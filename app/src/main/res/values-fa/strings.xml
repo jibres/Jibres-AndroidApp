@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">جیبرس</string>
+
+    <string name="url_app" translatable="false">https://source.jibres.com/api/v6/app</string>
+    <string name="url_salawat" translatable="false">https://source.jibres.com/fa/api/v6/salawat</string>
+    <string name="url_news" translatable="false">https://source.jibres.com/fa/api/v6/posts/get?id=</string>
+    <string name="url_del" translatable="false">https://source.jibres.com/fa/api/v6/delneveshte</string>
+    <string name="url_add_del" translatable="false">https://source.jibres.com/fa/api/v6/delneveshte/add</string>
+    <string name="url_del_like" translatable="false">https://source.jibres.com/fa/api/v6/delneveshte/like</string>
+    <string name="url_token" translatable="false">https://source.jibres.com/fa/api/v6/token</string>
+    <string name="url_enter">https://source.jibres.com/fa/enter</string>
+    <string name="url_user_add" translatable="false">https://source.jibres.com/fa/api/v6/android/user/add</string>
+    <string name="url_language" translatable="false">https://source.jibres.com/fa/api/v6/language</string>
+    <string name="url_notif" translatable="false">https://source.jibres.com/fa/api/v6/notif</string>
+    <string name="url_smile" translatable="false">https://source.jibres.com/fa/api/v6/smile</string>
+
+    <string name="errorNet_title_snackBar" translatable="false">اینترنت خود را بررسی کنید!</string>
+    <string name="errorNet_button_snackBar" translatable="false">تلاش مجدد</string>
+
+    <string name="change_language">تغییر زبان</string>
+
+    <string name="say_salawat">صلوات بفرستید!</string>
+    <string name="flag_salawat">شما هم در ختم صلوات شریک باشید</string>
+    <string name="post">https://source.jibres.com/fa/api/v6/posts</string>
+    <string name="url_vision">https://source.jibres.com/fa/api/v6/vision</string>
+    <string name="url_mission">https://source.jibres.com/fa/api/v6/mission</string>
+    <string name="url_contact">https://source.jibres.com/api/v6/contact</string>
+    <string name="url_about">https://source.jibres.com/fa/api/v6/about</string>
+    <string name="sex_female">زن</string>
+    <string name="sex_male">مرد</string>
+    <string name="edt_writ_del">صدای قلبت را بنویس</string>
+    <string name="edt_name">نام اختیاری</string>
+    <string name="edt_mobile">موبایل اختیاری</string>
+    <string name="send">ارسال</string>
+    <string name="full_list">لیست کامل</string>
+    <string name="update_android">اندروید شما خیلی قدیمی است!</string>
+    <string name="version">"نسخه "</string>
+    <string name="send_delneveshteh">ارسال دل نوشته</string>
+    <string name="tost_exit">برای خروج مجددا کلید برگشت را لمس کنید</string>
+    <string name="update_now">بروزرسانی</string>
+    <string name="smile">https://source.jibres.com/fa/api/v6/smile</string>
+    <string name="msg_token_fmt">msg_token_fmt</string>
+    <string name="later">بعدا</string>
+    <string name="website">https://source.jibres.com/fa</string>
+    <string name="start">شروع</string>
+    <string name="next">بعدی</string>
+    <string name="prev">قبلی</string>
+
+</resources>
