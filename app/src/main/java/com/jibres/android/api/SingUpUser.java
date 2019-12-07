@@ -2,13 +2,17 @@ package com.jibres.android.api;
 
 import android.content.Context;
 import android.os.Build;
+import android.util.Log;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.StringRequest;
+import com.google.gson.Gson;
+import com.jibres.android.Static.lookServer;
 import com.jibres.android.Static.url;
 import com.jibres.android.Static.value;
 import com.jibres.android.utility.Network;
@@ -18,23 +22,26 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.Map;
 
 public class SingUpUser {
 
     public static void Singing(final SingUpTampListener singUpTampListener, final Context context, final String token){
-        /*Get Info Device*/
-        final String model = Build.MODEL;
-        final String serial = Build.SERIAL;
-        final String manufacturer = Build.MANUFACTURER;
-        final String hardware = Build.HARDWARE;
-        final String type = Build.TYPE;
-        final String board = Build.BOARD;
-        final String id = Build.ID;
-        final String product =  Build.PRODUCT;
-        final String device = Build.DEVICE;
-        final String brand = Build.BRAND;
+        final Map<String,String> device = new HashMap<>();
+        device.put("model", Build.MODEL );
+        device.put("serial", Build.SERIAL );
+        device.put("manufacturer", Build.MANUFACTURER );
+        device.put("version", value.versionName );
+        device.put("hardware", Build.HARDWARE );
+        device.put("type", Build.TYPE );
+        device.put("board", Build.BOARD );
+        device.put("id", Build.ID );
+        device.put("product", Build.PRODUCT );
+        device.put("device", Build.DEVICE );
+        device.put("brand", Build.BRAND );
+        final String deviceInfo = new Gson().toJson(device);
         /*Request*/
         StringRequest post_user_add = new StringRequest(Request.Method.POST, url.user_add, new Response.Listener<String>(){
             @Override
@@ -76,26 +83,25 @@ public class SingUpUser {
             @Override
             public Map<String, String> getHeaders()  {
                 HashMap<String, String> headers = new HashMap<>();
+                headers.put("appkey", lookServer.appkey );
                 headers.put("token", token );
                 return headers;
             }
+
             @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> posting = new HashMap<>();
-                posting.put("model", model );
-                posting.put("serial", serial );
-                posting.put("manufacturer", manufacturer );
-                posting.put("version", value.versionName );
-                posting.put("hardware", hardware );
-                posting.put("type", type );
-                posting.put("board", board );
-                posting.put("id", id );
-                posting.put("product", product );
-                posting.put("device", device );
-                posting.put("brand", brand );
-                return posting;
+            public String getBodyContentType() {
+                return "application/json; charset=utf-8";
             }
 
+            @Override
+            public byte[] getBody() throws AuthFailureError {
+                try {
+                    return deviceInfo == null ? null : deviceInfo.getBytes("utf-8");
+                } catch (UnsupportedEncodingException uee) {
+                    VolleyLog.wtf("Unsupported Encoding while trying to get the bytes of %s using %s", deviceInfo, "utf-8");
+                    return null;
+                }
+            }
         };
         post_user_add.setRetryPolicy(new DefaultRetryPolicy(5 * 1000, 0, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         Network.getInstance().addToRequestQueue(post_user_add);
@@ -106,4 +112,6 @@ public class SingUpUser {
 
         void FiledUserAdd(Boolean FiledUserAdd);
     }
+
+
 }
