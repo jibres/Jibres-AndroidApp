@@ -21,4 +21,6 @@ public class url {
 
     public static String token = curl +"/account/token";
     public static String user_add = curl +"/account/android/add";
+    public static String enter = curl +"/account/enter";
+    public static String verify = curl +"/account/enter/verify";
 }

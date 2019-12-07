@@ -1,4 +1,4 @@
-package com.jibres.android.api;
+package com.jibres.android.api.account;
 
 import android.content.Context;
 import android.os.Build;
@@ -23,10 +23,11 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 
-public class SingUpUser {
+public class TempLogin {
 
     public static void Singing(final SingUpTampListener singUpTampListener, final Context context, final String token){
         final Map<String,String> device = new HashMap<>();
@@ -95,12 +96,7 @@ public class SingUpUser {
 
             @Override
             public byte[] getBody() throws AuthFailureError {
-                try {
-                    return deviceInfo == null ? null : deviceInfo.getBytes("utf-8");
-                } catch (UnsupportedEncodingException uee) {
-                    VolleyLog.wtf("Unsupported Encoding while trying to get the bytes of %s using %s", deviceInfo, "utf-8");
-                    return null;
-                }
+                return deviceInfo == null ? null : deviceInfo.getBytes(StandardCharsets.UTF_8);
             }
         };
         post_user_add.setRetryPolicy(new DefaultRetryPolicy(5 * 1000, 0, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));

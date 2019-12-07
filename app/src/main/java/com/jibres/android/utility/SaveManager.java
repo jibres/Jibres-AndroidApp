@@ -42,6 +42,7 @@ public class SaveManager extends ContextWrapper {
     public static final String apiKey = "apiKey";
     public static final String userCode = "userCode";
     public static final String zoneID = "zoneID";
+    public static final String mobile = "mobile";
 
     public void change_apiV6_URL(String local_URL) {
         editor.putString(apiV6_URL, local_URL);
@@ -61,6 +62,10 @@ public class SaveManager extends ContextWrapper {
         editor.putString(apiKey, ApiKey);
         editor.putString(userCode, UserCode);
         editor.putString(zoneID, ZoneID);
+        editor.apply();
+    }
+    public void change_mobile(String phone) {
+        editor.putString(mobile, phone);
         editor.apply();
     }
 
@@ -111,6 +116,7 @@ public class SaveManager extends ContextWrapper {
         hashMap.put(apiKey, sharedPreferences.getString(apiKey, null ));
         hashMap.put(userCode, sharedPreferences.getString(userCode, null ));
         hashMap.put(zoneID, sharedPreferences.getString(zoneID, null ));
+        hashMap.put(mobile, sharedPreferences.getString(mobile, null ));
         return hashMap;
     }
 

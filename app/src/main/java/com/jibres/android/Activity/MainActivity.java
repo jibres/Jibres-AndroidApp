@@ -59,6 +59,10 @@ public class MainActivity extends AppCompatActivity  {
         super.onResume();
         new set_language_device(this);
         startService(new Intent(MainActivity.this, Notification.class));
+        if (SaveManager.get(getApplicationContext()).getstring_appINFO().get(SaveManager.mobile) == null){
+            startActivity(new Intent(getApplicationContext(),LoginActivity.class));
+            finish();
+        }
     }
 
     @Override
