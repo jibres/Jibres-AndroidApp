@@ -6,27 +6,31 @@ import android.content.Intent;
 import android.net.Uri;
 
 import com.jibres.android.R;
+import com.jibres.android.Static.file;
+import com.jibres.android.Static.format;
 import com.jibres.android.Static.value;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
+
 public class CheckVersion {
-    public static Boolean Deprecated(Activity activity,Context context, String respones){
-        return false;
-        /*try {
-            JSONObject respone = new JSONObject(respones);
+    public static Boolean Deprecated(Activity activity,Context context){
+        try {
+            String settingApp = FileManager.read_FromStorage(context, file.setting, format.json);
+            JSONObject respone = new JSONObject(settingApp);
             JSONObject result = respone.getJSONObject("result");
             JSONObject url = result.getJSONObject("url");
             JSONObject version = result.getJSONObject("version");
-            *//*Url For Update*//*
+            /*Url For Update*/
             final String urlUpdate = url.getString("update");
-            *//*Deprecate Value*//*
+            /*Deprecate Value*/
             int deprecatedVersion = version.getInt("deprecated");
             String deprecated_title = version.getString("deprecated_title");
             String deprecated_desc = version.getString("deprecated_desc");
             String deprecated_btnTitle = context.getString(R.string.update_now);
-            *//*Update Value*//*
+            /*Update Value*/
             int lastVersion = version.getInt("last");
             String update_title = version.getString("update_title");
             String update_desc = version.getString("update_desc");
@@ -42,10 +46,10 @@ public class CheckVersion {
                 updateVersion(context,lastVersion);
                 return false;
             }
-        } catch (JSONException e) {
+        } catch (JSONException | IOException e) {
             e.printStackTrace();
             return false;
-        }*/
+        }
     }
 
     /*Check Update Version*/

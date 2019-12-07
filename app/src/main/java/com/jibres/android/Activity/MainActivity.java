@@ -1,22 +1,24 @@
 package com.jibres.android.Activity;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.view.ViewCompat;
-import androidx.recyclerview.widget.DefaultItemAnimator;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.Html;
 import android.text.Spanned;
 import android.util.Log;
 import android.view.View;
-import android.webkit.WebView;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.ViewCompat;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.jibres.android.Adaptor.Adaptor_Main;
 import com.jibres.android.Item.item_Main;
@@ -28,6 +30,7 @@ import com.jibres.android.Static.value;
 import com.jibres.android.api.apiV6;
 import com.jibres.android.utility.Dialog;
 import com.jibres.android.utility.SaveManager;
+import com.jibres.android.utility.changeNumber;
 import com.jibres.android.utility.set_language_device;
 
 import org.json.JSONArray;
@@ -36,16 +39,20 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity  {
 
-
+    Boolean hasNewVersion = false;
+    LinearLayout mainLayout;
     RecyclerView recylerview;
     Adaptor_Main adaptor_main;
     LinearLayoutManager LayoutManager;
     ArrayList<item_Main> itemMains;
     ProgressBar progressBar;
+
+    LinearLayout updateBox;
+    TextView updateBox_title,updateBox_desc,updateBox_skip;
+    Button updateBox_btnUpdate;
 
     @Override
     protected void onResume() {
@@ -58,63 +65,63 @@ public class MainActivity extends AppCompatActivity  {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         String apikey = SaveManager.get(this).getstring_appINFO().get(SaveManager.apiKey);
         String usercode = SaveManager.get(this).getstring_appINFO().get(SaveManager.userCode);
         String zonid = SaveManager.get(this).getstring_appINFO().get(SaveManager.zoneID);
+        hasNewVersion = SaveManager.get(getApplication()).getboolen_appINFO().get(SaveManager.hasNewVersion);
+
 
         Log.d(tag.get_info_login,
                 "\n Api Key: "+apikey+
                 "\n User Code: "+usercode+
                 "\n Zon ID: "+zonid);
 
-        progressBar = findViewById(R.id.progress_mains);
+        mainLayout = findViewById(R.id.main_layout);
+        progressBar = findViewById(R.id.progress_main);
+        updateBox = findViewById(R.id.updateBox);
+        updateBox_title = findViewById(R.id.updateBox_title);
+        updateBox_desc = findViewById(R.id.updateBox_desc);
+        updateBox_skip = findViewById(R.id.updateBox_skip);
+        updateBox_btnUpdate = findViewById(R.id.updateBox_btnUpdate);
 
-        LinearLayout main_lay = findViewById(R.id.main_layouts);
         String AppLanguage = SaveManager.get(this).getstring_appINFO().get(SaveManager.appLanguage);
-        if (Objects.requireNonNull(AppLanguage).equals("fa") || AppLanguage.equals("ar")){
-            ViewCompat.setLayoutDirection(main_lay,ViewCompat.LAYOUT_DIRECTION_RTL);
+        if (AppLanguage.equals("fa") || AppLanguage.equals("ar")){
+            ViewCompat.setLayoutDirection(mainLayout,ViewCompat.LAYOUT_DIRECTION_RTL);
         }else {
-            ViewCompat.setLayoutDirection(main_lay,ViewCompat.LAYOUT_DIRECTION_LTR);
+            ViewCompat.setLayoutDirection(mainLayout,ViewCompat.LAYOUT_DIRECTION_LTR);
         }
 
         String url_app= getString(R.string.url_app);
         itemMains = new ArrayList<>();
-        recylerview = findViewById(R.id.recyclerviews);
+        recylerview = findViewById(R.id.recyclerview);
 
         adaptor_main = new Adaptor_Main(itemMains, this);
         LayoutManager = new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
-        apiV6.app(url_app,new apiV6.appListener() {
+        apiV6.app0(getApplicationContext(),new apiV6.appListener() {
             @Override
-            public void setting(String mode , String url) {
-                Boolean userIsLogin = SaveManager.get(getApplication()).getboolen_appINFO().get(SaveManager.userIsLogin);
-                if (!userIsLogin){
-                    switch (mode){
-                        case "native":
-                            startActivity(new Intent(getApplication(),Enter.class));
-                            finish();
-                            break;
-                        case "webview":
-                            Intent goWebview = new Intent(getApplication(), Web_View.class);
-                            goWebview.putExtra("url",url);
-                            goWebview.putExtra("refresh",false);
-                            startActivity(goWebview);
-                            finish();
-                            break;
-
-                    }
+            public void lestener_GetRespone(String result) {
+                if (result != null){
+                    progressBar.setVisibility(View.GONE);
                 }
-
             }
 
             @Override
-            public void lestener_baner(String image, String url) {
-                Baner(image,url);
+            public void lestener_Updateversion(String url, String title, String desc) {
+                if (hasNewVersion){
+                    UpdateBox(url,title,desc,null,null);
+                }else {
+                    recylerview.setVisibility(View.VISIBLE);
+                }
             }
 
             @Override
-            public void lestener_link_1(String image, String url) {
-                Link_1(image,url);
+            public void lestener_baner(String image, String url,String type) {
+                Baner(image,url,type);
+            }
+
+            @Override
+            public void lestener_link_1(String image, String url,String type) {
+                Link_1(image,url,type);
             }
 
             @Override
@@ -133,8 +140,8 @@ public class MainActivity extends AppCompatActivity  {
             }
 
             @Override
-            public void lestener_title_link(String title,String image,String url) {
-                Title_link(title,null,url);
+            public void lestener_title_link(String title,String image,String url,String type) {
+                Title_link(title,null,url,type);
             }
 
             @Override
@@ -143,8 +150,8 @@ public class MainActivity extends AppCompatActivity  {
             }
 
             @Override
-            public void lestener_salavat(String count) {
-                salavat(null,count,null);
+            public void lestener_salavat(int count) {
+                salawat(null,count,null);
             }
 
             @Override
@@ -174,8 +181,6 @@ public class MainActivity extends AppCompatActivity  {
 
             @Override
             public void lestener_versionApp() {
-                progressBar.setVisibility(View.GONE);
-                recylerview.setVisibility(View.VISIBLE);
                 version();
             }
 
@@ -187,25 +192,17 @@ public class MainActivity extends AppCompatActivity  {
                 new Dialog(MainActivity.this,getString(R.string.errorNet_title_snackBar),"",getString(R.string.errorNet_button_snackBar),true,getintent);
             }
         });
-
-
-
-
-
-
         recylerview.setAdapter(adaptor_main);
 
     }
 
-
-
-    private void Baner(String img_url,String link){
-        itemMains.add(new item_Main(item_Main.BANER,img_url,link,
-                null,null,
-                null,null,null,null,
-                null,null,null,null,
-                null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
+    private void Baner(String img_url,String link,String type){
+        itemMains.add(new item_Main(item_Main.BANER,img_url,link,type,
                 null,null,null,
+                null,null,null,null,null,null,
+                null,null,null,null,null,
+                null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
+                null,null,null,null,
                 null,
                 null,null,null,
                 null,null,null,
@@ -220,12 +217,12 @@ public class MainActivity extends AppCompatActivity  {
     private void slaide(String responeArray){
 
         itemMains.add(new item_Main(item_Main.SLIDE,
-                null,null,
-                null,null,
-                null,null,null,null,
-                null,null,null,null,
-                null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
                 null,null,null,
+                null,null,null,
+                null,null,null,null,null,null,
+                null,null,null,null,null,
+                null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
+                null,null,null,null,
                 null,
                 null,null,null,
                 null,null,null,
@@ -238,13 +235,13 @@ public class MainActivity extends AppCompatActivity  {
         recylerview.setItemAnimator(new DefaultItemAnimator());
     }
 
-    private void Link_1(String img_url,String link){
-        itemMains.add(new item_Main(item_Main.LINK_1,null,null,
-                img_url,link,
-                null,null,null,null,
-                null,null,null,null,
+    private void Link_1(String img_url,String link,String type){
+        itemMains.add(new item_Main(item_Main.LINK_1,null,null,null,
+                img_url,link,type,
+                null,null,null,null,null,null,
+                null,null,null,null,null,
                 null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
-                null,null,null,
+                null,null,null,null,
                 null,
                 null,null,null,
                 null,null,null,
@@ -266,17 +263,21 @@ public class MainActivity extends AppCompatActivity  {
                 JSONObject object_link4 = link4Array.getJSONObject(i);
                 String image = object_link4.getString("image");
                 String url = object_link4.getString("url");
-                itemLink4.add(new item_link_2_4(image,null,url,null));
+                String target = null;
+                if (!object_link4.isNull("target")){
+                    target = object_link4.getString("target");
+                }
+                itemLink4.add(new item_link_2_4(image,null,url,target));
             }
 
-            itemMains.add(new item_Main(item_Main.LINK_2,null,null,
-                    null,null,
-
+            itemMains.add(new item_Main(item_Main.LINK_2,null,null,null,
+                    null,null,null,
                     itemLink4.get(0).getImage(),itemLink4.get(1).getImage(),
                     itemLink4.get(0).getUrl(),itemLink4.get(1).getUrl(),
-                    null,null,null,null,
+                    itemLink4.get(0).getType(),itemLink4.get(1).getType(),
+                    null,null,null,null,null,
                     null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
-                    null,null,null,
+                    null,null,null,null,
                     null,
                     null,null,null,
                     null,null,null,
@@ -298,12 +299,12 @@ public class MainActivity extends AppCompatActivity  {
 
     private void Link_3_desc(String img_url,String title,String desc,String link){
         itemMains.add(new item_Main(item_Main.LINK_Desc,
-                null,null,
-                null,null,
-                null,null,null,null,
-                img_url,title,desc,link,
-                null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
                 null,null,null,
+                null,null,null,
+                null,null,null,null,null,null,
+                img_url,title,desc,link,null,
+                null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
+                null,null,null,null,
                 null,
                 null,null,null,
                 null,null,null,
@@ -336,15 +337,15 @@ public class MainActivity extends AppCompatActivity  {
             }
 
             itemMains.add(new item_Main(item_Main.LINK_4,
-                    null,null,
-                    null,null,
-                    null,null,null,null,
-                    null,null,null,null,
+                    null,null,null,
+                    null,null,null,
+                    null,null,null,null,null,null,
+                    null,null,null,null,null,
                     itemLink4.get(0).getImage(),itemLink4.get(0).getTex(),itemLink4.get(0).getUrl(),itemLink4.get(0).getType(),
                     itemLink4.get(1).getImage(),itemLink4.get(1).getTex(),itemLink4.get(1).getUrl(),itemLink4.get(1).getType(),
                     itemLink4.get(2).getImage(),itemLink4.get(2).getTex(),itemLink4.get(2).getUrl(),itemLink4.get(2).getType(),
                     itemLink4.get(3).getImage(),itemLink4.get(3).getTex(),itemLink4.get(3).getUrl(),itemLink4.get(3).getType(),
-                    null,null,null,
+                    null,null,null,null,
                     null,
                     null,null,null,
                     null,null,null,
@@ -363,14 +364,14 @@ public class MainActivity extends AppCompatActivity  {
 
     }
 
-    private void Title_link(String title,String go,String url){
-        itemMains.add(new item_Main(item_Main.TITEL_link,null,null,
-                null,null,
+    private void Title_link(String title,String go,String url,String type){
+        itemMains.add(new item_Main(item_Main.TITEL_link,null,null,null,
+                null,null,null,
 
-                null,null,null,null,
-                null,null,null,null,
+                null,null,null,null,null,null,
+                null,null,null,null,null,
                 null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
-                title,go,url,
+                title,go,url,type,
                 null,
                 null,null,null,
                 null,null,null,
@@ -383,13 +384,13 @@ public class MainActivity extends AppCompatActivity  {
     }
 
     private void Title_none(String title){
-        itemMains.add(new item_Main(item_Main.TITEL_NONE,null,null,
-                null,null,
-
-                null,null,null,null,
-                null,null,null,null,
-                null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
+        itemMains.add(new item_Main(item_Main.TITEL_NONE,null,null,null,
                 null,null,null,
+
+                null,null,null,null,null,null,
+                null,null,null,null,null,
+                null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
+                null,null,null,null,
                 title,
                 null,null,null,
                 null,null,null,
@@ -401,16 +402,22 @@ public class MainActivity extends AppCompatActivity  {
         recylerview.setItemAnimator(new DefaultItemAnimator());
     }
 
-    private void salavat(String title,String count,String readText){
-        itemMains.add(new item_Main(item_Main.SALAVAT,null,null,
-                null,null,
-
-                null,null,null,null,
-                null,null,null,null,
-                null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
+    private void salawat(String title, int counts, String readText){
+        Integer count_INT = SaveManager.get(getApplicationContext()).getInt_appINFO().get(SaveManager.salawatCount);
+        if (counts > count_INT){
+            count_INT = counts;
+            SaveManager.get(getApplication()).change_salawatCount(counts);
+        }
+        String count_spilit = changeNumber.splitDigits(count_INT);
+        itemMains.add(new item_Main(item_Main.SALAVAT,null,null,null,
                 null,null,null,
+
+                null,null,null,null,null,null,
+                null,null,null,null,null,
+                null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
+                null,null,null,null,
                 null,
-                count,readText,title,
+                count_spilit,readText,title,
                 null,null,null,
                 null,null,null,null,
                 null,
@@ -421,13 +428,13 @@ public class MainActivity extends AppCompatActivity  {
     }
 
     private void hadith(String title,String link){
-        itemMains.add(new item_Main(item_Main.NEWS_TEXT,null,null,
-                null,null,
-
-                null,null,null,null,
-                null,null,null,null,
-                null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
+        itemMains.add(new item_Main(item_Main.NEWS_TEXT,null,null,null,
                 null,null,null,
+
+                null,null,null,null,null,null,
+                null,null,null,null,null,
+                null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
+                null,null,null,null,
                 null,
                 null,null,null,
                 title,link,null,
@@ -459,13 +466,13 @@ public class MainActivity extends AppCompatActivity  {
                     text_news = text_news.substring(0,110) + " ...";
                 }
 
-                itemMains.add(new item_Main(item_Main.NEWS,null,null,
-                        null,null,
-
-                        null,null,null,null,
-                        null,null,null,null,
-                        null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
+                itemMains.add(new item_Main(item_Main.NEWS,null,null,null,
                         null,null,null,
+
+                        null,null,null,null,null,null,
+                        null,null,null,null,null,
+                        null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
+                        null,null,null,null,
                         null,
                         null,null,null,
                         null,null,null,
@@ -480,6 +487,7 @@ public class MainActivity extends AppCompatActivity  {
 
         } catch (JSONException e) {
             e.printStackTrace();
+            Log.e("news", "news: ",e );
         }
 
 
@@ -487,13 +495,13 @@ public class MainActivity extends AppCompatActivity  {
     }
 
     private void hr(String img_url){
-        itemMains.add(new item_Main(item_Main.HR,null,null,
-                null,null,
-
-                null,null,null,null,
-                null,null,null,null,
-                null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
+        itemMains.add(new item_Main(item_Main.HR,null,null,null,
                 null,null,null,
+
+                null,null,null,null,null,null,
+                null,null,null,null,null,
+                null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
+                null,null,null,null,
                 null,
                 null,null,null,
                 null,null,null,
@@ -506,13 +514,13 @@ public class MainActivity extends AppCompatActivity  {
     }
 
     private void changeLanguage(){
-        itemMains.add(new item_Main(item_Main.LANGUAGE,null,null,
-                null,null,
-
-                null,null,null,null,
-                null,null,null,null,
-                null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
+        itemMains.add(new item_Main(item_Main.LANGUAGE,null,null,null,
                 null,null,null,
+
+                null,null,null,null,null,null,
+                null,null,null,null,null,
+                null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
+                null,null,null,null,
                 null,
                 null,null,null,
                 null,null,null,
@@ -525,13 +533,13 @@ public class MainActivity extends AppCompatActivity  {
     }
 
     private void version(){
-        itemMains.add(new item_Main(item_Main.VERSION,null,null,
-                null,null,
-
-                null,null,null,null,
-                null,null,null,null,
-                null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
+        itemMains.add(new item_Main(item_Main.VERSION,null,null,null,
                 null,null,null,
+
+                null,null,null,null,null,null,
+                null,null,null,null,null,
+                null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
+                null,null,null,null,
                 null,
                 null,null,null,
                 null,null,null,
@@ -561,5 +569,57 @@ public class MainActivity extends AppCompatActivity  {
         }, 1500);
     }
 
+    private void UpdateBox(String urlUpdate, String title, String desc, String btn, String skip){
+        progressBar.setVisibility(View.GONE);
+        recylerview.setVisibility(View.GONE);
+        updateBox.setVisibility(View.VISIBLE);
+        updateBox.animate().alpha(1).setDuration(500);
 
+        if (urlUpdate == null){
+            urlUpdate = "";
+        }
+        if (title != null){
+            updateBox_title.setText(title);
+        }
+        if (desc != null){
+            updateBox_desc.setText(desc);
+            updateBox_desc.setVisibility(View.VISIBLE);
+        }
+        if (btn != null){
+            updateBox_btnUpdate.setText(btn);
+
+        }
+        if (skip != null){
+            updateBox_skip.setText(skip);
+        }
+
+        updateBox_skip.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                goneUpdateBox();
+            }
+        });
+
+        final String finalUrlUpdate = urlUpdate;
+        updateBox_btnUpdate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent brower = new Intent(Intent.ACTION_VIEW);
+                brower.setData(Uri.parse(finalUrlUpdate));
+                startActivity(brower);
+                goneUpdateBox();
+            }
+        });
+    }
+
+    private void goneUpdateBox(){
+        updateBox.animate().alpha(0).setDuration(200);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                updateBox.setVisibility(View.GONE);
+                recylerview.setVisibility(View.VISIBLE);
+            }
+        }, 200);
+    }
 }

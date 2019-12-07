@@ -3,11 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:gravity="center|top"
-    android:orientation="vertical"
-    android:padding="0dp"
-    android:layout_margin="0dp"
-    android:layoutDirection="rtl"
+    android:gravity="center"
+    android:layoutDirection="inherit"
     android:layout_height="@dimen/_72sdp">
 
 
@@ -35,7 +32,7 @@
 
                 <androidx.cardview.widget.CardView
                     android:padding="0dp"
-                    android:layout_marginRight="3dp"
+                    android:layout_marginStart="3dp"
                     app:cardCornerRadius="7dp"
                     android:layout_width="@dimen/_70sdp"
                     android:layout_height="@dimen/_65sdp">
@@ -104,6 +101,8 @@
 
 
                     <ImageView
+                        android:id="@+id/img_flesh"
+                        android:rotation="0"
                         android:layout_width="@dimen/_20sdp"
                         android:layout_height="@dimen/_20sdp"
                         android:src="@drawable/ic_flesh_r" />

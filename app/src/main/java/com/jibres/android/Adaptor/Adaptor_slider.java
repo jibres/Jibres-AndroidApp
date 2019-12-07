@@ -11,6 +11,7 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.jibres.android.Activity.ImageViewer;
 import com.jibres.android.Activity.News;
 import com.jibres.android.Item.item_slider;
 import com.jibres.android.R;
@@ -41,7 +42,7 @@ public class Adaptor_slider extends RecyclerView.Adapter<Adaptor_slider.ViewHold
     // binds the data to the TextView in each row
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
-        String image = itemSliderList.get(position).getImage();
+        final String image = itemSliderList.get(position).getImage();
         String title = itemSliderList.get(position).getTitle();
         final String content = itemSliderList.get(position).getDesc();
         if (image != null){
@@ -62,6 +63,18 @@ public class Adaptor_slider extends RecyclerView.Adapter<Adaptor_slider.ViewHold
             holder.title.setOnClickListener(onclickSlied);
             holder.content.setOnClickListener(onclickSlied);
             holder.imageViews.setOnClickListener(onclickSlied);
+        }
+        else {
+            if (image != null){
+                holder.imageViews.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent viewImage = new Intent(context, ImageViewer.class);
+                        viewImage.putExtra("image",image);
+                        context.startActivity(viewImage);
+                    }
+                });
+            }
         }
 
 

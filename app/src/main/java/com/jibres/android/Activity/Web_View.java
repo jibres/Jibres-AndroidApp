@@ -1,10 +1,12 @@
 package com.jibres.android.Activity;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
@@ -38,18 +40,18 @@ import java.util.Map;
 public class Web_View extends AppCompatActivity {
 
     boolean errorUrl = true;
+    boolean errorNet = false;
     Map<String, String> send_headers = new HashMap<>();
     private String URL = null;
-    private boolean refresh = true;
-    int a = 0;
+    int oneStart = 0;
 
     SwipeRefreshLayout swipeRefreshLayout;
     WebView webView_object;
 
-/*    String[] url_pay = {"https://khadije.com/pay/","https://khadije.com/ar/pay/","https://khadije.com/en/pay/","https://khadije.com/pay/"};
-    String[] url_del = {"https://khadije.com/delneveshte","https://khadije.com/ar/delneveshte","https://khadije.com/en/delneveshte","https://khadije.com/delneveshte"};
-    String[] url_news = {"https://khadije.com/blog/","https://khadije.com/ar/blog/","https://khadije.com/en/blog/","https://khadije.com/blog/"};
-    String url_site = "https://khadije.com";*/
+    String[] url_pay = {"https://jeebres.ir/pay/","https://jeebres.ir/ar/pay/","https://jeebres.ir/en/pay/","https://jeebres.ir/pay/"};
+    String[] url_del = {"https://jeebres.ir/delneveshte","https://jeebres.ir/ar/delneveshte","https://jeebres.ir/en/delneveshte","https://jeebres.ir/delneveshte"};
+    String[] url_news = {"https://jeebres.ir/blog/","https://jeebres.ir/ar/blog/","https://jeebres.ir/en/blog/","https://jeebres.ir/blog/"};
+    String url_site = "https://jeebres.ir";
 
 
     private String mCM;
@@ -72,7 +74,6 @@ public class Web_View extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         URL = getIntent().getStringExtra("url");
-        refresh = getIntent().getBooleanExtra("refresh",true);
         try {
             setContentView(R.layout.activity_web_view);
 
@@ -98,12 +99,6 @@ public class Web_View extends AppCompatActivity {
             webSettings.setAllowFileAccess(true);
             webSettings.setAllowContentAccess(true);
 
-            if (refresh){
-                swipeRefreshLayout.setEnabled(true);
-            }
-            else {
-                swipeRefreshLayout.setEnabled(false);
-            }
 
 
 
@@ -163,14 +158,14 @@ public class Web_View extends AppCompatActivity {
                 webView_object.setWebViewClient(new WebViewClient() {
                     @Override
                     public void onReceivedError(WebView view, WebResourceRequest request, WebResourceError error){
-                        finish();
-                        if (a == 0){
-                            Log.d("WebView_onReceivedError", errorUrl + "WebView: "+view.getUrl());
-                            if (errorUrl){
-                                Toast.makeText(Web_View.this, getString(R.string.errorNet_title_snackBar), Toast.LENGTH_SHORT).show();
+                        if (error.getDescription().equals("net::ERR_INTERNET_DISCONNECTED")){
+                            if (oneStart == 0)
+                            {
+                                Dialog_WebView(false);
+                                oneStart++;
                             }
-                            a++;
                         }
+                        Log.d("WebView_onReceivedError", "ErrorCode= "+error.getErrorCode() +" | ErrorDescription= "+error.getDescription());
                     }
                     // in refresh send header
                     @Override
@@ -191,22 +186,56 @@ public class Web_View extends AppCompatActivity {
                                 startActivity(intent);
                             } catch (android.content.ActivityNotFoundException e) {
                             }
+                        }else {
+                            for (int i = 0; i < 3; i++) {
+                                if (url.startsWith(url_pay[i])) {
+                                    Log.d("WebView_onReceivedError", "url_pay");
+
+                                    Intent browser = new Intent(Intent.ACTION_VIEW);
+                                    browser.setData(Uri.parse(url));
+                                    startActivity(browser);
+                                    finish();
+                                    return true;
+                                }
+                                else if (!url.substring(0,19).startsWith(url_site)){
+                                    Log.d("WebView_onReceivedError", "substring(0,19)");
+
+                                    Intent browser = new Intent(Intent.ACTION_VIEW);
+                                    browser.setData(Uri.parse(url));
+                                    startActivity(browser);
+                                    finish();
+                                }
+                                else if (url.startsWith(url_del[i])){
+                                    Log.d("WebView_onReceivedError", "url_del");
+
+                                    startActivity(new Intent(Web_View.this,Delneveshte.class));
+                                    finish();
+                                }
+                                else if ((url.startsWith(url_news[i])))
+                                {
+                                    Log.d("WebView_onReceivedError", "url_news");
+
+                                    startActivity(new Intent(Web_View.this,ListNews.class));
+                                    finish();
+                                }
+                            }
                         }
 
                         return false;
                     }
                     @Override
-                    public void onPageFinished(WebView view, String url) {
-                        String [] words = url.split("\\?", url.length());
-                        for (String word : words) {
-                            if (word.equals("ok=true")){
-                                SaveManager.get(getApplication()).change_userIsLogin(true);
-                                Intent mainActivity = new Intent(getApplication(),MainActivity.class);
-                                startActivity(mainActivity);
-                                finish();
-                            }
-                        }
+                    public void onPageFinished(WebView view, String url)
+                    {
+
                         swipeRefreshLayout.setRefreshing(false);
+                        if
+                        (
+                           webView_object.getVisibility() == View.INVISIBLE
+                           && !errorNet
+                        )
+                            {
+                                webView_object.setVisibility(View.VISIBLE);
+                            }
                     }
                 });
             }
@@ -215,7 +244,10 @@ public class Web_View extends AppCompatActivity {
             }
         }
         catch (Exception e){
-            Toast.makeText(this, "Update Your Device!", Toast.LENGTH_SHORT).show();
+            Intent brower = new Intent(Intent.ACTION_VIEW);
+            brower.setData(Uri.parse(URL));
+            startActivity(brower);
+            finish();
         }
     }
 
@@ -305,6 +337,40 @@ public class Web_View extends AppCompatActivity {
                 doubleBackToExitPressedOnce=false;
             }
         }, 300);
+    }
+
+
+    private void Dialog_WebView(boolean Cancelable) {
+        errorNet = true;
+        webView_object.setVisibility(View.INVISIBLE);
+        final AlertDialog.Builder builderSingle = new AlertDialog.Builder(this);
+        /*Title*/
+        builderSingle.setTitle(getString(R.string.errorNet_title_snackBar));
+        /*Message*/
+        builderSingle.setMessage("");
+        /*Button*/
+        builderSingle.setPositiveButton(getString(R.string.errorNet_button_snackBar),
+                /*Open Url*/
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                        swipeRefreshLayout.setRefreshing(true);
+                        webView_object.reload();
+                        errorNet = false;
+                        oneStart = 0;
+
+                    }
+                });
+
+        builderSingle.setNeutralButton(getString(R.string.later), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                finish();
+
+            }
+        });
+        builderSingle.setCancelable(Cancelable);
+        builderSingle.show();
     }
 
 }

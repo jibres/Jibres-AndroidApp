@@ -1,0 +1,564 @@
+{
+    "ok": true,
+    "result": {
+        "lang_list": {
+            "fa": {
+                "name": "fa",
+                "direction": "rtl",
+                "iso": "fa_IR",
+                "localname": "فارسی",
+                "api_url": "https://jeebres.ir/fa/api/v6"
+            },
+            "ar": {
+                "name": "ar",
+                "direction": "rtl",
+                "iso": "ar_IQ",
+                "localname": "العربية",
+                "api_url": "https://jeebres.ir/ar/api/v6"
+            },
+            "en": {
+                "name": "en",
+                "direction": "ltr",
+                "iso": "en_US",
+                "localname": "English",
+                "api_url": "https://jeebres.ir/en/api/v6"
+            }
+        },
+        "url": {
+            "site": "https://jeebres.ir",
+            "kingdom": "https://jeebres.ir/en",
+            "domain": "jeebres.ir",
+            "root": "khadije",
+            "update": "https://jeebres.ir/en/app/update"
+        },
+        "site": {
+            "name": "Khadije Charity",
+            "desc": "Executor of first pilgrimage to the Ahl al-Bayt",
+            "slogan": "Executor of first pilgrimage to the Ahl al-Bayt",
+            "logo": "https://jeebres.ir/static/images/logo.png"
+        },
+        "version": {
+            "last": 48,
+            "deprecated": 34,
+            "deprecated_title": "This version is deprecated",
+            "deprecated_desc": "To download new version of this app click blow link",
+            "update_title": "New version is released",
+            "update_desc": "To download new version of this app click blow link"
+        },
+        "menu": [
+            {
+                "icon": "info",
+                "type": "menu",
+                "title": "About",
+                "link": null,
+                "child": [
+                    {
+                        "icon": "android",
+                        "type": "define",
+                        "title": "About this version",
+                        "link": null
+                    },
+                    {
+                        "icon": "info",
+                        "type": "api",
+                        "title": "About us",
+                        "link": "https://jeebres.ir/en/api/v6/about"
+                    },
+                    {
+                        "icon": "lock",
+                        "type": "api",
+                        "title": "Privacy",
+                        "link": "https://jeebres.ir/en/api/v6/privacy"
+                    },
+                    {
+                        "icon": "list",
+                        "type": "api",
+                        "title": "Terms",
+                        "link": "https://jeebres.ir/en/api/v6/terms"
+                    }
+                ]
+            },
+            {
+                "icon": null,
+                "type": "api",
+                "title": "Contact",
+                "link": "https://jeebres.ir/en/api/v6/contact",
+                "child": null
+            },
+            {
+                "icon": null,
+                "type": "api",
+                "title": "Vision",
+                "link": "https://jeebres.ir/en/api/v6/vision",
+                "child": null
+            },
+            {
+                "icon": null,
+                "type": "api",
+                "title": "Mission",
+                "link": "https://jeebres.ir/en/api/v6/mission",
+                "child": null
+            },
+            {
+                "icon": null,
+                "type": "url",
+                "title": "Website",
+                "link": "https://jeebres.ir/en",
+                "child": null
+            }
+        ],
+        "transalate": {
+            "version": "Version",
+            "changelang": "Change language",
+            "close": "Close",
+            "back": "Back",
+            "go": "Go",
+            "enter": "Enter"
+        },
+        "navigation": [
+            {
+                "icon": "setting",
+                "type": "define",
+                "title": "Setting",
+                "link": null
+            },
+            {
+                "icon": "more",
+                "type": "define",
+                "title": "More",
+                "link": null
+            },
+            {
+                "icon": "home",
+                "type": "url",
+                "title": "Home",
+                "link": "https://jeebres.ir/en/app"
+            }
+        ],
+        "intro": [
+            {
+                "title": "Khadije Charity",
+                "desc": "تمام خدمات موسسه در یک اپلیکیشن",
+                "bg_from": "#ffffff",
+                "bg_to": "#ffffff",
+                "title_color": "#000000",
+                "desc_color": "#000000",
+                "image": "https://jeebres.ir/static/images/app/app-splash-1.jpg",
+                "btn": [
+                    {
+                        "title": "Next",
+                        "action": "next"
+                    }
+                ]
+            },
+            {
+                "title": "Easy",
+                "desc": "روشی ساده برای پرداخت کمک‌های شما به زايرین",
+                "bg_from": "#ffffff",
+                "bg_to": "#ffffff",
+                "title_color": "#000000",
+                "desc_color": "#000000",
+                "image": "https://jeebres.ir/static/images/app/app-splash-2.jpg",
+                "btn": [
+                    {
+                        "title": "Prev",
+                        "action": "prev"
+                    },
+                    {
+                        "title": "Next",
+                        "action": "next"
+                    }
+                ]
+            },
+            {
+                "title": "ثبت‌نام کربلا",
+                "desc": "توانایی ثبت‌نام کربلا ویژه برنامه‌های تلویزیونی",
+                "bg_from": "#ffffff",
+                "bg_to": "#ffffff",
+                "title_color": "#000000",
+                "desc_color": "#000000",
+                "image": "https://jeebres.ir/static/images/app/app-splash-4.jpg",
+                "btn": [
+                    {
+                        "title": "Prev",
+                        "action": "prev"
+                    },
+                    {
+                        "title": "Next",
+                        "action": "next"
+                    }
+                ]
+            },
+            {
+                "title": "Khadije Charity",
+                "desc": "مجری طرح زاير اولی‌های اهل بیت علیه اسلام",
+                "bg_from": "#ffffff",
+                "bg_to": "#ffffff",
+                "title_color": "#000000",
+                "desc_color": "#000000",
+                "image": "https://jeebres.ir/static/images/logo.png",
+                "btn": [
+                    {
+                        "title": "Start",
+                        "action": "start"
+                    }
+                ]
+            }
+        ],
+        "theme": {
+            "default": {
+                "splash": {
+                    "bg_from": "#ffffff",
+                    "bg_to": "#ffffff",
+                    "color": "#000000"
+                },
+                "global": {
+                    "bg_from": "#ffffff",
+                    "bg_to": "#ffffff",
+                    "color": "#000000",
+                    "btn_from": "#ffffff",
+                    "btn_to": "#ffffff",
+                    "btn_color": "#000000"
+                },
+                "intro": {
+                    "bg_from": "#ffffff",
+                    "bg_to": "#ffffff",
+                    "color": "#000000",
+                    "header_from": "#ffffff",
+                    "header_to": "#ffffff",
+                    "header_color": "#000000",
+                    "footer_from": "#ffffff",
+                    "footer_to": "#ffffff",
+                    "footer_color": "#000000"
+                },
+                "share": {
+                    "bg_from": "#ffffff",
+                    "bg_to": "#ffffff",
+                    "color": "#000000",
+                    "header_from": "#ffffff",
+                    "header_to": "#ffffff",
+                    "header_color": "#000000",
+                    "footer_from": "#ffffff",
+                    "footer_to": "#ffffff",
+                    "footer_color": "#000000"
+                },
+                "btn": {
+                    "success": {
+                        "bg_from": "#ffffff",
+                        "bg_to": "#ffffff",
+                        "color": "#000000"
+                    },
+                    "danger": {
+                        "bg_from": "#ffffff",
+                        "bg_to": "#ffffff",
+                        "color": "#000000"
+                    },
+                    "warn": {
+                        "bg_from": "#ffffff",
+                        "bg_to": "#ffffff",
+                        "color": "#000000"
+                    },
+                    "info": {
+                        "bg_from": "#ffffff",
+                        "bg_to": "#ffffff",
+                        "color": "#000000"
+                    }
+                }
+            },
+            "night": {
+                "splash": {
+                    "bg_from": "#ffffff",
+                    "bg_to": "#ffffff",
+                    "color": "#000000"
+                },
+                "global": {
+                    "bg_from": "#ffffff",
+                    "bg_to": "#ffffff",
+                    "color": "#000000",
+                    "btn_from": "#ffffff",
+                    "btn_to": "#ffffff",
+                    "btn_color": "#000000"
+                },
+                "intro": {
+                    "bg_from": "#ffffff",
+                    "bg_to": "#ffffff",
+                    "color": "#000000",
+                    "header_from": "#ffffff",
+                    "header_to": "#ffffff",
+                    "header_color": "#000000",
+                    "footer_from": "#ffffff",
+                    "footer_to": "#ffffff",
+                    "footer_color": "#000000"
+                },
+                "share": {
+                    "bg_from": "#ffffff",
+                    "bg_to": "#ffffff",
+                    "color": "#000000",
+                    "header_from": "#ffffff",
+                    "header_to": "#ffffff",
+                    "header_color": "#000000",
+                    "footer_from": "#ffffff",
+                    "footer_to": "#ffffff",
+                    "footer_color": "#000000"
+                },
+                "btn": {
+                    "success": {
+                        "bg_from": "#ffffff",
+                        "bg_to": "#ffffff",
+                        "color": "#000000"
+                    },
+                    "danger": {
+                        "bg_from": "#ffffff",
+                        "bg_to": "#ffffff",
+                        "color": "#000000"
+                    },
+                    "warn": {
+                        "bg_from": "#ffffff",
+                        "bg_to": "#ffffff",
+                        "color": "#000000"
+                    },
+                    "info": {
+                        "bg_from": "#ffffff",
+                        "bg_to": "#ffffff",
+                        "color": "#000000"
+                    }
+                }
+            }
+        },
+        "ad": {
+            "top": {
+                "content": null,
+                "link": null
+            },
+            "bottom": []
+        },
+        "homepage": [
+            {
+                "type": "banner",
+                "image": "https://jeebres.ir/static/images/app/karbala201909.jpg",
+                "url": "https://jeebres.ir/en/arbaeen98"
+            },
+            {
+                "type": "link2",
+                "link": [
+                    {
+                        "image": "https://jeebres.ir/static/images/app/donate-wide.jpg",
+                        "url": "https://jeebres.ir/en/donate",
+                        "text": "Donate"
+                    },
+                    {
+                        "image": "https://jeebres.ir/static/images/app/donateproduct-wide.jpg",
+                        "url": "https://jeebres.ir/en/donate/product",
+                        "text": "Donate Product"
+                    }
+                ]
+            },
+            {
+                "type": "link4",
+                "link": [
+                    {
+                        "image": "https://jeebres.ir/static/images/app/KhadijeBadge-deputy.png",
+                        "url": "https://jeebres.ir/en/a/representation",
+                        "text": "Deputy pilgrimage"
+                    },
+                    {
+                        "image": "https://jeebres.ir/static/images/app/KhadijeBadge-Encyclopedia.png",
+                        "url": "https://jeebres.ir/en/wiki",
+                        "text": "Encyclopedia"
+                    },
+                    {
+                        "image": "https://jeebres.ir/static/images/app/KhadijeBadge-travel.png",
+                        "url": "https://jeebres.ir/en/a/group",
+                        "text": "Group travel"
+                    },
+                    {
+                        "image": "https://jeebres.ir/static/images/app/KhadijeBadge-consulting.png",
+                        "url": "https://jeebres.ir/en/contact",
+                        "text": "Contact Us"
+                    }
+                ]
+            },
+            {
+                "type": "link4",
+                "link": [
+                    {
+                        "image": "https://jeebres.ir/static/images/app/LastLine-services.jpg",
+                        "url": "https://jeebres.ir/en/support",
+                        "text": "Help Center"
+                    },
+                    {
+                        "image": "https://jeebres.ir/static/images/app/LastLine-website.jpg",
+                        "url": "https://jeebres.ir/en",
+                        "type": "browser",
+                        "text": "Website"
+                    },
+                    {
+                        "image": "https://jeebres.ir/static/images/app/LastLine-delneveshte.jpg",
+                        "url": "delneveshte",
+                        "text": "Delneveshteha"
+                    },
+                    {
+                        "image": "https://jeebres.ir/static/images/app/LastLine-honors.jpg",
+                        "url": "https://jeebres.ir/en/honors",
+                        "text": "Honors"
+                    }
+                ]
+            },
+            {
+                "type": "salawat",
+                "count": 368764,
+                "fit_count": "368,764"
+            },
+            {
+                "type": "inapplink",
+                "title": "News",
+                "link": "news"
+            },
+            {
+                "type": "news",
+                "news": [
+                    {
+                        "id": "md",
+                        "language": "en",
+                        "subdomain": null,
+                        "title": "The second largest community of companion of Ladys Khadijeh (P.U.H).",
+                        "seotitle": null,
+                        "slug": "ejtemaeyavaranhazrathkadije",
+                        "slug_raw": "ejtemaeyavaranhazrathkadije",
+                        "parent_url": [],
+                        "url": "ejtemaeyavaranhazrathkadije",
+                        "link": "https://jeebres.ir/en/ejtemaeyavaranhazrathkadije",
+                        "content": "The institute of Lady Khadijah decides to promote the culture of happiness in the family and to be happy for Ahl ul Beit's happiness, On the anniversary of the Prophet Mohammad Mostafa and the Lady of Hazrat Khadijeh marriage (P.U.TH), and at the same time, The coronation of Majesty Mahdi(P.U.H), The Lady's Khadijeh Institute intends to hold a magnificent celebration with the help of religious experts and Television artists.Time: On Saturday 17 November, from 18:30 PM in the permanent exhibition place in Qom Province, was invited all enthusiasts to attend the ceremony.",
+                        "meta": {
+                            "thumb": "https://jeebres.ir/files/1/445-b42df374abb06a9226db84212a3f3b5a.jpg",
+                            "gallery": [
+                                "https://jeebres.ir/files/1/446-adb6640ecb3cf7203beec8c8bfd8ee0d.jpg",
+                                "https://jeebres.ir/files/1/447-889404b41e1a30fae6194d3d29d8a28c.jpg",
+                                "https://jeebres.ir/files/1/448-4d2ad56798f85a4fd2d333788c7442b2.jpg",
+                                "https://jeebres.ir/files/1/449-0a24d7d702d82c78404eb9bf4df20d50.jpg",
+                                "https://jeebres.ir/files/1/450-25b2916b5c49db617f52fa5ea48efee7.jpg"
+                            ]
+                        },
+                        "file": {
+                            "main": "https://jeebres.ir/files/1/445-b42df374abb06a9226db84212a3f3b5a.jpg",
+                            "large": "https://jeebres.ir/files/1/445-b42df374abb06a9226db84212a3f3b5a-large.jpg",
+                            "normal": "https://jeebres.ir/files/1/445-b42df374abb06a9226db84212a3f3b5a-normal.jpg",
+                            "thumb": "https://jeebres.ir/files/1/445-b42df374abb06a9226db84212a3f3b5a-thumb.jpg"
+                        },
+                        "type": "post",
+                        "subtype": null,
+                        "special": "slider",
+                        "comment": "closed",
+                        "count": null,
+                        "order": null,
+                        "status": "publish",
+                        "parent": null,
+                        "user_id": "5Xv",
+                        "publishdate": "2018-11-18 19:00:00",
+                        "datemodified": "2019-07-13 12:47:11",
+                        "datecreated": "2018-11-27 19:22:59",
+                        "subtitle": null,
+                        "excerpt": "The second largest community of companion of Ladys Khadijeh(P.U.H) on the occasion of the anniversary of the Prophet and Lady Khadijeh marriage(P.U.TH). (The Anniversary Wedding of two Heavenly Couples)"
+                    },
+                    {
+                        "id": "mc",
+                        "language": "en",
+                        "subdomain": null,
+                        "title": "The anniversary of the beginning Imamatt of Majesty Mahdi (P.U.H)",
+                        "seotitle": null,
+                        "slug": "hamayeshasreaftab",
+                        "slug_raw": "hamayeshasreaftab",
+                        "parent_url": [],
+                        "url": "hamayeshasreaftab",
+                        "link": "https://jeebres.ir/en/hamayeshasreaftab",
+                        "content": "The Institute of Lady's Khadijeh and the Iranian Leadership Institute at Universities will coincide with the arrival at 9 Rabi Al_Aval, The anniversary of the beginning Imamatt of Majesty Mahdi (P.U.H) The 11th largest student conference of Mahdi companion, With more than four thousand students from across the country in the  Jamkaran Mosque.",
+                        "meta": {
+                            "thumb": "https://jeebres.ir/files/1/453-bdc90a45376646afc85ecccba3179d5e.jpg"
+                        },
+                        "file": {
+                            "main": "https://jeebres.ir/files/1/453-bdc90a45376646afc85ecccba3179d5e.jpg",
+                            "large": "https://jeebres.ir/files/1/453-bdc90a45376646afc85ecccba3179d5e-large.jpg",
+                            "normal": "https://jeebres.ir/files/1/453-bdc90a45376646afc85ecccba3179d5e-normal.jpg",
+                            "thumb": "https://jeebres.ir/files/1/453-bdc90a45376646afc85ecccba3179d5e-thumb.jpg"
+                        },
+                        "type": "post",
+                        "subtype": null,
+                        "special": "slider",
+                        "comment": "closed",
+                        "count": null,
+                        "order": null,
+                        "status": "publish",
+                        "parent": null,
+                        "user_id": "5Xv",
+                        "publishdate": "2018-11-14 11:00:00",
+                        "datemodified": "2019-07-13 12:47:20",
+                        "datecreated": "2018-11-27 19:10:34",
+                        "subtitle": null,
+                        "excerpt": "Holding a big student Conference who companion of Majesty Mahdi(P.U.H) with more than four Thousand University students from around the country."
+                    },
+                    {
+                        "id": "m9",
+                        "language": "en",
+                        "subdomain": null,
+                        "title": "Launch of the Umm al_Momenin ladys khadijeh Station in Najaf Ashraf",
+                        "seotitle": null,
+                        "slug": "mokebarbaeen",
+                        "slug_raw": "mokebarbaeen",
+                        "parent_url": [],
+                        "url": "mokebarbaeen",
+                        "link": "https://jeebres.ir/en/mokebarbaeen",
+                        "content": "Each year, Arbaeen Hosseini's ceremony brings an eternal epic by the Passionate presence of milions of Lovers Ahl al_Beit ( P.U.TH)Majestic khadijeh Institute, by the help of Samte Khoda Tv program to Improve quality of Service, and pilgrims Arbaeen, Especially the sisters, have set up the station of Umm al_Momenin khadijeh.The location of this Station is on Al_Rasul Street, Bab Qeble Amir al_ Moomenin in Najaf which provides cultural services and receptions for three meals.",
+                        "meta": {
+                            "thumb": "https://jeebres.ir/files/1/456-5c3b8927e8cf52b160d9084eacbc290d.jpg"
+                        },
+                        "file": {
+                            "main": "https://jeebres.ir/files/1/456-5c3b8927e8cf52b160d9084eacbc290d.jpg",
+                            "large": "https://jeebres.ir/files/1/456-5c3b8927e8cf52b160d9084eacbc290d-large.jpg",
+                            "normal": "https://jeebres.ir/files/1/456-5c3b8927e8cf52b160d9084eacbc290d-normal.jpg",
+                            "thumb": "https://jeebres.ir/files/1/456-5c3b8927e8cf52b160d9084eacbc290d-thumb.jpg"
+                        },
+                        "type": "post",
+                        "subtype": null,
+                        "special": "slider",
+                        "comment": "closed",
+                        "count": null,
+                        "order": null,
+                        "status": "publish",
+                        "parent": null,
+                        "user_id": "5Xv",
+                        "publishdate": "2018-10-14 11:15:00",
+                        "datemodified": "2019-07-13 12:47:27",
+                        "datecreated": "2018-11-27 18:46:35",
+                        "subtitle": null,
+                        "excerpt": "Each year, Arbaeen Hosseinis ceremony brings an eternal epic by the Passionate presence of milions of Lovers Ahl al_Beit ( P.U.TH) Majestic khadijeh Institute, by the help of Samte Khoda Tv program to Improve quality of Service, and pilgrims Arbaeen, Especially the sisters, have set up the..."
+                    }
+                ]
+            },
+            {
+                "type": "link4",
+                "link": [
+                    {
+                        "image": "https://jeebres.ir/static/images/app/KhadijeLine-about.jpg",
+                        "url": "about",
+                        "text": "About"
+                    },
+                    {
+                        "image": "https://jeebres.ir/static/images/app/KhadijeLine-mission.jpg",
+                        "url": "mission",
+                        "text": "Mission"
+                    },
+                    {
+                        "image": "https://jeebres.ir/static/images/app/KhadijeLine-vision.jpg",
+                        "url": "vision",
+                        "text": "Vision"
+                    },
+                    {
+                        "image": "https://jeebres.ir/static/images/app/KhadijeLine-language.jpg",
+                        "url": "lang",
+                        "text": "Languages"
+                    }
+                ]
+            }
+        ]
+    }
+}

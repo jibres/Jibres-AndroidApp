@@ -1,6 +1,7 @@
 package com.jibres.android.api;
 
-import android.widget.Toast;
+import android.content.Context;
+import android.util.Log;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
@@ -8,63 +9,97 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.jibres.android.Static.file;
+import com.jibres.android.Static.format;
 import com.jibres.android.Static.lookServer;
 import com.jibres.android.Static.value;
+import com.jibres.android.utility.FileManager;
 import com.jibres.android.utility.Network;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
 public class apiV6 {
 
-    public static void app(String url ,final appListener appListener){
+    public static void app0(Context context, final appListener appListener){
+        final String TAG = "api/v6";
+        try {
+            String settingApp = FileManager.read_FromStorage(context, file.setting, format.json);
+            JSONObject mainObject = new JSONObject(settingApp);
+            JSONObject result = mainObject.getJSONObject("result");
 
-        StringRequest mainRQ = new StringRequest(Request.Method.GET,url, new Response.Listener<String>(){
-            @Override
-            public void onResponse(String response) {
-                try {
-                    JSONObject mainObject = new JSONObject(response);
-                    JSONObject result = mainObject.getJSONObject("result");
-                    /*Url*/
-                    JSONObject url_object = result.getJSONObject("url");
-                    String  url_enter = url_object.getString("enter");
-                    /*Setting*/
-                    JSONObject setting = result.getJSONObject("setting");
-                    JSONObject enter = setting.getJSONObject("enter");
-                    String  mode = enter.getString("mode");
-                    appListener.setting(mode,url_enter);
-                    /*Home Page*/
-                    JSONArray homepage = result.getJSONArray("homepage");
-                    for (int i = 0; i < homepage.length(); i++) {
-                        JSONObject object_homepage = homepage.getJSONObject(i);
-                        String type = object_homepage.getString("type");
+            appListener.lestener_GetRespone(String.valueOf(result));
 
-                        switch (type){
-                            case "banner":
+            try {
+                JSONObject url = result.getJSONObject("url");
+                String url_update = url.getString("update");
+                JSONObject version = result.getJSONObject("version");
+                String update_title = version.getString("update_title");
+                String update_desc = version.getString("update_desc");
+                appListener.lestener_Updateversion(url_update,update_title,update_desc);
+            }catch (Exception e){
+                Log.e(TAG, "api/v6/app: url || version ",e);
+            }
+
+            try {
+                JSONArray homepage = result.getJSONArray("homepage");
+                for (int i = 0; i < homepage.length(); i++) {
+                    JSONObject object_homepage = homepage.getJSONObject(i);
+                    String type = object_homepage.getString("type");
+                    switch (type){
+                        case "banner":
+                            try {
                                 String baner_image = object_homepage.getString("image");
                                 String baner_url = object_homepage.getString("url");
-                                appListener.lestener_baner(baner_image,baner_url);
+                                String baner_target = null;
+                                if (!object_homepage.isNull("target")){
+                                    baner_target = object_homepage.getString("target");
+                                }
+                                appListener.lestener_baner(baner_image,baner_url,baner_target);
                                 break;
-                            case "slider":
+                            }catch (Exception e){
+                                Log.e(TAG, "onResponse: banner",e );
+                            }
+
+                        case "slider":
+                            try {
                                 JSONArray slider_homepage = object_homepage.getJSONArray("slider");
                                 appListener.lestener_slider(String.valueOf(slider_homepage));
                                 break;
-                            case "link1":
+                            }catch (Exception e){
+                                Log.e(TAG, "onResponse: slider",e );
+                                break;
+                            }
+                        case "link1":
+                            try {
                                 String image_link1 = object_homepage.getString("image");
                                 String url_link1 = object_homepage.getString("url");
-                                appListener.lestener_link_1(image_link1,url_link1);
+                                String link1_target = null;
+                                if (!object_homepage.isNull("target")){
+                                    link1_target = object_homepage.getString("target");
+                                }
+                                appListener.lestener_link_1(image_link1,url_link1,link1_target);
                                 break;
-
-                            case "link2":
+                            }catch (Exception e){
+                                Log.e(TAG, "onResponse: link1",e );
+                                break;
+                            }
+                        case "link2":
+                            try {
                                 JSONArray link2_homepage = object_homepage.getJSONArray("link");
                                 appListener.lestener_link_2(String.valueOf(link2_homepage));
                                 break;
-
-                            case "linkdesc":
+                            }catch (Exception e){
+                                Log.e(TAG, "onResponse: link2",e );
+                                break;
+                            }
+                        case "linkdesc":
+                            try {
                                 String title,desc,image,url;
                                 title = object_homepage.getString("title");
                                 desc = object_homepage.getString("desc");
@@ -72,60 +107,107 @@ public class apiV6 {
                                 url = object_homepage.getString("url");
                                 appListener.lestener_link_3_desc(title,desc,image,url);
                                 break;
+                            }catch (Exception e){
+                                Log.e(TAG, "onResponse: linkdesc",e );
+                                break;
+                            }
+                        case "link4":
 
-                            case "link4":
+                            try {
                                 JSONArray link4_homepage = object_homepage.getJSONArray("link");
                                 appListener.lestener_link_4(String.valueOf(link4_homepage));
                                 break;
 
-                            case "inapplink":
-                            case "titlelink":
+                            }catch (Exception e){
+                                Log.e(TAG, "onResponse: link4",e );
+                                break;
+                            }
+                        case "inapplink":
+                        case "titlelink":
+                            try {
                                 String titlelink_title = object_homepage.getString("title");
                                 String titlelink_url = object_homepage.getString("link");
-                                appListener.lestener_title_link(titlelink_title,null,titlelink_url);
+                                String titlelink_target = null;
+                                if (!object_homepage.isNull("target")){
+                                    titlelink_target = object_homepage.getString("target");
+                                }
+                                appListener.lestener_title_link(titlelink_title,null,titlelink_url,titlelink_target);
                                 break;
-
-                            case "title":
+                            }catch (Exception e){
+                                Log.e(TAG, "onResponse: inapplink || titlelink",e );
+                                break;
+                            }
+                        case "title":
+                            try {
                                 String titleNONE_title = object_homepage.getString("title");
                                 appListener.lestener_title_none(titleNONE_title);
                                 break;
-
-                            case "salawat":
-                                String count_salawat = null;
-                                if (!object_homepage.isNull("fit_count")){
-                                    count_salawat =  object_homepage.getString("fit_count");
+                            }catch (Exception e){
+                                Log.e(TAG, "onResponse: title",e );
+                                break;
+                            }
+                        case "salawat":
+                            try {
+                                int count_salawat = 0;
+                                if (!object_homepage.isNull("count")){
+                                    count_salawat = object_homepage.getInt("count");
                                 }
-                                else if (!object_homepage.isNull("count")){
-                                    count_salawat = String.valueOf(object_homepage.getInt("count"));
-                                }
-                                if (!object_homepage.isNull("")){}
                                 appListener.lestener_salavat(count_salawat);
                                 break;
-
-                            case "news":
+                            }catch (Exception e){
+                                Log.e(TAG, "onResponse: salawat",e );
+                                break;
+                            }
+                        case "news":
+                            try {
                                 JSONArray news = object_homepage.getJSONArray("news");
                                 appListener.lestener_news(String.valueOf(news));
                                 break;
-
-                            case "hr":
+                            }catch (Exception e){
+                                Log.e(TAG, "onResponse: news",e );
+                                break;
+                            }
+                        case "hr":
+                            try {
                                 appListener.lestener_hr();
                                 break;
-
-                            case "change_language":
+                            }catch (Exception e){
+                                Log.e(TAG, "onResponse: hr",e );
+                                break;
+                            }
+                        case "change_language":
+                            try {
                                 appListener.lestener_language();
                                 break;
-                        }
-
-                        if (i == homepage.length()-1){
-                            appListener.lestener_versionApp();
-                        }
+                            }catch (Exception e){
+                                Log.e(TAG, "onResponse: change_language",e );
+                                break;
+                            }
                     }
 
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                    appListener.error();
+                    if (i == homepage.length()-1){
+                        appListener.lestener_versionApp();
+                    }
                 }
+            }catch (Exception e){
+                Log.e(TAG, "api/v6/app: hompage ",e);
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+            appListener.error();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void app(String url ,final appListener appListener){
+
+        final String TAG = "api/v6";
+
+        StringRequest mainRQ = new StringRequest(Request.Method.GET,url, new Response.Listener<String>(){
+            @Override
+            public void onResponse(String response) {
+
             }
         }, new Response.ErrorListener() {
             @Override
@@ -143,21 +225,22 @@ public class apiV6 {
                 return sernd_headers;
             }
         }
-        ;mainRQ.setRetryPolicy(new DefaultRetryPolicy(5 * 1000, 0, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        ;
 
         Network.getInstance().addToRequestQueue(mainRQ);
     }
 
     public interface appListener{
-        void setting(String mode , String url);
-        void lestener_baner(String image,String url);
-        void lestener_link_1(String image,String url);
+        void lestener_GetRespone(String result);
+        void lestener_Updateversion(String url,String title,String desc);
+        void lestener_baner(String image,String url,String type);
+        void lestener_link_1(String image,String url,String type);
         void lestener_link_2(String link2Array);
         void lestener_link_3_desc(String title,String desc,String image,String url);
         void lestener_link_4(String link4Array);
-        void lestener_title_link(String title,String image,String url);
+        void lestener_title_link(String title,String image,String url,String type);
         void lestener_title_none(String title);
-        void lestener_salavat(String count);
+        void lestener_salavat(int count);
         void lestener_hadith();
         void lestener_slider(String respone);
         void lestener_news(String newsArray);
@@ -212,12 +295,9 @@ public class apiV6 {
                     if (ok){
                         JSONArray msg = mainObject.getJSONArray("msg");
                         JSONObject result = mainObject.getJSONObject("result");
-                        String count_salawat = null;
-                        if (!result.isNull("fit_count")){
-                            count_salawat =  result.getString("fit_count");
-                        }
-                        else if (!result.isNull("count")){
-                            count_salawat = String.valueOf(result.getInt("count"));
+                        int count_salawat = 0;
+                        if (!result.isNull("count")){
+                            count_salawat = result.getInt("count");
                         }
                         salawatListener.saveSalawat(count_salawat, String.valueOf(msg));
                     }else {
@@ -246,13 +326,13 @@ public class apiV6 {
                 }
                 return headers;
             }
-        };salawayRQ.setRetryPolicy(new DefaultRetryPolicy(5 * 1000, 0, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        };salawayRQ.setRetryPolicy(new DefaultRetryPolicy(2 * 1000, 0, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         Network.getInstance().addToRequestQueue(salawayRQ);
 
     }
 
     public interface salawatListener{
-        void saveSalawat(String count,String msgArray);
+        void saveSalawat(int count,String msgArray);
         void errorSalawat(String error);
     }
 
@@ -465,30 +545,6 @@ public class apiV6 {
     }
 
     public interface sendelListener{
-        void result(String respone);
-        void error(String error);
-    }
-
-
-    public static void getLanguage(String url,final languageListener languageListener){
-
-        StringRequest getLangRQ = new StringRequest(Request.Method.GET, url, new Response.Listener<String>(){
-            @Override
-            public void onResponse(String response) {
-                languageListener.result(String.valueOf(response));
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError e) {
-                languageListener.error("VolleyError: "+e);
-            }
-        });
-        getLangRQ.setRetryPolicy(new DefaultRetryPolicy(5 * 1000, 0, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-        Network.getInstance().addToRequestQueue(getLangRQ);
-
-    }
-
-    public interface languageListener{
         void result(String respone);
         void error(String error);
     }

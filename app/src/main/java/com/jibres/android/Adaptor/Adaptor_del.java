@@ -6,13 +6,13 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -36,6 +36,7 @@ public class Adaptor_del extends RecyclerView.Adapter<Adaptor_del.ViewHolder> {
     private LayoutInflater mInflater;
     private Context context;
     private boolean duble = false;
+    ImageView imageView;
 
     // data is passed into the constructor
     public Adaptor_del(Context context, List<item_del> data) {
@@ -54,6 +55,7 @@ public class Adaptor_del extends RecyclerView.Adapter<Adaptor_del.ViewHolder> {
     // binds the data to the TextView in each row
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
+        imageView = holder.imageHert_dubelClick;
         String plus = mData.get(position).getPlus();
         String text = mData.get(position).getText();
         String sex = mData.get(position).getSex();
@@ -93,7 +95,7 @@ public class Adaptor_del extends RecyclerView.Adapter<Adaptor_del.ViewHolder> {
         final View.OnClickListener clickLike = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Like(holder.plus,holder.bg_img_plus,id);
+                Like(holder.plus,holder.bg_img_plus,id,holder.imageHert_dubelClick);
             }
         };
 
@@ -104,7 +106,7 @@ public class Adaptor_del extends RecyclerView.Adapter<Adaptor_del.ViewHolder> {
             @Override
             public void onClick(View view) {
                 if (duble){
-                    Like(holder.plus,holder.bg_img_plus,id);
+                    Like(holder.plus,holder.bg_img_plus,id,holder.imageHert_dubelClick);
                 }
                 duble = true;
                 new Handler().postDelayed(new Runnable() {
@@ -125,8 +127,9 @@ public class Adaptor_del extends RecyclerView.Adapter<Adaptor_del.ViewHolder> {
     }
 
 
-    private void Like(TextView plus, ImageView bg_img_plus, final String id){
-        final String url = context.getString(R.string.url_del_like);
+    private void Like(TextView plus, ImageView bg_img_plus, final String id, final ImageView imgHertDubelClick){
+        final String url = SaveManager.get(context).getstring_appINFO().get(SaveManager.apiV6_URL)+ com.jibres.android.Static.url.like_del;
+
         SQLiteDatabase databases = new Database(context).getReadableDatabase();
         @SuppressLint("Recycle") Cursor checkID_del = databases.rawQuery(Database.select_del(id),null);
         if (checkID_del.getCount() == 0 ){
@@ -135,6 +138,8 @@ public class Adaptor_del extends RecyclerView.Adapter<Adaptor_del.ViewHolder> {
             ++plusApp;
             plus.setText(String.valueOf(plusApp));
             bg_img_plus.setColorFilter(Color.RED);
+            /**/
+            imageHertDubelClick_anim(imgHertDubelClick);
 
             String apikey = SaveManager.get(context).getstring_appINFO().get(SaveManager.apiKey);
             apiV6.like_del(url,apikey, id, new apiV6.likeListener() {
@@ -145,11 +150,10 @@ public class Adaptor_del extends RecyclerView.Adapter<Adaptor_del.ViewHolder> {
                         SQLiteDatabase database = new Database(context).getWritableDatabase();
                         database.execSQL(Database.insetTo_del(id,"true"));
                         database.close();
-
                         for (int i = 0; i < array.length(); i++) {
                             JSONObject object = array.getJSONObject(i);
                             String text = object.getString("text");
-                            Toast.makeText(context, text, Toast.LENGTH_SHORT).show();
+                            Log.d("like", "liked: "+text);
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -165,11 +169,24 @@ public class Adaptor_del extends RecyclerView.Adapter<Adaptor_del.ViewHolder> {
         checkID_del.close();
     }
 
+    private void imageHertDubelClick_anim(final ImageView imgHertDubelClick){
+        imgHertDubelClick.animate().setDuration(100).alpha(0.7f);
+        imgHertDubelClick.animate().setDuration(300).translationY(0);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                imgHertDubelClick.animate().setDuration(300).alpha(0.0f);
+                imgHertDubelClick.animate().setDuration(300).translationY(150);
+
+            }
+        }, 700);
+    }
+
 
     // stores and recycles views as they are scrolled off screen
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView name,text,plus;
-        ImageView avatar,bg_img_plus;
+        ImageView avatar,bg_img_plus,imageHert_dubelClick;
         RelativeLayout dubelClick;
 
         ViewHolder(View itemView) {
@@ -180,6 +197,7 @@ public class Adaptor_del extends RecyclerView.Adapter<Adaptor_del.ViewHolder> {
             bg_img_plus = itemView.findViewById(R.id.img_like);
             avatar = itemView.findViewById(R.id.imgSex_del);
             dubelClick = itemView.findViewById(R.id.outSide_itemDelneveshte);
+            imageHert_dubelClick = itemView.findViewById(R.id.imageHeart_dubelClick);
         }
 
     }

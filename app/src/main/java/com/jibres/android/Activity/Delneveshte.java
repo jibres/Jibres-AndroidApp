@@ -46,8 +46,6 @@ public class Delneveshte extends AppCompatActivity {
     ProgressBar progressBar;
     LinearLayout send_del_acdel;
 
-    String url;
-    String apikey;
     boolean oneAddDelneveshte = false;
     int pageDelneveshte = 1;
     int endPageDelneveshte = 2;
@@ -63,8 +61,6 @@ public class Delneveshte extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_delneveshte);
 
-        url = getString(R.string.url_del);
-        apikey = SaveManager.get(this).getstring_appINFO().get(SaveManager.apiKey);
 
         itemDels = new ArrayList<>();
         recyclerView = findViewById(R.id.recyclerview_del);
@@ -116,6 +112,10 @@ public class Delneveshte extends AppCompatActivity {
 
 
     private void addItemDelneveshte(int Page){
+        String url = SaveManager.get(getApplicationContext()).getstring_appINFO().get(SaveManager.apiV6_URL)+ com.jibres.android.Static.url.del;
+        String apikey = SaveManager.get(this).getstring_appINFO().get(SaveManager.apiKey);
+
+
         apiV6.del(url,Page,apikey,new apiV6.delListener() {
             @Override
             public void result(String respone) {
@@ -163,8 +163,7 @@ public class Delneveshte extends AppCompatActivity {
             @Override
             public void error(String error) {
                 Intent getintent = getIntent();
-                new Dialog(Delneveshte.this,getString(R.string.errorNet_title_snackBar),"",getString(R.string.errorNet_button_snackBar),false,getintent);
-
+                new Dialog(Delneveshte.this, getString(R.string.errorNet_title_snackBar), "", getString(R.string.errorNet_button_snackBar), false, getintent);
             }
         });
     }
@@ -229,8 +228,10 @@ public class Delneveshte extends AppCompatActivity {
     }
 
     private void add_del(String name,String number,String text,String sexs){
-        String url = getString(R.string.url_add_del);
+        final String url = SaveManager.get(getApplication()).getstring_appINFO().get(SaveManager.apiV6_URL)+ com.jibres.android.Static.url.send_del;
+
         String apikey = SaveManager.get(this).getstring_appINFO().get(SaveManager.apiKey);
+        Log.d("add_del", "add_del: "+" name "+name+" text "+text+" number "+number+" sexs: "+sexs);
         apiV6.sendDel(url, apikey,name, text, number, sexs, new apiV6.sendelListener() {
             @Override
             public void result(String respone) {

@@ -4,7 +4,6 @@
     android:layout_marginBottom="@dimen/_1sdp"
     android:layout_marginStart="5dp"
     android:layout_marginEnd="5dp"
-    android:layoutDirection="rtl"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
@@ -49,6 +48,8 @@
             android:layout_height="wrap_content"/>
 
         <ImageView
+            android:id="@+id/img_fleshTitle"
+            android:rotation="0"
             android:paddingLeft="5dp"
             android:src="@drawable/ic_flesh_r"
             android:layout_width="wrap_content"

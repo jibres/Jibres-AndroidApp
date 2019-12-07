@@ -27,6 +27,10 @@ public class SaveManager extends ContextWrapper {
 
 
     /** App Info */
+    public static final String apiV6_URL = "apiV6_URL";
+
+    public static final String salawatCount = "salawatCount";
+
     public static final String introIsChacked = "introIsChacked";
 
     public static final String appLanguage = "appLanguage";
@@ -38,14 +42,17 @@ public class SaveManager extends ContextWrapper {
     public static final String apiKey = "apiKey";
     public static final String userCode = "userCode";
     public static final String zoneID = "zoneID";
-    public static final String mobile = "mobile";
 
-    public static final String userIsLogin = "userIsLogin";
-
-    public void change_userIsLogin(Boolean result) {
-        editor.putBoolean(userIsLogin, result);
+    public void change_apiV6_URL(String local_URL) {
+        editor.putString(apiV6_URL, local_URL);
         editor.apply();
     }
+
+    public void change_salawatCount(int count) {
+        editor.putInt(salawatCount, count);
+        editor.apply();
+    }
+
     public void change_appLanguage(String Language) {
         editor.putString(appLanguage, Language);
         editor.apply();
@@ -54,10 +61,6 @@ public class SaveManager extends ContextWrapper {
         editor.putString(apiKey, ApiKey);
         editor.putString(userCode, UserCode);
         editor.putString(zoneID, ZoneID);
-        editor.apply();
-    }
-    public void chnage_mobile(String Mobile) {
-        editor.putString(mobile, mobile);
         editor.apply();
     }
 
@@ -83,6 +86,11 @@ public class SaveManager extends ContextWrapper {
     }
 
 
+    public Map<String, Integer> getInt_appINFO() {
+        HashMap<String, Integer> hashMap = new HashMap<>();
+        hashMap.put(salawatCount, sharedPreferences.getInt(salawatCount, 0 ));
+        return hashMap;
+    }
 
     public Map<String, Boolean> getboolen_appINFO() {
         HashMap<String, Boolean> hashMap = new HashMap<>();
@@ -91,19 +99,18 @@ public class SaveManager extends ContextWrapper {
         hashMap.put(deprecatedVersion, sharedPreferences.getBoolean(deprecatedVersion, false ));
 
         hashMap.put(changeLanguageByUser, sharedPreferences.getBoolean(changeLanguageByUser, true ));
-
-        hashMap.put(userIsLogin, sharedPreferences.getBoolean(userIsLogin, false ));
         return hashMap;
     }
 
     public Map<String, String> getstring_appINFO() {
         HashMap<String, String> hashMap = new HashMap<>();
+        hashMap.put(apiV6_URL, sharedPreferences.getString(apiV6_URL, "https://jeebres.ir/api/v6" ));
+
         hashMap.put(appLanguage, sharedPreferences.getString(appLanguage, null ));
 
         hashMap.put(apiKey, sharedPreferences.getString(apiKey, null ));
         hashMap.put(userCode, sharedPreferences.getString(userCode, null ));
         hashMap.put(zoneID, sharedPreferences.getString(zoneID, null ));
-        hashMap.put(mobile, sharedPreferences.getString(mobile, null ));
         return hashMap;
     }
 

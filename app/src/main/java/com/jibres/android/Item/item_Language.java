@@ -2,13 +2,13 @@ package com.jibres.android.Item;
 
 public class item_Language {
 
-    private String title;
-    private String tag;
+    private String title,tag,local_URL;
     private boolean chBoxVisibel;
 
-    public item_Language(String title, String tag, boolean chBoxVisibel) {
+    public item_Language(String title, String tag, boolean chBoxVisibel, String local_URL) {
         this.title = title;
         this.tag = tag;
+        this.local_URL = local_URL;
         this.chBoxVisibel = chBoxVisibel;
     }
 
@@ -26,6 +26,14 @@ public class item_Language {
 
     public void setTag(String tag) {
         this.tag = tag;
+    }
+
+    public String getLocal_URL() {
+        return local_URL;
+    }
+
+    public void setLocal_URL(String local_URL) {
+        this.local_URL = local_URL;
     }
 
     public boolean isChBoxVisibel() {

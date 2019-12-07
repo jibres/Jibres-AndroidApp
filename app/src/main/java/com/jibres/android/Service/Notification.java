@@ -37,6 +37,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
+import static com.jibres.android.utility.Firebase.Attribuites.FCM_ACTION_CLICK_NOTIFICATION;
 
 public class Notification extends Service {
 
@@ -206,7 +207,7 @@ public class Notification extends Service {
         PendingIntent pendingIntent;
 
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//        intent.setAction(FCM_ACTION_CLICK_NOTIFICATION);
+        intent.setAction(FCM_ACTION_CLICK_NOTIFICATION);
         pendingIntent = PendingIntent.getActivity(this, 0, intent,PendingIntent.FLAG_UPDATE_CURRENT);
 
         int randomNumber = new Random().nextInt(976431 ) + 20;
@@ -228,7 +229,7 @@ public class Notification extends Service {
                 .setSound(defaultSoundUri)
                 .setContentIntent(pendingIntent)
                 .setContentInfo(info)
-                .setSmallIcon(R.drawable.logo)
+                .setSmallIcon(R.drawable.logo_xml)
                 .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.logo))
                 .setColor(ContextCompat.getColor(this, R.color.colorPrimary));
         notificationManager.notify(100+randomNumber+id, builder.build());

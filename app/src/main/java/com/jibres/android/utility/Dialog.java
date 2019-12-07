@@ -3,7 +3,10 @@ package com.jibres.android.utility;
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.util.Log;
+import android.widget.Toast;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.appcompat.app.AlertDialog;
 
 import com.jibres.android.R;
@@ -40,6 +43,10 @@ public class Dialog {
             }
         });
         builderSingle.setCancelable(Cancelable);
-        builderSingle.show();
+        Log.e("amingoli78", "Dialog: "+activity.isFinishing() );
+        if (!activity.isFinishing()){
+            builderSingle.show();
+        }
+
     }
 }

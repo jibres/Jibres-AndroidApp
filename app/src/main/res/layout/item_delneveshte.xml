@@ -10,6 +10,9 @@
     android:gravity="center|top"
     android:layoutDirection="rtl"
     android:layout_height="wrap_content">
+    
+    
+
 
 
     <LinearLayout
@@ -51,7 +54,6 @@
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:fontFamily="@font/iransans_bold"
-                android:text="100"
                 android:textAlignment="center"
                 android:textColor="#FFFFFF"
                 android:textSize="@dimen/_5sdp" />
@@ -70,6 +72,7 @@
         android:orientation="vertical">
 
         <TextView
+            android:textDirection="rtl"
             android:id="@+id/name_del"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -80,6 +83,7 @@
             android:visibility="gone" />
 
         <TextView
+            android:textDirection="rtl"
             android:id="@+id/text_del"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -101,10 +105,17 @@
         android:layout_toEndOf="@+id/imagesss"
         android:layout_marginTop="0dp"
         android:layout_marginBottom="0dp" />
-    
 
 
 
+    <ImageView
+        android:id="@+id/imageHeart_dubelClick"
+        android:alpha="0.0"
+        android:translationY="100dp"
+        android:layout_centerInParent="true"
+        android:layout_width="@dimen/_50sdp"
+        android:layout_height="@dimen/_50sdp"
+        android:src="@drawable/heart"/>
 
 
 

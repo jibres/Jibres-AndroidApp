@@ -63,7 +63,7 @@ public class ApiView extends AppCompatActivity {
             @Override
             public void error(String error) {
                 Intent getintent = getIntent();
-                new Dialog(ApiView.this,getString(R.string.errorNet_title_snackBar),"",getString(R.string.errorNet_button_snackBar),false,getintent);
+                new Dialog(ApiView.this, getString(R.string.errorNet_title_snackBar), "", getString(R.string.errorNet_button_snackBar), false, getintent);
 
             }
         });

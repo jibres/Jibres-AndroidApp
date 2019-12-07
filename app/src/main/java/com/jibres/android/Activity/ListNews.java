@@ -1,20 +1,27 @@
 package com.jibres.android.Activity;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.DefaultItemAnimator;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Html;
 import android.text.Spanned;
+import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.ViewCompat;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.jibres.android.Adaptor.Adaptor_Main;
 import com.jibres.android.Item.item_Main;
 import com.jibres.android.R;
+import com.jibres.android.Static.url;
 import com.jibres.android.api.apiV6;
 import com.jibres.android.utility.Dialog;
+import com.jibres.android.utility.SaveManager;
 import com.jibres.android.utility.set_language_device;
 
 import org.json.JSONArray;
@@ -41,7 +48,16 @@ public class ListNews extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_news);
 
-        String url_app= getString(R.string.post);
+        RelativeLayout news_mainLayout = findViewById(R.id.listNews_mainLayout);
+        String AppLanguage = SaveManager.get(this).getstring_appINFO().get(SaveManager.appLanguage);
+        if (AppLanguage.equals("fa") || AppLanguage.equals("ar")){
+            ViewCompat.setLayoutDirection(news_mainLayout,ViewCompat.LAYOUT_DIRECTION_RTL);
+        }else {
+            ViewCompat.setLayoutDirection(news_mainLayout,ViewCompat.LAYOUT_DIRECTION_LTR);
+        }
+
+
+        String urlApp = SaveManager.get(getApplication()).getstring_appINFO().get(SaveManager.apiV6_URL)+ url.posts;
         itemMains = new ArrayList<>();
         recylerview_listNews = findViewById(R.id.recyclerview_listnews);
 
@@ -49,11 +65,12 @@ public class ListNews extends AppCompatActivity {
         LayoutManager_list = new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
         recylerview_listNews.setAdapter(adaptor_main_list);
 
-        apiV6.listNews(url_app,"50", new apiV6.listNewsListener() {
+        apiV6.listNews(urlApp,"50", new apiV6.listNewsListener() {
 
             @Override
             public void lestener_news(String newsArray) {
                 news(newsArray);
+                hiddenProgress();
             }
 
             @Override
@@ -85,12 +102,12 @@ public class ListNews extends AppCompatActivity {
                     text_news = text_news.substring(0,110) + " ...";
                 }
 
-                itemMains.add(new item_Main(item_Main.NEWS,null,null,
-                        null,null,
-                        null,null,null,null,
-                        null,null,null,null,
-                        null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
+                itemMains.add(new item_Main(item_Main.NEWS,null,null,null,
                         null,null,null,
+                        null,null,null,null,null,null,
+                        null,null,null,null,null,
+                        null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
+                        null,null,null,null,
                         null,
                         null,null,null,
                         null,null,null,
@@ -107,5 +124,12 @@ public class ListNews extends AppCompatActivity {
             e.printStackTrace();
         }
     }
-
+    private void hiddenProgress(){
+        try {
+            ProgressBar progressBar = findViewById(R.id.listNews_progress);
+            if (progressBar.getVisibility() == View.VISIBLE){
+                progressBar.setVisibility(View.GONE);
+            }
+        }catch (Exception e){}
+    }
 }
