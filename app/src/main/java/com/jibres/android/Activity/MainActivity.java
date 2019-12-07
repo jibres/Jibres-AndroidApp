@@ -458,7 +458,7 @@ public class MainActivity extends AppCompatActivity  {
                 String image_news = meta.getString("thumb");
                     content_news.replace("\n","");
                 String id_news = object_news.getString("id");
-                String url_news = object_news.getString("link");
+                String url_news = object_news.getString("curl");
 
                 Spanned html_contentNews = Html.fromHtml(content_news);
                 String text_news = String.valueOf(html_contentNews);

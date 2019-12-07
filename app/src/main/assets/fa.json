@@ -7,21 +7,21 @@
                 "direction": "rtl",
                 "iso": "fa_IR",
                 "localname": "فارسی",
-                "api_url": "https://jeebres.ir/fa/api/v6"
+                "api_url": "https://jeebres.ir/fa/api/v1"
             },
             "ar": {
                 "name": "ar",
                 "direction": "rtl",
                 "iso": "ar_IQ",
                 "localname": "العربية",
-                "api_url": "https://jeebres.ir/ar/api/v6"
+                "api_url": "https://jeebres.ir/ar/api/v1"
             },
             "en": {
                 "name": "en",
                 "direction": "ltr",
                 "iso": "en_US",
                 "localname": "English",
-                "api_url": "https://jeebres.ir/en/api/v6"
+                "api_url": "https://jeebres.ir/en/api/v1"
             }
         },
         "url": {
@@ -38,8 +38,8 @@
             "logo": "https://jeebres.ir/static/images/logo.png"
         },
         "version": {
-            "last": 48,
-            "deprecated": 34,
+            "last": 1,
+            "deprecated": 0,
             "deprecated_title": "این نسخه منقضی شده است",
             "deprecated_desc": "برای دانلود نسخه جدید بر روی لینک زیر کلیک کنید",
             "update_title": "نسخه جدید منتشر شده است",
@@ -62,19 +62,19 @@
                         "icon": "info",
                         "type": "api",
                         "title": "درباره ما",
-                        "link": "https://jeebres.ir/fa/api/v6/about"
+                        "link": "https://jeebres.ir/fa/api/v1/about"
                     },
                     {
                         "icon": "lock",
                         "type": "api",
                         "title": "حریم خصوصی",
-                        "link": "https://jeebres.ir/fa/api/v6/privacy"
+                        "link": "https://jeebres.ir/fa/api/v1/privacy"
                     },
                     {
                         "icon": "list",
                         "type": "api",
                         "title": "عبارات",
-                        "link": "https://jeebres.ir/fa/api/v6/terms"
+                        "link": "https://jeebres.ir/fa/api/v1/terms"
                     }
                 ]
             },
@@ -82,21 +82,21 @@
                 "icon": null,
                 "type": "api",
                 "title": "تماس",
-                "link": "https://jeebres.ir/fa/api/v6/contact",
+                "link": "https://jeebres.ir/fa/api/v1/contact",
                 "child": null
             },
             {
                 "icon": null,
                 "type": "api",
                 "title": "چشم‌انداز",
-                "link": "https://jeebres.ir/fa/api/v6/vision",
+                "link": "https://jeebres.ir/fa/api/v1/vision",
                 "child": null
             },
             {
                 "icon": null,
                 "type": "api",
                 "title": "ماموریت",
-                "link": "https://jeebres.ir/fa/api/v6/mission",
+                "link": "https://jeebres.ir/fa/api/v1/mission",
                 "child": null
             },
             {

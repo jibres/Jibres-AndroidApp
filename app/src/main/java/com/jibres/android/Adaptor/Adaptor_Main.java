@@ -412,7 +412,7 @@ public class Adaptor_Main extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                             String content_html = String.valueOf(Html.fromHtml(content));
                             String id = object_link4.getString("id");
                             String image = meta.getString("thumb");
-                            String url = object_link4.getString("link");
+                            String url = object_link4.getString("curl");
 
 
                             ((holder_slide)holder).itemSliderArrayList.add(new item_slider(image,title,content_html.replace("\n"," "),url,id));

@@ -27,7 +27,7 @@ import java.util.Map;
 public class apiV6 {
 
     public static void app0(Context context, final appListener appListener){
-        final String TAG = "api/v6";
+        final String TAG = "api/v1";
         try {
             String settingApp = FileManager.read_FromStorage(context, file.setting, format.json);
             JSONObject mainObject = new JSONObject(settingApp);
@@ -43,7 +43,7 @@ public class apiV6 {
                 String update_desc = version.getString("update_desc");
                 appListener.lestener_Updateversion(url_update,update_title,update_desc);
             }catch (Exception e){
-                Log.e(TAG, "api/v6/app: url || version ",e);
+                Log.e(TAG, "api/v1/app: url || version ",e);
             }
 
             try {
@@ -91,7 +91,7 @@ public class apiV6 {
                             }
                         case "link2":
                             try {
-                                JSONArray link2_homepage = object_homepage.getJSONArray("link");
+                                JSONArray link2_homepage = object_homepage.getJSONArray("curl");
                                 appListener.lestener_link_2(String.valueOf(link2_homepage));
                                 break;
                             }catch (Exception e){
@@ -114,7 +114,7 @@ public class apiV6 {
                         case "link4":
 
                             try {
-                                JSONArray link4_homepage = object_homepage.getJSONArray("link");
+                                JSONArray link4_homepage = object_homepage.getJSONArray("curl");
                                 appListener.lestener_link_4(String.valueOf(link4_homepage));
                                 break;
 
@@ -126,7 +126,7 @@ public class apiV6 {
                         case "titlelink":
                             try {
                                 String titlelink_title = object_homepage.getString("title");
-                                String titlelink_url = object_homepage.getString("link");
+                                String titlelink_url = object_homepage.getString("curl");
                                 String titlelink_target = null;
                                 if (!object_homepage.isNull("target")){
                                     titlelink_target = object_homepage.getString("target");
@@ -190,7 +190,7 @@ public class apiV6 {
                     }
                 }
             }catch (Exception e){
-                Log.e(TAG, "api/v6/app: hompage ",e);
+                Log.e(TAG, "api/v1/app: hompage ",e);
             }
         } catch (JSONException e) {
             e.printStackTrace();
@@ -202,7 +202,7 @@ public class apiV6 {
 
     public static void app(String url ,final appListener appListener){
 
-        final String TAG = "api/v6";
+        final String TAG = "api/v1";
 
         StringRequest mainRQ = new StringRequest(Request.Method.GET,url, new Response.Listener<String>(){
             @Override

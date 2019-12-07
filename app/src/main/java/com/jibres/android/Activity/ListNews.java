@@ -91,7 +91,7 @@ public class ListNews extends AppCompatActivity {
                 String content_news = object_news.getString("content");
                 content_news.replace("\n -  ","");
                 String id_news = object_news.getString("id");
-                String url_news = object_news.getString("link");
+                String url_news = object_news.getString("curl");
 
                 JSONObject meta = object_news.getJSONObject("meta");
                 String image_news = meta.getString("thumb");

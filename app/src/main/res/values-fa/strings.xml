@@ -2,17 +2,17 @@
 <resources>
     <string name="app_name">" جیبرس"</string>
 
-    <string name="url_app" translatable="false">https://jeebres.ir/fa/api/v6/app</string>
-    <string name="url_salawat" translatable="false">https://jeebres.ir/fa/api/v6/salawat</string>
-    <string name="url_news" translatable="false">https://jeebres.ir/fa/api/v6/posts/get?id=</string>
-    <string name="url_del" translatable="false">https://jeebres.ir/fa/api/v6/delneveshte</string>
-    <string name="url_add_del" translatable="false">https://jeebres.ir/fa/api/v6/delneveshte/add</string>
-    <string name="url_del_like" translatable="false">https://jeebres.ir/fa/api/v6/delneveshte/like</string>
-    <string name="url_token" translatable="false">https://jeebres.ir/fa/api/v6/token</string>
-    <string name="url_user_add" translatable="false">https://jeebres.ir/fa/api/v6/android/user/add</string>
-    <string name="url_language" translatable="false">https://jeebres.ir/fa/api/v6/language</string>
-    <string name="url_notif" translatable="false">https://jeebres.ir/fa/api/v6/notif</string>
-    <string name="url_smile" translatable="false">https://jeebres.ir/fa/api/v6/smile</string>
+    <string name="url_app" translatable="false">https://jeebres.ir/fa/api/v1/app</string>
+    <string name="url_salawat" translatable="false">https://jeebres.ir/fa/api/v1/salawat</string>
+    <string name="url_news" translatable="false">https://jeebres.ir/fa/api/v1/posts/get?id=</string>
+    <string name="url_del" translatable="false">https://jeebres.ir/fa/api/v1/delneveshte</string>
+    <string name="url_add_del" translatable="false">https://jeebres.ir/fa/api/v1/delneveshte/add</string>
+    <string name="url_del_like" translatable="false">https://jeebres.ir/fa/api/v1/delneveshte/like</string>
+    <string name="url_token" translatable="false">https://jeebres.ir/fa/api/v1/token</string>
+    <string name="url_user_add" translatable="false">https://jeebres.ir/fa/api/v1/android/user/add</string>
+    <string name="url_language" translatable="false">https://jeebres.ir/fa/api/v1/language</string>
+    <string name="url_notif" translatable="false">https://jeebres.ir/fa/api/v1/notif</string>
+    <string name="url_smile" translatable="false">https://jeebres.ir/fa/api/v1/smile</string>
 
     <string name="errorNet_title_snackBar" translatable="false">اینترنت خود را بررسی کنید!</string>
     <string name="errorNet_button_snackBar" translatable="false">تلاش مجدد</string>
@@ -21,11 +21,11 @@
 
     <string name="say_salawat">صلوات بفرستید!</string>
     <string name="flag_salawat">شما هم در ختم صلوات شریک باشید</string>
-    <string name="post">https://jeebres.ir/fa/api/v6/posts</string>
-    <string name="url_vision">https://jeebres.ir/fa/api/v6/vision</string>
-    <string name="url_mission">https://jeebres.ir/fa/api/v6/mission</string>
-    <string name="url_contact">https://jeebres.ir/fa/api/v6/contact</string>
-    <string name="url_about">https://jeebres.ir/fa/api/v6/about</string>
+    <string name="post">https://jeebres.ir/fa/api/v1/posts</string>
+    <string name="url_vision">https://jeebres.ir/fa/api/v1/vision</string>
+    <string name="url_mission">https://jeebres.ir/fa/api/v1/mission</string>
+    <string name="url_contact">https://jeebres.ir/fa/api/v1/contact</string>
+    <string name="url_about">https://jeebres.ir/fa/api/v1/about</string>
     <string name="sex_female">زن</string>
     <string name="sex_male">مرد</string>
     <string name="edt_writ_del">صدای قلبت را بنویس</string>
@@ -38,7 +38,7 @@
     <string name="send_delneveshteh">ارسال دل نوشته</string>
     <string name="tost_exit">برای خروج مجددا کلید برگشت را لمس کنید</string>
     <string name="update_now">بروزرسانی</string>
-    <string name="smile">https://jeebres.ir/fa/api/v6/smile</string>
+    <string name="smile">https://jeebres.ir/fa/api/v1/smile</string>
     <string name="msg_token_fmt">msg_token_fmt</string>
     <string name="later">خروج</string>
     <string name="website">https://jeebres.ir/fa</string>
