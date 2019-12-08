@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity  {
         super.onResume();
         new set_language_device(this);
         startService(new Intent(MainActivity.this, Notification.class));
-        if (SaveManager.get(getApplicationContext()).getstring_appINFO().get(SaveManager.mobile) == null){
+        if (SaveManager.get(this).getstring_appINFO().get(SaveManager.mobile) == null){
             startActivity(new Intent(getApplicationContext(),LoginActivity.class));
             finish();
         }
@@ -72,13 +72,15 @@ public class MainActivity extends AppCompatActivity  {
         String apikey = SaveManager.get(this).getstring_appINFO().get(SaveManager.apiKey);
         String usercode = SaveManager.get(this).getstring_appINFO().get(SaveManager.userCode);
         String zonid = SaveManager.get(this).getstring_appINFO().get(SaveManager.zoneID);
-        hasNewVersion = SaveManager.get(getApplication()).getboolen_appINFO().get(SaveManager.hasNewVersion);
+        String mobile = SaveManager.get(this).getstring_appINFO().get(SaveManager.mobile);
+        hasNewVersion = SaveManager.get(this).getboolen_appINFO().get(SaveManager.hasNewVersion);
 
 
         Log.d(tag.get_info_login,
                 "\n Api Key: "+apikey+
                 "\n User Code: "+usercode+
-                "\n Zon ID: "+zonid);
+                "\n Zon ID: "+zonid+
+                "\n mobile: "+mobile);
 
         mainLayout = findViewById(R.id.main_layout);
         progressBar = findViewById(R.id.progress_main);
@@ -111,7 +113,7 @@ public class MainActivity extends AppCompatActivity  {
 
             @Override
             public void lestener_Updateversion(String url, String title, String desc) {
-                if (hasNewVersion){
+                if (!hasNewVersion){
                     UpdateBox(url,title,desc,null,null);
                 }else {
                     recylerview.setVisibility(View.VISIBLE);

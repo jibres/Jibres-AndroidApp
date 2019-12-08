@@ -1,51 +1,130 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    android:orientation="vertical"
-    android:nextFocusDown="@id/edtNumberPhone_login"
+<RelativeLayout
+    android:layoutDirection="ltr"
+    android:nextFocusDown="@id/xedt_number_enter"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginLeft="30dp"
-    android:layout_marginRight="30dp"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
-    <TextView
-        android:id="@+id/textViewTitleNumber_login"
-        android:textStyle="bold"
-        android:textAlignment="center"
-        android:textColor="#000"
-        android:textSize="25sp"
-        android:text="Phone Number"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-    <EditText
-        android:id="@+id/edtNumberPhone_login"
-        android:maxLines="1"
-        android:maxLength="15"
-        android:digits="0123456789+"
-        android:gravity="center|left"
-        android:layout_marginTop="10dp"
-        android:paddingTop="10dp"
-        android:paddingBottom="10dp"
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp"
-        android:background="@drawable/edittext_numberphone"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="phone"
-        android:inputType="phone"
-        android:singleLine="true"
-        tools:ignore="RtlCompat" />
+        android:background="@android:color/white"
+        android:layout_centerInParent="true"
 
-    <Button
-        android:visibility="gone"
-        android:id="@+id/btnNumberPhone_login"
-        android:textStyle="bold"
-        android:layout_marginTop="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginBottom="50dp"
-        android:text="Continue"
-        android:padding="15dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-</LinearLayout>
+        app:cardCornerRadius="10dp"
+        android:layout_marginStart="@dimen/_20sdp"
+        android:layout_marginEnd="@dimen/_20sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginBottom="@dimen/_10sdp"
+        >
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+
+            android:layout_marginTop="@dimen/_20sdp"
+            android:layout_marginBottom="@dimen/_50sdp"
+            android:layout_marginStart="@dimen/_30sdp"
+            android:layout_marginEnd="@dimen/_30sdp"
+            >
+
+
+            <TextView
+                android:id="@+id/xtitle_enter"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/your_phone"
+
+                android:layout_marginBottom="@dimen/_15ssp"
+                android:textStyle="bold"
+                android:textSize="@dimen/_18ssp"
+                android:textColor="@color/text"
+
+                />
+
+            <TextView
+                android:id="@+id/xtitle_edt_number"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/xtitle_enter"
+                android:text="@string/phone_number"
+
+                android:textStyle="normal"
+                android:textSize="@dimen/_12ssp"
+                android:textColor="@color/text"
+
+                />
+
+
+            <LinearLayout
+                android:id="@+id/xbox_edtNumber_enter"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/xtitle_edt_number"
+                android:background="@drawable/bg_radus"
+                >
+
+                <EditText
+                    android:id="@+id/xedt_number_enter"
+                    android:layout_width="0dp"
+                    android:layout_weight="9"
+                    android:layout_height="wrap_content"
+                    style="@style/phoneNumber"
+                    />
+
+                <RelativeLayout
+                    android:padding="@dimen/_2sdp"
+                    android:layout_width="0dp"
+                    android:layout_weight="2"
+                    android:layout_height="match_parent">
+
+                    <ProgressBar
+                        android:id="@+id/xprogress_edt_enter"
+                        android:visibility="gone"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"/>
+
+                    <ImageView
+                        android:id="@+id/ximg_edt_next_enter"
+                        android:visibility="gone"
+
+                        android:tint="#0037FF"
+                        android:src="@drawable/ic_falesh_next"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"/>
+
+                    <ImageView
+                        android:id="@+id/ximg_edt_error_enter"
+                        android:visibility="gone"
+                        android:padding="@dimen/_2sdp"
+
+                        android:tint="#FF0000"
+                        android:src="@drawable/ic_error"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"/>
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+
+            <TextView
+                android:id="@+id/xdesc_enter"
+                android:layout_below="@+id/xbox_edtNumber_enter"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:textColor="@color/text_fade"
+                android:textSize="@dimen/_10ssp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:text="@string/desc_enter"
+                />
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+
+</RelativeLayout>

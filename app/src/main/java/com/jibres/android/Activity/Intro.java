@@ -95,7 +95,7 @@ public class Intro extends AppCompatActivity {
                         String titleBtn = btnObject.getString("title");
 
                         switch (action){
-                            case "next":
+                            case "next_img":
                                 nex_string = titleBtn;
                                 break;
                             case "prev":

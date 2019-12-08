@@ -2,7 +2,6 @@ package com.jibres.android.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -14,7 +13,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
+import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,7 +22,6 @@ import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.StringRequest;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
@@ -38,35 +37,46 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 
 public class LoginActivity extends AppCompatActivity {
-    TextView tvTitleNumber,tvTitleVerify,tvNumberVerify,tvTitleResend,tvResndVerify;
+    TextView tvTitleVerify, xtext_number_verify,tvResndVerify;
     EditText edtVerify_1, edtVerify_2, edtVerify_3, edtVerify_4, edtVerify_5, edtWriteNumber;
     Button btnNumber;
-    View boxNumber,boxVerify,boxResend;
+    View boxNumber,boxVerify;
+
+
+    //    enter.xml
+    ImageView next_img, error_img;
+    TextView title,title_boxNumber,desc;
+    EditText numberPhone;
+    ProgressBar progress;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        findViewById();
-        EditTextSetMethode(edtVerify_1, edtVerify_2, edtVerify_3, edtVerify_4, edtVerify_5, edtWriteNumber);
+        findId_enter();
+        findId_verify();
+        EditTextSetMethode(edtVerify_1, edtVerify_2, edtVerify_3, edtVerify_4, edtVerify_5,numberPhone);
 
         boxNumber.setVisibility(View.VISIBLE);
-        btnNumber.setOnClickListener(new View.OnClickListener() {
+        next_img.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                next_img.setVisibility(View.GONE);
+                progress.setVisibility(View.VISIBLE);
                 step1_VerifyNumber();
             }
         });
     }
 
     private String getNumberPhone(){
-        return edtWriteNumber.getText().toString().replace("+","");
+        return numberPhone.getText().toString().replace("+","");
     }
     private String getApiKey(){
         return SaveManager.get(this).getstring_appINFO().get(SaveManager.apiKey);
@@ -98,9 +108,16 @@ public class LoginActivity extends AppCompatActivity {
                             mainObject = new JSONObject(response);
                             ok_getVerify = mainObject.getBoolean("ok");
                             if (ok_getVerify){
-                                boxNumber.setVisibility(View.GONE);
-                                boxVerify.setVisibility(View.VISIBLE);
-                                tvNumberVerify.setText(getNumberPhone());
+                                new Handler().postDelayed(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        boxNumber.setVisibility(View.GONE);
+                                        progress.setVisibility(View.GONE);
+                                        boxVerify.setVisibility(View.VISIBLE);
+                                    }
+                                },500);
+
+                                xtext_number_verify.setText(getNumberPhone());
                                 edtVerify_1.requestFocus();
 
                                 new CountDownTimer(300000, 1000) {
@@ -109,8 +126,7 @@ public class LoginActivity extends AppCompatActivity {
                                         int seconds = (int) (millisUntilFinished / 1000) % 60 ;
                                         int minutes = (int) ((millisUntilFinished / (1000*60)) % 60);
                                         int hours   = (int) ((millisUntilFinished / (1000*60*60)) % 24);
-                                        tvResndVerify.setText("Resend new code in " +String.format("%d:%d",minutes,seconds));
-                                        findViewById(R.id.progress_resend).setVisibility(View.GONE);
+                                        tvResndVerify.setText("Resend " +String.format("%d:%d",minutes,seconds));
                                         //here you can have your logic to set text to edittext
                                     }
 
@@ -120,7 +136,6 @@ public class LoginActivity extends AppCompatActivity {
                                             @Override
                                             public void onClick(View view) {
                                                 step1_VerifyNumber();
-                                                findViewById(R.id.progress_resend).setVisibility(View.VISIBLE);
                                             }
                                         });
                                     }
@@ -143,6 +158,8 @@ public class LoginActivity extends AppCompatActivity {
                 }, new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
+                        progress.setVisibility(View.GONE);
+                        error_img.setVisibility(View.VISIBLE);
                         Log.e(tag.error,"VerifyNumberFetcher > onErrorResponse  "+error);
                     }
                 })
@@ -173,7 +190,8 @@ public class LoginActivity extends AppCompatActivity {
 
             @Override
             public void onTokenFailed(String error) {
-
+                progress.setVisibility(View.GONE);
+                error_img.setVisibility(View.VISIBLE);
             }
         });
     }
@@ -273,11 +291,14 @@ public class LoginActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if (error_img.getVisibility() == View.VISIBLE){
+                    error_img.setVisibility(View.GONE);
+                }
 
                 if (Number.length() >=7){
-                    btnNumber.setVisibility(View.VISIBLE);
+                    next_img.setVisibility(View.VISIBLE);
                 }else {
-                    btnNumber.setVisibility(View.GONE);
+                    next_img.setVisibility(View.GONE);
                 }
 
             }
@@ -413,24 +434,26 @@ public class LoginActivity extends AppCompatActivity {
 
     /** Static Method*/
     /*Find Id*/
-    private void findViewById(){
-        /*Number Phone*/
-        boxNumber=findViewById(R.id.boxNumberPhone_login);
-        tvTitleNumber=findViewById(R.id.textViewTitleNumber_login);
-        edtWriteNumber =findViewById(R.id.edtNumberPhone_login);
-        btnNumber=findViewById(R.id.btnNumberPhone_login);
-        tvResndVerify=findViewById(R.id.tvResndVerify_login);
+    private void findId_enter(){
+        progress = findViewById(R.id.xprogress_edt_enter);
+        error_img = findViewById(R.id.ximg_edt_error_enter);
+        next_img = findViewById(R.id.ximg_edt_next_enter);
+        title = findViewById(R.id.xtitle_enter);
+        title_boxNumber = findViewById(R.id.xtitle_edt_number);
+        desc = findViewById(R.id.xdesc_enter);
+        numberPhone = findViewById(R.id.xedt_number_enter);
+    }
+    private void findId_verify(){
         /*Verify*/
+        boxNumber = findViewById(R.id.boxNumberPhone_login);
         boxVerify=findViewById(R.id.boxVerify_login);
         tvTitleVerify=findViewById(R.id.textViewTitleVerify_login);
-        tvNumberVerify=findViewById(R.id.textViewNumberVerify_login);
+        xtext_number_verify =findViewById(R.id.xtext_number_verify);
         edtVerify_1 =findViewById(R.id.edt_verify1_login);
         edtVerify_2 =findViewById(R.id.edt_verify2_login);
         edtVerify_3 =findViewById(R.id.edt_verify3_login);
         edtVerify_4 =findViewById(R.id.edt_verify4_login);
         edtVerify_5 =findViewById(R.id.edt_verify5_login);
-        boxResend=findViewById(R.id.boxResendVerify_login);
-        tvTitleResend=findViewById(R.id.tvTitleResend_login);
         tvResndVerify=findViewById(R.id.tvResndVerify_login);
     }
     /*Show Snack Bar In Error Json*/

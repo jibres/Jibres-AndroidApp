@@ -14,4 +14,28 @@
 
     </style>
 
+
+    <style name="cardLogin" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:fontFamily">@font/iransans_bold</item>
+
+    </style>
+
+    <style name="phoneNumber">
+        <item name="android:maxLines">1</item>
+        <item name="android:maxLength">15</item>
+        <item name="android:digits">0123456789</item>
+        <item name="android:gravity">center|left</item>
+        <item name="android:hint">@string/enter_number</item>
+        <item name="android:inputType">phone</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:background">#00FFFFFF</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">@dimen/_10ssp</item>
+        <item name="android:textColor">@color/text</item>
+        <item name="android:paddingTop">@dimen/_2sdp</item>
+        <item name="android:paddingBottom">@dimen/_2sdp</item>
+        <item name="android:paddingStart">@dimen/_12sdp</item>
+        <item name="android:paddingEnd">@dimen/_8sdp</item>
+    </style>
+
 </resources>
