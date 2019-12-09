@@ -32,25 +32,29 @@ public class Token {
                     ok_getToken = mainObject.getBoolean("ok");
                     if (ok_getToken){
                         result = mainObject.getJSONObject("result");
-                        tokenListener.onTokenRecieved(result.getString("token"));
+                        tokenListener.onReceived(result.getString("token"));
                     }else {
                         msg = mainObject.getJSONArray("msg");
                         for (int i = 0 ; i<= msg.length();i++){
                             JSONObject msg_object = msg.getJSONObject(i);
-                            tokenListener.onTokenFailed(msg_object+"");
+                            if (!msg_object.isNull("text")){
+                                tokenListener.onFailed(msg_object.getString("text"));
+                            }else {
+                                tokenListener.onFailed(null);
+                            }
 
                         }
                     }
 
                 } catch (JSONException e) {
                     e.printStackTrace();
-                    tokenListener.onTokenFailed("JSONException: "+e);
+                    tokenListener.onFailed(null);
                 }
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError e) {
-                tokenListener.onTokenFailed("VolleyError: "+e);
+                tokenListener.onFailed(null);
             }
         })
                 // Send Headers
@@ -69,9 +73,8 @@ public class Token {
     }
 
     public interface TokenListener {
-        void onTokenRecieved(String token);
-
-        void onTokenFailed(String error);
+        void onReceived(String token);
+        void onFailed(String error);
     }
 }
 

@@ -52,7 +52,7 @@
     <string name="your_phone">Your Phone!</string>
     <string name="phone_number">Phone Number</string>
     <string name="enter_number">Enter Number</string>
-    <string name="desc_enter">A 4 digit OTP will be sent via SMS to verify \n yor mobile number!</string>
+    <string name="desc_enter">A 4 digit OTP will be sent via SMS to verify yor mobile number!</string>
     <string name="enter_the_otp">Enter the OTP you received to</string>
 
 </resources>

@@ -141,12 +141,12 @@ public class Splash extends AppCompatActivity {
         if ( !userIsAdded() ) {
             Token.GetToken(new Token.TokenListener() {
                 @Override
-                public void onTokenRecieved(String token) {
+                public void onReceived(String token) {
                     addUserTamp(token);
                 }
 
                 @Override
-                public void onTokenFailed(String error) {
+                public void onFailed(String error) {
                     nextActivity();
                 }
             });
