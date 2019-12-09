@@ -16,6 +16,7 @@ import com.jibres.android.R;
 import com.jibres.android.api.account.Enter;
 import com.jibres.android.utility.SaveManager;
 import com.jibres.android.utility.getUser;
+import com.jibres.android.weight;
 
 @SuppressLint("Registered")
 public class LoginActivity extends AppCompatActivity {
@@ -40,18 +41,18 @@ public class LoginActivity extends AppCompatActivity {
         findId_enter();
         findId_verify();
 
-        Enter.edtText_verifyCode(edtV1, edtV2, edtV3, edtV4, edtV5,
-                new Enter.edtText_verifyCode_Listener() {
-            @Override
-            public void onReceived() {
-                verifyCode();
-            }
+        weight.EditTextVerify(edtV1, edtV2, edtV3, edtV4, edtV5,
+                new weight.EditTextVerify_Listener() {
+                    @Override
+                    public void onReceived() {
+                        verifyCode();
+                    }
 
-            @Override
-            public void onError() {
+                    @Override
+                    public void onError() {
 
-            }
-        });
+                    }
+                });
 
         Enter.edtText_number(numberPhone,
                 new Enter.edtText_number_Listener() {
