@@ -55,7 +55,7 @@ public class LoginActivity extends AppCompatActivity {
                 new Enter.edtText_number_Listener() {
             @Override
             public void onReceived() {
-                e_okNumber.setVisibility(View.VISIBLE);
+                verifyNumber();
             }
 
             @Override
@@ -63,11 +63,17 @@ public class LoginActivity extends AppCompatActivity {
                 if (e_errorNumber.getVisibility() == View.VISIBLE){
                     e_errorNumber.setVisibility(View.GONE);
                 }
+                if (e_number.length() >=7){
+                    e_okNumber.setVisibility(View.VISIBLE);
+                }else {
+                    e_okNumber.setVisibility(View.GONE);
+                }
             }
 
             @Override
             public void onError() {
-                e_errorNumber.setVisibility(View.GONE);
+                e_okNumber.setVisibility(View.GONE);
+                e_errorNumber.setVisibility(View.VISIBLE);
             }
         });
     }
@@ -87,6 +93,10 @@ public class LoginActivity extends AppCompatActivity {
                 v_number.setText(getNumberPhone());
                 edtV1.requestFocus();
 
+                if (downTimer !=null){
+                    downTimer.cancel();
+                    downTimer = null;
+                }
                 downTimer = new CountDownTimer(300000, 1000) {
                     public void onTick(long millisUntilFinished) {
                         int seconds = (int) (millisUntilFinished / 1000) % 60 ;
@@ -202,23 +212,26 @@ public class LoginActivity extends AppCompatActivity {
         e_progressNumber = enterXML.findViewById(R.id.progress);
     }
 
-    public void showVerify_Number(View view){
-        e_errorNumber.setVisibility(View.GONE);
-        e_progressNumber.setVisibility(View.GONE);
-        downTimer.cancel();
-        enterXML.setVisibility(View.VISIBLE);
-        e_okNumber.setVisibility(View.VISIBLE);
-        verifyXML.setVisibility(View.GONE);
-    }
-    public void showVerify_Code(View view){
-        e_okNumber.setVisibility(View.GONE);
-        e_progressNumber.setVisibility(View.VISIBLE);
-        verifyNumber();
-    }
+    public void enter(View view) {
+        switch (view.getTag().toString()){
+            case "verifyNumber":
+                e_errorNumber.setVisibility(View.GONE);
+                e_progressNumber.setVisibility(View.GONE);
+                enterXML.setVisibility(View.VISIBLE);
+                e_okNumber.setVisibility(View.VISIBLE);
+                verifyXML.setVisibility(View.GONE);
+                break;
+            case "verifyCode":
+                e_okNumber.setVisibility(View.GONE);
+                e_progressNumber.setVisibility(View.VISIBLE);
+                verifyNumber();
+                break;
 
-    public void resndSMS(View view) {
-        if (view.isEnabled()){
-            verifyNumber();
+            case "resendCode":
+                if (view.isEnabled()){
+                    verifyNumber();
+                }
+                break;
         }
     }
 }

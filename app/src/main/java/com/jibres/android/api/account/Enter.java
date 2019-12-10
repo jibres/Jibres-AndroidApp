@@ -3,6 +3,9 @@ package com.jibres.android.api.account;
 import android.content.Context;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
+import android.view.KeyEvent;
+import android.view.View;
 import android.widget.EditText;
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -211,16 +214,27 @@ public class Enter {
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 listener.onChange();
-                if (number.length() >=7){
-                    listener.onReceived();
-                }else {
-                    listener.onError();
-                }
             }
 
             @Override
             public void afterTextChanged(Editable editable) {
 
+            }
+        });
+        number.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View view, int i, KeyEvent keyEvent) {
+                Log.d("admin", "onKey: "+i);
+                if (keyEvent.getAction() == KeyEvent.ACTION_DOWN){
+                    if (i == KeyEvent.KEYCODE_ENTER){
+                        if (number.length() >=7){
+                            listener.onReceived();
+                        }else {
+                            listener.onError();
+                        }
+                    }
+                }
+                return false;
             }
         });
 

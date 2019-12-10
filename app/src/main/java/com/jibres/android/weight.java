@@ -402,21 +402,22 @@ public class weight {
                         if (edt_5.length() == 1){
                             String all_verifyCode =
                                     edt_1.getText().toString()
-                                            +edt_2.getText().toString()
-                                            +edt_3.getText().toString()
-                                            +edt_4.getText().toString()
-                                            +edt_5.getText().toString();
+                                    +edt_2.getText().toString()
+                                    +edt_3.getText().toString()
+                                    +edt_4.getText().toString()
+                                    +edt_5.getText().toString();
                             if (all_verifyCode.length() == 5){
                                 listener.onReceived();
                                 return true;
                             }else {
-                                edt_1.getText().clear();
-                                edt_2.getText().clear();
-                                edt_3.getText().clear();
-                                edt_4.getText().clear();
                                 edt_5.getText().clear();
+                                edt_4.getText().clear();
+                                edt_3.getText().clear();
+                                edt_2.getText().clear();
+                                edt_1.getText().clear();
                                 edt_1.requestFocus();
                                 listener.onError();
+                                return true;
                             }
                         }
                     }

@@ -85,8 +85,8 @@
                     android:padding="@dimen/_2sdp"
                     android:layout_alignParentEnd="true"
                     android:layout_centerInParent="true"
-                    android:layout_width="@dimen/_25sdp"
-                    android:layout_height="@dimen/_34sdp">
+                    android:layout_width="@dimen/_30sdp"
+                    android:layout_height="@dimen/_30sdp">
 
                     <ProgressBar
                         android:id="@+id/progress"
@@ -96,20 +96,26 @@
 
                     <ImageView
                         android:id="@+id/ok"
-                        android:visibility="gone"
-                        android:background="#23B8B8B8"
-                        android:onClick="showVerify_Code"
-
-                        android:tint="#3faedf"
-                        android:src="@drawable/ic_falesh_next"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"/>
+                        android:layout_height="match_parent"
+                        android:visibility="gone"
+                        android:background="@drawable/bg_circle"
+                        android:backgroundTint="#3faedf"
+                        android:onClick="enter"
+                        android:tag="verifyCode"
+                        android:padding="@dimen/_3sdp"
+                        android:layout_margin="@dimen/_1sdp"
+
+                        android:tint="#FFFFFF"
+                        android:src="@drawable/ic_falesh_next"
+                        />
 
                     <ImageView
                         android:id="@+id/error"
                         android:visibility="gone"
                         android:padding="@dimen/_2sdp"
-                        android:onClick="showVerify_Code"
+                        android:onClick="enter"
+                        android:tag="verifyCode"
 
 
                         android:tint="#FF0000"

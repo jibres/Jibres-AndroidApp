@@ -88,7 +88,8 @@
                         android:layout_centerInParent="true"
                         android:layout_marginStart="@dimen/_10sdp"
                         android:layout_toEndOf="@+id/number"
-                        android:onClick="showVerify_Number"
+                        android:onClick="enter"
+                        android:tag="verifyNumber"
 
                         android:textStyle="bold"
                         android:textSize="@dimen/_12ssp"
@@ -146,7 +147,8 @@
                 android:layout_marginTop="@dimen/_10sdp"
                 android:text="@string/resend"
                 android:enabled="false"
-                android:onClick="resndSMS"
+                android:onClick="enter"
+                android:tag="resendCode"
 
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
