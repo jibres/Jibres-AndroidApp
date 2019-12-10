@@ -33,7 +33,7 @@
             >
 
             <TextView
-                android:id="@+id/textViewTitleVerify_login"
+                android:id="@+id/title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Phone Verification"
@@ -46,13 +46,14 @@
                 />
 
             <LinearLayout
-                android:id="@+id/xdesc_verify"
-                android:layout_below="@+id/textViewTitleVerify_login"
+                android:id="@+id/box_number"
+                android:layout_below="@+id/title"
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
                 <TextView
+                    android:id="@+id/titleNumber"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/enter_the_otp"
@@ -61,16 +62,40 @@
                     android:textSize="@dimen/_10ssp"
                     android:textColor="@color/text_fade"
                     />
-                <TextView
-                    android:id="@+id/xtext_number_verify"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="+98 919 519 1387"
 
-                    android:textStyle="bold"
-                    android:textSize="@dimen/_10ssp"
-                    android:textColor="@color/text"
-                    />
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/number"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:layout_alignParentStart="true"
+
+                        android:textStyle="bold"
+                        android:textSize="@dimen/_12ssp"
+                        android:textColor="@color/text"
+                        />
+
+                    <TextView
+                        android:id="@+id/editNumber"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="#3faedf"
+                        android:text="@string/edit"
+                        android:layout_centerInParent="true"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_toEndOf="@+id/number"
+                        android:onClick="showVerify_Number"
+
+                        android:textStyle="bold"
+                        android:textSize="@dimen/_12ssp"
+                        />
+
+                </RelativeLayout>
+
 
 
             </LinearLayout>
@@ -79,7 +104,7 @@
 
             <LinearLayout
                 android:id="@+id/xbox_verfiy"
-                android:layout_below="@+id/xdesc_verify"
+                android:layout_below="@+id/box_number"
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_marginTop="@dimen/_10sdp"
@@ -112,13 +137,17 @@
             </LinearLayout>
 
             <TextView
-                android:id="@+id/tvResndVerify_login"
-                android:textColor="#013DA5"
+                android:id="@+id/resend"
+                android:textColor="#3faedf"
                 android:layout_below="@+id/xbox_verfiy"
+                android:layout_alignParentStart="true"
                 android:textStyle="bold"
                 android:textSize="@dimen/_10ssp"
                 android:layout_marginTop="@dimen/_10sdp"
-                android:text="Resend "
+                android:text="@string/resend"
+                android:enabled="false"
+                android:onClick="resndSMS"
+
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 

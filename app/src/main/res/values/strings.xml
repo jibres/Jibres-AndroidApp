@@ -54,5 +54,7 @@
     <string name="enter_number">Enter Number</string>
     <string name="desc_enter">A 4 digit OTP will be sent via SMS to verify yor mobile number!</string>
     <string name="enter_the_otp">Enter the OTP you received to</string>
+    <string name="edit">EDIT</string>
+    <string name="resend">Resend</string>
 
 </resources>

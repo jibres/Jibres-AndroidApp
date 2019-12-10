@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -20,17 +19,16 @@ import com.jibres.android.weight;
 
 @SuppressLint("Registered")
 public class LoginActivity extends AppCompatActivity {
-    TextView tvTitleVerify, xtext_number_verify,tvResndVerify;
-    EditText edtV1, edtV2, edtV3, edtV4, edtV5, edtNumber;
-    Button btnNumber;
-    View boxNumber,boxVerify;
 
-
-    //    enter.xml
-    ImageView next_img, error_img;
-    TextView title,title_boxNumber,desc;
-    EditText numberPhone;
-    ProgressBar progress;
+    ImageView e_okNumber, e_errorNumber;
+    ProgressBar e_progressNumber;
+    TextView e_title,e_titleNumber,e_desc
+            ,v_titel,v_titleNumber,v_number,v_editNumber,v_resnd;
+    CountDownTimer downTimer;
+    EditText e_number
+            ,edtV1, edtV2, edtV3, edtV4, edtV5;
+    View enterXML
+         , verifyXML;
 
 
 
@@ -38,8 +36,7 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        findId_enter();
-        findId_verify();
+        idFinder();
 
         weight.EditTextVerify(edtV1, edtV2, edtV3, edtV4, edtV5,
                 new weight.EditTextVerify_Listener() {
@@ -54,70 +51,57 @@ public class LoginActivity extends AppCompatActivity {
                     }
                 });
 
-        Enter.edtText_number(numberPhone,
+        Enter.edtText_number(e_number,
                 new Enter.edtText_number_Listener() {
             @Override
             public void onReceived() {
-                next_img.setVisibility(View.VISIBLE);
+                e_okNumber.setVisibility(View.VISIBLE);
             }
 
             @Override
             public void onChange() {
-                if (error_img.getVisibility() == View.VISIBLE){
-                    error_img.setVisibility(View.GONE);
+                if (e_errorNumber.getVisibility() == View.VISIBLE){
+                    e_errorNumber.setVisibility(View.GONE);
                 }
             }
 
             @Override
             public void onError() {
-                next_img.setVisibility(View.GONE);
-            }
-        });
-
-        boxNumber.setVisibility(View.VISIBLE);
-        next_img.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                next_img.setVisibility(View.GONE);
-                progress.setVisibility(View.VISIBLE);
-                verifyNumber();
+                e_errorNumber.setVisibility(View.GONE);
             }
         });
     }
 
 
     /** Connection To Server*/
-    private void verifyNumber(){
+    public void verifyNumber(){
         Enter.phone(this,
                 getNumberPhone(),
                 new Enter.enterPhone_Listener() {
             @Override
             public void onReceived() {
-                boxNumber.setVisibility(View.GONE);
-                progress.setVisibility(View.GONE);
-                boxVerify.setVisibility(View.VISIBLE);
+                enterXML.setVisibility(View.GONE);
+                verifyXML.setVisibility(View.VISIBLE);
+                e_progressNumber.setVisibility(View.GONE);
 
-                xtext_number_verify.setText(getNumberPhone());
+                v_number.setText(getNumberPhone());
                 edtV1.requestFocus();
 
-                new CountDownTimer(300000, 1000) {
-
+                downTimer = new CountDownTimer(300000, 1000) {
                     public void onTick(long millisUntilFinished) {
                         int seconds = (int) (millisUntilFinished / 1000) % 60 ;
                         int minutes = (int) ((millisUntilFinished / (1000*60)) % 60);
                         int hours   = (int) ((millisUntilFinished / (1000*60*60)) % 24);
-                        tvResndVerify.setText("Resend " +String.format("%d:%d",minutes,seconds));
+                        v_resnd.setText("Resend " +String.format("%d:%d",minutes,seconds));
+                        if (v_resnd.isEnabled()){
+                            v_resnd.setEnabled(false);
+                        }
                         //here you can have your logic to set text to edittext
                     }
 
                     public void onFinish() {
-                        tvResndVerify.setText("Resend new code");
-                        tvResndVerify.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-                                verifyCode();
-                            }
-                        });
+                        v_resnd.setText("Resend new code");
+                        v_resnd.setEnabled(true);
                     }
 
                 }.start();
@@ -130,8 +114,8 @@ public class LoginActivity extends AppCompatActivity {
 
             @Override
             public void onError() {
-                progress.setVisibility(View.GONE);
-                error_img.setVisibility(View.VISIBLE);
+                e_progressNumber.setVisibility(View.GONE);
+                e_errorNumber.setVisibility(View.VISIBLE);
             }
         });
 
@@ -190,29 +174,51 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private String getNumberPhone(){
-        return numberPhone.getText().toString().replace("+","");
+        return e_number.getText().toString().replace("+","");
     }
-    /*Find Id*/
-    private void findId_enter(){
-        progress = findViewById(R.id.xprogress_edt_enter);
-        error_img = findViewById(R.id.ximg_edt_error_enter);
-        next_img = findViewById(R.id.ximg_edt_next_enter);
-        title = findViewById(R.id.xtitle_enter);
-        title_boxNumber = findViewById(R.id.xtitle_edt_number);
-        desc = findViewById(R.id.xdesc_enter);
-        numberPhone = findViewById(R.id.xedt_number_enter);
+
+    private void idFinder(){
+        /*Verify = v_ */
+        verifyXML =findViewById(R.id.boxVerify_login);
+        v_titel = verifyXML.findViewById(R.id.title);
+        v_titleNumber = verifyXML.findViewById(R.id.titleNumber);
+        v_number = verifyXML.findViewById(R.id.number);
+        v_editNumber = verifyXML.findViewById(R.id.editNumber);
+        v_resnd = verifyXML.findViewById(R.id.resend);
+        edtV1 = findViewById(R.id.edt_verify1_login);
+        edtV2 = findViewById(R.id.edt_verify2_login);
+        edtV3 = findViewById(R.id.edt_verify3_login);
+        edtV4 = findViewById(R.id.edt_verify4_login);
+        edtV5 = findViewById(R.id.edt_verify5_login);
+
+        /*Enter = e_ */
+        enterXML = findViewById(R.id.boxNumberPhone_login);
+        e_title = enterXML.findViewById(R.id.title);
+        e_titleNumber = enterXML.findViewById(R.id.titleNumber);
+        e_number = enterXML.findViewById(R.id.number);
+        e_desc = enterXML.findViewById(R.id.desc);
+        e_okNumber = enterXML.findViewById(R.id.ok);
+        e_errorNumber = enterXML.findViewById(R.id.error);
+        e_progressNumber = enterXML.findViewById(R.id.progress);
     }
-    private void findId_verify(){
-        /*Verify*/
-        boxNumber = findViewById(R.id.boxNumberPhone_login);
-        boxVerify=findViewById(R.id.boxVerify_login);
-        tvTitleVerify=findViewById(R.id.textViewTitleVerify_login);
-        xtext_number_verify =findViewById(R.id.xtext_number_verify);
-        edtV1 =findViewById(R.id.edt_verify1_login);
-        edtV2 =findViewById(R.id.edt_verify2_login);
-        edtV3 =findViewById(R.id.edt_verify3_login);
-        edtV4 =findViewById(R.id.edt_verify4_login);
-        edtV5 =findViewById(R.id.edt_verify5_login);
-        tvResndVerify=findViewById(R.id.tvResndVerify_login);
+
+    public void showVerify_Number(View view){
+        e_errorNumber.setVisibility(View.GONE);
+        e_progressNumber.setVisibility(View.GONE);
+        downTimer.cancel();
+        enterXML.setVisibility(View.VISIBLE);
+        e_okNumber.setVisibility(View.VISIBLE);
+        verifyXML.setVisibility(View.GONE);
+    }
+    public void showVerify_Code(View view){
+        e_okNumber.setVisibility(View.GONE);
+        e_progressNumber.setVisibility(View.VISIBLE);
+        verifyNumber();
+    }
+
+    public void resndSMS(View view) {
+        if (view.isEnabled()){
+            verifyNumber();
+        }
     }
 }

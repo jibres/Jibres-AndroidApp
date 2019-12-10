@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     android:layoutDirection="ltr"
-    android:nextFocusDown="@id/xedt_number_enter"
+    android:nextFocusDown="@id/number"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:android="http://schemas.android.com/apk/res/android"
@@ -34,12 +34,13 @@
 
 
             <TextView
-                android:id="@+id/xtitle_enter"
+                android:id="@+id/title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/your_phone"
 
-                android:layout_marginBottom="@dimen/_15ssp"
+                android:layout_marginBottom="@dimen/_20sdp"
+
                 android:textStyle="bold"
                 android:textSize="@dimen/_18ssp"
                 android:textColor="@color/text"
@@ -47,11 +48,13 @@
                 />
 
             <TextView
-                android:id="@+id/xtitle_edt_number"
+                android:id="@+id/titleNumber"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/xtitle_enter"
+                android:layout_below="@+id/title"
                 android:text="@string/phone_number"
+
+                android:layout_margin="@dimen/_2sdp"
 
                 android:textStyle="normal"
                 android:textSize="@dimen/_12ssp"
@@ -61,16 +64,16 @@
 
 
             <RelativeLayout
-                android:id="@+id/xbox_edtNumber_enter"
+                android:id="@+id/box_number"
                 android:layoutDirection="ltr"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_35sdp"
-                android:layout_below="@+id/xtitle_edt_number"
+                android:layout_height="@dimen/_36sdp"
+                android:layout_below="@+id/titleNumber"
                 android:background="@drawable/bg_radus"
                 >
 
                 <EditText
-                    android:id="@+id/xedt_number_enter"
+                    android:id="@+id/number"
                     android:layout_alignParentStart="true"
                     android:layout_centerInParent="true"
                     android:layout_width="match_parent"
@@ -83,32 +86,36 @@
                     android:layout_alignParentEnd="true"
                     android:layout_centerInParent="true"
                     android:layout_width="@dimen/_25sdp"
-                    android:layout_height="wrap_content">
+                    android:layout_height="@dimen/_34sdp">
 
                     <ProgressBar
-                        android:id="@+id/xprogress_edt_enter"
+                        android:id="@+id/progress"
                         android:visibility="gone"
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/_34sdp"/>
+                        android:layout_height="match_parent"/>
 
                     <ImageView
-                        android:id="@+id/ximg_edt_next_enter"
+                        android:id="@+id/ok"
                         android:visibility="gone"
+                        android:background="#23B8B8B8"
+                        android:onClick="showVerify_Code"
 
-                        android:tint="#0037FF"
+                        android:tint="#3faedf"
                         android:src="@drawable/ic_falesh_next"
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/_34sdp"/>
+                        android:layout_height="match_parent"/>
 
                     <ImageView
-                        android:id="@+id/ximg_edt_error_enter"
+                        android:id="@+id/error"
                         android:visibility="gone"
                         android:padding="@dimen/_2sdp"
+                        android:onClick="showVerify_Code"
+
 
                         android:tint="#FF0000"
                         android:src="@drawable/ic_error"
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/_34sdp"/>
+                        android:layout_height="match_parent"/>
 
                 </RelativeLayout>
 
@@ -116,14 +123,15 @@
 
 
             <TextView
-                android:id="@+id/xdesc_enter"
-                android:layout_below="@+id/xbox_edtNumber_enter"
+                android:id="@+id/desc"
+                android:layout_below="@+id/box_number"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
 
+                android:layout_margin="@dimen/_2sdp"
+
                 android:textColor="@color/text_fade"
                 android:textSize="@dimen/_10ssp"
-                android:layout_marginTop="@dimen/_5sdp"
                 android:text="@string/desc_enter"
                 />
         </RelativeLayout>
