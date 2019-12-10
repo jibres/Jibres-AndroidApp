@@ -27,7 +27,7 @@
             android:layout_height="match_parent"
 
             android:layout_marginTop="@dimen/_20sdp"
-            android:layout_marginBottom="@dimen/_50sdp"
+            android:layout_marginBottom="@dimen/_20sdp"
             android:layout_marginStart="@dimen/_30sdp"
             android:layout_marginEnd="@dimen/_30sdp"
             >
@@ -86,7 +86,8 @@
                     android:layout_alignParentEnd="true"
                     android:layout_centerInParent="true"
                     android:layout_width="@dimen/_30sdp"
-                    android:layout_height="@dimen/_30sdp">
+                    android:layout_height="@dimen/_30sdp"
+                    android:layout_marginEnd="@dimen/_2sdp">
 
                     <ProgressBar
                         android:id="@+id/progress"
@@ -134,7 +135,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
 
-                android:layout_margin="@dimen/_2sdp"
+                android:layout_marginStart="@dimen/_2sdp"
+                android:layout_marginBottom="@dimen/_10ssp"
+
 
                 android:textColor="@color/text_fade"
                 android:textSize="@dimen/_10ssp"

@@ -27,7 +27,7 @@
             android:layout_height="match_parent"
 
             android:layout_marginTop="@dimen/_20sdp"
-            android:layout_marginBottom="@dimen/_50sdp"
+            android:layout_marginBottom="@dimen/_20sdp"
             android:layout_marginStart="@dimen/_30sdp"
             android:layout_marginEnd="@dimen/_30sdp"
             >
@@ -145,6 +145,7 @@
                 android:textStyle="bold"
                 android:textSize="@dimen/_10ssp"
                 android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginBottom="@dimen/_10ssp"
                 android:text="@string/resend"
                 android:enabled="false"
                 android:onClick="enter"
