@@ -431,4 +431,46 @@ public class weight {
         void onReceived();
         void onError();
     }
+    /**
+     *  Set Edit Text
+     */
+    public static void edtText_number(final EditText number , final edtText_number_Listener listener){
+        number.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                listener.onChange();
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+        number.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View view, int i, KeyEvent keyEvent) {
+                if (keyEvent.getAction() == KeyEvent.ACTION_DOWN){
+                    if (i == KeyEvent.KEYCODE_ENTER){
+                        if (number.length() >=7){
+                            listener.onReceived();
+                        }else {
+                            listener.onError();
+                        }
+                    }
+                }
+                return false;
+            }
+        });
+
+    }
+    public interface edtText_number_Listener {
+        void onReceived();
+        void onChange();
+        void onError();
+    }
 }

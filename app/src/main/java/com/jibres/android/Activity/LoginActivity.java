@@ -51,8 +51,8 @@ public class LoginActivity extends AppCompatActivity {
                     }
                 });
 
-        Enter.edtText_number(e_number,
-                new Enter.edtText_number_Listener() {
+        weight.edtText_number(e_number,
+                new weight.edtText_number_Listener() {
             @Override
             public void onReceived() {
                 verifyNumber();
