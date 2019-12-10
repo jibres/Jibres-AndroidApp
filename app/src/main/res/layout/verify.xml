@@ -145,7 +145,7 @@
                 android:textStyle="bold"
                 android:textSize="@dimen/_10ssp"
                 android:layout_marginTop="@dimen/_10sdp"
-                android:layout_marginBottom="@dimen/_10ssp"
+                android:layout_marginBottom="@dimen/_8ssp"
                 android:text="@string/resend"
                 android:enabled="false"
                 android:onClick="enter"

@@ -136,7 +136,7 @@
                 android:layout_height="wrap_content"
 
                 android:layout_marginStart="@dimen/_2sdp"
-                android:layout_marginBottom="@dimen/_10ssp"
+                android:layout_marginBottom="@dimen/_8ssp"
 
 
                 android:textColor="@color/text_fade"

@@ -81,6 +81,8 @@ public class LoginActivity extends AppCompatActivity {
 
     /** Connection To Server*/
     public void verifyNumber(){
+        e_okNumber.setVisibility(View.GONE);
+        e_progressNumber.setVisibility(View.VISIBLE);
         Enter.phone(this,
                 getNumberPhone(),
                 new Enter.enterPhone_Listener() {
@@ -222,8 +224,6 @@ public class LoginActivity extends AppCompatActivity {
                 verifyXML.setVisibility(View.GONE);
                 break;
             case "verifyCode":
-                e_okNumber.setVisibility(View.GONE);
-                e_progressNumber.setVisibility(View.VISIBLE);
                 verifyNumber();
                 break;
 
