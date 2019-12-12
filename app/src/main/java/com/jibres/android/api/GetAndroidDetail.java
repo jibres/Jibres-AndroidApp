@@ -12,12 +12,17 @@ import com.jibres.android.Static.format;
 import com.jibres.android.Static.statics;
 import com.jibres.android.Static.url;
 import com.jibres.android.utility.FileManager;
-import com.jibres.android.utility.Network;
+import com.jibres.android.MainApplication;
 import com.jibres.android.utility.SaveManager;
 
 import java.io.IOException;
 
 public class GetAndroidDetail {
+
+
+
+
+
 
     public static void GetJson(final Context context, final JsonLocalListener jsonLocalListener){
         String urlApp = SaveManager.get(context).getstring_appINFO().get(SaveManager.apiV6_URL)+ url.app;
@@ -56,7 +61,7 @@ public class GetAndroidDetail {
                 3000
                 , DefaultRetryPolicy.DEFAULT_MAX_RETRIES
                 , DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-        Network.getInstance().addToRequestQueue(get_local);
+        MainApplication.getInstance().addToRequestQueue(get_local);
 
     }
     public interface JsonLocalListener {

@@ -1,12 +1,7 @@
 package com.jibres.android.api;
 
 import android.content.Context;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.util.Log;
-import android.view.KeyEvent;
-import android.view.View;
-import android.widget.EditText;
+
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -15,8 +10,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.google.gson.Gson;
 import com.jibres.android.Static.lookServer;
 import com.jibres.android.Static.url;
-import com.jibres.android.api.Token;
-import com.jibres.android.utility.Network;
+import com.jibres.android.MainApplication;
 import com.jibres.android.utility.getUser;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -94,7 +88,7 @@ public class Enter {
                     }
 
                 };
-                Network.getInstance().addToRequestQueue(getVerify);
+                MainApplication.getInstance().addToRequestQueue(getVerify);
             }
 
             @Override
@@ -181,7 +175,7 @@ public class Enter {
                     }
 
                 };
-                Network.getInstance().addToRequestQueue(getVerify);
+                MainApplication.getInstance().addToRequestQueue(getVerify);
             }
 
             @Override

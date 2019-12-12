@@ -14,6 +14,7 @@ import com.jibres.android.R;
 import com.jibres.android.api.Enter;
 import com.jibres.android.utility.SaveManager;
 import com.jibres.android.utility.getUser;
+import com.jibres.android.utility.util_Color;
 import com.jibres.android.view.weight_EditText;
 
 @SuppressLint("Registered")
@@ -21,13 +22,13 @@ public class LoginActivity extends AppCompatActivity {
 
     ImageView e_okNumber, e_errorNumber;
     ProgressBar e_progressNumber;
-    TextView e_title,e_titleNumber,e_desc
-            ,v_titel,v_titleNumber,v_number,v_editNumber,v_resnd;
+    TextView e_title,e_titleNumber,e_desc ,
+             v_titel,v_titleNumber,v_number,v_editNumber,v_resnd;
     CountDownTimer downTimer;
-    android.widget.EditText e_number
-            ,edtV1, edtV2, edtV3, edtV4, edtV5;
-    View enterXML
-         , verifyXML;
+    android.widget.EditText e_number,
+             edtV1, edtV2, edtV3, edtV4, edtV5;
+    View enterXML ,
+         verifyXML;
 
 
 
@@ -36,6 +37,9 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         idFinder();
+
+        util_Color.gradientDrawable(enterXML, "#3395ff", "#d1395c");
+        util_Color.gradientDrawable(verifyXML, "#3395ff", "#d1395c");
 
         weight_EditText.enter_virifyCode(edtV1, edtV2, edtV3, edtV4, edtV5,
                 new weight_EditText.enter_verifyCode_Listener() {

@@ -26,7 +26,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.jibres.android.Activity.Splash;
 import com.jibres.android.R;
 import com.jibres.android.Static.tag;
-import com.jibres.android.utility.Network;
+import com.jibres.android.MainApplication;
 import com.jibres.android.utility.SaveManager;
 
 import org.json.JSONArray;
@@ -139,7 +139,7 @@ public class Notification extends Service {
             }
         }
                 ;
-        Network.getInstance().addToRequestQueue(PostSmile_Request);
+        MainApplication.getInstance().addToRequestQueue(PostSmile_Request);
     }
 
     // get Notification and run for user > Yes Notif is ..
@@ -198,7 +198,7 @@ public class Notification extends Service {
                 return headers_postSmile;
             }
         };
-        Network.getInstance().addToRequestQueue(Notif_is_Request);
+        MainApplication.getInstance().addToRequestQueue(Notif_is_Request);
     }
 
     private void send_Notif(String title,String excerpt,String desc,String info,int id){

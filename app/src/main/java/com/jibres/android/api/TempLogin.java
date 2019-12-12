@@ -2,27 +2,24 @@ package com.jibres.android.api;
 
 import android.content.Context;
 import android.os.Build;
-import android.util.Log;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.StringRequest;
 import com.google.gson.Gson;
 import com.jibres.android.Static.lookServer;
 import com.jibres.android.Static.url;
 import com.jibres.android.Static.value;
-import com.jibres.android.utility.Network;
+import com.jibres.android.MainApplication;
 import com.jibres.android.utility.SaveManager;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
@@ -100,7 +97,7 @@ public class TempLogin {
             }
         };
         post_user_add.setRetryPolicy(new DefaultRetryPolicy(5 * 1000, 0, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-        Network.getInstance().addToRequestQueue(post_user_add);
+        MainApplication.getInstance().addToRequestQueue(post_user_add);
     }
 
     public interface SingUpTampListener {

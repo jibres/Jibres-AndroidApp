@@ -8,7 +8,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.jibres.android.Static.lookServer;
 import com.jibres.android.Static.url;
-import com.jibres.android.utility.Network;
+import com.jibres.android.MainApplication;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -68,7 +68,7 @@ public class Token {
 
         };
         getToken.setRetryPolicy(new DefaultRetryPolicy(5 * 1000, 0, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-        Network.getInstance().addToRequestQueue(getToken);
+        MainApplication.getInstance().addToRequestQueue(getToken);
 
     }
 

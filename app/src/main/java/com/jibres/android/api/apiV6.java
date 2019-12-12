@@ -14,7 +14,7 @@ import com.jibres.android.Static.format;
 import com.jibres.android.Static.lookServer;
 import com.jibres.android.Static.value;
 import com.jibres.android.utility.FileManager;
-import com.jibres.android.utility.Network;
+import com.jibres.android.MainApplication;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -227,7 +227,7 @@ public class apiV6 {
         }
         ;
 
-        Network.getInstance().addToRequestQueue(mainRQ);
+        MainApplication.getInstance().addToRequestQueue(mainRQ);
     }
 
     public interface appListener{
@@ -275,7 +275,7 @@ public class apiV6 {
             }
         });mainRQ.setRetryPolicy(new DefaultRetryPolicy(5 * 1000, 0, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
 
-        Network.getInstance().addToRequestQueue(mainRQ);
+        MainApplication.getInstance().addToRequestQueue(mainRQ);
     }
 
     public interface listNewsListener{
@@ -327,7 +327,7 @@ public class apiV6 {
                 return headers;
             }
         };salawayRQ.setRetryPolicy(new DefaultRetryPolicy(2 * 1000, 0, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-        Network.getInstance().addToRequestQueue(salawayRQ);
+        MainApplication.getInstance().addToRequestQueue(salawayRQ);
 
     }
 
@@ -368,7 +368,7 @@ public class apiV6 {
             }
         });
         newsRQ.setRetryPolicy(new DefaultRetryPolicy(5 * 1000, 0, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-        Network.getInstance().addToRequestQueue(newsRQ);
+        MainApplication.getInstance().addToRequestQueue(newsRQ);
     }
 
     public interface newsLinstener{
@@ -422,7 +422,7 @@ public class apiV6 {
                 return headers;
             }
         };getDelRQ.setRetryPolicy(new DefaultRetryPolicy(5 * 1000, 0, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-        Network.getInstance().addToRequestQueue(getDelRQ);
+        MainApplication.getInstance().addToRequestQueue(getDelRQ);
     }
 
     public interface delListener{
@@ -477,7 +477,7 @@ public class apiV6 {
                 return body;
             }
         };likeDelRQ.setRetryPolicy(new DefaultRetryPolicy(5 * 1000, 0, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-        Network.getInstance().addToRequestQueue(likeDelRQ);
+        MainApplication.getInstance().addToRequestQueue(likeDelRQ);
     }
 
     public interface likeListener{
@@ -541,7 +541,7 @@ public class apiV6 {
             }
         };
         sendDelRQ.setRetryPolicy(new DefaultRetryPolicy(5 * 1000, 0, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-        Network.getInstance().addToRequestQueue(sendDelRQ);
+        MainApplication.getInstance().addToRequestQueue(sendDelRQ);
     }
 
     public interface sendelListener{
@@ -563,7 +563,7 @@ public class apiV6 {
             }
         });
         apiRQ.setRetryPolicy(new DefaultRetryPolicy(5 * 1000, 0, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-        Network.getInstance().addToRequestQueue(apiRQ);
+        MainApplication.getInstance().addToRequestQueue(apiRQ);
 
     }
 

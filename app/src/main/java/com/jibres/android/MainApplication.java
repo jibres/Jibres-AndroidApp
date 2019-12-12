@@ -1,4 +1,4 @@
-package com.jibres.android.utility;
+package com.jibres.android;
 
 import android.app.Application;
 import android.text.TextUtils;
@@ -7,11 +7,11 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
 
-public class Network extends Application {
+public class MainApplication extends Application {
 
-    public static final String TAG = Network.class.getSimpleName();
+    public static final String TAG = MainApplication.class.getSimpleName();
     private RequestQueue mRequestQueue;
-    private static Network mInstance;
+    private static MainApplication mInstance;
 
     @Override
     public void onCreate() {
@@ -19,7 +19,7 @@ public class Network extends Application {
         mInstance = this;
     }
 
-    public static synchronized Network getInstance() {
+    public static synchronized MainApplication getInstance() {
         return mInstance;
     }
 
