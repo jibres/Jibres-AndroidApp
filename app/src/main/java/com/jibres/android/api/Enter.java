@@ -1,4 +1,4 @@
-package com.jibres.android.api.account;
+package com.jibres.android.api;
 
 import android.content.Context;
 import android.text.Editable;
@@ -128,7 +128,6 @@ public class Enter {
                         JSONArray msg;
                         boolean ok_getVerify;
                         try {
-                            Log.d("admin", "onResponse: "+response);
                             mainObject = new JSONObject(response);
                             ok_getVerify = mainObject.getBoolean("ok");
                             if (ok_getVerify){

@@ -1,21 +1,20 @@
-package com.jibres.android;
+package com.jibres.android.view;
 
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
-import android.widget.EditText;
 
 import com.jibres.android.Static.tag;
 
-public class weight {
-    public static void EditTextVerify(final EditText edt_1 ,
-                                          final EditText edt_2 ,
-                                          final EditText edt_3,
-                                          final EditText edt_4,
-                                          final EditText edt_5,
-                                          final EditTextVerify_Listener listener)
+public class weight_EditText {
+    public static void enter_virifyCode(final android.widget.EditText edt_1 ,
+                                        final android.widget.EditText edt_2 ,
+                                        final android.widget.EditText edt_3,
+                                        final android.widget.EditText edt_4,
+                                        final android.widget.EditText edt_5,
+                                        final enter_verifyCode_Listener listener)
     {
         edt_1.addTextChangedListener(new TextWatcher() {
             @Override
@@ -427,14 +426,14 @@ public class weight {
         });
 
     }
-    public interface EditTextVerify_Listener {
+    public interface enter_verifyCode_Listener {
         void onReceived();
         void onError();
     }
     /**
      *  Set Edit Text
      */
-    public static void edtText_number(final EditText number , final edtText_number_Listener listener){
+    public static void enter_number(final android.widget.EditText number , final enter_number_Listener listener){
         number.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -468,7 +467,7 @@ public class weight {
         });
 
     }
-    public interface edtText_number_Listener {
+    public interface enter_number_Listener {
         void onReceived();
         void onChange();
         void onError();

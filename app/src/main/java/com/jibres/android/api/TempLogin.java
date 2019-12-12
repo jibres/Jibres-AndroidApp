@@ -1,4 +1,4 @@
-package com.jibres.android.api.account;
+package com.jibres.android.api;
 
 import android.content.Context;
 import android.os.Build;

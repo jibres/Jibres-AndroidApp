@@ -49,7 +49,7 @@
     <string name="update">Update</string>
     <string name="salawat">Allahouma sali ala mohamed wa ali muhammad</string>
     <string name="language_is_selected">Language is Selected</string>
-    <string name="your_phone">Your Phone!</string>
+    <string name="your_phone">Your Phone</string>
     <string name="phone_number">Phone Number</string>
     <string name="enter_number">Enter Number</string>
     <string name="desc_enter">A 4 digit OTP will be sent via SMS to verify yor mobile number!</string>

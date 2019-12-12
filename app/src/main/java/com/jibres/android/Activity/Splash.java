@@ -16,7 +16,7 @@ import com.jibres.android.R;
 import com.jibres.android.Static.file;
 import com.jibres.android.Static.format;
 import com.jibres.android.api.GetAndroidDetail;
-import com.jibres.android.api.account.TempLogin;
+import com.jibres.android.api.TempLogin;
 import com.jibres.android.api.Token;
 import com.jibres.android.utility.CheckVersion;
 import com.jibres.android.utility.FileManager;

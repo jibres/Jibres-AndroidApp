@@ -5,17 +5,16 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import com.jibres.android.R;
-import com.jibres.android.api.account.Enter;
+import com.jibres.android.api.Enter;
 import com.jibres.android.utility.SaveManager;
 import com.jibres.android.utility.getUser;
-import com.jibres.android.weight;
+import com.jibres.android.view.weight_EditText;
 
 @SuppressLint("Registered")
 public class LoginActivity extends AppCompatActivity {
@@ -25,7 +24,7 @@ public class LoginActivity extends AppCompatActivity {
     TextView e_title,e_titleNumber,e_desc
             ,v_titel,v_titleNumber,v_number,v_editNumber,v_resnd;
     CountDownTimer downTimer;
-    EditText e_number
+    android.widget.EditText e_number
             ,edtV1, edtV2, edtV3, edtV4, edtV5;
     View enterXML
          , verifyXML;
@@ -38,8 +37,8 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         idFinder();
 
-        weight.EditTextVerify(edtV1, edtV2, edtV3, edtV4, edtV5,
-                new weight.EditTextVerify_Listener() {
+        weight_EditText.enter_virifyCode(edtV1, edtV2, edtV3, edtV4, edtV5,
+                new weight_EditText.enter_verifyCode_Listener() {
                     @Override
                     public void onReceived() {
                         verifyCode();
@@ -51,8 +50,8 @@ public class LoginActivity extends AppCompatActivity {
                     }
                 });
 
-        weight.edtText_number(e_number,
-                new weight.edtText_number_Listener() {
+        weight_EditText.enter_number(e_number,
+                new weight_EditText.enter_number_Listener() {
             @Override
             public void onReceived() {
                 verifyNumber();
