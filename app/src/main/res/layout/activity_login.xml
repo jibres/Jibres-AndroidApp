@@ -8,11 +8,6 @@
     android:gravity="center"
     tools:context=".Activity.LoginActivity">
 
-    <View
-        android:background="#A2A2A2"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
-
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -27,12 +22,16 @@
             <include
                 android:id="@+id/boxNumberPhone_login"
                 android:visibility="visible"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 layout="@layout/enter"/>
 
             <!--Verify Code-->
             <include
                 android:id="@+id/boxVerify_login"
                 android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 layout="@layout/verify"/>
 
         </RelativeLayout>
