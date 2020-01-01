@@ -16,15 +16,25 @@ android {
 
     signingConfigs {
         release {
-            storeFile file("storeFile")
-            storePassword 'storePassword'
-            keyAlias 'keyAlias'
-            keyPassword 'keyPassword'
+            storeFile file(STORE_FILE)
+            storePassword STORE_PASSWORD
+            keyAlias KEY_ALIAS
+            keyPassword KEY_PASSWORD
         }
     }
 
 
     buildTypes {
+        beta {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+            versionNameSuffix "-beta"
+            if (project.hasProperty('disableCrashlytics')) {
+                ext.enableCrashlytics = false
+            }
+            matchingFallbacks = ['debug']
+        }
         debug {
             minifyEnabled false
         }
