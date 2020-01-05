@@ -4,7 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-import com.jibres.android.account.AddUserTemp;
+import com.jibres.android.function.AddUserTemp;
 
 public class MainActivity extends AppCompatActivity {
 
