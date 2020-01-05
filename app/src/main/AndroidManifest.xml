@@ -3,6 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.jibres.android">
 
+    <uses-permission android:name="android.permission.INTERNET"/>
+
     <application
         android:name=".JibresApplication"
         android:allowBackup="true"
