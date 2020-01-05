@@ -1,6 +1,4 @@
 apply plugin: 'com.android.application'
-apply plugin: 'io.fabric'
-
 
 android {
     compileSdkVersion 29
@@ -10,47 +8,14 @@ android {
         minSdkVersion 19
         targetSdkVersion 29
         versionCode 1
-        versionName "1.0.0"
+        versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
-
-    signingConfigs {
-        release {
-            storeFile file(STORE_FILE)
-            storePassword STORE_PASSWORD
-            keyAlias KEY_ALIAS
-            keyPassword KEY_PASSWORD
-        }
-    }
-
-
     buildTypes {
-        beta {
-            minifyEnabled true
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            signingConfig signingConfigs.release
-            versionNameSuffix "-beta"
-            if (project.hasProperty('disableCrashlytics')) {
-                ext.enableCrashlytics = false
-            }
-            matchingFallbacks = ['debug']
-        }
-        debug {
-            minifyEnabled false
-        }
-
         release {
-            signingConfig signingConfigs.release
-            minifyEnabled true
+            minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
-    }
-
-    lintOptions {
-        checkReleaseBuilds false
-        // Or, if you prefer, you can continue to check for errors in release builds,
-        // but continue the build even when errors are found:
-        abortOnError false
     }
 }
 
@@ -59,32 +24,6 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
     testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test:runner:1.2.0'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
-
-    implementation 'androidx.recyclerview:recyclerview:1.1.0'
-    //noinspection GradleCompatible
-    implementation 'com.android.support:design:28.0.0'
-    implementation 'org.jetbrains:annotations-java5:15.0'
-    implementation 'com.google.code.gson:gson:2.8.5'
-    implementation 'com.android.volley:volley:1.1.1'
-    implementation 'com.sothree.slidinguppanel:library:3.4.0'
-    implementation 'com.duolingo.open:rtl-viewpager:2.0.0'
-    implementation 'com.readystatesoftware.sqliteasset:sqliteassethelper:2.0.1'
-    implementation 'com.github.bumptech.glide:glide:4.8.0'
-    implementation 'com.github.lsjwzh.RecyclerViewPager:lib:v1.1.2'
-    //noinspection GradleCompatible
-    implementation 'com.android.support:cardview-v7:28.0.0'
-    implementation 'com.nex3z:toggle-button-group:1.2.0'
-    implementation 'com.intuit.sdp:sdp-android:1.0.6'
-    implementation 'com.intuit.ssp:ssp-android:1.0.6'
-    // (Recommended) Add Analytics
-    implementation 'com.google.firebase:firebase-analytics:17.2.1'
-    implementation 'com.google.firebase:firebase-core:17.2.1'
-    implementation 'com.google.firebase:firebase-messaging:20.0.1'
-    implementation 'com.crashlytics.sdk.android:crashlytics:2.10.1'
-    /*Photo Viewer*/
-    implementation 'com.github.chrisbanes:PhotoView:2.3.0'
-
 }
-apply plugin: 'com.google.gms.google-services'
