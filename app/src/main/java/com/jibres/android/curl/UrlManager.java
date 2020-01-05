@@ -16,6 +16,8 @@ public class UrlManager {
         static String local = https+"jibres.com";
         static String api = "/api/v1";
 
+        static String site = local+api;
+
         public static String local_api(Context context){
             return local + LanguageManager
                     .get(context).getAppLanguage()
@@ -24,10 +26,6 @@ public class UrlManager {
 
         public static String app_detail = "/app";
 
-        public static String token = "/account/token";
-        public static String add_temp = "/account/android/add";
-
-
         public static String language_list = "/language";
 
         public static String country_list = "/location/country";
@@ -35,6 +33,14 @@ public class UrlManager {
         public static String city_list = "/location/city";
 
         public static String store = "/y885";
+
+        public static String token(){
+            return site+"/account/token";
+        }
+
+        public static String add_user(Context context){
+            return local_api(context)+"/account/android/add";
+        }
 
 
     }
