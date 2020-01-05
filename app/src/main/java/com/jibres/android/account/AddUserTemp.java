@@ -12,7 +12,7 @@ public class AddUserTemp {
     public AddUserTemp(Context context) {
         this.context = context;
 
-        Api.getToken(new ApiListener.token() {
+        Api.getToken(context,new ApiListener.token() {
             @Override
             public void onReceived(String token) {
                 Api.userAdd(context, token, new ApiListener.userAdd() {
@@ -28,14 +28,14 @@ public class AddUserTemp {
 
                     @Override
                     public void onFailed() {
-                        Log.d("amingoli", "AddUserTemp - onFailed");
+                        Log.e("amingoli", "AddUserTemp - onFailed");
                     }
                 });
             }
 
             @Override
             public void onFailed(String error) {
-
+                Log.e("amingoli", "AddUserTemp (Token) - onFailed");
             }
         });
     }

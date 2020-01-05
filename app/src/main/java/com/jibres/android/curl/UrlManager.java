@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.ContextWrapper;
 import android.content.SharedPreferences;
 
+import com.jibres.android.appinfo.UserManager;
 import com.jibres.android.language.LanguageManager;
 
 import java.util.HashMap;
@@ -12,16 +13,16 @@ import java.util.Map;
 
 public class UrlManager {
     public static class get{
-        static String https = "https://";
-        static String local = https+"jibres.com";
+        static String local = "https://jibres.com";
         static String api = "/api/v1";
 
-        static String site = local+api;
-
         public static String local_api(Context context){
-            return local + LanguageManager
-                    .get(context).getAppLanguage()
-                    .get(LanguageManager.appLanguage) + api;
+
+            https://jibres.com/fa/api/v1/y885/account/token
+            return local + "/" +
+                    LanguageManager.get(context).getAppLanguage().get(LanguageManager.appLanguage)
+                    + api + "/"
+                    + UserManager.getStore(context);
         }
 
         public static String app_detail = "/app";
@@ -34,8 +35,8 @@ public class UrlManager {
 
         public static String store = "/y885";
 
-        public static String token(){
-            return site+"/account/token";
+        public static String token(Context context){
+            return local_api(context)+"/account/token";
         }
 
         public static String add_user(Context context){

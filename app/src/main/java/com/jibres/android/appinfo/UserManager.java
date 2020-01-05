@@ -28,10 +28,17 @@ public class UserManager extends ContextWrapper {
   }
 
   /** App Info */
+  public static final String store = "store";
+
   public static final String apikey = "apikey";
   public static final String userCode = "userCode";
   public static final String zonId = "zonId";
   public static final String mobile = "mobile";
+
+  public void saveStore(String STORE) {
+    editor.putString( store, STORE);
+    editor.apply();
+  }
 
   public void saveUserInfo(String Apikey, String UserCode, String ZonId, String Mobile) {
     editor.putString( apikey, Apikey);
@@ -43,6 +50,7 @@ public class UserManager extends ContextWrapper {
 
   public Map<String, String> getUserInfo() {
     HashMap<String, String> hashMap = new HashMap<>();
+    hashMap.put(store, sharedPreferences.getString(store, "y885"));
     hashMap.put(apikey, sharedPreferences.getString(apikey, null));
     hashMap.put(userCode, sharedPreferences.getString(userCode, null));
     hashMap.put(zonId, sharedPreferences.getString(zonId, null));
@@ -53,6 +61,10 @@ public class UserManager extends ContextWrapper {
 
   public static String versionName = BuildConfig.VERSION_NAME;
   public static int versionCode = BuildConfig.VERSION_CODE;
+
+  public static String getStore(Context context){
+    return UserManager.get(context).getUserInfo().get(UserManager.store);
+  }
 
   public static String getApikey(Context context){
     return UserManager.get(context).getUserInfo().get(UserManager.apikey);

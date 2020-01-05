@@ -23,8 +23,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Api {
-    public static void getToken(final ApiListener.token listener) {
-        StringRequest request = new StringRequest(Request.Method.POST, UrlManager.get.token(),
+    public static void getToken(Context context,final ApiListener.token listener) {
+        StringRequest request =
+                new StringRequest(Request.Method.POST, UrlManager.get.token(context),
                 response -> {
                     JSONObject mainObject,result;
                     JSONArray msg;
