@@ -30,3 +30,4 @@ captures
 .externalNativeBuild
 app/gradle.properties
 .cxx
+/app/src/main/java/com/jibres/android/keys.java
