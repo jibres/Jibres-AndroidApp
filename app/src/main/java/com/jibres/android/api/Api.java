@@ -92,7 +92,7 @@ public class Api {
                                             UserManager.getMobile(context));
 
                                     listener.onReceived();
-                                    Log.d("userAdd", "userAdd: "
+                                    listener.onMassage("userIsAdded ="
                                             + UserManager.getApikey(context)
                                             + " | " + UserManager.getUserCode(context)
                                             + " | " + UserManager.getZonId(context)
