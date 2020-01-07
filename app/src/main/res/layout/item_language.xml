@@ -8,7 +8,7 @@
 
 
   <ImageView
-      android:id="@+id/imo_country"
+      android:id="@+id/img_country"
       android:layout_marginLeft="@dimen/_10sdp"
       android:layout_marginRight="@dimen/_10sdp"
 
@@ -22,7 +22,7 @@
       android:layout_marginLeft="@dimen/_10sdp"
       android:layout_marginRight="@dimen/_10sdp"
 
-      android:layout_toEndOf="@+id/imo_country"
+      android:layout_toEndOf="@+id/img_country"
       android:layout_centerInParent="true"
       android:textColor="@color/title"
       android:text="English"
@@ -35,7 +35,7 @@
       android:id="@+id/icChoosed"
       android:layout_marginLeft="@dimen/_10sdp"
       android:layout_marginRight="@dimen/_10sdp"
-
+      android:src="@drawable/ic_chaked"
       android:layout_centerInParent="true"
       android:layout_alignParentEnd="true"
       android:tint="#326B00"

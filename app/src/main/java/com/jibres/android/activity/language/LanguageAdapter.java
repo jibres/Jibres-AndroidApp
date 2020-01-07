@@ -73,7 +73,7 @@ public class LanguageAdapter extends RecyclerView.Adapter<LanguageAdapter.MyView
     MyViewHolder(View itemView) {
       super(itemView);
       view = itemView;
-      imgCountry = itemView.findViewById(R.id.imo_country);
+      imgCountry = itemView.findViewById(R.id.img_country);
       icChoosed = itemView.findViewById(R.id.icChoosed);
       titleCountry = itemView.findViewById(R.id.title_country);
     }
