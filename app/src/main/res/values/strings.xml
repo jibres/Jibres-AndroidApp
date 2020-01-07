@@ -2,5 +2,6 @@
     <string name="app_name">Jibres</string>
     <string name="update">Update</string>
     <string name="update_warn">This Version is Deprecated!</string>
-    <string name="link_flag_contry">https://jibres.com/static/img/flags/png100px/%1$s.png</string>
+    <string name="link_flag_contry" translatable="false">https://jibres.com/static/img/flags/png100px/%1$s.png</string>
+    <string name="prefs_change_language">Choose Language</string>
 </resources>

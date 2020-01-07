@@ -16,7 +16,6 @@ import com.jibres.android.activity.intro.IntroApi;
 import com.jibres.android.activity.language.LanguageActivity;
 import com.jibres.android.activity.language.LanguageManager;
 import com.jibres.android.function.AddUserTemp;
-import com.jibres.android.function.Chake;
 import com.jibres.android.managers.UrlManager;
 import com.jibres.android.managers.UserManager;
 
@@ -43,7 +42,7 @@ public class SplashActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        if (Chake.userIsAddTemp(this)){
+        /*if (Chake.userIsAddTemp(this)){
             switch (UserManager.getSplash(this)){
                 case 0:
                     changeLanguage();
@@ -55,7 +54,10 @@ public class SplashActivity extends AppCompatActivity {
                     mainActivity();
                     break;
             }
-        }
+        }*/
+        Intent intent = new Intent(this, LanguageActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+        startActivity(intent);
     }
 
     @Override
