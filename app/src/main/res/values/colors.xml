@@ -3,4 +3,9 @@
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
+    <color name="title">#333333</color>
+    <!--On click-->
+    <color name="onClick_activated">#B1B1B1</color>
+    <color name="onClick_pressed">#FFFFFF</color>
+    <color name="onClick_ripple">#C7CACA</color>
 </resources>
