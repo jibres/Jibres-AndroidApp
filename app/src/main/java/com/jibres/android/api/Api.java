@@ -3,7 +3,6 @@ package com.jibres.android.api;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Build;
-import android.util.Log;
 
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
@@ -23,45 +22,90 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Api {
+
+    public static void getAppDetail(Context context,ApiListener.appDetail listener){
+        StringRequest request =
+                new StringRequest(Request.Method.GET, UrlManager.get.app_detail(context),
+                        response -> {
+                            try {
+                                JSONObject mainObject = new JSONObject(response);
+                                if (mainObject.getBoolean("ok")){
+                                    JSONObject result = mainObject.getJSONObject("result");
+                                    listener.onReceived(true,String.valueOf(result));
+                                }else {
+                                    JSONArray msg = mainObject.getJSONArray("msg");
+                                    for (int i = 0 ; i<= msg.length();i++){
+                                        JSONObject msg_object = msg.getJSONObject(i);
+                                        if (!msg_object.isNull("text")){
+                                            listener.onReceived(false,
+                                                    msg_object.getString("text") );
+                                        }else {
+                                            listener.onReceived(false,null);
+                                        }
+                                    }
+                                }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                                listener.onReceived(false,null);
+                            }
+                        }, e -> listener.onReceived(false,null))
+                        // Send Headers
+                {
+                    @Override
+                    public Map<String, String> getHeaders()  {
+                        HashMap<String, String> headers = new HashMap<>();
+                        headers.put("appkey", keys.appkey);
+                        return headers;
+                    }
+
+                };
+        request.setRetryPolicy(
+                new DefaultRetryPolicy(
+                        DefaultRetryPolicy.DEFAULT_TIMEOUT_MS,
+                        DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                        DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        JibresApplication.getInstance().addToRequestQueue(request);
+    }
+
     public static void getToken(Context context,final ApiListener.token listener) {
         StringRequest request =
                 new StringRequest(Request.Method.POST, UrlManager.get.token(context),
-                response -> {
-                    JSONObject mainObject,result;
-                    JSONArray msg;
-                    boolean ok_getToken;
-                    try {
-                        mainObject = new JSONObject(response);
-                        ok_getToken = mainObject.getBoolean("ok");
-                        if (ok_getToken){
-                            result = mainObject.getJSONObject("result");
-                            listener.onReceived(result.getString("token"));
-                        }else {
-                            msg = mainObject.getJSONArray("msg");
-                            for (int i = 0 ; i<= msg.length();i++){
-                                JSONObject msg_object = msg.getJSONObject(i);
-                                if (!msg_object.isNull("text")){
-                                    listener.onFailed(msg_object.getString("text"));
+                        response -> {
+                            JSONObject mainObject,result;
+                            JSONArray msg;
+                            boolean ok_getToken;
+                            try {
+                                mainObject = new JSONObject(response);
+                                ok_getToken = mainObject.getBoolean("ok");
+                                if (ok_getToken){
+                                    result = mainObject.getJSONObject("result");
+                                    listener.onReceived(result.getString("token"));
                                 }else {
-                                    listener.onFailed(null);
+                                    msg = mainObject.getJSONArray("msg");
+                                    for (int i = 0 ; i<= msg.length();i++){
+                                        JSONObject msg_object = msg.getJSONObject(i);
+                                        if (!msg_object.isNull("text")){
+                                            listener.onFailed(msg_object.getString("text"));
+                                        }else {
+                                            listener.onFailed(null);
+                                        }
+                                    }
                                 }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                                listener.onFailed(null);
                             }
-                        }
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                        listener.onFailed(null);
+                        }, e -> listener.onFailed(null))
+                        // Send Headers
+                {
+                    @Override
+                    public Map<String, String> getHeaders()  {
+                        HashMap<String, String> headers = new HashMap<>();
+                        headers.put("appkey", keys.appkey);
+                        return headers;
                     }
-                }, e -> listener.onFailed(null))
-                // Send Headers
-        {
-            @Override
-            public Map<String, String> getHeaders()  {
-                HashMap<String, String> headers = new HashMap<>();
-                headers.put("appkey", keys.appkey);
-                return headers;
-            }
 
-        };
+                };
         request.setRetryPolicy(
                 new DefaultRetryPolicy(
                         DefaultRetryPolicy.DEFAULT_TIMEOUT_MS,
@@ -101,7 +145,6 @@ public class Api {
                                 } else {
                                     listener.onFailed();
                                 }
-
                                 try {
                                     msg = mainObject.getJSONArray("msg");
                                     for (int i = 0 ; i<= msg.length();i++){
@@ -125,7 +168,6 @@ public class Api {
                         headers.put("token", token );
                         return headers;
                     }
-
                     @Override
                     public String getBodyContentType() {
                         return "application/json; charset=utf-8";

@@ -1,11 +1,20 @@
 package com.jibres.android;
 
 import android.app.Application;
+import android.content.Context;
+import android.content.res.Configuration;
+import android.content.res.Resources;
+import android.os.Build;
 import android.text.TextUtils;
+
+import androidx.annotation.NonNull;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
+import com.jibres.android.language.LanguageManager;
+
+import java.util.Locale;
 
 public class JibresApplication extends Application {
 
@@ -46,5 +55,34 @@ public class JibresApplication extends Application {
         if (mRequestQueue != null) {
             mRequestQueue.cancelAll(tag);
         }
+    }
+
+    public void refreshLocale(@NonNull Context context) {
+        final String language = LanguageManager.getAppLanguage(this);
+
+        final Locale locale;
+        if (language != null) {
+            locale = new Locale(language);
+//      locale = new Locale("ar");
+        } else {
+            // nothing to do...
+            return;
+        }
+
+        updateLocale(context, locale);
+        final Context appContext = context.getApplicationContext();
+        if (context != appContext) {
+            updateLocale(appContext, locale);
+        }
+    }
+
+    private void updateLocale(@NonNull Context context, @NonNull Locale locale) {
+        final Resources resources = context.getResources();
+        Configuration config = resources.getConfiguration();
+        config.locale = locale;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+            config.setLayoutDirection(config.locale);
+        }
+        resources.updateConfiguration(config, resources.getDisplayMetrics());
     }
 }

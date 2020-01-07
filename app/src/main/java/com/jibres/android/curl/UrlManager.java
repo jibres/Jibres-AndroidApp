@@ -20,12 +20,10 @@ public class UrlManager {
 
             https://jibres.com/fa/api/v1/y885/account/token
             return local + "/" +
-                    LanguageManager.get(context).getAppLanguage().get(LanguageManager.appLanguage)
+                    LanguageManager.getAppLanguage(context)
                     + api + "/"
                     + UserManager.getStore(context);
         }
-
-        public static String app_detail = "/app";
 
         public static String language_list = "/language";
 
@@ -35,13 +33,34 @@ public class UrlManager {
 
         public static String store = "/y885";
 
+        public static String app_detail(Context context){
+            return local_api(context)+"/app";
+        }
         public static String token(Context context){
             return local_api(context)+"/account/token";
         }
-
         public static String add_user(Context context){
             return local_api(context)+"/account/android/add";
         }
+
+
+        //        Static URL
+        public static String url_site(Context context){
+            return save.get(context).getstring_appINFO().get(save.url_site);
+        }
+        public static String url_kingdom(Context context){
+            return save.get(context).getstring_appINFO().get(save.url_kingdom);
+        }
+        public static String url_domain(Context context){
+            return save.get(context).getstring_appINFO().get(save.url_domain);
+        }
+        public static String url_root(Context context){
+            return save.get(context).getstring_appINFO().get(save.url_root);
+        }
+        public static String url_update(Context context){
+            return save.get(context).getstring_appINFO().get(save.url_update);
+        }
+
 
 
     }

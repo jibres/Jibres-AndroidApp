@@ -29,15 +29,23 @@ public class LanguageManager extends ContextWrapper {
   /** App Info */
   public static final String appLanguage = "appLanguage";
 
-  public void save_app_language(String languageLocal) {
+  public void setAppLanguage(String languageLocal) {
     editor.putString(appLanguage, languageLocal);
     editor.apply();
   }
 
-  public Map<String, String> getAppLanguage() {
+  public Map<String, String> getAppLanguage_fromSaveManager() {
     HashMap<String, String> hashMap = new HashMap<>();
     hashMap.put(appLanguage, sharedPreferences.getString(appLanguage, "en" ));
     return hashMap;
+  }
+
+
+  public static String getAppLanguage(Context context){
+    return LanguageManager
+            .get(context)
+            .getAppLanguage_fromSaveManager()
+            .get(LanguageManager.appLanguage);
   }
 
 

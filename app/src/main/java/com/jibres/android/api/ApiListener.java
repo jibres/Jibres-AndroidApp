@@ -10,4 +10,8 @@ public class ApiListener {
         void onMassage(String massage);
         void onFailed();
     }
+    public interface appDetail {
+        void onReceived(boolean status , String value);
+    }
+
 }
