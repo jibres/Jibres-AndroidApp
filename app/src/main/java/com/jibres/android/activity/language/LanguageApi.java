@@ -7,9 +7,13 @@ import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.toolbox.StringRequest;
 import com.jibres.android.JibresApplication;
+import com.jibres.android.keys;
 import com.jibres.android.managers.UrlManager;
 
 import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class LanguageApi {
     public LanguageApi(Context context) {
@@ -31,7 +35,16 @@ public class LanguageApi {
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
-                }, Throwable::printStackTrace);
+                }, Throwable::printStackTrace)
+                {
+                    @Override
+                    public Map<String, String> getHeaders()  {
+                        HashMap<String, String> headers = new HashMap<>();
+                        headers.put("appkey", keys.appkey);
+                        return headers;
+                    }
+
+                };
         request.setRetryPolicy(new DefaultRetryPolicy(
                 DefaultRetryPolicy.DEFAULT_TIMEOUT_MS,
                 DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
