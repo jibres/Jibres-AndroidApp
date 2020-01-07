@@ -5,7 +5,7 @@ import android.content.Context;
 import com.jibres.android.managers.UserManager;
 
 public class Chake {
-    static Boolean userIsAddTemp(Context context){
+    public static Boolean userIsAddTemp(Context context){
         return UserManager.getApikey(context) !=null
                 && UserManager.getUserCode(context) !=null
                 && UserManager.getZonId(context) !=null ;
