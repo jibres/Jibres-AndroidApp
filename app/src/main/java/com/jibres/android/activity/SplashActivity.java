@@ -12,7 +12,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.jibres.android.JibresApplication;
 import com.jibres.android.R;
 import com.jibres.android.activity.intro.IntroActivity;
-import com.jibres.android.activity.intro.IntroApi;
 import com.jibres.android.activity.language.LanguageActivity;
 import com.jibres.android.activity.language.LanguageManager;
 import com.jibres.android.function.AddUserTemp;
