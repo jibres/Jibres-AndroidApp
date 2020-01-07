@@ -14,9 +14,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
-        <activity android:name=".intro.IntroActivity"></activity>
-        <activity android:name=".language.LanguageActivity" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".activity.intro.IntroActivity"></activity>
+        <activity android:name=".activity.language.LanguageActivity" />
+        <activity android:name=".activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

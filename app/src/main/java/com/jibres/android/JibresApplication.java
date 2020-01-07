@@ -12,7 +12,7 @@ import androidx.annotation.NonNull;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
-import com.jibres.android.language.LanguageManager;
+import com.jibres.android.activity.language.LanguageManager;
 
 import java.util.Locale;
 

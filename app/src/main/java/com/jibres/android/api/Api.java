@@ -9,8 +9,8 @@ import com.android.volley.Request;
 import com.android.volley.toolbox.StringRequest;
 import com.google.gson.Gson;
 import com.jibres.android.JibresApplication;
-import com.jibres.android.appinfo.UserManager;
-import com.jibres.android.curl.UrlManager;
+import com.jibres.android.managers.UserManager;
+import com.jibres.android.managers.UrlManager;
 import com.jibres.android.keys;
 
 import org.json.JSONArray;

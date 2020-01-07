@@ -1,12 +1,11 @@
-package com.jibres.android.curl;
+package com.jibres.android.managers;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.ContextWrapper;
 import android.content.SharedPreferences;
 
-import com.jibres.android.appinfo.UserManager;
-import com.jibres.android.language.LanguageManager;
+import com.jibres.android.activity.language.LanguageManager;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -18,7 +17,6 @@ public class UrlManager {
 
         public static String local_api(Context context){
 
-            https://jibres.com/fa/api/v1/y885/account/token
             return local + "/" +
                     LanguageManager.getAppLanguage(context)
                     + api + "/"

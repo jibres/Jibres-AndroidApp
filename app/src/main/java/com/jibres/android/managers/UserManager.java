@@ -1,4 +1,4 @@
-package com.jibres.android.appinfo;
+package com.jibres.android.managers;
 
 
 import android.annotation.SuppressLint;
@@ -28,12 +28,19 @@ public class UserManager extends ContextWrapper {
   }
 
   /** App Info */
+  public static final String splash = "splash";
+
   public static final String store = "store";
 
   public static final String apikey = "apikey";
   public static final String userCode = "userCode";
   public static final String zonId = "zonId";
   public static final String mobile = "mobile";
+
+  public void save_splash(int id) {
+    editor.putInt(splash, id);
+    editor.apply();
+  }
 
   public void saveStore(String STORE) {
     editor.putString( store, STORE);
@@ -55,12 +62,20 @@ public class UserManager extends ContextWrapper {
     hashMap.put(userCode, sharedPreferences.getString(userCode, null));
     hashMap.put(zonId, sharedPreferences.getString(zonId, null));
     hashMap.put(mobile, sharedPreferences.getString(mobile, null));
-
+    return hashMap;
+  }
+  public Map<String, Integer> getUserInfo_int() {
+    HashMap<String, Integer> hashMap = new HashMap<>();
+    hashMap.put(splash, sharedPreferences.getInt(splash, 0));
     return hashMap;
   }
 
   public static String versionName = BuildConfig.VERSION_NAME;
   public static int versionCode = BuildConfig.VERSION_CODE;
+
+  public static Integer getSplash(Context context){
+    return UserManager.get(context).getUserInfo_int().get(UserManager.splash);
+  }
 
   public static String getStore(Context context){
     return UserManager.get(context).getUserInfo().get(UserManager.store);

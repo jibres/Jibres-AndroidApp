@@ -1,7 +1,4 @@
-package com.jibres.android;
-
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
+package com.jibres.android.activity;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -9,12 +6,18 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 
-import com.jibres.android.curl.UrlManager;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.jibres.android.JibresApplication;
+import com.jibres.android.R;
+import com.jibres.android.activity.intro.IntroActivity;
+import com.jibres.android.activity.intro.IntroApi;
+import com.jibres.android.activity.language.LanguageActivity;
+import com.jibres.android.activity.language.LanguageManager;
 import com.jibres.android.function.AddUserTemp;
-import com.jibres.android.intro.IntroActivity;
-import com.jibres.android.intro.IntroApi;
-import com.jibres.android.language.LanguageActivity;
-import com.jibres.android.language.LanguageManager;
+import com.jibres.android.managers.UrlManager;
+import com.jibres.android.managers.UserManager;
 
 import java.util.Locale;
 
@@ -57,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
     }
     private void goIntro() {
         new IntroApi();
-        SaveManager.get(getApplication()).save_splash(2);
+        UserManager.get(getApplication()).save_splash(2);
         new Handler().postDelayed(() -> {
             Intent intent = new Intent(getApplication(), IntroActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);

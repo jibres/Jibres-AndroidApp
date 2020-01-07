@@ -1,4 +1,4 @@
-package com.jibres.android.language;
+package com.jibres.android.activity.language;
 
 
 import android.annotation.SuppressLint;
