@@ -55,7 +55,7 @@ public class LanguageAdapter extends RecyclerView.Adapter<LanguageAdapter.MyView
             .into(holder.imgCountry);
 
     holder.view.setOnClickListener(view -> {
-      LanguageManager.get(mContext).setAppLanguage(aItem.getTag());
+      LanguageManager.context(mContext).setAppLanguage(aItem.getTag());
       mlistener.onClick();
     });
 

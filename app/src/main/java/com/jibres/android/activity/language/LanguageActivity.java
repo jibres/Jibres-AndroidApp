@@ -48,8 +48,7 @@ public class LanguageActivity extends AppCompatActivity {
     /*Get Language*/
     void GetLanguage() {
         try {
-            JSONObject jsonOffline = new JSONObject(LanguageManager.getJsonLanguage(this));
-            JSONObject result = jsonOffline.getJSONObject("result");
+            JSONObject result = new JSONObject(LanguageManager.getJsonLanguage(this));
             Iterator<?> keys = result.keys();
             while (keys.hasNext()) {
                 String key = (String) keys.next();

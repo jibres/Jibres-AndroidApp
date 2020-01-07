@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class JsonManager extends ContextWrapper {
-    public static String intro_en = "\"intro\": [{\"title\": \"Jibres\", \"desc\": \"Jibres is not just an online accounting software; We try to create the best financial platform that has everything you need to sale and manage your financial life.\", \"bg_from\": \"#ffffff\", \"bg_to\": \"#ffffff\", \"title_color\": \"#000000\", \"desc_color\": \"#000000\", \"image\": \"https://jibres.com/static/img/logo/icon/svg/Jibres-Logo-icon.svg\", \"btn\": [{\"title\": \"Next\", \"action\": \"next\"} ] }, {\"title\": \"Easy\", \"desc\": \"Easy to use\", \"bg_from\": \"#ffffff\", \"bg_to\": \"#ffffff\", \"title_color\": \"#000000\", \"desc_color\": \"#000000\", \"image\": \"https://jibres.com/static/img/logo/icon/svg/Jibres-Logo-icon.svg\", \"btn\": [{\"title\": \"Prev\", \"action\": \"prev\"}, {\"title\": \"Next\", \"action\": \"next\"} ] }, {\"title\": \"Powerful\", \"desc\": \"Best application\", \"bg_from\": \"#ffffff\", \"bg_to\": \"#ffffff\", \"title_color\": \"#000000\", \"desc_color\": \"#000000\", \"image\": \"https://jibres.com/static/img/logo/icon/svg/Jibres-Logo-icon.svg\", \"btn\": [{\"title\": \"Prev\", \"action\": \"prev\"}, {\"title\": \"Next\", \"action\": \"next\"} ] }, {\"title\": \"Enjoy\", \"desc\": \"Welcome to our collection\", \"bg_from\": \"#ffffff\", \"bg_to\": \"#ffffff\", \"title_color\": \"#000000\", \"desc_color\": \"#000000\", \"image\": \"https://jibres.com/static/img/logo/icon/svg/Jibres-Logo-icon.svg\", \"btn\": [{\"title\": \"Start\", \"action\": \"start\"} ] } ]";
+    public static String intro_en = "\"intro\": [{\"title\": \"OFFLINE\", \"desc\": \"Jibres is not just an online accounting software; We try to create the best financial platform that has everything you need to sale and manage your financial life.\", \"bg_from\": \"#ffffff\", \"bg_to\": \"#ffffff\", \"title_color\": \"#000000\", \"desc_color\": \"#000000\", \"image\": \"https://jibres.com/static/img/logo/icon/svg/Jibres-Logo-icon.svg\", \"btn\": [{\"title\": \"Next\", \"action\": \"next\"} ] }, {\"title\": \"Easy\", \"desc\": \"Easy to use\", \"bg_from\": \"#ffffff\", \"bg_to\": \"#ffffff\", \"title_color\": \"#000000\", \"desc_color\": \"#000000\", \"image\": \"https://jibres.com/static/img/logo/icon/svg/Jibres-Logo-icon.svg\", \"btn\": [{\"title\": \"Prev\", \"action\": \"prev\"}, {\"title\": \"Next\", \"action\": \"next\"} ] }, {\"title\": \"Powerful\", \"desc\": \"Best application\", \"bg_from\": \"#ffffff\", \"bg_to\": \"#ffffff\", \"title_color\": \"#000000\", \"desc_color\": \"#000000\", \"image\": \"https://jibres.com/static/img/logo/icon/svg/Jibres-Logo-icon.svg\", \"btn\": [{\"title\": \"Prev\", \"action\": \"prev\"}, {\"title\": \"Next\", \"action\": \"next\"} ] }, {\"title\": \"Enjoy\", \"desc\": \"Welcome to our collection\", \"bg_from\": \"#ffffff\", \"bg_to\": \"#ffffff\", \"title_color\": \"#000000\", \"desc_color\": \"#000000\", \"image\": \"https://jibres.com/static/img/logo/icon/svg/Jibres-Logo-icon.svg\", \"btn\": [{\"title\": \"Start\", \"action\": \"start\"} ] } ]";
 
     SharedPreferences.Editor editor;
     SharedPreferences sharedPreferences;
@@ -21,7 +21,7 @@ public class JsonManager extends ContextWrapper {
         sharedPreferences = getSharedPreferences(SH_PREF_NAME, MODE_PRIVATE);
         editor = sharedPreferences.edit();
     }
-    public static JsonManager get(Context context) {
+    public static JsonManager context(Context context) {
         return new JsonManager(context);
     }
 
@@ -41,7 +41,7 @@ public class JsonManager extends ContextWrapper {
 
     public static String getJsonIntro(Context context){
         return JsonManager
-                .get(context)
+                .context(context)
                 .getJsonIntro_fromSaveManager()
                 .get(JsonManager.jsonIntro);
     }

@@ -24,7 +24,7 @@ public class LanguageManager extends ContextWrapper {
     sharedPreferences = getSharedPreferences(SH_PREF_NAME, MODE_PRIVATE);
     editor = sharedPreferences.edit();
   }
-  public static LanguageManager get(Context context) {
+  public static LanguageManager context(Context context) {
     return new LanguageManager(context);
   }
 
@@ -52,13 +52,13 @@ public class LanguageManager extends ContextWrapper {
 
   public static String getAppLanguage(Context context){
     return LanguageManager
-            .get(context)
+            .context(context)
             .getAppLanguage_fromSaveManager()
             .get(LanguageManager.appLanguage);
   }
   public static String getJsonLanguage(Context context){
     return LanguageManager
-            .get(context)
+            .context(context)
             .getAppLanguage_fromSaveManager()
             .get(LanguageManager.jsonLanguage);
   }

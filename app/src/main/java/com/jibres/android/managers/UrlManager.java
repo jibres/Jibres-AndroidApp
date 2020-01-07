@@ -12,7 +12,8 @@ import java.util.Map;
 
 public class UrlManager {
     public static class get{
-        static String local = "https://jibres.com";
+        public static String google = "http://www.google.com";
+        public static String local = "https://jibres.com";
         static String api = "/api/v1";
 
         public static String local_api(Context context){

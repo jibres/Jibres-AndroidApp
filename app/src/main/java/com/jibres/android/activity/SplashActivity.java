@@ -3,7 +3,6 @@ package com.jibres.android.activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
 import android.util.Log;
 
 import androidx.appcompat.app.AlertDialog;
@@ -12,68 +11,74 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.jibres.android.JibresApplication;
 import com.jibres.android.R;
 import com.jibres.android.activity.intro.IntroActivity;
-import com.jibres.android.activity.intro.IntroApi;
 import com.jibres.android.activity.language.LanguageActivity;
 import com.jibres.android.activity.language.LanguageManager;
 import com.jibres.android.function.AddUserTemp;
+import com.jibres.android.function.Chake;
+import com.jibres.android.function.GetAppDetail;
 import com.jibres.android.managers.UrlManager;
 import com.jibres.android.managers.UserManager;
 
 import java.util.Locale;
 
 public class SplashActivity extends AppCompatActivity {
+    Boolean seceondStart = false;
 
     @Override
     protected void onStart() {
         super.onStart();
-        new AddUserTemp(getApplication(), new AddUserTemp.AddUserTempListener() {
-            @Override
-            public void onReceived() {
-                Log.d("amingoli", "onReceived: AddUserTemp..");
-            }
-
-            @Override
-            public void onFiled() {
-                Log.e("amingoli", "onReceived: AddUserTemp ERROR");
-            }
-        });
+        seceondStart = true;
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        /*if (Chake.userIsAddTemp(this)){
-            switch (UserManager.getSplash(this)){
-                case 0:
-                    changeLanguage();
-                    break;
-                case 1:
-                    goIntro();
-                    break;
-                default:
-                    mainActivity();
-                    break;
+        new GetAppDetail(getApplicationContext(), status -> {
+            if (status){
+                new AddUserTemp(getApplication(), new AddUserTemp.AddUserTempListener() {
+                    @Override
+                    public void onReceived() {
+                        if (Chake.userIsAddTemp(getApplicationContext())){
+                            switch (UserManager.getSplash(getApplicationContext())){
+                                case 0:
+                                    changeLanguage();
+                                    break;
+                                case 1:
+                                    goIntro();
+                                    break;
+                                default:
+                                    mainActivity();
+                                    break;
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onFiled() {
+                        Log.e("amingoli", "onReceived: AddUserTemp ERROR");
+                    }
+                });
             }
-        }*/
-        goIntro();
+        });
+
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
-
+        if (UserManager.getSplash(getApplicationContext()) == 0){
+            changeLanguage();
+        }
     }
-
 
     private void changeLanguage() {
         UserManager.get(getApplication()).save_splash(1);
-        LanguageManager.getAppLanguage(getApplication());
         String deviceLanguage = Locale.getDefault().getLanguage();
         switch (deviceLanguage){
             case "fa":
             case "ar":
-                LanguageManager.get(getApplication()).setAppLanguage(deviceLanguage);
+                LanguageManager.context(getApplicationContext()).setAppLanguage(deviceLanguage);
                 ((JibresApplication) getApplication()).refreshLocale(this);
                 goIntro();
                 break;
@@ -85,14 +90,11 @@ public class SplashActivity extends AppCompatActivity {
         }
     }
     private void goIntro() {
-        new IntroApi(getApplicationContext());
         UserManager.get(getApplication()).save_splash(2);
-        new Handler().postDelayed(() -> {
-            Intent intent = new Intent(getApplication(), IntroActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-            startActivity(intent);
-            finish();
-        },1200);
+        Intent intent = new Intent(getApplication(), IntroActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+        startActivity(intent);
+        finish();
 
     }
     private void mainActivity() {
