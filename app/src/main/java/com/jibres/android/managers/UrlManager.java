@@ -34,6 +34,10 @@ public class UrlManager {
         public static String app_detail(Context context){
             return local_api(context)+"/app";
         }
+        public static String language(Context context){
+            return local_api(context)+"/language";
+        }
+
         public static String token(Context context){
             return local_api(context)+"/account/token";
         }
