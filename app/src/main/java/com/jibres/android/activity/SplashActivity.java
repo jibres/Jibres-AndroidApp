@@ -4,98 +4,105 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.jibres.android.JibresApplication;
 import com.jibres.android.R;
 import com.jibres.android.activity.intro.IntroActivity;
 import com.jibres.android.activity.language.LanguageActivity;
 import com.jibres.android.activity.language.LanguageManager;
 import com.jibres.android.function.AddUserTemp;
-import com.jibres.android.function.Chake;
-import com.jibres.android.function.GetAppDetail;
+import com.jibres.android.function.AppDetailJson;
 import com.jibres.android.managers.UrlManager;
 import com.jibres.android.managers.UserManager;
 
 import java.util.Locale;
 
 public class SplashActivity extends AppCompatActivity {
-    Boolean seceondStart = false;
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        seceondStart = true;
-    }
-
     @Override
     protected void onResume() {
         super.onResume();
-        new GetAppDetail(getApplicationContext(), status -> {
-            if (status){
-                new AddUserTemp(getApplication(), new AddUserTemp.AddUserTempListener() {
-                    @Override
-                    public void onReceived() {
-                        if (Chake.userIsAddTemp(getApplicationContext())){
-                            switch (UserManager.getSplash(getApplicationContext())){
-                                case 0:
-                                    changeLanguage();
-                                    break;
-                                case 1:
-                                    goIntro();
-                                    break;
-                                default:
-                                    mainActivity();
-                                    break;
-                            }
-                        }
-                    }
-
-                    @Override
-                    public void onFiled() {
-                        Log.e("amingoli", "onReceived: AddUserTemp ERROR");
-                    }
-                });
-            }
-        });
-
+        helperSplash();
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
-        if (UserManager.getSplash(getApplicationContext()) == 0){
-            changeLanguage();
+        new AppDetailJson(getApplicationContext(), new AppDetailJson.Listener() {
+                    @Override
+                    public void isDeprecated() {
+                        deprecatedDialog();
+                    }
+
+                    @Override
+                    public void onReceived(boolean hasUpdate) {
+                        new AddUserTemp(getApplication(), new AddUserTemp.AddUserTempListener() {
+                            @Override
+                            public void onReceived() {
+                                helperSplash();
+                                if (hasUpdate){}
+                            }
+                            @Override
+                            public void onFiled() {
+                                Log.e("amingoli", "onReceived: AddUserTemp ERROR");
+                            }
+                        });
+                    }
+                    @Override
+                    public void onFiled(boolean hasInternet) {
+                    }
+                });
+    }
+
+    private void helperSplash(){
+        Log.d("amingolis", "helperSplash: "+UserManager.getSplash(getApplicationContext()));
+        switch (UserManager.getSplash(getApplicationContext())){
+            case 0:
+                firstChangeLanguage();
+                break;
+            case 1:
+                goIntro();
+                break;
+            case 2:
+                changeLanguage();
+                break;
+            default:
+                Toast.makeText(this, "MainActivity "+UserManager.getSplash(getApplicationContext()), Toast.LENGTH_SHORT).show();
+                mainActivity();
+                break;
         }
     }
 
     private void changeLanguage() {
-        UserManager.get(getApplication()).save_splash(1);
-        String deviceLanguage = Locale.getDefault().getLanguage();
-        switch (deviceLanguage){
-            case "fa":
-            case "ar":
-                LanguageManager.context(getApplicationContext()).setAppLanguage(deviceLanguage);
-                ((JibresApplication) getApplication()).refreshLocale(this);
-                goIntro();
-                break;
-            default:
-                Intent intent = new Intent(this, LanguageActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-                startActivity(intent);
-                break;
-        }
-    }
-    private void goIntro() {
-        UserManager.get(getApplication()).save_splash(2);
-        Intent intent = new Intent(getApplication(), IntroActivity.class);
+        UserManager.get(getApplicationContext()).save_splash(1);
+        Intent intent = new Intent(this, LanguageActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
         startActivity(intent);
-        finish();
+    }
 
+    private void firstChangeLanguage() {
+        if (UserManager.getSplash(getApplicationContext())== 0){
+            String deviceLanguage = Locale.getDefault().getLanguage();
+            if (deviceLanguage.equals("fa")){
+                LanguageManager.context(getApplicationContext()).setAppLanguage(deviceLanguage);
+                UserManager.get(getApplicationContext()).save_splash(1);
+            }else {
+                UserManager.get(getApplicationContext()).save_splash(2);
+            }
+        }
+    }
+
+
+    private void goIntro() {
+        if (UserManager.getSplash(getApplicationContext()) == 1){
+            Intent intent = new Intent(getApplication(), IntroActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+            startActivity(intent);
+            finish();
+        }
     }
     private void mainActivity() {
         Intent intent = new Intent(this, MainActivity.class);
@@ -124,6 +131,7 @@ public class SplashActivity extends AppCompatActivity {
                 builderSingle.show();
             }
         }catch (Exception e){
+            Toast.makeText(this, "deprecatedDialog", Toast.LENGTH_SHORT).show();
             mainActivity();
             Log.e("amingoli", "deprecatedDialog: ",e );
         }

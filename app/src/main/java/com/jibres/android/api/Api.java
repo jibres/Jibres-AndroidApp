@@ -21,6 +21,8 @@ import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 
+import static com.jibres.android.managers.UserManager.versionName;
+
 public class Api {
 
     public static void getAppDetail(Context context,ApiListener.appDetail listener){
@@ -180,7 +182,7 @@ public class Api {
                         device.put("model", Build.MODEL );
                         device.put("serial", Build.SERIAL );
                         device.put("manufacturer", Build.MANUFACTURER );
-                        device.put("version", UserManager.versionName );
+                        device.put("version", versionName );
                         device.put("hardware", Build.HARDWARE );
                         device.put("type", Build.TYPE );
                         device.put("board", Build.BOARD );

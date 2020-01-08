@@ -16,8 +16,6 @@ public class LanguageManager extends ContextWrapper {
   SharedPreferences sharedPreferences;
   public static final String SH_PREF_NAME = "ShPerfManager_Jibres_LanguageManager";
 
-
-
   @SuppressLint("CommitPrefEdits")
   private LanguageManager(Context context) {
     super(context);
@@ -62,8 +60,6 @@ public class LanguageManager extends ContextWrapper {
             .getAppLanguage_fromSaveManager()
             .get(LanguageManager.jsonLanguage);
   }
-
-
 }
 
 

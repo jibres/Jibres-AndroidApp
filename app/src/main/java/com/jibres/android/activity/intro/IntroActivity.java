@@ -11,7 +11,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.jibres.android.R;
 import com.jibres.android.activity.SplashActivity;
-import com.jibres.android.managers.JsonManager;
+import com.jibres.android.api.Api;
+import com.jibres.android.managers.UserManager;
 import com.lsjwzh.widget.recyclerviewpager.RecyclerViewPager;
 
 import org.json.JSONArray;
@@ -34,6 +35,7 @@ public class IntroActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_intro);
+        UserManager.get(getApplication()).save_splash(3);
 
         nex_string = "->";
         pravs_string = "<-";
@@ -51,91 +53,96 @@ public class IntroActivity extends AppCompatActivity {
         final LinearLayoutManager layout = new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false);
 
 
-        try {
-            JSONArray intro = new JSONArray(JsonManager.getJsonIntro(getApplicationContext()));
+        Api.getAppDetail(getApplicationContext(), (status, value) -> {
+            if (status && value!=null){
+                try {
+                    JSONObject result = new JSONObject(value);
+                    JSONArray intro = result.getJSONArray("intro");
+                    for (int i = 0; i < intro.length(); i++) {
+                        JSONObject object = intro.getJSONObject(i);
+                        String image= null;
+                        if (!object.isNull("image")){
+                            image = object.getString("image");
+                        }
+                        String title = object.getString("title");
+                        String desc = object.getString("desc");
 
-            for (int i = 0; i < intro.length(); i++) {
-                JSONObject object = intro.getJSONObject(i);
-                String image= null;
-                if (!object.isNull("image")){
-                    image = object.getString("image");
+                        String bg_from = object.getString("bg_from");
+                        String bg_to = object.getString("bg_to");
+                        String title_color = object.getString("title_color");
+                        String desc_color = object.getString("desc_color");
+
+                        itemIntroList.add(new IntroModel(image,title,desc,bg_from,bg_to,title_color,desc_color));
+                        recyclerViewPager.setLayoutManager(layout);
+                        recyclerViewPager.setItemAnimator(new DefaultItemAnimator());
+
+
+                        if (!object.isNull("btn")){
+                            JSONArray btnArray = object.getJSONArray("btn");
+                            for (int j = 0; j < btnArray.length(); j++) {
+                                JSONObject btnObject = btnArray.getJSONObject(j);
+                                String action = btnObject.getString("action");
+                                String titleBtn = btnObject.getString("title");
+
+                                switch (action){
+                                    case "next":
+                                        nex_string = titleBtn;
+                                        break;
+                                    case "prev":
+                                        pravs_string = titleBtn;
+                                        break;
+                                    case "start":
+                                        skip_string = titleBtn;
+                                        break;
+                                }
+                            }
+                        }
+                    }
+
+                    if (itemIntroList.size() == 1){
+                        nex.setText(nex_string);
+                        nex.setOnClickListener(view -> {
+                            finish();
+                            startActivity(new Intent(getApplicationContext(), SplashActivity.class));
+                        });
+                    }
+                    else {
+                        nex.setText(nex_string);
+                        prav.setText(pravs_string);
+                        nex.setOnClickListener(view -> {
+
+                            if (page_intro() == itemIntroList.size()-1){
+                                finish();
+                                startActivity(new Intent(getApplicationContext(),SplashActivity.class));
+                            }else {
+                                recyclerViewPager.smoothScrollToPosition(recyclerViewPager.getCurrentPosition() + 1);
+                            }
+                        });
+                        prav.setOnClickListener(view ->
+                                recyclerViewPager.smoothScrollToPosition(recyclerViewPager.getCurrentPosition() - 1));
+
+                        recyclerViewPager.addOnPageChangedListener((i, i1) -> {
+                            if (recyclerViewPager.isScrollContainer()){
+                                if (page_intro() == itemIntroList.size()-1){
+                                    nex.setText(skip_string);
+                                }else {
+                                    nex.setText(nex_string);
+                                }
+
+                                if (page_intro() >=1){
+                                    prav.setVisibility(View.VISIBLE);
+                                }else {
+                                    prav.setVisibility(View.INVISIBLE);
+                                }
+                            }
+                        });
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
                 }
-                String title = object.getString("title");
-                String desc = object.getString("desc");
-
-                String bg_from = object.getString("bg_from");
-                String bg_to = object.getString("bg_to");
-                String title_color = object.getString("title_color");
-                String desc_color = object.getString("desc_color");
-
-                itemIntroList.add(new IntroModel(image,title,desc,bg_from,bg_to,title_color,desc_color));
-                recyclerViewPager.setLayoutManager(layout);
-                recyclerViewPager.setItemAnimator(new DefaultItemAnimator());
-
-
-                if (!object.isNull("btn")){
-                    JSONArray btnArray = object.getJSONArray("btn");
-                    for (int j = 0; j < btnArray.length(); j++) {
-                        JSONObject btnObject = btnArray.getJSONObject(j);
-                        String action = btnObject.getString("action");
-                        String titleBtn = btnObject.getString("title");
-
-                        switch (action){
-                            case "next":
-                                nex_string = titleBtn;
-                                break;
-                            case "prev":
-                                pravs_string = titleBtn;
-                                break;
-                            case "start":
-                                skip_string = titleBtn;
-                                break;
-                        }
-                    }
-                }
             }
-
-            if (itemIntroList.size() == 1){
-                nex.setText(nex_string);
-                nex.setOnClickListener(view -> {
-                    finish();
-                    startActivity(new Intent(getApplicationContext(), SplashActivity.class));
-                });
-            }
-            else {
-                nex.setText(nex_string);
-                prav.setText(pravs_string);
-                nex.setOnClickListener(view -> {
-
-                    if (page_intro() == itemIntroList.size()-1){
-                        finish();
-                        startActivity(new Intent(getApplicationContext(),SplashActivity.class));
-                    }else {
-                        recyclerViewPager.smoothScrollToPosition(recyclerViewPager.getCurrentPosition() + 1);
-                    }
-                });
-                prav.setOnClickListener(view ->
-                        recyclerViewPager.smoothScrollToPosition(recyclerViewPager.getCurrentPosition() - 1));
-
-                recyclerViewPager.addOnPageChangedListener((i, i1) -> {
-                    if (recyclerViewPager.isScrollContainer()){
-                        if (page_intro() == itemIntroList.size()-1){
-                            nex.setText(skip_string);
-                        }else {
-                            nex.setText(nex_string);
-                        }
-
-                        if (page_intro() >=1){
-                            prav.setVisibility(View.VISIBLE);
-                        }else {
-                            prav.setVisibility(View.INVISIBLE);
-                        }
-                    }
-                });
-            }
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+        });
     }
 
     private int page_intro(){
