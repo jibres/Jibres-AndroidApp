@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -24,7 +23,8 @@ public class SplashActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        helperSplash();
+        
+        helperSplash(true);
     }
 
     @Override
@@ -36,13 +36,12 @@ public class SplashActivity extends AppCompatActivity {
                     public void isDeprecated() {
                         deprecatedDialog();
                     }
-
                     @Override
                     public void onReceived(boolean hasUpdate) {
                         new AddUserTemp(getApplication(), new AddUserTemp.AddUserTempListener() {
                             @Override
                             public void onReceived() {
-                                helperSplash();
+                                helperSplash(false);
                                 if (hasUpdate){}
                             }
                             @Override
@@ -57,23 +56,37 @@ public class SplashActivity extends AppCompatActivity {
                 });
     }
 
-    private void helperSplash(){
+    private void helperSplash(boolean onResume){
         Log.d("amingolis", "helperSplash: "+UserManager.getSplash(getApplicationContext()));
-        switch (UserManager.getSplash(getApplicationContext())){
-            case 0:
-                firstChangeLanguage();
-                break;
-            case 1:
-                goIntro();
-                break;
-            case 2:
-                changeLanguage();
-                break;
-            default:
-                Toast.makeText(this, "MainActivity "+UserManager.getSplash(getApplicationContext()), Toast.LENGTH_SHORT).show();
-                mainActivity();
-                break;
+        if (onResume){
+            switch (UserManager.getSplash(getApplicationContext())){
+                case 0:
+                    firstChangeLanguage();
+                    break;
+                case 1:
+                    goIntro();
+                    break;
+                case 2:
+                    changeLanguage();
+                    break;
+            } 
+        }else {
+            switch (UserManager.getSplash(getApplicationContext())){
+                case 0:
+                    firstChangeLanguage();
+                    break;
+                case 1:
+                    goIntro();
+                    break;
+                case 2:
+                    changeLanguage();
+                    break;
+                default:
+                    mainActivity();
+                    break;
+            }
         }
+        
     }
 
     private void changeLanguage() {
@@ -131,7 +144,6 @@ public class SplashActivity extends AppCompatActivity {
                 builderSingle.show();
             }
         }catch (Exception e){
-            Toast.makeText(this, "deprecatedDialog", Toast.LENGTH_SHORT).show();
             mainActivity();
             Log.e("amingoli", "deprecatedDialog: ",e );
         }
