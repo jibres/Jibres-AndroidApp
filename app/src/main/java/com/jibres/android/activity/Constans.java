@@ -1,7 +1,7 @@
 package com.jibres.android.activity;
 
 public class Constans {
-    public static int CLICK_PROFILE = 10;
+    public static int ON_CLICK_PROFILE = 10;
     public static int ON_CLICK_AC_STORE = 11;
     public static int ON_CLICK_AC_NOTIFS = 12;
     public static int ON_CLICK_AC_PRIVACI = 13;
