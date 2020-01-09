@@ -4,8 +4,9 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.jibres.android.R;
@@ -23,7 +24,6 @@ public class SplashActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        
         helperSplash(true);
     }
 
@@ -126,23 +126,15 @@ public class SplashActivity extends AppCompatActivity {
 
     public void deprecatedDialog() {
         try {
-            final AlertDialog.Builder builderSingle = new AlertDialog.Builder(this);
-            /*Title*/
-            builderSingle.setTitle(getString(R.string.update));
-            /*Message*/
-            builderSingle.setMessage(getString(R.string.update_warn));
-            /*Button*/
-            builderSingle.setPositiveButton(getString(R.string.update),
-                    /*Open Url*/
-                    (dialog, which) -> {
-                        Intent intent = new Intent(Intent.ACTION_VIEW);
-                        intent.setData(Uri.parse(UrlManager.get.url_update(this)));
-                        startActivity(intent);
-                    });
-            builderSingle.setCancelable(false);
-            if (!this.isFinishing()){
-                builderSingle.show();
-            }
+            View view = findViewById(R.id.item_deprecated);
+            Button btnUpdate = view.findViewById(R.id.btn);
+            btnUpdate.setOnClickListener(view1 -> {
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setData(Uri.parse(UrlManager.get.url_update(getApplication())));
+                startActivity(intent);
+            });
+            findViewById(R.id.progress).setVisibility(View.GONE);
+            view.setVisibility(View.VISIBLE);
         }catch (Exception e){
             mainActivity();
             Log.e("amingoli", "deprecatedDialog: ",e );
