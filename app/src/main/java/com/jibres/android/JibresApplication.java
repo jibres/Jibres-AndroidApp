@@ -13,6 +13,7 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
 import com.jibres.android.activity.language.LanguageManager;
+import com.jibres.android.utility.TypefaceUtil;
 
 import java.util.Locale;
 
@@ -26,6 +27,7 @@ public class JibresApplication extends Application {
     public void onCreate() {
         super.onCreate();
         mInstance = this;
+        setFont();
     }
 
     public static synchronized JibresApplication getInstance() {
@@ -84,5 +86,14 @@ public class JibresApplication extends Application {
             config.setLayoutDirection(config.locale);
         }
         resources.updateConfiguration(config, resources.getDisplayMetrics());
+        setFont();
+    }
+
+    private void setFont(){
+        if (LanguageManager.getAppLanguage(getApplicationContext()).equals("fa")){
+            TypefaceUtil.overrideFont(getApplicationContext(), "SERIF", "iranyekan_regular.ttf");
+        }else {
+            TypefaceUtil.overrideFont(getApplicationContext(), "SERIF", "roboto_regular.ttf");
+        }
     }
 }
