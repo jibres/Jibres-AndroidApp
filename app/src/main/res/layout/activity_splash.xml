@@ -9,12 +9,11 @@
     <ProgressBar
         android:id="@+id/progress"
         android:layout_centerInParent="true"
-        android:layout_width="@dimen/_155sdp"
-        android:layout_height="@dimen/_155sdp"/>
+        android:layout_width="@dimen/_156sdp"
+        android:layout_height="@dimen/_156sdp"/>
 
     <ImageView
         android:id="@+id/logo"
-        android:padding="@dimen/_2sdp"
         android:layout_centerInParent="true"
         android:src="@drawable/logo_xml"
         android:layout_width="@dimen/_150sdp"

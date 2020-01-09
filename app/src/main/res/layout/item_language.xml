@@ -4,6 +4,7 @@
     android:padding="@dimen/_5sdp"
     android:layout_width="@dimen/_180sdp"
     android:layout_height="wrap_content"
+    android:background="@drawable/row_background"
     tools:ignore="UnusedAttribute">
 
 
