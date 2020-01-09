@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:background="@drawable/row_background"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:visibility="gone"
+        android:id="@+id/image"
+        android:src="@drawable/logo_xml"
+        android:layout_centerInParent="true"
+        android:layout_alignParentStart="true"
+        android:layout_width="@dimen/_50sdp"
+        android:layout_height="@dimen/_50sdp"/>
+
+    <LinearLayout
+        android:visibility="gone"
+        android:id="@+id/box_text"
+        android:layout_centerInParent="true"
+        android:layout_alignEnd="@+id/felahs"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_toEndOf="@+id/image">
+
+        <TextView
+            android:visibility="gone"
+            style="@style/item_setting_text_view"
+            android:text="Javad Evazzadeh"
+            android:textColor="@color/title"
+            android:textSize="@dimen/_14ssp" />
+        <TextView
+            android:visibility="gone"
+            style="@style/item_setting_text_view"
+            android:text="+98 919 519 1378"
+            android:textColor="@color/desc"
+            android:textSize="@dimen/_12ssp" />
+        <TextView
+            android:visibility="gone"
+            style="@style/item_setting_text_view"
+            android:text="\@evazzadeh"
+            android:textColor="@color/desc"
+            android:textSize="@dimen/_12ssp" />
+    </LinearLayout>
+
+    <ImageView
+        android:visibility="gone"
+        android:id="@+id/felahs"
+        android:layout_centerInParent="true"
+        android:layout_alignParentEnd="true"
+        android:src="@drawable/ic_flesh_2"
+        android:tint="#C0C0C0"
+        android:layout_width="@dimen/_25sdp"
+        android:layout_height="@dimen/_25sdp"/>
+
+</RelativeLayout>

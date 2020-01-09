@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.jibres.android.JibresApplication;
 import com.jibres.android.R;
 import com.jibres.android.activity.enter.EnterActivity;
 import com.jibres.android.activity.language.LanguageActivity;
@@ -20,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ((JibresApplication) getApplication()).refreshLocale(this);
 
         LinearLayout layout = findViewById(R.id.linear_layout);
         TextView textView;
