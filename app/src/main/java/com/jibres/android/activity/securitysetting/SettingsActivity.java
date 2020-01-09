@@ -1,7 +1,7 @@
 package com.jibres.android.activity.securitysetting;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
@@ -10,9 +10,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.jibres.android.R;
+import com.jibres.android.activity.language.LanguageActivity;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.jibres.android.activity.Constans.ON_CLICK_AC_LANGUAGE;
+
 
 public class SettingsActivity extends AppCompatActivity {
     RecyclerView recyclerView;
@@ -26,7 +30,7 @@ public class SettingsActivity extends AppCompatActivity {
 
         recyclerView = findViewById(R.id.recycler_view);
         item = new ArrayList<>();
-        adapter = new SettingAdapter(item, this, this::restartActivity);
+        adapter = new SettingAdapter(item, this, this::onCliked);
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
 
         LinearLayoutManager sLayoutManager =
@@ -35,29 +39,36 @@ public class SettingsActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
         GetLanguage();
         recyclerView.setLayoutManager(sLayoutManager);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        adapter.notifyDataSetChanged();
     }
 
     void GetLanguage() {
-        for (int i = 0; i < 50; i++) {
-            item.add(new SettingModel(0,0,
-                    "https://jibres.com/static/images/logo.png",
-                    i+"- Javad Adib","98 919 519 1378","@JavadAdib",true));
-            item.add(new SettingModel(0,R.drawable.logo_xml,
-                    "",i+"- Setting Error",null,null,true));
-            item.add(new SettingModel(0,0,
-                    "",i+"- Setting Tester","Summery Test",null,true));
-            item.add(new SettingModel(0,0,
-                    "",i+"- Setting App",null,null,false));
-            item.add(new SettingModel(0,R.drawable.logo_xml,
-                    "",i+"- Setting Error",null,null,true));
-            recyclerView.setItemAnimator(new DefaultItemAnimator());
-            adapter.notifyDataSetChanged();
 
-        }
+        item.add(new SettingModel(0,
+                0,null,
+                "App Setting",null,null,false));
+        item.add(new SettingModel(ON_CLICK_AC_LANGUAGE,
+                0,null,
+                "Change Language",null,null,true));
+
+        item.add(new SettingModel(0,0,
+                "https://jibres.com/static/images/logo.png",
+                "Javad Adib","98 919 519 1378","@JavadAdib",true));
+
 
     }
 
-    private void restartActivity(int i) {
-        Toast.makeText(this, ""+i, Toast.LENGTH_SHORT).show();
+    private void onCliked(int status) {
+        Intent intents = null;
+        switch (status){
+            case 16:
+                intents = new Intent(this, LanguageActivity.class);
+                break;
+        }
+        if (intents!=null){
+            intents.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+            startActivity(intents);
+        }
     }
 }
