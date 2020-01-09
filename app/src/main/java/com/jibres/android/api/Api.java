@@ -9,7 +9,7 @@ import com.android.volley.Request;
 import com.android.volley.toolbox.StringRequest;
 import com.google.gson.Gson;
 import com.jibres.android.JibresApplication;
-import com.jibres.android.managers.UserManager;
+import com.jibres.android.managers.AppManager;
 import com.jibres.android.managers.UrlManager;
 import com.jibres.android.keys;
 
@@ -21,7 +21,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.jibres.android.managers.UserManager.versionName;
+import static com.jibres.android.managers.AppManager.versionName;
 
 public class Api {
 
@@ -132,18 +132,18 @@ public class Api {
                                 if (ok_getToken){
 
                                     result = mainObject.getJSONObject("result");
-                                    UserManager.get(context).saveUserInfo(
+                                    AppManager.get(context).saveUserInfo(
                                             result.getString("apikey"),
                                             result.getString("usercode"),
                                             result.getString("zoneid"),
-                                            UserManager.getMobile(context));
+                                            AppManager.getMobile(context));
 
                                     listener.onReceived();
                                     listener.onMassage("userIsAdded ="
-                                            + UserManager.getApikey(context)
-                                            + " | " + UserManager.getUserCode(context)
-                                            + " | " + UserManager.getZonId(context)
-                                            + " | " + UserManager.getMobile(context));
+                                            + AppManager.getApikey(context)
+                                            + " | " + AppManager.getUserCode(context)
+                                            + " | " + AppManager.getZonId(context)
+                                            + " | " + AppManager.getMobile(context));
                                 } else {
                                     listener.onFailed();
                                 }

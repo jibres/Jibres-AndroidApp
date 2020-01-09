@@ -1,19 +1,19 @@
 package com.jibres.android.function;
 
 import android.content.Context;
-import com.jibres.android.managers.UserManager;
+import com.jibres.android.managers.AppManager;
 
 public class Chake {
     public static Boolean userIsAddTemp(Context context){
-        return UserManager.getApikey(context) !=null
-                && UserManager.getUserCode(context) !=null
-                && UserManager.getZonId(context) !=null ;
+        return AppManager.getApikey(context) !=null
+                && AppManager.getUserCode(context) !=null
+                && AppManager.getZonId(context) !=null ;
     }
 
     public static Boolean userHasMobileNumber(Context context){
-        return UserManager.getApikey(context) !=null
-                && UserManager.getUserCode(context) !=null
-                && UserManager.getZonId(context) !=null
-                && UserManager.getMobile(context) !=null ;
+        return AppManager.getApikey(context) !=null
+                && AppManager.getUserCode(context) !=null
+                && AppManager.getZonId(context) !=null
+                && AppManager.getMobile(context) !=null ;
     }
 }

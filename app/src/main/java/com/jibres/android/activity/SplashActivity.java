@@ -16,7 +16,7 @@ import com.jibres.android.activity.language.LanguageManager;
 import com.jibres.android.function.AddUserTemp;
 import com.jibres.android.function.AppDetailJson;
 import com.jibres.android.managers.UrlManager;
-import com.jibres.android.managers.UserManager;
+import com.jibres.android.managers.AppManager;
 
 import java.util.Locale;
 
@@ -34,6 +34,7 @@ public class SplashActivity extends AppCompatActivity {
         new AppDetailJson(getApplicationContext(), new AppDetailJson.Listener() {
                     @Override
                     public void isDeprecated() {
+                        AppManager.get(getApplicationContext()).setDeprecated(true);
                         deprecatedDialog();
                     }
                     @Override
@@ -41,8 +42,14 @@ public class SplashActivity extends AppCompatActivity {
                         new AddUserTemp(getApplication(), new AddUserTemp.AddUserTempListener() {
                             @Override
                             public void onReceived() {
+                                AppManager.get(getApplicationContext()).setDeprecated(false);
                                 helperSplash(false);
-                                if (hasUpdate){}
+                                if (hasUpdate){
+                                    AppManager.get(getApplicationContext()).setUpdate(true);
+                                }else {
+                                    AppManager.get(getApplicationContext()).setUpdate(false);
+                                }
+
                             }
                             @Override
                             public void onFiled() {
@@ -52,14 +59,14 @@ public class SplashActivity extends AppCompatActivity {
                     }
                     @Override
                     public void onFiled(boolean hasInternet) {
+                        Log.e("amingoli", "onReceived: AddUserTemp ERROR hasNet: "+hasInternet);
                     }
                 });
     }
 
     private void helperSplash(boolean onResume){
-        Log.d("amingolis", "helperSplash: "+UserManager.getSplash(getApplicationContext()));
         if (onResume){
-            switch (UserManager.getSplash(getApplicationContext())){
+            switch (AppManager.getSplash(getApplicationContext())){
                 case 0:
                     firstChangeLanguage();
                     break;
@@ -71,7 +78,7 @@ public class SplashActivity extends AppCompatActivity {
                     break;
             } 
         }else {
-            switch (UserManager.getSplash(getApplicationContext())){
+            switch (AppManager.getSplash(getApplicationContext())){
                 case 0:
                     firstChangeLanguage();
                     break;
@@ -90,27 +97,27 @@ public class SplashActivity extends AppCompatActivity {
     }
 
     private void changeLanguage() {
-        UserManager.get(getApplicationContext()).save_splash(1);
+        AppManager.get(getApplicationContext()).save_splash(1);
         Intent intent = new Intent(this, LanguageActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
         startActivity(intent);
     }
 
     private void firstChangeLanguage() {
-        if (UserManager.getSplash(getApplicationContext())== 0){
+        if (AppManager.getSplash(getApplicationContext())== 0){
             String deviceLanguage = Locale.getDefault().getLanguage();
             if (deviceLanguage.equals("fa")){
                 LanguageManager.context(getApplicationContext()).setAppLanguage(deviceLanguage);
-                UserManager.get(getApplicationContext()).save_splash(1);
+                AppManager.get(getApplicationContext()).save_splash(1);
             }else {
-                UserManager.get(getApplicationContext()).save_splash(2);
+                AppManager.get(getApplicationContext()).save_splash(2);
             }
         }
     }
 
 
     private void goIntro() {
-        if (UserManager.getSplash(getApplicationContext()) == 1){
+        if (AppManager.getSplash(getApplicationContext()) == 1){
             Intent intent = new Intent(getApplication(), IntroActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
             startActivity(intent);

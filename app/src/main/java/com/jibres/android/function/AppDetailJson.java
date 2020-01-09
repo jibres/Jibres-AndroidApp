@@ -8,7 +8,7 @@ import com.jibres.android.api.Api;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import static com.jibres.android.managers.UserManager.versionCode;
+import static com.jibres.android.managers.AppManager.versionCode;
 
 public class AppDetailJson {
 

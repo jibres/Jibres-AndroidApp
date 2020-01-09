@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import com.jibres.android.R;
 import com.jibres.android.activity.MainActivity;
 import com.jibres.android.api.Api;
-import com.jibres.android.managers.UserManager;
+import com.jibres.android.managers.AppManager;
 import com.lsjwzh.widget.recyclerviewpager.RecyclerViewPager;
 
 import org.json.JSONArray;
@@ -35,7 +35,7 @@ public class IntroActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_intro);
-        UserManager.get(getApplication()).save_splash(3);
+        AppManager.get(getApplication()).save_splash(3);
 
         nex_string = "->";
         pravs_string = "<-";

@@ -21,7 +21,7 @@ public class UrlManager {
             return local + "/" +
                     LanguageManager.getAppLanguage(context)
                     + api + "/"
-                    + UserManager.getStore(context);
+                    + AppManager.getStore(context);
         }
 
         public static String language_list = "/language";
