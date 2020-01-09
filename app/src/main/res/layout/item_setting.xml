@@ -4,11 +4,8 @@
     android:id="@+id/background"
     android:orientation="vertical"
     android:background="@drawable/row_background"
-
     android:paddingStart="@dimen/_10sdp"
     android:paddingEnd="@dimen/_10sdp"
-    android:paddingBottom="@dimen/_5sdp"
-
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -25,6 +22,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
+        android:paddingBottom="@dimen/_5sdp"
         android:layout_toEndOf="@+id/image"
         android:orientation="vertical"
         android:visibility="visible">
