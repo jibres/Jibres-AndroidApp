@@ -45,6 +45,12 @@ public class UrlManager {
         public static String add_user(Context context){
             return local_api(context)+"/account/android/add";
         }
+        public static String enter_mobile(Context context){
+            return local_api(context)+"/account/enter";
+        }
+        public static String verify_code(Context context){
+            return local_api(context)+"/account/enter/verify";
+        }
 
 
         //        Static URL

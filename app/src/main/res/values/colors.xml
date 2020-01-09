@@ -8,4 +8,6 @@
     <color name="onClick_activated">#B1B1B1</color>
     <color name="onClick_pressed">#FFFFFF</color>
     <color name="onClick_ripple">#C7CACA</color>
+
+    <color name="text_fade">#77333333</color>
 </resources>

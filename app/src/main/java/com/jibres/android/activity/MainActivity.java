@@ -6,7 +6,7 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.jibres.android.R;
-import com.jibres.android.activity.language.LanguageActivity;
+import com.jibres.android.activity.enter.EnterActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -15,7 +15,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         findViewById(R.id.text).setOnClickListener(view -> {
-            Intent intent = new Intent(getApplication(), LanguageActivity.class);
+            Intent intent = new Intent(getApplication(), EnterActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
             startActivity(intent);
         });

@@ -4,4 +4,13 @@
     <string name="update_warn">This Version is Deprecated!</string>
     <string name="link_flag_contry" translatable="false">https://jibres.com/static/img/flags/png100px/%1$s.png</string>
     <string name="prefs_change_language">Choose Language</string>
+
+    <string name="your_phone">Your Phone</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="enter_number">Enter Number</string>
+    <string name="desc_enter">A 4 digit OTP will be sent via SMS to verify yor mobile number!</string>
+    <string name="enter_the_otp">Enter the OTP you received to</string>
+    <string name="edit">EDIT</string>
+    <string name="resend">Resend</string>
+    <string name="phone_verification">Phone Verification</string>
 </resources>
