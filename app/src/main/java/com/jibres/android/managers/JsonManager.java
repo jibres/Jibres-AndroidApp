@@ -9,7 +9,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class JsonManager extends ContextWrapper {
-    public static String intro_en = "\"intro\": [{\"title\": \"OFFLINE\", \"desc\": \"Jibres is not just an online accounting software; We try to create the best financial platform that has everything you need to sale and manage your financial life.\", \"bg_from\": \"#ffffff\", \"bg_to\": \"#ffffff\", \"title_color\": \"#000000\", \"desc_color\": \"#000000\", \"image\": \"https://jibres.com/static/img/logo/icon/svg/Jibres-Logo-icon.svg\", \"btn\": [{\"title\": \"Next\", \"action\": \"next\"} ] }, {\"title\": \"Easy\", \"desc\": \"Easy to use\", \"bg_from\": \"#ffffff\", \"bg_to\": \"#ffffff\", \"title_color\": \"#000000\", \"desc_color\": \"#000000\", \"image\": \"https://jibres.com/static/img/logo/icon/svg/Jibres-Logo-icon.svg\", \"btn\": [{\"title\": \"Prev\", \"action\": \"prev\"}, {\"title\": \"Next\", \"action\": \"next\"} ] }, {\"title\": \"Powerful\", \"desc\": \"Best application\", \"bg_from\": \"#ffffff\", \"bg_to\": \"#ffffff\", \"title_color\": \"#000000\", \"desc_color\": \"#000000\", \"image\": \"https://jibres.com/static/img/logo/icon/svg/Jibres-Logo-icon.svg\", \"btn\": [{\"title\": \"Prev\", \"action\": \"prev\"}, {\"title\": \"Next\", \"action\": \"next\"} ] }, {\"title\": \"Enjoy\", \"desc\": \"Welcome to our collection\", \"bg_from\": \"#ffffff\", \"bg_to\": \"#ffffff\", \"title_color\": \"#000000\", \"desc_color\": \"#000000\", \"image\": \"https://jibres.com/static/img/logo/icon/svg/Jibres-Logo-icon.svg\", \"btn\": [{\"title\": \"Start\", \"action\": \"start\"} ] } ]";
 
     SharedPreferences.Editor editor;
     SharedPreferences sharedPreferences;
@@ -26,16 +25,16 @@ public class JsonManager extends ContextWrapper {
     }
 
     /** App Info */
-    public static final String jsonIntro = "jsonIntro";
+    public static final String json = "json";
 
-    public void setJsonIntro(String json) {
-        editor.putString(jsonIntro, json);
+    public void setJsonIntros(String json) {
+        editor.putString(JsonManager.json, json);
         editor.apply();
     }
 
     public Map<String, String> getJsonIntro_fromSaveManager() {
         HashMap<String, String> hashMap = new HashMap<>();
-        hashMap.put(jsonIntro, sharedPreferences.getString(jsonIntro,intro_en));
+        hashMap.put(json, sharedPreferences.getString(json,null));
         return hashMap;
     }
 
@@ -43,7 +42,7 @@ public class JsonManager extends ContextWrapper {
         return JsonManager
                 .context(context)
                 .getJsonIntro_fromSaveManager()
-                .get(JsonManager.jsonIntro);
+                .get(JsonManager.json);
     }
 
 

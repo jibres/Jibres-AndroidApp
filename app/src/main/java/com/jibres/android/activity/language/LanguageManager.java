@@ -10,7 +10,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class LanguageManager extends ContextWrapper {
-  private String defaultValue = "{\"ok\": true, \"result\": {\"fa\": {\"name\": \"fa\", \"direction\": \"rtl\", \"iso\": \"fa_IR\", \"localname\": \"فارسی\", \"api_url\": \"https://salamquran.com/fa/api/v6\"}, \"en\": {\"name\": \"en\", \"direction\": \"ltr\", \"iso\": \"en_US\", \"localname\": \"English\", \"api_url\": \"https://salamquran.com/en/api/v6\"}, \"ar\": {\"name\": \"ar\", \"direction\": \"rtl\", \"iso\": \"ar_IQ\", \"localname\": \"العربية\", \"api_url\": \"https://salamquran.com/ar/api/v6\"} } }";
+  private String defaultValue = "{\"fa\": {\"name\": \"fa\", \"direction\": \"rtl\", \"iso\": \"fa_IR\", \"localname\": \"فارسی\", \"country\": [\"Iran\"] }, \"en\": {\"name\": \"en\", \"direction\": \"ltr\", \"iso\": \"en_US\", \"localname\": \"English\", \"country\": [\"United Kingdom\", \"United States\"] } }";
 
   SharedPreferences.Editor editor;
   SharedPreferences sharedPreferences;

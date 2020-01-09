@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.jibres.android.R;
-import com.jibres.android.activity.SplashActivity;
+import com.jibres.android.activity.MainActivity;
 import com.jibres.android.api.Api;
 import com.jibres.android.managers.UserManager;
 import com.lsjwzh.widget.recyclerviewpager.RecyclerViewPager;
@@ -44,8 +44,6 @@ public class IntroActivity extends AppCompatActivity {
         nex = findViewById(R.id.btn_next);
         prav = findViewById(R.id.btn_prav);
 
-
-
         itemIntroList = new ArrayList<>();
         recyclerViewPager  = findViewById(R.id.recyclerViewPager_intro);
         adaptorIntro  = new IntroAdapter(this,itemIntroList);
@@ -76,7 +74,6 @@ public class IntroActivity extends AppCompatActivity {
                         recyclerViewPager.setLayoutManager(layout);
                         recyclerViewPager.setItemAnimator(new DefaultItemAnimator());
 
-
                         if (!object.isNull("btn")){
                             JSONArray btnArray = object.getJSONArray("btn");
                             for (int j = 0; j < btnArray.length(); j++) {
@@ -103,7 +100,7 @@ public class IntroActivity extends AppCompatActivity {
                         nex.setText(nex_string);
                         nex.setOnClickListener(view -> {
                             finish();
-                            startActivity(new Intent(getApplicationContext(), SplashActivity.class));
+                            startActivity(new Intent(getApplicationContext(), MainActivity.class));
                         });
                     }
                     else {
@@ -113,7 +110,7 @@ public class IntroActivity extends AppCompatActivity {
 
                             if (page_intro() == itemIntroList.size()-1){
                                 finish();
-                                startActivity(new Intent(getApplicationContext(),SplashActivity.class));
+                                startActivity(new Intent(getApplicationContext(),MainActivity.class));
                             }else {
                                 recyclerViewPager.smoothScrollToPosition(recyclerViewPager.getCurrentPosition() + 1);
                             }
@@ -148,6 +145,4 @@ public class IntroActivity extends AppCompatActivity {
     private int page_intro(){
         return recyclerViewPager.getCurrentPosition();
     }
-
-
 }
