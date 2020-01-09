@@ -42,8 +42,8 @@ public class EnterActivity extends AppCompatActivity {
         ColorUtil.setGradient(enterXML, "#3395ff", "#d1395c");
         ColorUtil.setGradient(verifyXML, "#3395ff", "#d1395c");
 
-        weight_EditText.enter_virifyCode(edtV1, edtV2, edtV3, edtV4, edtV5,
-                new weight_EditText.enter_verifyCode_Listener() {
+        VerifyCodeWeight.enter_virifyCode(edtV1, edtV2, edtV3, edtV4, edtV5,
+                new VerifyCodeWeight.enter_verifyCode_Listener() {
                     @Override
                     public void onReceived() {
                         verifyCode();
@@ -55,7 +55,7 @@ public class EnterActivity extends AppCompatActivity {
                     }
                 });
 
-        weight_EditText.enter_number(e_number, new weight_EditText.enter_number_Listener() {
+        VerifyCodeWeight.enter_number(e_number, new VerifyCodeWeight.enter_number_Listener() {
             @Override
             public void onReceived() {
                 verifyNumber();
@@ -114,7 +114,6 @@ public class EnterActivity extends AppCompatActivity {
 
                     public void onFinish() {
                         v_resnd.setText("Resend new code");
-                        v_resnd.setText("Your Phone");
                         v_resnd.setEnabled(true);
                     }
 

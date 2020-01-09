@@ -5,7 +5,7 @@ import android.text.TextWatcher;
 import android.view.KeyEvent;
 import android.view.View;
 
-public class weight_EditText {
+public class VerifyCodeWeight {
     public static void enter_virifyCode(final android.widget.EditText edt_1 ,
                                         final android.widget.EditText edt_2 ,
                                         final android.widget.EditText edt_3,
