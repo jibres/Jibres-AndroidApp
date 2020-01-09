@@ -6,18 +6,19 @@
     android:layout_height="match_parent"
     tools:context=".activity.SplashActivity">
 
-    <ImageView
-        android:id="@+id/logo"
-        android:layout_centerInParent="true"
-        android:src="@drawable/logo_xml"
-        android:layout_width="@dimen/_200sdp"
-        android:layout_height="@dimen/_220sdp"/>
     <ProgressBar
         android:id="@+id/progress"
         android:layout_centerInParent="true"
-        android:layout_below="@+id/logo"
-        android:layout_width="@dimen/_20sdp"
-        android:layout_height="@dimen/_20sdp"/>
+        android:layout_width="@dimen/_155sdp"
+        android:layout_height="@dimen/_155sdp"/>
+
+    <ImageView
+        android:id="@+id/logo"
+        android:padding="@dimen/_2sdp"
+        android:layout_centerInParent="true"
+        android:src="@drawable/logo_xml"
+        android:layout_width="@dimen/_150sdp"
+        android:layout_height="@dimen/_150sdp"/>
 
     <include
         android:id="@+id/item_deprecated"
