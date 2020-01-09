@@ -15,7 +15,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
-        <activity android:name=".activity.enter.EnterActivity"></activity>
+        <activity android:name=".activity.securitysetting.SettingsActivity"></activity>
+        <activity android:name=".activity.enter.EnterActivity" />
         <activity android:name=".activity.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
