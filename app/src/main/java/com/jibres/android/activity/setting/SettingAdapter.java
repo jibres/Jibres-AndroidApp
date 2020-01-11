@@ -1,4 +1,4 @@
-package com.jibres.android.activity.securitysetting;
+package com.jibres.android.activity.setting;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -80,7 +80,10 @@ public class SettingAdapter extends RecyclerView.Adapter<SettingAdapter.MyViewHo
     }else {
       holder.felash.setVisibility(View.GONE);
     }
-    holder.view.setOnClickListener(view -> mlistener.onClick(aItem.getOnClick()));
+
+    if (aItem.getOnClick() !=0){
+      holder.view.setOnClickListener(view -> mlistener.onClick(aItem.getOnClick()));
+    }
 
     if (!aItem.isShowFlesh() && aItem.getDesc()==null && aItem.getSummery()==null){
       holder.background.setBackgroundColor(Color.parseColor("#7CDDDDDD"));

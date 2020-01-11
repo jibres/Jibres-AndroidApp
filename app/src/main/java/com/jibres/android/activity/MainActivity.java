@@ -12,7 +12,7 @@ import com.jibres.android.JibresApplication;
 import com.jibres.android.R;
 import com.jibres.android.activity.enter.EnterActivity;
 import com.jibres.android.activity.language.LanguageActivity;
-import com.jibres.android.activity.securitysetting.SettingsActivity;
+import com.jibres.android.activity.setting.SettingsActivity;
 
 public class MainActivity extends AppCompatActivity {
     String[] ac = {"EnterActivity","LanguageActivity","SettingsActivity"};

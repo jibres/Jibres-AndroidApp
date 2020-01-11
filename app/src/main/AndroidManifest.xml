@@ -16,7 +16,7 @@
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
         <activity android:name=".activity.profile.ProfileActivity"></activity>
-        <activity android:name=".activity.securitysetting.SettingsActivity" />
+        <activity android:name=".activity.setting.SettingsActivity" />
         <activity android:name=".activity.enter.EnterActivity" />
         <activity android:name=".activity.SplashActivity">
             <intent-filter>

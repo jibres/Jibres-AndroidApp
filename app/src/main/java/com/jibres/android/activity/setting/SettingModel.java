@@ -1,4 +1,4 @@
-package com.jibres.android.activity.securitysetting;
+package com.jibres.android.activity.setting;
 
 public class SettingModel {
 

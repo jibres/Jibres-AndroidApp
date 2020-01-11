@@ -1,4 +1,4 @@
-package com.jibres.android.activity.securitysetting;
+package com.jibres.android.activity.setting;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -46,14 +46,6 @@ public class SettingsActivity extends AppCompatActivity {
     }
 
     void GetLanguage() {
-
-        item.add(new SettingModel(0,
-                0,null,
-                "App Setting",null,null,false));
-        item.add(new SettingModel(ON_CLICK_AC_LANGUAGE,
-                0,null,
-                "Change Language",null,null,true));
-
         item.add(new SettingModel(ON_CLICK_PROFILE,0,
                 "https://jibres.com/static/images/logo.png",
                 "Javad Adib","98 919 519 1378","@JavadAdib",true));
@@ -73,8 +65,42 @@ public class SettingsActivity extends AppCompatActivity {
                 "اعلان‌ها",null,null,true));
 
         item.add(new SettingModel(0,
-                R.drawable.ic_security,null,
-                "حریم‌خصوصی و امنیت",null,null,true));
+                0,null,
+                "حریم‌خصوصی و امنیت",null,null,false));
+        item.add(new SettingModel(0,
+                0,null,
+                "کد پین",null,null,true));
+        item.add(new SettingModel(0,
+                0,null,
+                "قفل لمسی",null,null,true));
+        item.add(new SettingModel(0,
+                0,null,
+                "نشست‌های فعال",null,null,true));
+
+
+        item.add(new SettingModel(0,
+                0,null,
+                "آدرس‌ها من",null,null,true));
+
+        item.add(new SettingModel(0,
+                0,null,
+                "ظاهر",null,null,true));
+
+        item.add(new SettingModel(ON_CLICK_AC_LANGUAGE,
+                0,null,
+                "زبان",null,null,true));
+        item.add(new SettingModel(0,
+                0,null,
+                "مرکز راهنمایی",null,null,true));
+        item.add(new SettingModel(0,
+                0,null,
+                "سوالات متداول",null,null,true));
+        item.add(new SettingModel(0,
+                0,null,
+                "تیکت‌ها",null,null,true));
+        item.add(new SettingModel(0,
+                0,null,
+                "درباره ما",null,null,true));
 
     }
 
