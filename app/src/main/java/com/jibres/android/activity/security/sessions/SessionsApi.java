@@ -153,6 +153,6 @@ public class SessionsApi {
     public interface sessionsRemoveListener{
         void onReceived(boolean removed);
         void onMassage(String value);
-        void onFileds(boolean hasNet);
+        void onFiled(boolean hasNet);
     }
 }
