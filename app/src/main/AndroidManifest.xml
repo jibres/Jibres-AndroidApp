@@ -15,7 +15,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
-        <activity android:name=".activity.WebViewActivity"></activity>
+        <activity android:name=".activity.security.sessions.SessionsActivity"></activity>
+        <activity android:name=".activity.WebViewActivity" />
         <activity android:name=".activity.HtmlViewActivity" />
         <activity android:name=".activity.about.AboutAppActivity" />
         <activity android:name=".activity.about.AboutActivity" />

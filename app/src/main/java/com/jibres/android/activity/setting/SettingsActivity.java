@@ -14,6 +14,7 @@ import com.jibres.android.R;
 import com.jibres.android.activity.about.AboutActivity;
 import com.jibres.android.activity.language.LanguageActivity;
 import com.jibres.android.activity.profile.ProfileActivity;
+import com.jibres.android.activity.security.sessions.SessionsActivity;
 import com.jibres.android.weight.DividerItemDecoratorWeighet;
 
 import java.util.ArrayList;
@@ -21,6 +22,7 @@ import java.util.List;
 
 import static com.jibres.android.activity.Constans.ON_CLICK_AC_ABOUT;
 import static com.jibres.android.activity.Constans.ON_CLICK_AC_LANGUAGE;
+import static com.jibres.android.activity.Constans.ON_CLICK_AC_SESSION;
 import static com.jibres.android.activity.Constans.ON_CLICK_PROFILE;
 
 
@@ -83,7 +85,7 @@ public class SettingsActivity extends AppCompatActivity {
         item.add(new SettingModel(0,
                 0,null,
                 "قفل لمسی",null,null,true));
-        item.add(new SettingModel(0,
+        item.add(new SettingModel(ON_CLICK_AC_SESSION,
                 0,null,
                 "نشست‌های فعال",null,null,true));
 
@@ -125,6 +127,9 @@ public class SettingsActivity extends AppCompatActivity {
                 break;
             case 20:
                 intents = new Intent(this, AboutActivity.class);
+                break;
+            case 26:
+                intents = new Intent(this, SessionsActivity.class);
                 break;
         }
         if (intents!=null){

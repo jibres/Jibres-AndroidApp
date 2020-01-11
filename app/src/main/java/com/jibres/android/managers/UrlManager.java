@@ -17,7 +17,6 @@ public class UrlManager {
         static String api = "/api/v1";
 
         public static String local_api(Context context){
-
             return local + "/" +
                     LanguageManager.getAppLanguage(context)
                     + api + "/"
@@ -56,8 +55,8 @@ public class UrlManager {
         public static String verify_code(Context context){
             return local_api(context)+"/account/enter/verify";
         }
-        public static String privacy(Context context){
-            return local_api_NOSTORE(context)+"/privacy";
+        public static String session(Context context){
+            return local_api(context)+"/account/session";
         }
 
 

@@ -17,4 +17,6 @@ public class Constans {
     public static int ON_CLICK_AC_HTML_VIEW = 23;
     public static int ON_CLICK_AC_HTML_VIEW_TREMOFUSE = 24;
     public static int ON_CLICK_AC_HTML_VIEW_PRIVACYPOLICE = 25;
+
+    public static int ON_CLICK_AC_SESSION = 26;
 }
