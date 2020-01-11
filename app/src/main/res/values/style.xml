@@ -45,4 +45,12 @@
         <item name="android:paddingEnd">@dimen/_2sdp</item>
         <item name="android:textColor">@color/title</item>
     </style>
+
+    <style name="text_view_about_app">
+        <item name="android:textAlignment">center</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:padding">@dimen/_3sdp</item>
+        <item name="android:textColor">@color/title</item>
+    </style>
 </resources>

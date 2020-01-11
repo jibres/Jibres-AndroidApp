@@ -1,9 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activity.about.AboutAppActivity">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_alignParentTop="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+        <TextView
+            android:id="@+id/toolbar_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center" />
+    </androidx.appcompat.widget.Toolbar>
+
+    <ScrollView
+        android:layout_below="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/image"
+                android:layout_alignParentTop="true"
+                android:layout_centerInParent="true"
+                android:src="@drawable/logo_xml"
+                android:layout_width="@dimen/_120sdp"
+                android:layout_height="@dimen/_160sdp"/>
+
+
+            <LinearLayout
+                android:id="@+id/box_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/image"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/text_view_about_app"
+                    android:text="@string/app_name" />
+
+                <TextView
+                    style="@style/text_view_about_app"
+                    android:text="@string/flag" />
+
+                <TextView
+                    style="@style/text_view_about_app"
+                    android:text="توضیح جیبرس این تست متن برای این قسمت هست" />
+
+                <TextView
+                    style="@style/text_view_about_app"
+                    android:text="نسخه ۱.۰.۰ بتا" />
+
+                <TextView
+                    style="@style/text_view_about_app"
+                    android:layout_marginTop="@dimen/_40sdp"
+                    android:text="Copyright 2020 Jibres, Inc, \n All Rights Reserved" />
+            </LinearLayout>
+
+
+
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+</RelativeLayout>

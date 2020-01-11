@@ -20,7 +20,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.jibres.android.activity.Constans.ON_CLICK_AC_ABOUT_APP;
-import static com.jibres.android.activity.Constans.ON_CLICK_AC_HTML_VIEW;
+import static com.jibres.android.activity.Constans.ON_CLICK_AC_HTML_VIEW_PRIVACYPOLICE;
+import static com.jibres.android.activity.Constans.ON_CLICK_AC_HTML_VIEW_TREMOFUSE;
 
 public class AboutActivity extends AppCompatActivity {
     RecyclerView recyclerView;
@@ -57,10 +58,10 @@ public class AboutActivity extends AppCompatActivity {
         item.add(new SettingModel(ON_CLICK_AC_ABOUT_APP,
                 0,null,
                 "درباره این نسخه",null,null,true));
-        item.add(new SettingModel(ON_CLICK_AC_HTML_VIEW,
+        item.add(new SettingModel(ON_CLICK_AC_HTML_VIEW_TREMOFUSE,
                 0,null,
                 "شرایط استفاده",null,null,true));
-        item.add(new SettingModel(ON_CLICK_AC_HTML_VIEW,
+        item.add(new SettingModel(ON_CLICK_AC_HTML_VIEW_PRIVACYPOLICE,
                 0,null,
                 "حریم خصوصی",null,null,true));
     }
@@ -71,8 +72,15 @@ public class AboutActivity extends AppCompatActivity {
             case 21:
                 intents = new Intent(this, AboutAppActivity.class);
                 break;
-            case 22:
+            case 24:
                 intents = new Intent(this, HtmlViewActivity.class);
+                intents.putExtra("url","a");
+                intents.putExtra("title","شرایط استفاده");
+                break;
+            case 25:
+                intents = new Intent(this, HtmlViewActivity.class);
+                intents.putExtra("url","b");
+                intents.putExtra("title","حریم خصوصی");
                 break;
         }
         if (intents!=null){
