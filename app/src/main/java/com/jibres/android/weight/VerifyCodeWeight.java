@@ -1,4 +1,4 @@
-package com.jibres.android.activity.enter;
+package com.jibres.android.weight;
 
 import android.text.Editable;
 import android.text.TextWatcher;
