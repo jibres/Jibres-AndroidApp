@@ -11,14 +11,16 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.jibres.android.R;
-import com.jibres.android.activity.language.LanguageActivity;
-import com.jibres.android.activity.profile.ProfileActivity;
+import com.jibres.android.activity.HtmlViewActivity;
 import com.jibres.android.activity.setting.SettingAdapter;
 import com.jibres.android.activity.setting.SettingModel;
 import com.jibres.android.weight.DividerItemDecoratorWeighet;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.jibres.android.activity.Constans.ON_CLICK_AC_ABOUT_APP;
+import static com.jibres.android.activity.Constans.ON_CLICK_AC_HTML_VIEW;
 
 public class AboutActivity extends AppCompatActivity {
     RecyclerView recyclerView;
@@ -52,13 +54,13 @@ public class AboutActivity extends AppCompatActivity {
     }
 
     void GetLanguage() {
-        item.add(new SettingModel(0,
+        item.add(new SettingModel(ON_CLICK_AC_ABOUT_APP,
                 0,null,
                 "درباره این نسخه",null,null,true));
-        item.add(new SettingModel(0,
+        item.add(new SettingModel(ON_CLICK_AC_HTML_VIEW,
                 0,null,
                 "شرایط استفاده",null,null,true));
-        item.add(new SettingModel(0,
+        item.add(new SettingModel(ON_CLICK_AC_HTML_VIEW,
                 0,null,
                 "حریم خصوصی",null,null,true));
     }
@@ -66,14 +68,11 @@ public class AboutActivity extends AppCompatActivity {
     private void onCliked(int status) {
         Intent intents = null;
         switch (status){
-            case 16:
-                intents = new Intent(this, LanguageActivity.class);
+            case 21:
+                intents = new Intent(this, AboutAppActivity.class);
                 break;
-            case 10:
-                intents = new Intent(this, ProfileActivity.class);
-                break;
-            case 20:
-                intents = new Intent(this, AboutActivity.class);
+            case 22:
+                intents = new Intent(this, HtmlViewActivity.class);
                 break;
         }
         if (intents!=null){

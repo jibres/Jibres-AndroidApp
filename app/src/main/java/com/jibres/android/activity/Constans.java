@@ -12,4 +12,7 @@ public class Constans {
     public static int ON_CLICK_AC_QUCSTION = 18;
     public static int ON_CLICK_AC_TIKET = 19;
     public static int ON_CLICK_AC_ABOUT = 20;
+    public static int ON_CLICK_AC_ABOUT_APP = 21;
+    public static int ON_CLICK_AC_HTML_VIEW = 22;
+    public static int ON_CLICK_AC_WEB_VIEW = 23;
 }

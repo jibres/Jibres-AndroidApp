@@ -15,7 +15,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
-        <activity android:name=".activity.about.AboutActivity"></activity>
+        <activity android:name=".activity.WebViewActivity"></activity>
+        <activity android:name=".activity.HtmlViewActivity" />
+        <activity android:name=".activity.about.AboutAppActivity" />
+        <activity android:name=".activity.about.AboutActivity" />
         <activity android:name=".activity.profile.ProfileActivity" />
         <activity android:name=".activity.setting.SettingsActivity" />
         <activity android:name=".activity.enter.EnterActivity" />
