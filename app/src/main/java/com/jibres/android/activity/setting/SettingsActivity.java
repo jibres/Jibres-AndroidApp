@@ -6,6 +6,7 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -37,9 +38,14 @@ public class SettingsActivity extends AppCompatActivity {
 
         LinearLayoutManager sLayoutManager =
                 new LinearLayoutManager(getApplicationContext(),RecyclerView.VERTICAL,false);
+
+        DividerItemDecoration dividerItemDecoration =
+                new DividerItemDecoration(recyclerView.getContext(), DividerItemDecoration.VERTICAL);
+
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(adapter);
         GetLanguage();
+        recyclerView.addItemDecoration(dividerItemDecoration);
         recyclerView.setLayoutManager(sLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         adapter.notifyDataSetChanged();
@@ -48,7 +54,7 @@ public class SettingsActivity extends AppCompatActivity {
     void GetLanguage() {
         item.add(new SettingModel(ON_CLICK_PROFILE,0,
                 "https://jibres.com/static/images/logo.png",
-                "Javad Adib","98 919 519 1378","@JavadAdib",true));
+                "Javad Adib","+98 919 519 1378","@JavadAdib",true));
 
         item.add(new SettingModel(0,
                 0,null,
