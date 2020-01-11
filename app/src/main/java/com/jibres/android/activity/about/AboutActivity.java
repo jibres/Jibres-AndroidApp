@@ -2,9 +2,12 @@ package com.jibres.android.activity.about;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -32,6 +35,17 @@ public class AboutActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about);
+
+        View toolbarView = findViewById(R.id.toolbar);
+
+        Toolbar toolbar = toolbarView.findViewById(R.id.toolbar);
+        TextView mTitle = toolbar.findViewById(R.id.title);
+        setSupportActionBar(toolbar);
+        mTitle.setText("درباره‌ما");
+        if (getSupportActionBar()!=null){
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setDisplayShowTitleEnabled(false);
+        }
 
         recyclerView = findViewById(R.id.recycler_view);
         item = new ArrayList<>();
@@ -87,5 +101,11 @@ public class AboutActivity extends AppCompatActivity {
             intents.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
             startActivity(intents);
         }
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
     }
 }
