@@ -1,6 +1,8 @@
 package com.jibres.android.activity;
 
+import android.app.KeyguardManager;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -15,7 +17,7 @@ import com.jibres.android.activity.language.LanguageActivity;
 import com.jibres.android.activity.setting.SettingsActivity;
 
 public class MainActivity extends AppCompatActivity {
-    String[] ac = {"EnterActivity","LanguageActivity","SettingsActivity"};
+    String[] ac = {"EnterActivity","LanguageActivity","SettingsActivity","key"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +56,13 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case "SettingsActivity":
                 intent= new Intent(getApplication(), SettingsActivity.class);
+                break;
+            case "key":
+                KeyguardManager km = (KeyguardManager)getSystemService(KEYGUARD_SERVICE);
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    Intent intents = km.createConfirmDeviceCredentialIntent("TITLE","DESC");
+                    startActivityForResult(intents,RESULT_FIRST_USER);
+                }
                 break;
         }
         if (intent!=null){
