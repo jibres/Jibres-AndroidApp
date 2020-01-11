@@ -1,6 +1,7 @@
 package com.jibres.android.activity.about;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,8 +15,10 @@ public class AboutAppActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about_app);
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        TextView mTitle = toolbar.findViewById(R.id.toolbar_title);
+        View toolbarView = findViewById(R.id.toolbar);
+
+        Toolbar toolbar = toolbarView.findViewById(R.id.toolbar);
+        TextView mTitle = toolbar.findViewById(R.id.title);
         setSupportActionBar(toolbar);
         mTitle.setText("درباه این نسخه");
         if (getSupportActionBar()!=null){
