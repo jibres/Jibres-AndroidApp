@@ -23,6 +23,11 @@ public class UrlManager {
                     + api + "/"
                     + AppManager.getStore(context);
         }
+        public static String local_api_NOSTORE(Context context){
+
+            return local + "/" +
+                    LanguageManager.getAppLanguage(context);
+        }
 
         public static String language_list = "/language";
 
@@ -50,6 +55,9 @@ public class UrlManager {
         }
         public static String verify_code(Context context){
             return local_api(context)+"/account/enter/verify";
+        }
+        public static String privacy(Context context){
+            return local_api_NOSTORE(context)+"/privacy";
         }
 
 

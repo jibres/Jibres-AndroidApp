@@ -74,12 +74,12 @@ public class AboutActivity extends AppCompatActivity {
                 break;
             case 24:
                 intents = new Intent(this, HtmlViewActivity.class);
-                intents.putExtra("url","a");
+                intents.putExtra("url","https://jibres.com/fa/terms");
                 intents.putExtra("title","شرایط استفاده");
                 break;
             case 25:
                 intents = new Intent(this, HtmlViewActivity.class);
-                intents.putExtra("url","b");
+                intents.putExtra("url","https://jibres.com/fa/privacy");
                 intents.putExtra("title","حریم خصوصی");
                 break;
         }
