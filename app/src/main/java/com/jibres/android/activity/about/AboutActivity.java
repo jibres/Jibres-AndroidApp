@@ -1,4 +1,4 @@
-package com.jibres.android.activity.setting;
+package com.jibres.android.activity.about;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,20 +11,16 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.jibres.android.R;
-import com.jibres.android.activity.about.AboutActivity;
 import com.jibres.android.activity.language.LanguageActivity;
 import com.jibres.android.activity.profile.ProfileActivity;
+import com.jibres.android.activity.setting.SettingAdapter;
+import com.jibres.android.activity.setting.SettingModel;
 import com.jibres.android.weight.DividerItemDecoratorWeighet;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.jibres.android.activity.Constans.ON_CLICK_AC_ABOUT;
-import static com.jibres.android.activity.Constans.ON_CLICK_AC_LANGUAGE;
-import static com.jibres.android.activity.Constans.ON_CLICK_PROFILE;
-
-
-public class SettingsActivity extends AppCompatActivity {
+public class AboutActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     SettingAdapter adapter;
     List<SettingModel> item;
@@ -32,7 +28,7 @@ public class SettingsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_settings);
+        setContentView(R.layout.activity_about);
 
         recyclerView = findViewById(R.id.recycler_view);
         item = new ArrayList<>();
@@ -56,62 +52,15 @@ public class SettingsActivity extends AppCompatActivity {
     }
 
     void GetLanguage() {
-        item.add(new SettingModel(ON_CLICK_PROFILE,0,
-                "https://jibres.com/static/images/logo.png",
-                "Javad Adib","+98 919 519 1378","@JavadAdib",true));
-
         item.add(new SettingModel(0,
                 0,null,
-                "لیست فروشگاه‌ها",null,null,false));
-        item.add(new SettingModel(0,0,
-                "https://jibres.com/files/1/26-fd0b2a3f04aeaf73d419a9e677c40c88.jpg",
-                "آهوی ایرانی",null,"آخرین فعالیت ۴ دقیقه قبل",true));
-        item.add(new SettingModel(0,0,
-                "https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Ic_add_circle_outline_48px.svg/1024px-Ic_add_circle_outline_48px.svg.png",
-                "فروشگاه جدید",null,null,true));
-
-        item.add(new SettingModel(0,
-                R.drawable.ic_alarm,null,
-                "اعلان‌ها",null,null,true));
-
+                "درباره این نسخه",null,null,true));
         item.add(new SettingModel(0,
                 0,null,
-                "حریم‌خصوصی و امنیت",null,null,false));
+                "شرایط استفاده",null,null,true));
         item.add(new SettingModel(0,
                 0,null,
-                "کد پین",null,null,true));
-        item.add(new SettingModel(0,
-                0,null,
-                "قفل لمسی",null,null,true));
-        item.add(new SettingModel(0,
-                0,null,
-                "نشست‌های فعال",null,null,true));
-
-
-        item.add(new SettingModel(0,
-                0,null,
-                "آدرس‌ها من",null,null,true));
-
-        item.add(new SettingModel(0,
-                0,null,
-                "ظاهر",null,null,true));
-
-        item.add(new SettingModel(ON_CLICK_AC_LANGUAGE,
-                0,null,
-                "زبان",null,null,true));
-        item.add(new SettingModel(0,
-                0,null,
-                "مرکز راهنمایی",null,null,true));
-        item.add(new SettingModel(0,
-                0,null,
-                "سوالات متداول",null,null,true));
-        item.add(new SettingModel(0,
-                0,null,
-                "تیکت‌ها",null,null,true));
-        item.add(new SettingModel(ON_CLICK_AC_ABOUT,
-                0,null,
-                "درباره ما",null,null,true));
-
+                "حریم خصوصی",null,null,true));
     }
 
     private void onCliked(int status) {

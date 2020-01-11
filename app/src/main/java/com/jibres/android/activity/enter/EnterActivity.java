@@ -17,6 +17,7 @@ import com.jibres.android.R;
 import com.jibres.android.activity.MainActivity;
 import com.jibres.android.managers.AppManager;
 import com.jibres.android.utility.ColorUtil;
+import com.jibres.android.weight.VerifyCodeWeight;
 
 @SuppressLint("Registered")
 public class EnterActivity extends AppCompatActivity {

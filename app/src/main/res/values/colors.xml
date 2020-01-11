@@ -10,5 +10,7 @@
     <color name="onClick_pressed">#FFFFFF</color>
     <color name="onClick_ripple">#C7CACA</color>
 
+    <color name="gray_fade">#E6E5E5</color>
+
     <color name="text_fade">#77333333</color>
 </resources>

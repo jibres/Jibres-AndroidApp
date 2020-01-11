@@ -25,7 +25,7 @@ public class SettingAdapter extends RecyclerView.Adapter<SettingAdapter.MyViewHo
   private ItemClickListener mlistener;
 
 
-  SettingAdapter(List<SettingModel> itemList, Context mContext, ItemClickListener listener) {
+  public SettingAdapter(List<SettingModel> itemList, Context mContext, ItemClickListener listener) {
     this.itemList = itemList;
     this.mContext = mContext;
     this.mlistener = listener;
