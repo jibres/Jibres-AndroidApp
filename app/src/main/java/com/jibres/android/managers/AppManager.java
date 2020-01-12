@@ -33,6 +33,9 @@ public class AppManager extends ContextWrapper {
   /** App Info */
   public static final String splash = "splash";
 
+  public static final String look_status = "look_status";
+  public static final String pin_code = "pin_code";
+
   public static final String store = "store";
 
   public static final String apikey = "apikey";
@@ -43,8 +46,18 @@ public class AppManager extends ContextWrapper {
   public static final String version_update = "version_update";
   public static final String version_deprecated = "version_deprecated";
 
+
   public void save_splash(int id) {
     editor.putInt(splash, id);
+    editor.apply();
+  }
+  public void save_lookStatus(int status) {
+    editor.putInt(look_status, status);
+    editor.apply();
+  }
+
+  public void save_pinCode(String pinCode) {
+    editor.putString(pin_code, pinCode);
     editor.apply();
   }
 
@@ -79,11 +92,14 @@ public class AppManager extends ContextWrapper {
     hashMap.put(userCode, sharedPreferences.getString(userCode, null));
     hashMap.put(zonId, sharedPreferences.getString(zonId, null));
     hashMap.put(mobile, sharedPreferences.getString(mobile, null));
+
+    hashMap.put(pin_code, sharedPreferences.getString(pin_code, null));
     return hashMap;
   }
   public Map<String, Integer> getUserInfo_int() {
     HashMap<String, Integer> hashMap = new HashMap<>();
     hashMap.put(splash, sharedPreferences.getInt(splash, 0));
+    hashMap.put(look_status, sharedPreferences.getInt(look_status, 0));
     return hashMap;
   }
 
@@ -96,6 +112,13 @@ public class AppManager extends ContextWrapper {
 
   public static Integer getSplash(Context context){
     return AppManager.get(context).getUserInfo_int().get(AppManager.splash);
+  }
+
+  public static Integer getLookStatus(Context context){
+    return AppManager.get(context).getUserInfo_int().get(AppManager.look_status);
+  }
+  public static String getPinCode(Context context){
+    return AppManager.get(context).getUserInfo().get(AppManager.pin_code);
   }
 
   public static String getStore(Context context){
