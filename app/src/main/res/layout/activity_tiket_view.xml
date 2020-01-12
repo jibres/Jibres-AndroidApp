@@ -1,9 +1,72 @@
-<androidx.recyclerview.widget.RecyclerView
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/recycler_view"
     tools:context=".activity.tiket.activity.TiketViewActivity">
 
-</androidx.recyclerview.widget.RecyclerView>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/a"/>
+
+
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/a"
+        android:layout_alignParentBottom="true"
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <RelativeLayout
+
+            android:paddingStart="@dimen/_5sdp"
+            android:paddingEnd="@dimen/_5sdp"
+            android:paddingTop="@dimen/_3sdp"
+            android:paddingBottom="@dimen/_3sdp"
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toStartOf="@+id/send_tiket"
+                android:layout_toEndOf="@+id/choose_file"
+                android:background="@null"
+                android:hint="Massage.."
+                android:maxLines="5"
+                android:padding="@dimen/_7sdp"
+                android:textSize="@dimen/_11ssp" />
+
+            <ImageView
+                android:id="@+id/choose_file"
+                android:layout_centerVertical="true"
+                android:background="@drawable/row_background"
+                android:src="@drawable/ic_choose_file"
+                android:tint="@color/text_fade"
+                android:rotation="45"
+                android:padding="@dimen/_8sdp"
+                android:layout_width="@dimen/_35sdp"
+                android:layout_height="@dimen/_35sdp"/>
+
+            <ImageView
+                android:id="@+id/send_tiket"
+                android:layout_centerVertical="true"
+                android:background="@drawable/row_background"
+                android:src="@drawable/ic_send"
+                android:tint="@color/text_fade"
+                android:layout_alignParentEnd="true"
+                android:padding="@dimen/_8sdp"
+                android:layout_width="@dimen/_35sdp"
+                android:layout_height="@dimen/_35sdp"/>
+
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+
+
+
+</RelativeLayout>

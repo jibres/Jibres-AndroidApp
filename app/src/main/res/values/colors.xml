@@ -15,5 +15,5 @@
     <color name="onClick_ripple">#C7CACA</color>
     <!--Fade Color-->
     <color name="gray_fade">#E6E5E5</color>
-    <color name="text_fade">#77333333</color>
+    <color name="text_fade">#999999</color>
 </resources>
