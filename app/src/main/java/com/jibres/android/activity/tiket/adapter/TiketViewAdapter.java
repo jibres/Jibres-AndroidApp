@@ -62,7 +62,6 @@ public class TiketViewAdapter extends RecyclerView.Adapter<TiketViewAdapter.MyVi
     }else {
       holder.time.setVisibility(View.GONE);
     }
-
   }
 
   @Override
