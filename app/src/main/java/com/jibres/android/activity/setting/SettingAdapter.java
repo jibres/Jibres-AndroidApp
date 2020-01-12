@@ -48,7 +48,7 @@ public class SettingAdapter extends RecyclerView.Adapter<SettingAdapter.MyViewHo
     if (aItem.getImageDrawble()!=0){
       holder.imageView.setVisibility(View.VISIBLE);
       holder.imageView.setImageResource(aItem.getImageDrawble());
-    }else if (aItem.getImage()!=null && aItem.getImage().startsWith("http")){
+    }else if (aItem.getImage()!=null){
       holder.imageView.setVisibility(View.VISIBLE);
       Glide.with(mContext)
               .load(aItem.getImage())

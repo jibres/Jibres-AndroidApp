@@ -59,6 +59,10 @@ public class UrlManager {
             return local_api(context)+"/account/session";
         }
 
+        public static String tiket_list(Context context,String page){
+            return local_api(context)+"/ticket/list?page="+page;
+        }
+
 
         //        Static URL
         public static String url_site(Context context){

@@ -4,6 +4,7 @@ import android.app.KeyguardManager;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -17,9 +18,19 @@ import com.jibres.android.activity.language.LanguageActivity;
 import com.jibres.android.activity.security.fingerprint.FingerprintActivity;
 import com.jibres.android.activity.security.pincode.PincodeActivity;
 import com.jibres.android.activity.setting.SettingsActivity;
+import com.jibres.android.activity.tiket.TiketListActivity;
+import com.jibres.android.managers.AppManager;
 
 public class MainActivity extends AppCompatActivity {
-    String[] ac = {"EnterActivity","LanguageActivity","SettingsActivity","key","FingerpringActivity","PinCode"};
+    String[] ac = {"EnterActivity","LanguageActivity",
+            "SettingsActivity","key","FingerpringActivity",
+            "PinCode","ListTiket"};
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Log.d("AppManager", "apikey: "+ AppManager.getApikey(this));
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +82,9 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case "PinCode":
                 intent= new Intent(getApplication(), PincodeActivity.class);
+                break;
+            case "ListTiket":
+                intent= new Intent(getApplication(), TiketListActivity.class);
                 break;
         }
         if (intent!=null){
