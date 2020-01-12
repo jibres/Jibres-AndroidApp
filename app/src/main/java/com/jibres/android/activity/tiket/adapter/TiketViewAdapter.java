@@ -1,6 +1,7 @@
 package com.jibres.android.activity.tiket.adapter;
 
 import android.content.Context;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -54,7 +55,7 @@ public class TiketViewAdapter extends RecyclerView.Adapter<TiketViewAdapter.MyVi
     }else {
       holder.title.setVisibility(View.GONE);
     }
-    holder.massage.setText(item.getMassage());
+    holder.massage.setText(Html.fromHtml(item.getMassage()));
     if (item.getTime()!=null){
       holder.time.setVisibility(View.VISIBLE);
       holder.time.setText(item.getTime());
