@@ -49,7 +49,10 @@ public class TiketListAdapter extends RecyclerView.Adapter<TiketListAdapter.MyVi
     }
 
     if (item.getTitle()!=null){
+      holder.title.setVisibility(View.VISIBLE);
       holder.title.setText(item.getTitle());
+    }else {
+      holder.title.setVisibility(View.GONE);
     }
     holder.desc.setText(item.getContent());
     if (item.isSolved()){
@@ -100,6 +103,8 @@ public class TiketListAdapter extends RecyclerView.Adapter<TiketListAdapter.MyVi
         return "در انتظار";
       case "spam":
         return "اسپم";
+      case "answered":
+        return "پاسخ داده شده";
     }
     return "";
   }

@@ -1,4 +1,4 @@
-package com.jibres.android.activity.tiket;
+package com.jibres.android.activity.tiket.activity;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -92,16 +92,28 @@ public class TiketListActivity extends AppCompatActivity {
                     for (int i = 0; i < results.length(); i++) {
                         JSONObject object = results.getJSONObject(i);
                         boolean solved = false;
+                        String title = null ,
+                                avatar = null,
+                                displayname = null;
                         if (!object.isNull("solved")){
-                            solved = object.getBoolean("solved");
+                            solved = true;
+                        }
+                        if (!object.isNull("title")){
+                            title = object.getString("title");
+                        }
+                        if (!object.isNull("avatar")){
+                            avatar = object.getString("avatar");
+                        }
+                        if (!object.isNull("displayname")){
+                            displayname = object.getString("displayname");
                         }
                         item.add(new TiketListModel(
                                 object.getString("id"),
-                                object.getString("title"),
+                                title,
                                 object.getString("content"),
                                 object.getString("status"),
-                                object.getString("avatar"),
-                                object.getString("displayname"),
+                                avatar,
+                                displayname,
                                 solved));
                         recyclerView.addItemDecoration(dividerItemDecoration);
                         recyclerView.setLayoutManager(sLayoutManager);
