@@ -20,4 +20,5 @@ public class Constans {
 
     public static int ON_CLICK_AC_SESSION = 26;
     public static int ON_CLICK_AC_FINGER_PRINT = 27;
+    public static int ON_CLICK_AC_PINCODE = 28;
 }
