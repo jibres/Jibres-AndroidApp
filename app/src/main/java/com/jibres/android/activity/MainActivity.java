@@ -15,10 +15,11 @@ import com.jibres.android.R;
 import com.jibres.android.activity.enter.EnterActivity;
 import com.jibres.android.activity.language.LanguageActivity;
 import com.jibres.android.activity.security.fingerprint.FingerprintActivity;
+import com.jibres.android.activity.security.pincode.PincodeActivity;
 import com.jibres.android.activity.setting.SettingsActivity;
 
 public class MainActivity extends AppCompatActivity {
-    String[] ac = {"EnterActivity","LanguageActivity","SettingsActivity","key","FingerpringActivity"};
+    String[] ac = {"EnterActivity","LanguageActivity","SettingsActivity","key","FingerpringActivity","PinCode"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,6 +68,9 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case "FingerpringActivity":
                 intent= new Intent(getApplication(), FingerprintActivity.class);
+                break;
+            case "PinCode":
+                intent= new Intent(getApplication(), PincodeActivity.class);
                 break;
         }
         if (intent!=null){
