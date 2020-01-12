@@ -1,8 +1,8 @@
 package com.jibres.android.activity.tiket.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
@@ -133,6 +133,8 @@ public class TiketListActivity extends AppCompatActivity {
     }
 
     private void onCliked(String id) {
-        Toast.makeText(this, id, Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(this,TiketViewActivity.class);
+        intent.putExtra("id",id);
+        startActivity(intent);
     }
 }

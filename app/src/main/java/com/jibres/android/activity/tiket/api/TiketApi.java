@@ -56,4 +56,38 @@ public class TiketApi {
                         DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         JibresApplication.getInstance().addToRequestQueue(request);
     }
+
+    public static void viewTiket(Context context,String tiket,TiketListener.viewTiket listener){
+        StringRequest request =
+                new StringRequest(Request.Method.GET, UrlManager.get.tiket_view(context,tiket),
+                        response -> {
+                            try {
+                                JSONObject mainObject = new JSONObject(response);
+                                if (mainObject.getBoolean("ok")){
+                                    JSONArray result = mainObject.getJSONArray("result");
+                                    listener.onReceived(String.valueOf(result));
+                                }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                                listener.onFiled(true);
+                            }
+                        }, e -> listener.onFiled(false))
+                        // Send Headers
+                {
+                    @Override
+                    public Map<String, String> getHeaders()  {
+                        HashMap<String, String> headers = new HashMap<>();
+                        headers.put("appkey", keys.appkey);
+                        headers.put("apikey", AppManager.getApikey(context));
+                        return headers;
+                    }
+
+                };
+        request.setRetryPolicy(
+                new DefaultRetryPolicy(
+                        DefaultRetryPolicy.DEFAULT_TIMEOUT_MS,
+                        DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                        DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        JibresApplication.getInstance().addToRequestQueue(request);
+    }
 }
