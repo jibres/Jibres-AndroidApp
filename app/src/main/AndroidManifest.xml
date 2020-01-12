@@ -5,6 +5,7 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.USE_FINGERPRINT" />
 
     <application
         android:name=".JibresApplication"
@@ -15,7 +16,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
-        <activity android:name=".activity.security.sessions.SessionsActivity"></activity>
+        <activity android:name=".activity.security.fingerprint.FingerprintActivity"></activity>
+        <activity android:name=".activity.security.sessions.SessionsActivity" />
         <activity android:name=".activity.WebViewActivity" />
         <activity android:name=".activity.HtmlViewActivity" />
         <activity android:name=".activity.about.AboutAppActivity" />

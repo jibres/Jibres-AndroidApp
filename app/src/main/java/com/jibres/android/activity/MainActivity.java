@@ -14,10 +14,11 @@ import com.jibres.android.JibresApplication;
 import com.jibres.android.R;
 import com.jibres.android.activity.enter.EnterActivity;
 import com.jibres.android.activity.language.LanguageActivity;
+import com.jibres.android.activity.security.fingerprint.FingerprintActivity;
 import com.jibres.android.activity.setting.SettingsActivity;
 
 public class MainActivity extends AppCompatActivity {
-    String[] ac = {"EnterActivity","LanguageActivity","SettingsActivity","key"};
+    String[] ac = {"EnterActivity","LanguageActivity","SettingsActivity","key","FingerpringActivity"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +64,9 @@ public class MainActivity extends AppCompatActivity {
                     Intent intents = km.createConfirmDeviceCredentialIntent("TITLE","DESC");
                     startActivityForResult(intents,RESULT_FIRST_USER);
                 }
+                break;
+            case "FingerpringActivity":
+                intent= new Intent(getApplication(), FingerprintActivity.class);
                 break;
         }
         if (intent!=null){
