@@ -16,7 +16,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
-        <activity android:name=".activity.tiket.TiketListActivity"></activity>
+        <activity android:name=".activity.tiket.activity.TiketViewActivity"></activity>
+        <activity android:name=".activity.tiket.activity.TiketAddActivity" />
+        <activity android:name=".activity.tiket.activity.TiketListActivity" />
         <activity android:name=".activity.security.pincode.PincodeManagerActivity" />
         <activity android:name=".activity.security.pincode.PincodeActivity" />
         <activity android:name=".activity.security.fingerprint.FingerprintActivity" />

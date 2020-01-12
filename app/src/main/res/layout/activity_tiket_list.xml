@@ -5,6 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/recycler_view"
-    tools:context=".activity.tiket.TiketListActivity">
+    tools:context=".activity.tiket.activity.TiketListActivity">
 
 </androidx.recyclerview.widget.RecyclerView>

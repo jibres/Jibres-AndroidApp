@@ -18,7 +18,7 @@ import com.jibres.android.activity.language.LanguageActivity;
 import com.jibres.android.activity.security.fingerprint.FingerprintActivity;
 import com.jibres.android.activity.security.pincode.PincodeActivity;
 import com.jibres.android.activity.setting.SettingsActivity;
-import com.jibres.android.activity.tiket.TiketListActivity;
+import com.jibres.android.activity.tiket.activity.TiketListActivity;
 import com.jibres.android.managers.AppManager;
 
 public class MainActivity extends AppCompatActivity {
