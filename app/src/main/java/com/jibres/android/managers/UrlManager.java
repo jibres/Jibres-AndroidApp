@@ -65,6 +65,18 @@ public class UrlManager {
         public static String tiket_view(Context context,String tiket){
             return local_api(context)+"/ticket/"+tiket;
         }
+        public static String tiket_replay(Context context,String tiket){
+            return local_api(context)+"/ticket/"+tiket+"/replay";
+        }
+        public static String tiket_set_status(Context context,String tiket){
+            return local_api(context)+"/ticket/"+tiket+"/status";
+        }
+        public static String tiket_set_solved(Context context,String tiket){
+            return local_api(context)+"/ticket/"+tiket+"/solved";
+        }
+        public static String tiket_add(Context context){
+            return local_api(context)+"/ticket/add";
+        }
 
 
         //        Static URL
