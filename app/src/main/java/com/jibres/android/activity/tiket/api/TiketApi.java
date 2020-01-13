@@ -1,10 +1,12 @@
 package com.jibres.android.activity.tiket.api;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.toolbox.StringRequest;
+import com.google.gson.Gson;
 import com.jibres.android.JibresApplication;
 import com.jibres.android.keys;
 import com.jibres.android.managers.AppManager;
@@ -14,6 +16,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -82,6 +85,59 @@ public class TiketApi {
                         return headers;
                     }
 
+                };
+        request.setRetryPolicy(
+                new DefaultRetryPolicy(
+                        DefaultRetryPolicy.DEFAULT_TIMEOUT_MS,
+                        DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                        DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        JibresApplication.getInstance().addToRequestQueue(request);
+    }
+
+    public static void replay(Context context, String TIKET, String MASSAGE, String TITLE ,
+                              TiketListener.replay listener){
+        StringRequest request =
+                new StringRequest(Request.Method.POST, UrlManager.get.tiket_replay(context,TIKET),
+                        response -> {
+                            try {
+                                JSONObject mainObject = new JSONObject(response);
+                                try {
+                                    JSONArray msg = mainObject.getJSONArray("msg");
+                                    for (int i = 0 ; i<= msg.length();i++){
+                                        JSONObject object = msg.getJSONObject(i);
+                                        listener.onReceived(object.getString("text"));
+                                    }
+                                }catch (Exception e){
+                                    e.printStackTrace();
+                                }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                                listener.onFiled(true);
+                            }
+                        }, e -> listener.onFiled(false))
+                {
+                    @Override
+                    public Map<String, String> getHeaders()  {
+                        HashMap<String, String> headers = new HashMap<>();
+                        headers.put("appkey", keys.appkey );
+                        headers.put("apikey", AppManager.getApikey(context) );
+                        return headers;
+                    }
+                    @Override
+                    public String getBodyContentType() {
+                        return "application/json; charset=utf-8";
+                    }
+
+                    @SuppressLint("HardwareIds")
+                    @Override
+                    public byte[] getBody() {
+                        final Map<String,String> body = new HashMap<>();
+                        body.put("content", MASSAGE );
+                        if (TITLE != null){
+                            body.put("title", TITLE );
+                        }
+                        return new Gson().toJson(body).getBytes(StandardCharsets.UTF_8);
+                    }
                 };
         request.setRetryPolicy(
                 new DefaultRetryPolicy(

@@ -1,7 +1,6 @@
 package com.jibres.android.activity.tiket.adapter;
 
 import android.content.Context;
-import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -55,7 +54,7 @@ public class TiketViewAdapter extends RecyclerView.Adapter<TiketViewAdapter.MyVi
     }else {
       holder.title.setVisibility(View.GONE);
     }
-    holder.massage.setText(Html.fromHtml(item.getMassage()));
+    holder.massage.setText(removeHtml(item.getMassage()));
     if (item.getTime()!=null){
       holder.time.setVisibility(View.VISIBLE);
       holder.time.setText(item.getTime());
@@ -86,6 +85,15 @@ public class TiketViewAdapter extends RecyclerView.Adapter<TiketViewAdapter.MyVi
 
   public interface ItemClickListener{
     void onClick(int onClick);
+  }
+
+  String removeHtml(String html){
+    html = html.replaceAll("<(.*?)\\>"," ");//Removes all items in brackets
+    html = html.replaceAll("<(.*?)\\\n"," ");//Must be undeneath
+    html = html.replaceFirst("(.*?)\\>", " ");//Removes any connected item to the last bracket
+    html = html.replaceAll("&nbsp;"," ");
+    html = html.replaceAll("&amp;"," ");
+    return html;
   }
 
 }

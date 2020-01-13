@@ -1,6 +1,10 @@
 package com.jibres.android.activity.tiket.activity;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
@@ -22,16 +26,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TiketViewActivity extends AppCompatActivity {
+    String id_tiket;
+
     RecyclerView recyclerView;
     TiketViewAdapter adapter;
     List<TiketViewModel> item;
-
     LinearLayoutManager sLayoutManager;
+    int item_size = 0;
+
+    EditText editMassage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tiket_view);
+
+        id_tiket = getIntent().getStringExtra("id");
 
         recyclerView = findViewById(R.id.recycler_view);
         item = new ArrayList<>();
@@ -43,18 +53,22 @@ public class TiketViewActivity extends AppCompatActivity {
 
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(adapter);
-        GetLanguage(getIntent().getStringExtra("id"));
+        GetLanguage();
         recyclerView.setLayoutManager(sLayoutManager);
+
+        editMassage = findViewById(R.id.massage);
+
     }
 
-    void GetLanguage(String tiket) {
-        TiketApi.viewTiket(getApplicationContext(), tiket, new TiketListener.viewTiket() {
+    void GetLanguage() {
+        TiketApi.viewTiket(getApplicationContext(), id_tiket, new TiketListener.viewTiket() {
             @Override
             public void onReceived(String value) {
 
                 try {
                     JSONArray result = new JSONArray(value);
-                    for (int i = 0; i < result.length(); i++) {
+                    for (int i = item_size; i < result.length(); i++) {
+                        item_size = i;
                         JSONObject object = result.getJSONObject(i);
 
                         String title = null ,
@@ -91,7 +105,7 @@ public class TiketViewActivity extends AppCompatActivity {
                                 datecreated));
                         recyclerView.setItemAnimator(new DefaultItemAnimator());
                         adapter.notifyDataSetChanged();
-
+                        sLayoutManager.scrollToPosition(item.size()-1);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -109,5 +123,42 @@ public class TiketViewActivity extends AppCompatActivity {
     }
 
     private void onCliked(int status) {
+    }
+
+    public void send_massage(View view) {
+        if (getEditMassage()!=null){
+            TiketApi.replay(getApplicationContext(), id_tiket, getEditMassage(), null,
+                    new TiketListener.replay() {
+                        @Override
+                        public void onReceived(String massage) {
+                            Toast.makeText(TiketViewActivity.this, massage, Toast.LENGTH_SHORT).show();
+                            item_size++;
+                            editMassage.getText().clear();
+                            new Handler().postDelayed(() -> {
+                                GetLanguage();
+                            },200);
+
+                        }
+
+                        @Override
+                        public void onFiled(boolean hasNet) {
+
+                        }
+                    });
+        }
+
+    }
+
+    public void choose_file(View view) {
+
+    }
+
+
+    String getEditMassage(){
+        String text = editMassage.getText().toString();
+        if (text.length()>1){
+            return editMassage.getText().toString();
+        }
+        return null;
     }
 }

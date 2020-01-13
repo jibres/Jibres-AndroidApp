@@ -9,13 +9,13 @@
         android:id="@+id/recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/a"/>
+        android:layout_above="@+id/card_view"/>
 
 
 
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/a"
+        android:id="@+id/card_view"
         android:layout_alignParentBottom="true"
 
         android:layout_width="match_parent"
@@ -31,6 +31,7 @@
             android:layout_height="wrap_content">
 
             <EditText
+                android:id="@+id/massage"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
@@ -44,6 +45,7 @@
 
             <ImageView
                 android:id="@+id/choose_file"
+                android:onClick="choose_file"
                 android:layout_centerVertical="true"
                 android:background="@drawable/row_background"
                 android:src="@drawable/ic_choose_file"
@@ -55,6 +57,7 @@
 
             <ImageView
                 android:id="@+id/send_tiket"
+                android:onClick="send_massage"
                 android:layout_centerVertical="true"
                 android:background="@drawable/row_background"
                 android:src="@drawable/ic_send"

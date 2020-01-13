@@ -33,12 +33,9 @@
                 android:paddingStart="@dimen/_7sdp"
                 android:paddingEnd="@dimen/_7sdp"
                 android:paddingTop="@dimen/_5sdp"
-
                 android:layout_alignParentTop="true"
                 android:layout_alignParentStart="true"
-
-                android:text="ربات تجارک  Tejarak"
-                android:textSize="@dimen/_9ssp"
+                android:textSize="@dimen/_8ssp"
                 android:textColor="@android:color/holo_green_dark"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
@@ -51,11 +48,10 @@
                 android:paddingEnd="@dimen/_7sdp"
                 android:paddingTop="@dimen/_5sdp"
                 android:paddingBottom="@dimen/_5sdp"
-
+                android:autoLink="web|phone"
                 android:layout_below="@+id/title"
 
-                android:text="ربات تجارک  Tejarak"
-                android:textSize="@dimen/_11ssp"
+                android:textSize="@dimen/_9ssp"
                 android:textColor="@color/title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
@@ -65,14 +61,9 @@
             <TextView
                 android:visibility="visible"
                 android:id="@+id/time"
-                android:padding="@dimen/_5sdp"
-
-                android:text="19:09"
-
-                android:layout_toEndOf="@+id/massage"
+                android:padding="@dimen/_2sdp"
                 android:layout_below="@+id/massage"
-
-                android:textSize="@dimen/_7ssp"
+                android:textSize="@dimen/_6ssp"
                 android:textColor="@color/text_fade"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>

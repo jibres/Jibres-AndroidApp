@@ -10,4 +10,9 @@ public class TiketListener {
         void onReceived(String result);
         void onFiled(boolean hasNet);
     }
+
+    public interface replay{
+        void onReceived(String massage);
+        void onFiled(boolean hasNet);
+    }
 }
