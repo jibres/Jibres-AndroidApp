@@ -1,7 +1,10 @@
 package com.jibres.android.activity.tiket.activity;
 
+import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.provider.MediaStore;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -149,8 +152,18 @@ public class TiketViewActivity extends AppCompatActivity {
 
     }
 
+    @SuppressLint("IntentReset")
     public void choose_file(View view) {
+        Intent getIntent = new Intent(Intent.ACTION_GET_CONTENT);
+        getIntent.setType("image/*");
 
+        Intent pickIntent = new Intent(Intent.ACTION_PICK_ACTIVITY, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        pickIntent.setType("image/*");
+
+        Intent chooserIntent = Intent.createChooser(getIntent, "Select Image");
+        chooserIntent.putExtra(Intent.EXTRA_INITIAL_INTENTS, new Intent[] {pickIntent});
+
+        startActivityForResult(chooserIntent,2);
     }
 
 

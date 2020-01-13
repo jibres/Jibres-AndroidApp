@@ -43,17 +43,22 @@
                 android:padding="@dimen/_7sdp"
                 android:textSize="@dimen/_11ssp" />
 
-            <ImageView
+
+            <RelativeLayout
                 android:id="@+id/choose_file"
                 android:onClick="choose_file"
-                android:layout_centerVertical="true"
                 android:background="@drawable/row_background"
-                android:src="@drawable/ic_choose_file"
-                android:tint="@color/text_fade"
-                android:rotation="45"
-                android:padding="@dimen/_8sdp"
                 android:layout_width="@dimen/_35sdp"
-                android:layout_height="@dimen/_35sdp"/>
+                android:layout_height="@dimen/_35sdp">
+                <ImageView
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/ic_choose_file"
+                    android:tint="@color/text_fade"
+                    android:rotation="45"
+                    android:padding="@dimen/_8sdp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
+            </RelativeLayout>
 
             <ImageView
                 android:id="@+id/send_tiket"

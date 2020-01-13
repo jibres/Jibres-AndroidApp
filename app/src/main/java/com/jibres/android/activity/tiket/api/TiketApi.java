@@ -146,4 +146,39 @@ public class TiketApi {
                         DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         JibresApplication.getInstance().addToRequestQueue(request);
     }
+
+    void a(){
+        /*SimpleMultiPartRequest
+                smr = new SimpleMultiPartRequest(Request.Method.POST, URL,
+                response -> {
+                    Log.d("amingoliss", "onErrorResponse: "+response );
+
+                },
+                error -> Log.e("amingoliss", "onErrorResponse: "+error.getMessage()))
+        {
+            @Override
+            public Map<String, String> getHeaders()  {
+                HashMap<String, String> headers = new HashMap<>();
+                headers.put("appkey", keys.appkey );
+                headers.put("apikey", "" );
+                return headers;
+            }
+            @Override
+            public String getBodyContentType() {
+                return "application/json; charset=utf-8";
+            }
+
+            @SuppressLint("HardwareIds")
+            @Override
+            public byte[] getBody() {
+                final Map<String,String> body = new HashMap<>();
+                body.put("content", "" );
+                return new Gson().toJson(body).getBytes(StandardCharsets.UTF_8);
+            }
+        };
+
+        smr.addStringParam("param string", " data text");
+        smr.addFile("param file", "");
+        JibresApplication.getInstance().addToRequestQueue(smr);*/
+    }
 }
