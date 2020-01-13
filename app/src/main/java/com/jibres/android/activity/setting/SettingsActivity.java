@@ -17,6 +17,7 @@ import com.jibres.android.activity.profile.ProfileActivity;
 import com.jibres.android.activity.security.fingerprint.FingerprintActivity;
 import com.jibres.android.activity.security.pincode.PincodeManagerActivity;
 import com.jibres.android.activity.security.sessions.SessionsActivity;
+import com.jibres.android.activity.tiket.activity.TiketListActivity;
 import com.jibres.android.weight.DividerItemDecoratorWeighet;
 
 import java.util.ArrayList;
@@ -27,6 +28,7 @@ import static com.jibres.android.activity.Constans.ON_CLICK_AC_FINGER_PRINT;
 import static com.jibres.android.activity.Constans.ON_CLICK_AC_LANGUAGE;
 import static com.jibres.android.activity.Constans.ON_CLICK_AC_PINCODE;
 import static com.jibres.android.activity.Constans.ON_CLICK_AC_SESSION;
+import static com.jibres.android.activity.Constans.ON_CLICK_AC_TIKET;
 import static com.jibres.android.activity.Constans.ON_CLICK_PROFILE;
 
 
@@ -111,7 +113,7 @@ public class SettingsActivity extends AppCompatActivity {
         item.add(new SettingModel(0,
                 0,null,
                 "سوالات متداول",null,null,true));
-        item.add(new SettingModel(0,
+        item.add(new SettingModel(ON_CLICK_AC_TIKET,
                 0,null,
                 "تیکت‌ها",null,null,true));
         item.add(new SettingModel(ON_CLICK_AC_ABOUT,
@@ -123,11 +125,14 @@ public class SettingsActivity extends AppCompatActivity {
     private void onCliked(int status) {
         Intent intents = null;
         switch (status){
+            case 10:
+                intents = new Intent(this, ProfileActivity.class);
+                break;
             case 16:
                 intents = new Intent(this, LanguageActivity.class);
                 break;
-            case 10:
-                intents = new Intent(this, ProfileActivity.class);
+            case 19:
+                intents = new Intent(this, TiketListActivity.class);
                 break;
             case 20:
                 intents = new Intent(this, AboutActivity.class);
