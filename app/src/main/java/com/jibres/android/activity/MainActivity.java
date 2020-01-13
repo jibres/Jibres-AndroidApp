@@ -20,12 +20,13 @@ import com.jibres.android.activity.security.pincode.PincodeActivity;
 import com.jibres.android.activity.setting.SettingsActivity;
 import com.jibres.android.activity.tiket.activity.TiketListActivity;
 import com.jibres.android.managers.AppManager;
-import com.jibres.android.upload_file_test.TestUploadFileActivity;
 
 public class MainActivity extends AppCompatActivity {
     String[] ac = {"EnterActivity","LanguageActivity",
             "SettingsActivity","key","FingerpringActivity",
-            "PinCode","ListTiket","TestUplloadFile"};
+            "PinCode","ListTiket",
+            /*"TestUplloadFile"*/
+    };
 
     @Override
     protected void onStart() {
@@ -87,9 +88,9 @@ public class MainActivity extends AppCompatActivity {
             case "ListTiket":
                 intent= new Intent(getApplication(), TiketListActivity.class);
                 break;
-            case "TestUplloadFile":
+            /*case "TestUplloadFile":
                 intent= new Intent(getApplication(), TestUploadFileActivity.class);
-                break;
+                break;*/
         }
         if (intent!=null){
             intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
