@@ -5,4 +5,29 @@
     android:layout_height="match_parent"
     tools:context=".activity.tiket.activity.TiketAddActivity">
 
+    <include
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        layout="@layout/item_toolbar"/>
+
+    <EditText
+        android:id="@+id/edit_title"
+        android:padding="@dimen/_10sdp"
+        android:layout_below="@+id/toolbar"
+        android:background="@color/gray_fade"
+        android:hint="Title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <EditText
+        android:id="@+id/edit_massage"
+        android:padding="@dimen/_10sdp"
+        android:background="@color/gray_fade"
+        android:layout_below="@+id/edit_title"
+        android:hint="Massage"
+        android:minHeight="@dimen/_120sdp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
 </RelativeLayout>
