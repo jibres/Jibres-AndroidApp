@@ -3,6 +3,7 @@ package com.jibres.android.activity.tiket.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
@@ -136,5 +137,9 @@ public class TiketListActivity extends AppCompatActivity {
         Intent intent = new Intent(this,TiketViewActivity.class);
         intent.putExtra("id",id);
         startActivity(intent);
+    }
+
+    public void add_tiket(View view) {
+        startActivity(new Intent(this,TiketAddActivity.class));
     }
 }
