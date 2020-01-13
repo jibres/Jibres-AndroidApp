@@ -77,6 +77,7 @@ public class TiketViewActivity extends AppCompatActivity {
                         String title = null ,
                                 avatar = null,
                                 displayname = null,
+                                file = null,
                                 datecreated = null;
 
                         if (!object.isNull("datecreated")){
@@ -94,6 +95,9 @@ public class TiketViewActivity extends AppCompatActivity {
                         if (!object.isNull("displayname")){
                             displayname = object.getString("displayname");
                         }
+                        if (!object.isNull("file")){
+                            file = object.getString("file");
+                        }
 
 
                         object.getString("displayname");
@@ -105,7 +109,8 @@ public class TiketViewActivity extends AppCompatActivity {
                         item.add(new TiketViewModel(avatar,
                                 displayname,
                                 title,
-                                datecreated));
+                                datecreated,
+                                file));
                         recyclerView.setItemAnimator(new DefaultItemAnimator());
                         adapter.notifyDataSetChanged();
                         sLayoutManager.scrollToPosition(item.size()-1);

@@ -1,13 +1,14 @@
 package com.jibres.android.activity.tiket.model;
 
 public class TiketViewModel {
-    String avatar,title,massage,time;
+    String avatar,title,massage,time,file;
 
-    public TiketViewModel(String avatar, String title, String massage, String time) {
+    public TiketViewModel(String avatar, String title, String massage, String time, String file) {
         this.avatar = avatar;
         this.title = title;
         this.massage = massage;
         this.time = time;
+        this.file = file;
     }
 
     public String getAvatar() {
@@ -40,5 +41,13 @@ public class TiketViewModel {
 
     public void setTime(String time) {
         this.time = time;
+    }
+
+    public String getFile() {
+        return file;
+    }
+
+    public void setFile(String file) {
+        this.file = file;
     }
 }

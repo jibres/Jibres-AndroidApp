@@ -8,7 +8,7 @@
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/avatar"
-        android:layout_centerVertical="true"
+        android:layout_toStartOf="@+id/card_view"
         android:layout_margin="@dimen/_5sdp"
         android:src="@drawable/test"
         android:layout_width="@dimen/_35sdp"
@@ -17,7 +17,11 @@
 
 
     <androidx.cardview.widget.CardView
-        android:layout_margin="@dimen/_7sdp"
+        android:layout_marginEnd="@dimen/_20sdp"
+        android:layout_marginStart="@dimen/_2sdp"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:layout_marginBottom="@dimen/_5sdp"
+
         android:layout_toEndOf="@+id/avatar"
         android:layout_centerVertical="true"
         android:background="@drawable/row_background"
@@ -42,6 +46,15 @@
                 android:layout_height="wrap_content"/>
 
 
+            <ImageView
+                android:visibility="gone"
+                android:id="@+id/image"
+                android:layout_below="@+id/title"
+                android:src="@drawable/test"
+                android:scaleType="centerCrop"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_150sdp"/>
+
 
             <TextView
                 android:id="@+id/massage"
@@ -50,7 +63,7 @@
                 android:paddingTop="@dimen/_5sdp"
                 android:paddingBottom="@dimen/_5sdp"
                 android:autoLink="web|phone"
-                android:layout_below="@+id/title"
+                android:layout_below="@+id/image"
 
                 android:textSize="@dimen/_9ssp"
                 android:textColor="@color/title"

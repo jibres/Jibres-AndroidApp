@@ -61,6 +61,12 @@ public class TiketViewAdapter extends RecyclerView.Adapter<TiketViewAdapter.MyVi
     }else {
       holder.time.setVisibility(View.GONE);
     }
+    if (item.getFile()!=null){
+      holder.image.setVisibility(View.VISIBLE);
+      Glide.with(mContext).load(item.getFile()).into(holder.image);
+    }else {
+      holder.image.setVisibility(View.GONE);
+    }
   }
 
   @Override
@@ -70,7 +76,7 @@ public class TiketViewAdapter extends RecyclerView.Adapter<TiketViewAdapter.MyVi
 
   class MyViewHolder extends RecyclerView.ViewHolder {
     View view;
-    ImageView avatar;
+    ImageView avatar,image;
     TextView title,massage,time;
 
     MyViewHolder(View itemView) {
@@ -78,6 +84,7 @@ public class TiketViewAdapter extends RecyclerView.Adapter<TiketViewAdapter.MyVi
       view = itemView;
       avatar = itemView.findViewById(R.id.avatar);
       title = itemView.findViewById(R.id.title);
+      image = itemView.findViewById(R.id.image);
       massage = itemView.findViewById(R.id.massage);
       time = itemView.findViewById(R.id.time);
     }
