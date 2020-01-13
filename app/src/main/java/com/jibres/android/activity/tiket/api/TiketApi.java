@@ -147,6 +147,59 @@ public class TiketApi {
         JibresApplication.getInstance().addToRequestQueue(request);
     }
 
+    public static void addTiket(Context context, String TITLE, String MASSAGE ,
+                              TiketListener.replay listener){
+        StringRequest request =
+                new StringRequest(Request.Method.POST, UrlManager.get.tiket_add(context),
+                        response -> {
+                            try {
+                                JSONObject mainObject = new JSONObject(response);
+                                try {
+                                    JSONArray msg = mainObject.getJSONArray("msg");
+                                    for (int i = 0 ; i<= msg.length();i++){
+                                        JSONObject object = msg.getJSONObject(i);
+                                        listener.onReceived(object.getString("text"));
+                                    }
+                                }catch (Exception e){
+                                    e.printStackTrace();
+                                }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                                listener.onFiled(true);
+                            }
+                        }, e -> listener.onFiled(false))
+                {
+                    @Override
+                    public Map<String, String> getHeaders()  {
+                        HashMap<String, String> headers = new HashMap<>();
+                        headers.put("appkey", keys.appkey );
+                        headers.put("apikey", AppManager.getApikey(context) );
+                        return headers;
+                    }
+                    @Override
+                    public String getBodyContentType() {
+                        return "application/json; charset=utf-8";
+                    }
+
+                    @SuppressLint("HardwareIds")
+                    @Override
+                    public byte[] getBody() {
+                        final Map<String,String> body = new HashMap<>();
+                        body.put("content", MASSAGE );
+                        if (TITLE != null){
+                            body.put("title", TITLE );
+                        }
+                        return new Gson().toJson(body).getBytes(StandardCharsets.UTF_8);
+                    }
+                };
+        request.setRetryPolicy(
+                new DefaultRetryPolicy(
+                        DefaultRetryPolicy.DEFAULT_TIMEOUT_MS,
+                        DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                        DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        JibresApplication.getInstance().addToRequestQueue(request);
+    }
+
     void a(){
         /*SimpleMultiPartRequest
                 smr = new SimpleMultiPartRequest(Request.Method.POST, URL,

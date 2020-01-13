@@ -16,17 +16,27 @@
         android:padding="@dimen/_10sdp"
         android:layout_below="@+id/toolbar"
         android:background="@color/gray_fade"
-        android:hint="Title"
+        android:textSize="@dimen/_10sdp"
+        android:hint="عنوان"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
     <EditText
         android:id="@+id/edit_massage"
+        android:textSize="@dimen/_10sdp"
         android:padding="@dimen/_10sdp"
         android:background="@color/gray_fade"
         android:layout_below="@+id/edit_title"
-        android:hint="Massage"
+        android:hint="پیام"
+        android:maxLines="5"
         android:minHeight="@dimen/_120sdp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <Button
+        android:onClick="button_add_tiket"
+        android:layout_below="@+id/edit_massage"
+        android:text="Send"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
