@@ -48,7 +48,7 @@ public class NotifAdapter extends RecyclerView.Adapter<NotifAdapter.MyViewHolder
     holder.desc.setText(item.getDesc());
     holder.date.setText(item.getDate());
 
-    if (item.isReadUser()){
+    if (!item.isReadUser()){
       holder.status.setColorFilter(Color.parseColor("#FFD100"));
     }else {
       holder.status.setColorFilter(Color.parseColor("#7A7A7A"));

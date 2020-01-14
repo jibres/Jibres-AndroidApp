@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     android:background="@drawable/row_background"
-    android:padding="@dimen/_10sdp"
+    android:padding="@dimen/_3sdp"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
@@ -41,13 +41,14 @@
         android:layout_below="@+id/title"
         android:textSize="@dimen/_9ssp"
         android:text="Desc"
+        android:maxLines="2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
     <TextView
         android:id="@+id/date"
         android:layout_alignParentEnd="true"
-        android:layout_below="@+id/title"
+        android:layout_below="@id/desc"
         android:textSize="@dimen/_7ssp"
         android:text="3 min"
         android:layout_width="wrap_content"
