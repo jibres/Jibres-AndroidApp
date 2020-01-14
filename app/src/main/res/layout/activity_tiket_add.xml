@@ -11,14 +11,15 @@
         android:layout_height="wrap_content"
         layout="@layout/item_toolbar"/>
 
-    <EditText
-        android:id="@+id/edit_title"
-        android:padding="@dimen/_10sdp"
+    <TextView
+        android:id="@+id/desc"
+        android:text="هر توضیحی رو میتوانید اینجا اضافه کتید"
         android:layout_below="@+id/toolbar"
-        android:background="@color/gray_fade"
+        android:layout_centerHorizontal="true"
+        android:padding="@dimen/_10sdp"
         android:textSize="@dimen/_10sdp"
-        android:hint="عنوان"
-        android:layout_width="match_parent"
+        android:textColor="@color/title"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
     <EditText
@@ -26,7 +27,7 @@
         android:textSize="@dimen/_10sdp"
         android:padding="@dimen/_10sdp"
         android:background="@color/gray_fade"
-        android:layout_below="@+id/edit_title"
+        android:layout_below="@+id/desc"
         android:hint="پیام"
         android:maxLines="5"
         android:minHeight="@dimen/_120sdp"

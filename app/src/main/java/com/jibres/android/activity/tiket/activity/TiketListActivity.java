@@ -140,6 +140,8 @@ public class TiketListActivity extends AppCompatActivity {
     }
 
     public void add_tiket(View view) {
-        startActivity(new Intent(this,TiketAddActivity.class));
+        Intent intent = new Intent(this,TiketAddActivity.class);
+        intent.putExtra("title","تیکت");
+        startActivity(intent);
     }
 }

@@ -138,14 +138,14 @@ public class TiketViewActivity extends AppCompatActivity {
             TiketApi.replay(getApplicationContext(), id_tiket, getEditMassage(), null,
                     new TiketListener.replay() {
                         @Override
-                        public void onReceived(String massage) {
+                        public void onReceived(String massage , boolean isSend) {
                             Toast.makeText(TiketViewActivity.this, massage, Toast.LENGTH_SHORT).show();
-                            item_size++;
-                            editMassage.getText().clear();
-                            new Handler().postDelayed(() -> {
-                                GetLanguage();
-                            },200);
-
+                            if (isSend){
+                                item_size++;
+                                editMassage.getText().clear();
+                                editMassage.setText("");
+                                new Handler().postDelayed(() -> GetLanguage(),200);
+                            }
                         }
 
                         @Override

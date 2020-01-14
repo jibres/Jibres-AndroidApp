@@ -1,5 +1,6 @@
 package com.jibres.android.activity.tiket.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -14,20 +15,28 @@ import com.jibres.android.activity.tiket.api.TiketApi;
 import com.jibres.android.activity.tiket.api.TiketListener;
 
 public class TiketAddActivity extends AppCompatActivity {
-    EditText editTitle,editMassage;
+    EditText editMassage;
+    TextView desc;
+
+    String title_Toolbar = "Send Request";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tiket_add);
-        editTitle = findViewById(R.id.edit_title);
+
+        if (getIntent().getStringExtra("title")!=null){
+            title_Toolbar = getIntent().getStringExtra("title");
+        }
+
+        desc = findViewById(R.id.desc);
         editMassage = findViewById(R.id.edit_massage);
 
         View toolbarView = findViewById(R.id.toolbar);
         Toolbar toolbar = toolbarView.findViewById(R.id.toolbar);
         TextView mTitle = toolbar.findViewById(R.id.title);
         setSupportActionBar(toolbar);
-        mTitle.setText("ارسال تیکت");
+        mTitle.setText(title_Toolbar);
         if (getSupportActionBar()!=null){
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setDisplayShowTitleEnabled(false);
@@ -43,11 +52,17 @@ public class TiketAddActivity extends AppCompatActivity {
     public void button_add_tiket(View view) {
         if (getMassage_edt()!=null){
             TiketApi.addTiket(getApplicationContext(), getTitle_edt(), getMassage_edt(),
-                    new TiketListener.replay() {
+                    new TiketListener.addTiket() {
                         @Override
-                        public void onReceived(String massage) {
+                        public void onReceived(String massage, boolean isSend, String id) {
                             Toast.makeText(TiketAddActivity.this, massage, Toast.LENGTH_SHORT).show();
-                            finish();
+                            if (isSend && id != null){
+                                Intent intent = new Intent(getApplicationContext(),
+                                        TiketViewActivity.class);
+                                intent.putExtra("id",id);
+                                startActivity(intent);
+                                finish();
+                            }
                         }
 
                         @Override
@@ -60,10 +75,7 @@ public class TiketAddActivity extends AppCompatActivity {
 
 
     String getTitle_edt(){
-        if (editTitle.getText().toString().length() >1){
-            return editTitle.getText().toString();
-        }
-        return null;
+        return title_Toolbar;
     }
     String getMassage_edt(){
         if (editMassage.getText().toString().length() >1){

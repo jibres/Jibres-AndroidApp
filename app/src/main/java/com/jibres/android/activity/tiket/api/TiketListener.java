@@ -12,7 +12,12 @@ public class TiketListener {
     }
 
     public interface replay{
-        void onReceived(String massage);
+        void onReceived(String massage, boolean massageIsSend);
+        void onFiled(boolean hasNet);
+    }
+
+    public interface addTiket{
+        void onReceived(String massage,boolean massageIsSend, String id);
         void onFiled(boolean hasNet);
     }
 }

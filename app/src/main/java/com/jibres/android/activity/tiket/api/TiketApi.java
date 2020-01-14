@@ -102,10 +102,18 @@ public class TiketApi {
                             try {
                                 JSONObject mainObject = new JSONObject(response);
                                 try {
-                                    JSONArray msg = mainObject.getJSONArray("msg");
-                                    for (int i = 0 ; i<= msg.length();i++){
-                                        JSONObject object = msg.getJSONObject(i);
-                                        listener.onReceived(object.getString("text"));
+                                    if (mainObject.getBoolean("ok")){
+                                        JSONArray msg = mainObject.getJSONArray("msg");
+                                        for (int i = 0 ; i<= msg.length();i++){
+                                            JSONObject object = msg.getJSONObject(i);
+                                            listener.onReceived(object.getString("text"),true);
+                                        }
+                                    }else {
+                                        JSONArray msg = mainObject.getJSONArray("msg");
+                                        for (int i = 0 ; i<= msg.length();i++){
+                                            JSONObject object = msg.getJSONObject(i);
+                                            listener.onReceived(object.getString("text"),false);
+                                        }
                                     }
                                 }catch (Exception e){
                                     e.printStackTrace();
@@ -148,17 +156,26 @@ public class TiketApi {
     }
 
     public static void addTiket(Context context, String TITLE, String MASSAGE ,
-                              TiketListener.replay listener){
+                              TiketListener.addTiket listener){
         StringRequest request =
                 new StringRequest(Request.Method.POST, UrlManager.get.tiket_add(context),
                         response -> {
                             try {
                                 JSONObject mainObject = new JSONObject(response);
                                 try {
-                                    JSONArray msg = mainObject.getJSONArray("msg");
-                                    for (int i = 0 ; i<= msg.length();i++){
-                                        JSONObject object = msg.getJSONObject(i);
-                                        listener.onReceived(object.getString("text"));
+                                    if (mainObject.getBoolean("ok")){
+                                        String id = mainObject.getJSONObject("result").getString("id");
+                                        JSONArray msg = mainObject.getJSONArray("msg");
+                                        for (int i = 0 ; i<= msg.length();i++){
+                                            JSONObject object = msg.getJSONObject(i);
+                                            listener.onReceived(object.getString("text"),true,id);
+                                        }
+                                    }else {
+                                        JSONArray msg = mainObject.getJSONArray("msg");
+                                        for (int i = 0 ; i<= msg.length();i++){
+                                            JSONObject object = msg.getJSONObject(i);
+                                            listener.onReceived(object.getString("text"),false,null);
+                                        }
                                     }
                                 }catch (Exception e){
                                     e.printStackTrace();
