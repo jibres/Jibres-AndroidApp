@@ -54,6 +54,8 @@ public class NotifAdapter extends RecyclerView.Adapter<NotifAdapter.MyViewHolder
       holder.status.setColorFilter(Color.parseColor("#7A7A7A"));
     }
 
+    holder.view.setOnClickListener(view -> mlistener.onClick("1"));
+
   }
 
   @Override
@@ -78,7 +80,7 @@ public class NotifAdapter extends RecyclerView.Adapter<NotifAdapter.MyViewHolder
   }
 
   public interface ItemClickListener{
-    void onClick(int onClick);
+    void onClick(String id);
   }
 
 }

@@ -54,7 +54,7 @@ public class NotifViewActivity extends AppCompatActivity {
         item.add(new NotifModel(true,"اطلاع رسانی ۵","عنوان تستی","متن توضیحی زیاد این متن تکرار میشود \n و هی تکرار میشود","۲۲ روز قبل"));
     }
 
-    private void onCliked(int i) {
+    private void onCliked(String id) {
 
     }
 }
