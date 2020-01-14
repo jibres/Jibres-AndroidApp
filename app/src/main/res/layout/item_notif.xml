@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
+    android:background="@drawable/row_background"
+    android:padding="@dimen/_10sdp"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <ImageView
         android:id="@+id/status"
@@ -15,6 +17,7 @@
 
     <TextView
         android:id="@+id/name"
+        android:padding="@dimen/_5sdp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:textSize="@dimen/_10ssp"
@@ -24,6 +27,7 @@
 
     <TextView
         android:id="@+id/title"
+        android:padding="@dimen/_2sdp"
         android:layout_below="@+id/name"
         android:textSize="@dimen/_12ssp"
         android:textStyle="bold"
@@ -33,6 +37,7 @@
 
     <TextView
         android:id="@+id/desc"
+        android:padding="@dimen/_2sdp"
         android:layout_below="@+id/title"
         android:textSize="@dimen/_9ssp"
         android:text="Desc"
