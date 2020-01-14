@@ -15,6 +15,7 @@ import com.jibres.android.JibresApplication;
 import com.jibres.android.R;
 import com.jibres.android.activity.enter.EnterActivity;
 import com.jibres.android.activity.language.LanguageActivity;
+import com.jibres.android.activity.notif.NotifViewActivity;
 import com.jibres.android.activity.security.fingerprint.FingerprintActivity;
 import com.jibres.android.activity.security.pincode.PincodeActivity;
 import com.jibres.android.activity.setting.SettingsActivity;
@@ -24,7 +25,7 @@ import com.jibres.android.managers.AppManager;
 public class MainActivity extends AppCompatActivity {
     String[] ac = {"EnterActivity","LanguageActivity",
             "SettingsActivity","key","FingerpringActivity",
-            "PinCode","ListTiket",
+            "PinCode","ListTiket","NotifViewActivity"
             /*"TestUplloadFile"*/
     };
 
@@ -87,6 +88,9 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case "ListTiket":
                 intent= new Intent(getApplication(), TiketListActivity.class);
+                break;
+            case "NotifViewActivity":
+                intent= new Intent(getApplication(), NotifViewActivity.class);
                 break;
             /*case "TestUplloadFile":
                 intent= new Intent(getApplication(), TestUploadFileActivity.class);
