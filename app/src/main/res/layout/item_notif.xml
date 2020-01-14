@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:layout_alignParentEnd="true"
+        android:padding="@dimen/_7sdp"
+        android:src="@drawable/ic_star"
+        android:tint="#7A7A7A"
+        android:layout_width="@dimen/_30sdp"
+        android:layout_height="@dimen/_30sdp"/>
+
+    <TextView
+        android:id="@+id/name"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:text="Name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_below="@+id/name"
+        android:text="Title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/desc"
+        android:layout_below="@+id/title"
+        android:text="Desc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+</RelativeLayout>
