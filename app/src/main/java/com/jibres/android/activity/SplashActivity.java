@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.jibres.android.R;
@@ -15,8 +16,8 @@ import com.jibres.android.activity.language.LanguageActivity;
 import com.jibres.android.activity.language.LanguageManager;
 import com.jibres.android.function.AddUserTemp;
 import com.jibres.android.function.AppDetailJson;
-import com.jibres.android.managers.UrlManager;
 import com.jibres.android.managers.AppManager;
+import com.jibres.android.managers.UrlManager;
 
 import java.util.Locale;
 
@@ -53,12 +54,14 @@ public class SplashActivity extends AppCompatActivity {
                             }
                             @Override
                             public void onFiled() {
+                                Dialog_WebView(false);
                                 Log.e("amingoli", "onReceived: AddUserTemp ERROR");
                             }
                         });
                     }
                     @Override
                     public void onFiled(boolean hasInternet) {
+                        Dialog_WebView(false);
                         Log.e("amingoli", "onReceived: AddUserTemp ERROR hasNet: "+hasInternet);
                     }
                 });
@@ -146,5 +149,26 @@ public class SplashActivity extends AppCompatActivity {
             mainActivity();
             Log.e("amingoli", "deprecatedDialog: ",e );
         }
+    }
+
+    private void Dialog_WebView(boolean Cancelable) {
+        final AlertDialog.Builder builderSingle = new AlertDialog.Builder(this);
+        /*Title*/
+        builderSingle.setTitle("اینترنت نداری");
+        /*Message*/
+        builderSingle.setMessage("");
+        /*Button*/
+        builderSingle.setPositiveButton("تلاش مجدد",
+                /*Open Url*/
+                (dialog, which) -> {
+                    dialog.dismiss();
+                    finish();
+                    startActivity(getIntent());
+
+                });
+
+        builderSingle.setNeutralButton("خروج", (dialogInterface, i) -> finish());
+        builderSingle.setCancelable(Cancelable);
+        builderSingle.show();
     }
 }

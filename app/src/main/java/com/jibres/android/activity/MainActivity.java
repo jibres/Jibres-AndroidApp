@@ -15,12 +15,14 @@ import com.jibres.android.JibresApplication;
 import com.jibres.android.R;
 import com.jibres.android.activity.enter.EnterActivity;
 import com.jibres.android.activity.language.LanguageActivity;
+import com.jibres.android.activity.language.LanguageManager;
 import com.jibres.android.activity.notif.NotifViewActivity;
 import com.jibres.android.activity.security.fingerprint.FingerprintActivity;
 import com.jibres.android.activity.security.pincode.PincodeActivity;
 import com.jibres.android.activity.setting.SettingsActivity;
 import com.jibres.android.activity.tiket.activity.TiketListActivity;
 import com.jibres.android.managers.AppManager;
+import com.jibres.android.managers.UrlManager;
 
 public class MainActivity extends AppCompatActivity {
     String[] ac = {"EnterActivity","LanguageActivity",
@@ -33,6 +35,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         Log.d("AppManager", "apikey: "+ AppManager.getApikey(this));
+        Intent intent = new Intent(this,WebViewActivity.class);
+        intent.putExtra("url", UrlManager.get.local+"/"+
+                LanguageManager.getAppLanguage(this));
+        startActivity(intent);
+        finish();
     }
 
     @Override
