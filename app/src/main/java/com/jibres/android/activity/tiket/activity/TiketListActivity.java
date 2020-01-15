@@ -142,7 +142,7 @@ public class TiketListActivity extends AppCompatActivity {
 
     private void onCliked(String id,boolean isLongClick) {
         if (isLongClick){
-            dialogStatus();
+            dialogStatus(id);
         }else {
             Intent intent = new Intent(this,TiketViewActivity.class);
             intent.putExtra("id",id);
@@ -156,8 +156,8 @@ public class TiketListActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    void dialogStatus(){
-        String[] amin = {"solved","close","deleted","awaiting","spam","answered"};
+    void dialogStatus(String id){
+        String[] amin = {"solved","close","deleted","awaiting","spam"};
         AlertDialog.Builder builderSingle = new AlertDialog.Builder(this);
         builderSingle.setTitle("وضعیت تیکت را انتخاب کنید");
 
@@ -176,7 +176,7 @@ public class TiketListActivity extends AppCompatActivity {
         builderSingle.setAdapter(arrayAdapter, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                Toast.makeText(TiketListActivity.this, textStatus(amin[which]), Toast.LENGTH_SHORT).show();
+                setStatusTiket(id,amin[which]);
                 dialog.dismiss();
             }
         });
@@ -199,5 +199,36 @@ public class TiketListActivity extends AppCompatActivity {
                 return "پاسخ داده شده";
         }
         return "";
+    }
+
+    private void setStatusTiket(String idTiket,String status){
+        if (!status.equals("solved")){
+            TiketApi.setStatus(getApplicationContext(), idTiket, status,
+                    new TiketListener.setStatus() {
+                        @Override
+                        public void onReceived(String massage, boolean statusISset) {
+                            Toast.makeText(TiketListActivity.this, massage, Toast.LENGTH_SHORT).show();
+                        }
+
+                        @Override
+                        public void onFiled(boolean hasNet) {
+
+                        }
+                    });
+        }else {
+            TiketApi.setSolved(getApplicationContext(), idTiket, true,
+                    new TiketListener.setStatus() {
+                        @Override
+                        public void onReceived(String massage, boolean statusISset) {
+                            Toast.makeText(TiketListActivity.this, massage, Toast.LENGTH_SHORT).show();
+                        }
+
+                        @Override
+                        public void onFiled(boolean hasNet) {
+
+                        }
+                    });
+        }
+
     }
 }

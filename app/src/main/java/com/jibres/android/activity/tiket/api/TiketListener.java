@@ -20,4 +20,9 @@ public class TiketListener {
         void onReceived(String massage,boolean massageIsSend, String id);
         void onFiled(boolean hasNet);
     }
+
+    public interface setStatus{
+        void onReceived(String massage, boolean statusISset);
+        void onFiled(boolean hasNet);
+    }
 }

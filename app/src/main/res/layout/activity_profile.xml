@@ -7,42 +7,4 @@
     android:layout_height="match_parent"
     tools:context=".activity.profile.ProfileActivity">
 
-    <androidx.appcompat.widget.Toolbar
-        android:background="@color/colorAccent"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <ImageView
-                android:id="@+id/image_profile"
-                android:src="@drawable/ic_error"
-                android:layout_width="@dimen/_50sdp"
-                android:layout_height="@dimen/_50sdp"/>
-
-            <LinearLayout
-                android:layout_toEndOf="@+id/image_profile"
-                android:layout_centerVertical="true"
-                android:orientation="vertical"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-                <TextView
-                    style="@style/item_setting_text_view"
-                    android:textSize="@dimen/_12ssp"
-                    android:textColor="@android:color/white"
-                    android:text="Amin Goli"/>
-                <TextView
-                    style="@style/item_setting_text_view"
-                    android:textSize="@dimen/_10ssp"
-                    android:textColor="@android:color/white"
-                    android:text="+98 919 519 1378"/>
-            </LinearLayout>
-        </RelativeLayout>
-
-
-
-
-    </androidx.appcompat.widget.Toolbar>
-
 </RelativeLayout>

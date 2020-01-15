@@ -157,7 +157,7 @@ public class TiketApi {
     }
 
     public static void addTiket(Context context, String TITLE, String MASSAGE ,
-                              TiketListener.addTiket listener){
+                                TiketListener.addTiket listener){
         StringRequest request =
                 new StringRequest(Request.Method.POST, UrlManager.get.tiket_add(context),
                         response -> {
@@ -217,6 +217,131 @@ public class TiketApi {
                         DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         JibresApplication.getInstance().addToRequestQueue(request);
     }
+
+
+    public static void setStatus(Context context, String TIKET, String status,
+                                 TiketListener.setStatus listener){
+        StringRequest request =
+                new StringRequest(Request.Method.PUT, UrlManager.get.tiket_set_status(context,TIKET)
+                        , response -> {
+                    try {
+                        JSONObject mainObject = new JSONObject(response);
+                        try {
+                            if (mainObject.getBoolean("ok")){
+                                JSONArray msg = mainObject.getJSONArray("msg");
+                                for (int i = 0 ; i<= msg.length();i++){
+                                    JSONObject object = msg.getJSONObject(i);
+                                    listener.onReceived(object.getString("text"),true);
+                                }
+                            }else {
+                                JSONArray msg = mainObject.getJSONArray("msg");
+                                for (int i = 0 ; i<= msg.length();i++){
+                                    JSONObject object = msg.getJSONObject(i);
+                                    listener.onReceived(object.getString("text"),false);
+                                }
+                            }
+                        }catch (Exception e){
+                            e.printStackTrace();
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                        listener.onFiled(true);
+                    }
+                }, e -> listener.onFiled(false))
+                {
+                    @Override
+                    public Map<String, String> getHeaders()  {
+                        HashMap<String, String> headers = new HashMap<>();
+                        headers.put("appkey", keys.appkey );
+                        headers.put("apikey", AppManager.getApikey(context) );
+                        return headers;
+                    }
+                    @Override
+                    public String getBodyContentType() {
+                        return "application/json; charset=utf-8";
+                    }
+
+                    @SuppressLint("HardwareIds")
+                    @Override
+                    public byte[] getBody() {
+                        final Map<String,String> body = new HashMap<>();
+                        body.put("status", status);
+                        return new Gson().toJson(body).getBytes(StandardCharsets.UTF_8);
+                    }
+                };
+        request.setRetryPolicy(
+                new DefaultRetryPolicy(
+                        DefaultRetryPolicy.DEFAULT_TIMEOUT_MS,
+                        DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                        DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        JibresApplication.getInstance().addToRequestQueue(request);
+    }
+
+    public static void setSolved(Context context, String TIKET, boolean solved,
+                                 TiketListener.setStatus listener){
+        StringRequest request =
+                new StringRequest(Request.Method.PUT, UrlManager.get.tiket_set_solved(context,TIKET)
+                        , response -> {
+                    try {
+                        JSONObject mainObject = new JSONObject(response);
+                        try {
+                            if (mainObject.getBoolean("ok")){
+                                JSONArray msg = mainObject.getJSONArray("msg");
+                                for (int i = 0 ; i<= msg.length();i++){
+                                    JSONObject object = msg.getJSONObject(i);
+                                    listener.onReceived(object.getString("text"),true);
+                                }
+                            }else {
+                                JSONArray msg = mainObject.getJSONArray("msg");
+                                for (int i = 0 ; i<= msg.length();i++){
+                                    JSONObject object = msg.getJSONObject(i);
+                                    listener.onReceived(object.getString("text"),false);
+                                }
+                            }
+                        }catch (Exception e){
+                            e.printStackTrace();
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                        listener.onFiled(true);
+                    }
+                }, e -> listener.onFiled(false))
+                {
+                    @Override
+                    public Map<String, String> getHeaders()  {
+                        HashMap<String, String> headers = new HashMap<>();
+                        headers.put("appkey", keys.appkey );
+                        headers.put("apikey", AppManager.getApikey(context) );
+                        return headers;
+                    }
+                    @Override
+                    public String getBodyContentType() {
+                        return "application/json; charset=utf-8";
+                    }
+
+                    @SuppressLint("HardwareIds")
+                    @Override
+                    public byte[] getBody() {
+                        final Map<String,Boolean> body = new HashMap<>();
+                        body.put("solved", solved);
+                        return new Gson().toJson(body).getBytes(StandardCharsets.UTF_8);
+                    }
+                };
+        request.setRetryPolicy(
+                new DefaultRetryPolicy(
+                        DefaultRetryPolicy.DEFAULT_TIMEOUT_MS,
+                        DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                        DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        JibresApplication.getInstance().addToRequestQueue(request);
+    }
+
+
+
+
+
+
+
+
 
     void a(){
         /*SimpleMultiPartRequest
