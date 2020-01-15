@@ -64,6 +64,7 @@ public class TiketApi {
         StringRequest request =
                 new StringRequest(Request.Method.GET, UrlManager.get.tiket_view(context,tiket),
                         response -> {
+                            listener.onReceived(response);
                             try {
                                 JSONObject mainObject = new JSONObject(response);
                                 if (mainObject.getBoolean("ok")){

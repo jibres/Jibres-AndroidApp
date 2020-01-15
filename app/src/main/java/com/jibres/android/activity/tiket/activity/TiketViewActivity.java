@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -67,7 +68,6 @@ public class TiketViewActivity extends AppCompatActivity {
         TiketApi.viewTiket(getApplicationContext(), id_tiket, new TiketListener.viewTiket() {
             @Override
             public void onReceived(String value) {
-
                 try {
                     JSONArray result = new JSONArray(value);
                     for (int i = item_size; i < result.length(); i++) {
@@ -111,10 +111,10 @@ public class TiketViewActivity extends AppCompatActivity {
                                 title,
                                 datecreated,
                                 file));
-                        recyclerView.setItemAnimator(new DefaultItemAnimator());
-                        adapter.notifyDataSetChanged();
-                        sLayoutManager.scrollToPosition(item.size()-1);
                     }
+                    recyclerView.setItemAnimator(new DefaultItemAnimator());
+                    adapter.notifyDataSetChanged();
+                    sLayoutManager.scrollToPosition(item.size()-1);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -124,7 +124,7 @@ public class TiketViewActivity extends AppCompatActivity {
 
             @Override
             public void onFiled(boolean hasNet) {
-
+                Log.d("amingoli", "onFiled: "+hasNet);
             }
         });
 

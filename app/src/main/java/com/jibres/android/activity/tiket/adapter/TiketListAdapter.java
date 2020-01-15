@@ -61,7 +61,11 @@ public class TiketListAdapter extends RecyclerView.Adapter<TiketListAdapter.MyVi
       holder.status.setText(textStatus(item.getStatus()));
     }
 
-    holder.view.setOnClickListener(view -> mlistener.onClick(item.getId()));
+    holder.view.setOnClickListener(view -> mlistener.onClick(item.getId(),false));
+    holder.view.setOnLongClickListener(view -> {
+      mlistener.onClick(item.getId(),true);
+      return false;
+    });
 
   }
 
@@ -88,7 +92,7 @@ public class TiketListAdapter extends RecyclerView.Adapter<TiketListAdapter.MyVi
   }
 
   public interface ItemClickListener{
-    void onClick(String id);
+    void onClick(String id,boolean isOnclickLong);
   }
 
   private String textStatus(String status){

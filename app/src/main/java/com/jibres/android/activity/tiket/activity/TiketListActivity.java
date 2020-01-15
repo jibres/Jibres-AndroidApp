@@ -1,10 +1,14 @@
 package com.jibres.android.activity.tiket.activity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.content.ContextCompat;
@@ -17,6 +21,7 @@ import com.jibres.android.activity.tiket.adapter.TiketListAdapter;
 import com.jibres.android.activity.tiket.api.TiketApi;
 import com.jibres.android.activity.tiket.api.TiketListener;
 import com.jibres.android.activity.tiket.model.TiketListModel;
+import com.jibres.android.managers.UrlManager;
 import com.jibres.android.weight.DividerItemDecoratorWeighet;
 
 import org.json.JSONArray;
@@ -42,6 +47,8 @@ public class TiketListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tiket_list);
+
+        Log.d("amingili", "onCreate: local_api= "+ UrlManager.get.local_api(this));
 
         recyclerView = findViewById(R.id.recycler_view);
         item = new ArrayList<>();
@@ -133,15 +140,64 @@ public class TiketListActivity extends AppCompatActivity {
         });
     }
 
-    private void onCliked(String id) {
-        Intent intent = new Intent(this,TiketViewActivity.class);
-        intent.putExtra("id",id);
-        startActivity(intent);
+    private void onCliked(String id,boolean isLongClick) {
+        if (isLongClick){
+            dialogStatus();
+        }else {
+            Intent intent = new Intent(this,TiketViewActivity.class);
+            intent.putExtra("id",id);
+            startActivity(intent);
+        }
     }
 
     public void add_tiket(View view) {
         Intent intent = new Intent(this,TiketAddActivity.class);
         intent.putExtra("title","تیکت");
         startActivity(intent);
+    }
+
+    void dialogStatus(){
+        String[] amin = {"solved","close","deleted","awaiting","spam","answered"};
+        AlertDialog.Builder builderSingle = new AlertDialog.Builder(this);
+        builderSingle.setTitle("وضعیت تیکت را انتخاب کنید");
+
+        final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.select_dialog_singlechoice);
+        for (int i = 0; i < amin.length; i++) {
+            arrayAdapter.add(textStatus(amin[i]));
+        }
+
+        builderSingle.setNegativeButton("خروج", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+
+        builderSingle.setAdapter(arrayAdapter, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Toast.makeText(TiketListActivity.this, textStatus(amin[which]), Toast.LENGTH_SHORT).show();
+                dialog.dismiss();
+            }
+        });
+        builderSingle.show();
+    }
+
+    private String textStatus(String status){
+        switch (status){
+            case "solved":
+                return "حل شده";
+            case "close":
+                return "بسته شده";
+            case "deleted":
+                return "حذف شده";
+            case "awaiting":
+                return "در انتظار";
+            case "spam":
+                return "اسپم";
+            case "answered":
+                return "پاسخ داده شده";
+        }
+        return "";
     }
 }
