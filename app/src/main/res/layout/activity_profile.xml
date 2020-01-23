@@ -7,4 +7,44 @@
     android:layout_height="match_parent"
     tools:context=".activity.profile.ProfileActivity">
 
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/image"
+        android:background="@drawable/row_background"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/logo_xml"
+        android:layout_width="@dimen/_70sdp"
+        android:layout_height="@dimen/_70sdp"/>
+    <TextView
+        android:id="@+id/name"
+        android:textSize="@dimen/_14ssp"
+        android:textColor="@color/title"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/image"
+        android:text="محمد امین"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <LinearLayout
+        android:layout_below="@+id/name"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:text="aaaa"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:text="aaaa"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:text="aaaa"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        am
+
+
+    </LinearLayout>
+
 </RelativeLayout>
