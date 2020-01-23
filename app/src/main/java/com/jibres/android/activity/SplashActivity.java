@@ -152,14 +152,14 @@ public class SplashActivity extends AppCompatActivity {
     }
 
     private void Dialog_WebView(boolean Cancelable) {
-        final AlertDialog.Builder builderSingle = new AlertDialog.Builder(this);
-        /*Title*/
+        /*final AlertDialog.Builder builderSingle = new AlertDialog.Builder(this);
+        *//*Title*//*
         builderSingle.setTitle("اینترنت نداری");
-        /*Message*/
+        *//*Message*//*
         builderSingle.setMessage("");
-        /*Button*/
+        *//*Button*//*
         builderSingle.setPositiveButton("تلاش مجدد",
-                /*Open Url*/
+                *//*Open Url*//*
                 (dialog, which) -> {
                     dialog.dismiss();
                     finish();
@@ -169,6 +169,6 @@ public class SplashActivity extends AppCompatActivity {
 
         builderSingle.setNeutralButton("خروج", (dialogInterface, i) -> finish());
         builderSingle.setCancelable(Cancelable);
-        builderSingle.show();
+        builderSingle.show();*/
     }
 }
