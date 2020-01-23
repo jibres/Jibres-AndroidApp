@@ -143,7 +143,7 @@ public class SplashActivity extends AppCompatActivity {
                 intent.setData(Uri.parse(UrlManager.get.url_update(getApplication())));
                 startActivity(intent);
             });
-            findViewById(R.id.progress).setVisibility(View.GONE);
+            findViewById(R.id.lav_actionBar).setVisibility(View.GONE);
             view.setVisibility(View.VISIBLE);
         }catch (Exception e){
             mainActivity();

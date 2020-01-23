@@ -10,30 +10,21 @@
         android:id="@+id/lav_actionBar"
         android:layout_centerInParent="true"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_marginStart="0dp"
         android:layout_marginTop="0dp"
         android:layout_marginEnd="0dp"
-        android:scaleType="centerCrop"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        android:scaleType="fitCenter"
         app:lottie_autoPlay="true"
         app:lottie_fileName="splash.json"
         app:lottie_loop="true" />
-
-    <ProgressBar
-        android:id="@+id/progress"
-        android:layout_centerInParent="true"
-        android:layout_width="@dimen/_156sdp"
-        android:layout_height="@dimen/_156sdp"/>
 
     <ImageView
         android:id="@+id/logo"
         android:layout_centerInParent="true"
         android:src="@drawable/logo_xml"
-        android:layout_width="@dimen/_150sdp"
-        android:layout_height="@dimen/_150sdp"/>
+        android:layout_width="@dimen/_80sdp"
+        android:layout_height="@dimen/_80sdp"/>
 
     <include
         android:id="@+id/item_deprecated"
