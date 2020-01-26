@@ -8,12 +8,12 @@
     tools:context=".activity.SplashActivity">
 
     <com.airbnb.lottie.LottieAnimationView
-        android:id="@+id/lav_actionBar"
+        android:id="@+id/animate_bg"
         android:alpha="0.2"
         android:layout_centerInParent="true"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scaleType="centerInside"
+        android:scaleType="centerCrop"
         app:lottie_autoPlay="true"
         app:lottie_fileName="loading.json"
         app:lottie_loop="true" />
@@ -24,6 +24,33 @@
         android:src="@drawable/logo_xml"
         android:layout_width="@dimen/_130sdp"
         android:layout_height="@dimen/_150sdp"/>
+
+    <com.jibres.android.weight.GradientTextView
+        android:id="@+id/app_name"
+        android:layout_below="@+id/logo"
+        android:layout_centerHorizontal="true"
+        android:text="@string/app_name"
+        android:maxLines="1"
+        android:maxLength="20"
+        android:textSize="@dimen/_11ssp"
+        android:textAlignment="center"
+        android:textColor="@color/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <com.jibres.android.weight.GradientTextView
+        android:id="@+id/desc"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:text="Desc Text Desc Text Desc Text Desc Text Desc Text Desc Text Desc Text Desc Text Desc Text Desc Text Desc Text Desc Text Desc Text Desc Text Desc Text Desc Text Desc Text "
+        android:maxLines="5"
+        android:textSize="@dimen/_9ssp"
+        android:textColor="@color/title"
+        android:textAlignment="center"
+        android:maxLength="150"
+        android:layout_marginBottom="@dimen/_10sdp"
+        android:layout_width="@dimen/_200sdp"
+        android:layout_height="wrap_content"/>
 
     <include
         android:id="@+id/item_deprecated"

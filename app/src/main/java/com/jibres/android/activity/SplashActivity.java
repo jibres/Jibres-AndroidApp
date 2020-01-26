@@ -1,16 +1,17 @@
 package com.jibres.android.activity;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.RelativeLayout;
+import android.widget.ImageView;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.jibres.android.R;
 import com.jibres.android.activity.intro.IntroActivity;
 import com.jibres.android.activity.language.LanguageActivity;
@@ -20,10 +21,16 @@ import com.jibres.android.function.AppDetailJson;
 import com.jibres.android.managers.AppManager;
 import com.jibres.android.managers.UrlManager;
 import com.jibres.android.utility.ColorUtil;
+import com.jibres.android.weight.GradientTextView;
 
 import java.util.Locale;
 
 public class SplashActivity extends AppCompatActivity {
+    View background;
+    GradientTextView app_name,desc;
+    LottieAnimationView animation_bg;
+    ImageView logo;
+
     @Override
     protected void onResume() {
         super.onResume();
@@ -34,9 +41,10 @@ public class SplashActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
-        RelativeLayout splash = findViewById(R.id.splash_relative_layout);
-        ColorUtil.setGradient(splash,"#b76cd6","#6d3fc3");
-
+        idFinder();
+        ColorUtil.setGradient(background,"#b76cd6","#6d3fc3");
+        app_name.setLinearGradient(Color.parseColor("#FFFF0000"), Color.parseColor("#ffffff"));
+        desc.setLinearGradient(Color.parseColor("#FFFF0000"), Color.parseColor("#ffffff"));
 
         new AppDetailJson(getApplicationContext(), new AppDetailJson.Listener() {
                     @Override
@@ -149,7 +157,9 @@ public class SplashActivity extends AppCompatActivity {
                 intent.setData(Uri.parse(UrlManager.get.url_update(getApplication())));
                 startActivity(intent);
             });
-            findViewById(R.id.lav_actionBar).setVisibility(View.GONE);
+            findViewById(R.id.app_name).setVisibility(View.GONE);
+            findViewById(R.id.desc).setVisibility(View.GONE);
+            findViewById(R.id.animate_bg).setVisibility(View.GONE);
             view.setVisibility(View.VISIBLE);
         }catch (Exception e){
             mainActivity();
@@ -158,23 +168,42 @@ public class SplashActivity extends AppCompatActivity {
     }
 
     private void Dialog_WebView(boolean Cancelable) {
-        final AlertDialog.Builder builderSingle = new AlertDialog.Builder(this);
-        /*Title*/
-        builderSingle.setTitle("اینترنت نداری");
-        /*Message*/
-        builderSingle.setMessage("");
-        /*Button*/
-        builderSingle.setPositiveButton("تلاش مجدد",
-                /*Open Url*/
-                (dialog, which) -> {
-                    dialog.dismiss();
-                    finish();
-                    startActivity(getIntent());
+//        final AlertDialog.Builder builderSingle = new AlertDialog.Builder(this);
+//        /*Title*/
+//        builderSingle.setTitle("اینترنت نداری");
+//        /*Message*/
+//        builderSingle.setMessage("");
+//        /*Button*/
+//        builderSingle.setPositiveButton("تلاش مجدد",
+//                /*Open Url*/
+//                (dialog, which) -> {
+//                    dialog.dismiss();
+//                    finish();
+//                    startActivity(getIntent());
+//
+//                });
+//
+//        builderSingle.setNeutralButton("خروج", (dialogInterface, i) -> finish());
+//        builderSingle.setCancelable(Cancelable);
+//        builderSingle.show();
+    }
 
-                });
 
-        builderSingle.setNeutralButton("خروج", (dialogInterface, i) -> finish());
-        builderSingle.setCancelable(Cancelable);
-        builderSingle.show();
+    void idFinder(){
+        background = findViewById(R.id.splash_relative_layout);
+        animation_bg = findViewById(R.id.animate_bg);
+        logo = findViewById(R.id.logo);
+        app_name = findViewById(R.id.app_name);
+        desc = findViewById(R.id.desc);
+    }
+
+    void setStringSplash(String AppName,String Desc){
+        if (AppName != null && AppName.length()>1){
+            app_name.setText(AppName);
+        }
+        if (desc != null && Desc.length()>1){
+            desc.setVisibility(View.VISIBLE);
+            desc.setText(Desc);
+        }
     }
 }
