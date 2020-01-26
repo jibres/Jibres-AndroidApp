@@ -39,7 +39,6 @@ public class ColorUtil {
         textView.measure(0, 0);       //must call measure!
         int h = textView.getMeasuredHeight(); //get height
         int w = textView.getMeasuredWidth()/2;  //get width
-        Log.e("amingoli", h+"setGradient: "+w );
         textView.getPaint().setShader(
                 new LinearGradient(0, 0, w, h,
                 Color.parseColor(START),
