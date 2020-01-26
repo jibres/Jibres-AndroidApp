@@ -104,7 +104,7 @@ public class UrlManager {
 
         SharedPreferences.Editor editor;
         SharedPreferences sharedPreferences;
-        public static final String SH_PREF_NAME = "ShPerfManager_Payamres";
+        public static final String SH_PREF_NAME = "SAVE_URL_JIBRES";
 
 
         @SuppressLint("CommitPrefEdits")
