@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    android:id="@+id/background"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <LinearLayout
+        android:layout_marginTop="@dimen/_160sdp"
+        android:layout_alignParentTop="true"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <com.jibres.android.weight.GradientTextView
+            android:id="@+id/title"
+            android:textSize="@dimen/_40ssp"
+            android:textColor="@color/title"
+            android:text="Hello"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <com.jibres.android.weight.GradientTextView
+            android:id="@+id/desc"
+            android:textSize="@dimen/_12ssp"
+            android:textColor="@color/desc"
+            android:text="Welcome to Jibres on Moblie."
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+
+
+</RelativeLayout>

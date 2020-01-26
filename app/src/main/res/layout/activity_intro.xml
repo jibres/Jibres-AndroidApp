@@ -16,48 +16,16 @@
         android:layout_height="match_parent"
         app:rvp_triggerOffset="0.1"
         app:rvp_singlePageFling="true"
+        android:layout_above="@+id/tabDots"
         android:clipToPadding="false"/>
 
-    <LinearLayout
-        android:id="@+id/layoutDots"
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tabDots"
+        android:layout_alignParentBottom="true"
         android:layout_width="match_parent"
-        android:layout_height="35dp"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="20dp"
-        android:gravity="center"
-        android:orientation="horizontal">
-
-    </LinearLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:alpha=".5"
-        android:background="@android:color/white" />
-
-    <Button
-        android:layout_margin="@dimen/_5sdp"
-        android:textSize="@dimen/_12ssp"
-        android:id="@+id/btn_next"
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:background="@drawable/row_background"
-        android:textColor="#1a1414" />
-
-    <Button
-        android:layout_margin="@dimen/_5sdp"
-        android:textSize="@dimen/_12ssp"
-        android:id="@+id/btn_prav"
-        android:visibility="gone"
-        android:gravity="center"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:background="@drawable/row_background"
-        android:text=""
-        android:textColor="#1a1414" />
+        app:tabBackground="@drawable/tab_selector"
+        app:tabGravity="center"
+        app:tabIndicatorHeight="0dp"/>
 
 </RelativeLayout>
