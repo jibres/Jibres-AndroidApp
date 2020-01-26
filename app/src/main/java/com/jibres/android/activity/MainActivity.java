@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -21,11 +22,12 @@ import com.jibres.android.activity.security.pincode.PincodeActivity;
 import com.jibres.android.activity.setting.SettingsActivity;
 import com.jibres.android.activity.tiket.activity.TiketListActivity;
 import com.jibres.android.managers.AppManager;
+import com.jibres.android.weight.BottomSheetFragment;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements BottomSheetFragment.listenerBottomSheet {
     String[] ac = {"EnterActivity","LanguageActivity",
             "SettingsActivity","key","FingerpringActivity",
-            "PinCode","ListTiket","NotifViewActivity"
+            "PinCode","ListTiket","NotifViewActivity","BottomSheet"
             /*"TestUplloadFile"*/
     };
 
@@ -92,13 +94,26 @@ public class MainActivity extends AppCompatActivity {
             case "NotifViewActivity":
                 intent= new Intent(getApplication(), NotifViewActivity.class);
                 break;
-            /*case "TestUplloadFile":
-                intent= new Intent(getApplication(), TestUploadFileActivity.class);
-                break;*/
+            case "BottomSheet":
+                showBottomSheetDialogFragment();
+                break;
         }
         if (intent!=null){
             intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
             startActivity(intent);
         }
+    }
+
+    public void showBottomSheetDialogFragment() {
+        BottomSheetFragment bottomSheetFragment = new BottomSheetFragment();
+        bottomSheetFragment.setCancelable(true);
+        bottomSheetFragment.setListener(this);
+        bottomSheetFragment.show(getSupportFragmentManager(), bottomSheetFragment.getTag());
+    }
+
+    @Override
+    public void refreh() {
+        finish();
+        startActivity(getIntent());
     }
 }
