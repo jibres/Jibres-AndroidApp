@@ -1,15 +1,18 @@
 package com.jibres.android.activity;
 
 import android.app.KeyguardManager;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.jibres.android.JibresApplication;
@@ -19,6 +22,7 @@ import com.jibres.android.activity.language.LanguageActivity;
 import com.jibres.android.activity.notif.NotifViewActivity;
 import com.jibres.android.activity.security.fingerprint.FingerprintActivity;
 import com.jibres.android.activity.security.pincode.PincodeActivity;
+import com.jibres.android.activity.security.pincode.PincodeManagerActivity;
 import com.jibres.android.activity.setting.SettingsActivity;
 import com.jibres.android.activity.tiket.activity.TiketListActivity;
 import com.jibres.android.managers.AppManager;
@@ -27,7 +31,7 @@ import com.jibres.android.weight.BottomSheetFragment;
 public class MainActivity extends AppCompatActivity implements BottomSheetFragment.listenerBottomSheet {
     String[] ac = {"EnterActivity","LanguageActivity",
             "SettingsActivity","key","FingerpringActivity",
-            "PinCode","ListTiket","NotifViewActivity","BottomSheet"
+            "PinCode","ListTiket","NotifViewActivity","BottomSheet","WebView"
             /*"TestUplloadFile"*/
     };
 
@@ -86,7 +90,7 @@ public class MainActivity extends AppCompatActivity implements BottomSheetFragme
                 intent= new Intent(getApplication(), FingerprintActivity.class);
                 break;
             case "PinCode":
-                intent= new Intent(getApplication(), PincodeActivity.class);
+                intent= new Intent(getApplication(), PincodeManagerActivity.class);
                 break;
             case "ListTiket":
                 intent= new Intent(getApplication(), TiketListActivity.class);
@@ -96,6 +100,9 @@ public class MainActivity extends AppCompatActivity implements BottomSheetFragme
                 break;
             case "BottomSheet":
                 showBottomSheetDialogFragment();
+                break;
+            case "WebView":
+                dialog();
                 break;
         }
         if (intent!=null){
@@ -115,5 +122,27 @@ public class MainActivity extends AppCompatActivity implements BottomSheetFragme
     public void refreh() {
         finish();
         startActivity(getIntent());
+    }
+
+
+    void dialog(){
+        EditText inputEditTextField = new EditText(this);
+        inputEditTextField.setText("jibres.ir");
+        AlertDialog dialog = new AlertDialog.Builder(this)
+                .setTitle("Go to WebView")
+                .setMessage("Enter Your Url")
+                .setView(inputEditTextField)
+                .setPositiveButton("OK", (dialogInterface, i) -> {
+                    String editTextInput = inputEditTextField.getText().toString();
+                    if (!editTextInput.startsWith("https://")){
+                        editTextInput = "https://"+editTextInput;
+                    }
+                    Intent intent = new Intent(this,WebViewActivity.class);
+                    intent.putExtra("url",editTextInput);
+                    startActivity(intent);
+                })
+                .setNegativeButton("Cancel", null)
+                .create();
+        dialog.show();
     }
 }
