@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.RelativeLayout;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,6 +19,7 @@ import com.jibres.android.function.AddUserTemp;
 import com.jibres.android.function.AppDetailJson;
 import com.jibres.android.managers.AppManager;
 import com.jibres.android.managers.UrlManager;
+import com.jibres.android.utility.ColorUtil;
 
 import java.util.Locale;
 
@@ -32,6 +34,10 @@ public class SplashActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
+        RelativeLayout splash = findViewById(R.id.splash_relative_layout);
+        ColorUtil.setGradient(splash,"#b76cd6","#6d3fc3");
+
+
         new AppDetailJson(getApplicationContext(), new AppDetailJson.Listener() {
                     @Override
                     public void isDeprecated() {
@@ -152,14 +158,14 @@ public class SplashActivity extends AppCompatActivity {
     }
 
     private void Dialog_WebView(boolean Cancelable) {
-        /*final AlertDialog.Builder builderSingle = new AlertDialog.Builder(this);
-        *//*Title*//*
+        final AlertDialog.Builder builderSingle = new AlertDialog.Builder(this);
+        /*Title*/
         builderSingle.setTitle("اینترنت نداری");
-        *//*Message*//*
+        /*Message*/
         builderSingle.setMessage("");
-        *//*Button*//*
+        /*Button*/
         builderSingle.setPositiveButton("تلاش مجدد",
-                *//*Open Url*//*
+                /*Open Url*/
                 (dialog, which) -> {
                     dialog.dismiss();
                     finish();
@@ -169,6 +175,6 @@ public class SplashActivity extends AppCompatActivity {
 
         builderSingle.setNeutralButton("خروج", (dialogInterface, i) -> finish());
         builderSingle.setCancelable(Cancelable);
-        builderSingle.show();*/
+        builderSingle.show();
     }
 }
