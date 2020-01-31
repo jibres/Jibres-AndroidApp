@@ -1,23 +1,16 @@
 package com.jibres.android.activity.intro;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.PagerSnapHelper;
 
 import com.jibres.android.R;
-import com.jibres.android.activity.MainActivity;
-import com.jibres.android.api.Api;
 import com.jibres.android.managers.AppManager;
 import com.lsjwzh.widget.recyclerviewpager.RecyclerViewPager;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +18,7 @@ import java.util.List;
 public class IntroActivity extends AppCompatActivity {
 
     List<IntroModel> itemIntroList;
-    RecyclerViewPager recyclerViewPager;
+    RecyclerViewPager recyclerView;
     IntroAdapter adaptorIntro;
 
     @Override
@@ -39,9 +32,13 @@ public class IntroActivity extends AppCompatActivity {
 
 
         itemIntroList = new ArrayList<>();
-        recyclerViewPager  = findViewById(R.id.recyclerViewPager_intro);
+        recyclerView = findViewById(R.id.recyclerViewPager_intro);
         adaptorIntro  = new IntroAdapter(this,itemIntroList);
-        recyclerViewPager.setAdapter(adaptorIntro);
+        recyclerView.setAdapter(adaptorIntro);
+        recyclerView.setNestedScrollingEnabled(false);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.addItemDecoration(new DotsIndicatorRecyclerView(getApplicationContext()));
+        new PagerSnapHelper().attachToRecyclerView(recyclerView);
         final LinearLayoutManager layout = new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false);
 
 
@@ -52,11 +49,9 @@ public class IntroActivity extends AppCompatActivity {
         itemIntroList.add(new IntroModel(i));
         itemIntroList.add(new IntroModel(i));
         itemIntroList.add(new IntroModel(i));
-        itemIntroList.add(new IntroModel(i));
-        itemIntroList.add(new IntroModel(i));
-        itemIntroList.add(new IntroModel(i));
-        recyclerViewPager.setLayoutManager(layout);
-        recyclerViewPager.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.setLayoutManager(layout);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+
 
         /*Api.getAppDetail(getApplicationContext(), (status, value) -> {
             if (status && value!=null){
@@ -78,8 +73,8 @@ public class IntroActivity extends AppCompatActivity {
                         String desc_color = object.getString("desc_color");
 
                         itemIntroList.add(new IntroModel(image,title,desc,bg_from,bg_to,title_color,desc_color));
-                        recyclerViewPager.setLayoutManager(layout);
-                        recyclerViewPager.setItemAnimator(new DefaultItemAnimator());
+                        recyclerView.setLayoutManager(layout);
+                        recyclerView.setItemAnimator(new DefaultItemAnimator());
                     }
 
                 } catch (JSONException e) {
@@ -90,6 +85,6 @@ public class IntroActivity extends AppCompatActivity {
     }
 
     private int page_intro(){
-        return recyclerViewPager.getCurrentPosition();
+        return recyclerView.getCurrentPosition();
     }
 }
