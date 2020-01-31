@@ -18,6 +18,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.jibres.android.JibresApplication;
 import com.jibres.android.R;
 import com.jibres.android.activity.enter.EnterActivity;
+import com.jibres.android.activity.intro.IntroActivity;
 import com.jibres.android.activity.language.LanguageActivity;
 import com.jibres.android.activity.notif.NotifViewActivity;
 import com.jibres.android.activity.security.fingerprint.FingerprintActivity;
@@ -31,7 +32,8 @@ import com.jibres.android.weight.BottomSheetFragment;
 public class MainActivity extends AppCompatActivity implements BottomSheetFragment.listenerBottomSheet {
     String[] ac = {"EnterActivity","LanguageActivity",
             "SettingsActivity","key","FingerpringActivity",
-            "PinCode","ListTiket","NotifViewActivity","BottomSheet","WebView"
+            "PinCode","ListTiket","NotifViewActivity",
+            "BottomSheet","WebView","intro"
             /*"TestUplloadFile"*/
     };
 
@@ -103,6 +105,9 @@ public class MainActivity extends AppCompatActivity implements BottomSheetFragme
                 break;
             case "WebView":
                 dialog();
+                break;
+            case "intro":
+                intent = new Intent(getApplication(), IntroActivity.class);
                 break;
         }
         if (intent!=null){
