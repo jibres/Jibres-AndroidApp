@@ -1,144 +1,132 @@
 package com.jibres.android.activity.intro;
 
-import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.view.View;
+import android.view.animation.AccelerateDecelerateInterpolator;
+import android.view.animation.Interpolator;
 
-import androidx.annotation.ColorInt;
-import androidx.core.content.ContextCompat;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.jibres.android.R;
-
-import org.jetbrains.annotations.NotNull;
-
 public class DotsIndicatorRecyclerView extends RecyclerView.ItemDecoration {
+    private int colorActive = 0xDE000000;
+    private int colorInactive = 0x33000000;
 
-    private final int indicatorHeight;
-    private final int indicatorItemPadding;
-    private final int radius;
+    private static final float DP = Resources.getSystem().getDisplayMetrics().density;
 
-    private final Paint inactivePaint = new Paint();
-    private final Paint activePaint = new Paint();
+    /**
+     * Height of the space the indicator takes up at the bottom of the view.
+     */
+    private final int mIndicatorHeight = (int) (DP * 56);
 
-    public DotsIndicatorRecyclerView(int radius, int padding, int indicatorHeight, @ColorInt int colorInactive, @ColorInt int colorActive) {
-        float strokeWidth = Resources.getSystem().getDisplayMetrics().density * 1;
-        this.radius = radius;
-        inactivePaint.setStrokeCap(Paint.Cap.ROUND);
-        inactivePaint.setStrokeWidth(strokeWidth);
-        inactivePaint.setStyle(Paint.Style.STROKE);
-        inactivePaint.setAntiAlias(true);
-        inactivePaint.setColor(colorInactive);
+    /**
+     * Indicator stroke width.
+     */
+    private final float mIndicatorStrokeWidth = DP * 4;
 
-        activePaint.setStrokeCap(Paint.Cap.ROUND);
-        activePaint.setStrokeWidth(strokeWidth);
-        activePaint.setStyle(Paint.Style.FILL);
-        activePaint.setAntiAlias(true);
-        activePaint.setColor(colorActive);
+    /**
+     * Indicator width.
+     */
+    private final float mIndicatorItemLength = DP * 4;
+    /**
+     * Padding between indicators.
+     */
+    private final float mIndicatorItemPadding = DP * 10;
 
-        this.indicatorItemPadding = padding;
-        this.indicatorHeight = indicatorHeight;
-    }
+    /**
+     * Some more natural animation interpolation
+     */
+    private final Interpolator mInterpolator = new AccelerateDecelerateInterpolator();
 
-    public DotsIndicatorRecyclerView(Context context) {
-        final int radius = (int) context.getResources().getDimension(R.dimen._2sdp);
-        final int dotsHeight = (int) context.getResources().getDimension(R.dimen._10sdp);
-        final int color1 = Color.parseColor("#333333");
-        final int color2 = Color.parseColor("#858282");
+    private final Paint mPaint = new Paint();
 
-        float strokeWidth = Resources.getSystem().getDisplayMetrics().density * 1;
-        this.radius = radius;
-        inactivePaint.setStrokeCap(Paint.Cap.ROUND);
-        inactivePaint.setStrokeWidth(strokeWidth);
-        inactivePaint.setStyle(Paint.Style.STROKE);
-        inactivePaint.setAntiAlias(true);
-        inactivePaint.setColor(color1);
+    public DotsIndicatorRecyclerView() {
 
-        activePaint.setStrokeCap(Paint.Cap.ROUND);
-        activePaint.setStrokeWidth(strokeWidth);
-        activePaint.setStyle(Paint.Style.FILL);
-        activePaint.setAntiAlias(true);
-        activePaint.setColor(color2);
-
-        this.indicatorItemPadding = radius;
-        this.indicatorHeight = dotsHeight;
+        mPaint.setStrokeWidth(mIndicatorStrokeWidth);
+        mPaint.setStyle(Paint.Style.STROKE);
+        mPaint.setAntiAlias(true);
     }
 
     @Override
-    public void onDrawOver(@NotNull Canvas c, @NotNull RecyclerView parent, @NotNull RecyclerView.State state) {
+    public void onDrawOver(Canvas c, RecyclerView parent, RecyclerView.State state) {
         super.onDrawOver(c, parent, state);
 
-        final RecyclerView.Adapter adapter = parent.getAdapter();
-
-        if (adapter == null) {
-            return;
-        }
-
-        int itemCount = adapter.getItemCount();
+        int itemCount = parent.getAdapter().getItemCount();
 
         // center horizontally, calculate width and subtract half from center
-        float totalLength = this.radius * 2 * itemCount;
-        float paddingBetweenItems = Math.max(0, itemCount - 1) * indicatorItemPadding;
+        float totalLength = mIndicatorItemLength * itemCount;
+        float paddingBetweenItems = Math.max(0, itemCount - 1) * mIndicatorItemPadding;
         float indicatorTotalWidth = totalLength + paddingBetweenItems;
-        float indicatorStartX = (parent.getWidth() - indicatorTotalWidth) / 2f;
+        float indicatorStartX = (parent.getWidth() - indicatorTotalWidth) / 2F;
 
         // center vertically in the allotted space
-        float indicatorPosY = parent.getHeight() - indicatorHeight / 2f;
+        float indicatorPosY = parent.getHeight() - mIndicatorHeight / 2F;
 
-        drawInactiveDots(c, indicatorStartX, indicatorPosY, itemCount);
+        drawInactiveIndicators(c, indicatorStartX, indicatorPosY, itemCount);
 
-        final int activePosition;
-
-        if (parent.getLayoutManager() instanceof GridLayoutManager) {
-            activePosition = ((GridLayoutManager) parent.getLayoutManager()).findFirstVisibleItemPosition();
-        } else if (parent.getLayoutManager() instanceof LinearLayoutManager) {
-            activePosition = ((LinearLayoutManager) parent.getLayoutManager()).findFirstVisibleItemPosition();
-        } else {
-            // not supported layout manager
-            return;
-        }
-
+        // find active page (which should be highlighted)
+        LinearLayoutManager layoutManager = (LinearLayoutManager) parent.getLayoutManager();
+        int activePosition = layoutManager.findFirstVisibleItemPosition();
         if (activePosition == RecyclerView.NO_POSITION) {
             return;
         }
 
-        // find offset of active page if the user is scrolling
-        final View activeChild = parent.getLayoutManager().findViewByPosition(activePosition);
-        if (activeChild == null) {
-            return;
-        }
+        // find offset of active page (if the user is scrolling)
+        final View activeChild = layoutManager.findViewByPosition(activePosition);
+        int left = activeChild.getLeft();
+        int width = activeChild.getWidth();
+        int right = activeChild.getRight();
 
-        drawActiveDot(c, indicatorStartX, indicatorPosY, activePosition);
+        // on swipe the active item will be positioned from [-width, 0]
+        // interpolate offset for smooth animation
+        float progress = mInterpolator.getInterpolation(left * -1 / (float) width);
+
+        drawHighlights(c, indicatorStartX, indicatorPosY, activePosition, progress);
     }
 
-    private void drawInactiveDots(Canvas c, float indicatorStartX, float indicatorPosY, int itemCount) {
-        // width of item indicator including padding
-        final float itemWidth = this.radius * 2 + indicatorItemPadding;
+    private void drawInactiveIndicators(Canvas c, float indicatorStartX, float indicatorPosY, int itemCount) {
+        mPaint.setColor(colorInactive);
 
-        float start = indicatorStartX + radius;
+        // width of item indicator including padding
+        final float itemWidth = mIndicatorItemLength + mIndicatorItemPadding;
+
+        float start = indicatorStartX;
         for (int i = 0; i < itemCount; i++) {
-            c.drawCircle(start, indicatorPosY, radius, inactivePaint);
+
+            c.drawCircle(start, indicatorPosY, mIndicatorItemLength / 2F, mPaint);
+
             start += itemWidth;
         }
     }
 
-    private void drawActiveDot(Canvas c, float indicatorStartX, float indicatorPosY,
-                               int highlightPosition) {
+    private void drawHighlights(Canvas c, float indicatorStartX, float indicatorPosY,
+                                int highlightPosition, float progress) {
+        mPaint.setColor(colorActive);
+
         // width of item indicator including padding
-        final float itemWidth = this.radius * 2 + indicatorItemPadding;
-        float highlightStart = indicatorStartX + radius + itemWidth * highlightPosition;
-        c.drawCircle(highlightStart, indicatorPosY, radius, activePaint);
+        final float itemWidth = mIndicatorItemLength + mIndicatorItemPadding;
+
+        if (progress == 0F) {
+            // no swipe, draw a normal indicator
+            float highlightStart = indicatorStartX + itemWidth * highlightPosition;
+
+            c.drawCircle(highlightStart, indicatorPosY, mIndicatorItemLength / 2F, mPaint);
+
+        } else {
+            float highlightStart = indicatorStartX + itemWidth * highlightPosition;
+            // calculate partial highlight
+            float partialLength = mIndicatorItemLength * progress + mIndicatorItemPadding*progress;
+
+            c.drawCircle(highlightStart + partialLength, indicatorPosY, mIndicatorItemLength / 2F, mPaint);
+        }
     }
 
     @Override
-    public void getItemOffsets(@NotNull Rect outRect, @NotNull View view, @NotNull RecyclerView parent, @NotNull RecyclerView.State state) {
+    public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
         super.getItemOffsets(outRect, view, parent, state);
-        outRect.bottom = indicatorHeight;
+        outRect.bottom = mIndicatorHeight;
     }
 }

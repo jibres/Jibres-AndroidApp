@@ -37,7 +37,6 @@ public class IntroActivity extends AppCompatActivity {
         recyclerView.setAdapter(adaptorIntro);
         recyclerView.setNestedScrollingEnabled(false);
         recyclerView.setHasFixedSize(true);
-        recyclerView.addItemDecoration(new DotsIndicatorRecyclerView(getApplicationContext()));
         new PagerSnapHelper().attachToRecyclerView(recyclerView);
         final LinearLayoutManager layout = new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false);
 
@@ -45,12 +44,9 @@ public class IntroActivity extends AppCompatActivity {
         itemIntroList.add(new IntroModel(i));
         itemIntroList.add(new IntroModel(i));
         itemIntroList.add(new IntroModel(i));
-        itemIntroList.add(new IntroModel(i));
-        itemIntroList.add(new IntroModel(i));
-        itemIntroList.add(new IntroModel(i));
-        itemIntroList.add(new IntroModel(i));
         recyclerView.setLayoutManager(layout);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.addItemDecoration(new DotsIndicatorRecyclerView());
 
 
         /*Api.getAppDetail(getApplicationContext(), (status, value) -> {
