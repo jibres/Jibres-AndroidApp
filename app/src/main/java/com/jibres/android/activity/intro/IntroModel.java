@@ -14,6 +14,10 @@ public class IntroModel {
     this.colot_desc = colot_desc;
   }
 
+  public IntroModel(String image) {
+    this.image = image;
+  }
+
   public String getImage() {
     return image;
   }

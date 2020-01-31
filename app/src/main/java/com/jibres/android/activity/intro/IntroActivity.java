@@ -34,6 +34,7 @@ public class IntroActivity extends AppCompatActivity {
         setContentView(R.layout.activity_intro);
         AppManager.get(getApplication()).save_splash(3);
 
+        String i = "https://is3-ssl.mzstatic.com/image/thumb/Purple111/v4/07/2e/5d/072e5d73-6a71-2110-64f3-107eda8a1698/source/512x512bb.jpg";
 
 
 
@@ -44,7 +45,20 @@ public class IntroActivity extends AppCompatActivity {
         final LinearLayoutManager layout = new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false);
 
 
-        Api.getAppDetail(getApplicationContext(), (status, value) -> {
+        itemIntroList.add(new IntroModel(i));
+        itemIntroList.add(new IntroModel(i));
+        itemIntroList.add(new IntroModel(i));
+        itemIntroList.add(new IntroModel(i));
+        itemIntroList.add(new IntroModel(i));
+        itemIntroList.add(new IntroModel(i));
+        itemIntroList.add(new IntroModel(i));
+        itemIntroList.add(new IntroModel(i));
+        itemIntroList.add(new IntroModel(i));
+        itemIntroList.add(new IntroModel(i));
+        recyclerViewPager.setLayoutManager(layout);
+        recyclerViewPager.setItemAnimator(new DefaultItemAnimator());
+
+        /*Api.getAppDetail(getApplicationContext(), (status, value) -> {
             if (status && value!=null){
                 try {
                     JSONObject result = new JSONObject(value);
@@ -72,7 +86,7 @@ public class IntroActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
             }
-        });
+        });*/
     }
 
     private int page_intro(){
