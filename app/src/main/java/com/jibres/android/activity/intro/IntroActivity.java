@@ -1,12 +1,15 @@
 package com.jibres.android.activity.intro;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.PagerSnapHelper;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.jibres.android.R;
 import com.jibres.android.managers.AppManager;
@@ -21,6 +24,8 @@ public class IntroActivity extends AppCompatActivity {
     RecyclerViewPager recyclerView;
     IntroAdapter adaptorIntro;
 
+    TextView next, skip;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,7 +34,8 @@ public class IntroActivity extends AppCompatActivity {
 
         String i = "https://is3-ssl.mzstatic.com/image/thumb/Purple111/v4/07/2e/5d/072e5d73-6a71-2110-64f3-107eda8a1698/source/512x512bb.jpg";
 
-
+        next = findViewById(R.id.next);
+        skip = findViewById(R.id.skip);
 
         itemIntroList = new ArrayList<>();
         recyclerView = findViewById(R.id.recyclerViewPager_intro);
@@ -40,7 +46,31 @@ public class IntroActivity extends AppCompatActivity {
         new PagerSnapHelper().attachToRecyclerView(recyclerView);
         final LinearLayoutManager layout = new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false);
 
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+                if (getPage() == itemIntroList.size()-1){
+                    next.setText("GetStarted");
+                    next.setTag("start");
+                }else {
+                    next.setText("Next");
+                    next.setTag("next");
+                }
 
+                if (getPage() ==0){
+                    skip.setText("Skip");
+                    skip.setTag("skip");
+                }else {
+                    skip.setText("Back");
+                    skip.setTag("back");
+                }
+            }
+        });
+
+
+        itemIntroList.add(new IntroModel(i));
+        itemIntroList.add(new IntroModel(i));
         itemIntroList.add(new IntroModel(i));
         itemIntroList.add(new IntroModel(i));
         itemIntroList.add(new IntroModel(i));
@@ -79,8 +109,23 @@ public class IntroActivity extends AppCompatActivity {
             }
         });*/
     }
-
-    private int page_intro(){
+    int getPage(){
         return recyclerView.getCurrentPosition();
+    }
+
+    public void btn_intro(View view) {
+        int page = getPage();
+        String tag = view.getTag().toString();
+        switch (tag){
+            case "next":
+                recyclerView.smoothScrollToPosition(page+1);
+                break;
+            case "back":
+                recyclerView.smoothScrollToPosition(page-1);
+                break;
+            default:
+                finish();
+                break;
+        }
     }
 }

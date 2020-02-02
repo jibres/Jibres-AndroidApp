@@ -9,7 +9,6 @@
     tools:context=".activity.intro.IntroActivity"
     tools:ignore="UnusedAttribute">
 
-
     <com.lsjwzh.widget.recyclerviewpager.RecyclerViewPager
         android:id="@+id/recyclerViewPager_intro"
         android:paddingStart="@dimen/_25sdp"
@@ -21,5 +20,40 @@
         app:rvp_singlePageFling="true"
         android:clipToPadding="false"/>
 
+    <RelativeLayout
+        android:layout_alignParentBottom="true"
+        android:paddingBottom="@dimen/_5sdp"
+        android:paddingStart="@dimen/_5sdp"
+        android:paddingEnd="@dimen/_5sdp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/next"
+            android:tag="next"
+            android:onClick="btn_intro"
+            android:layout_alignParentEnd="true"
+            android:background="@drawable/row_background"
+            android:padding="@dimen/_10sdp"
+            android:textColor="@android:color/holo_blue_dark"
+            android:textSize="@dimen/_12ssp"
+            android:text="Next"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/skip"
+            android:tag="back"
+            android:onClick="btn_intro"
+            android:layout_alignParentStart="true"
+            android:background="@drawable/row_background"
+            android:padding="@dimen/_10sdp"
+            android:textColor="@android:color/holo_blue_dark"
+            android:textSize="@dimen/_12ssp"
+            android:text="Skip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+    </RelativeLayout>
 
 </RelativeLayout>
