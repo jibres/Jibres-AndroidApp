@@ -13,19 +13,23 @@
         android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-        <com.jibres.android.weight.GradientTextView
+        <TextView
             android:id="@+id/title"
-            android:textSize="@dimen/_40ssp"
+            android:padding="@dimen/_5sdp"
+            android:textAlignment="center"
             android:textColor="@color/title"
-            android:text="Hello"
+            android:textSize="@dimen/_20ssp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 
-        <com.jibres.android.weight.GradientTextView
+        <TextView
             android:id="@+id/desc"
-            android:textSize="@dimen/_12ssp"
+            android:paddingTop="@dimen/_5sdp"
+            android:paddingStart="@dimen/_7sdp"
+            android:paddingEnd="@dimen/_7sdp"
+            android:textAlignment="center"
             android:textColor="@color/desc"
-            android:text="Welcome to Jibres on Moblie."
+            android:textSize="@dimen/_12ssp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
     </LinearLayout>

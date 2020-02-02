@@ -11,8 +11,8 @@
 
     <com.lsjwzh.widget.recyclerviewpager.RecyclerViewPager
         android:id="@+id/recyclerViewPager_intro"
-        android:paddingStart="@dimen/_25sdp"
-        android:paddingEnd="@dimen/_25sdp"
+        android:paddingStart="@dimen/_20sdp"
+        android:paddingEnd="@dimen/_20sdp"
         android:paddingTop="@dimen/_20sdp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -21,6 +21,7 @@
         android:clipToPadding="false"/>
 
     <RelativeLayout
+        android:id="@+id/bg_dots"
         android:layout_alignParentBottom="true"
         android:paddingBottom="@dimen/_5sdp"
         android:paddingStart="@dimen/_5sdp"

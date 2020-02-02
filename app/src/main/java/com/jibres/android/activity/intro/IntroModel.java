@@ -1,10 +1,11 @@
 package com.jibres.android.activity.intro;
 
 public class IntroModel {
-  String image,title,desc;
-  String bg_color_start,bg_color_end,colot_title,colot_desc;
+  private String image,title,desc,bg_color_start,bg_color_end,colot_title,colot_desc =null;
+  private int style = 1;
 
-  public IntroModel(String image, String title, String desc, String bg_color_start, String bg_color_end, String colot_title, String colot_desc) {
+  public IntroModel(int style, String image, String title, String desc, String bg_color_start, String bg_color_end, String colot_title, String colot_desc) {
+    this.style = style;
     this.image = image;
     this.title = title;
     this.desc = desc;
@@ -13,9 +14,43 @@ public class IntroModel {
     this.colot_title = colot_title;
     this.colot_desc = colot_desc;
   }
-
-  public IntroModel(String image) {
+  public IntroModel(int style, String image, String title, String desc, String bg_color_start, String bg_color_end) {
+    this.style = style;
     this.image = image;
+    this.title = title;
+    this.desc = desc;
+    this.bg_color_start = bg_color_start;
+    this.bg_color_end = bg_color_end;
+  }
+  public IntroModel(String image,String title, String desc ) {
+    if (image !=null){
+      this.style = 2;
+      this.image = image;
+      this.title = title;
+      this.desc = desc;
+    }else {
+      new IntroModel(title,desc);
+    }
+  }
+  public IntroModel(int style,String image,String title, String desc ) {
+    if (image !=null){
+      this.style = style;
+      this.image = image;
+      this.title = title;
+      this.desc = desc;
+    }else {
+      new IntroModel(title,desc);
+    }
+  }
+  public IntroModel(String title, String desc ) {
+    this.style = 1;
+    this.title = title;
+    this.desc = desc;
+  }
+  public IntroModel(int style ,String title, String desc ) {
+    this.style = style;
+    this.title = title;
+    this.desc = desc;
   }
 
   public String getImage() {
@@ -72,5 +107,13 @@ public class IntroModel {
 
   public void setColot_desc(String colot_desc) {
     this.colot_desc = colot_desc;
+  }
+
+  public int getStyle() {
+    return style;
+  }
+
+  public void setStyle(int style) {
+    this.style = style;
   }
 }

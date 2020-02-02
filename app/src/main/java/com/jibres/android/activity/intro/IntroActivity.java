@@ -19,11 +19,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class IntroActivity extends AppCompatActivity {
+    int style = 1;
+    int padding = 0;
 
     List<IntroModel> itemIntroList;
     RecyclerViewPager recyclerView;
     IntroAdapter adaptorIntro;
 
+    View bg_dots;
     TextView next, skip;
 
     @Override
@@ -34,8 +37,9 @@ public class IntroActivity extends AppCompatActivity {
 
         String i = "https://is3-ssl.mzstatic.com/image/thumb/Purple111/v4/07/2e/5d/072e5d73-6a71-2110-64f3-107eda8a1698/source/512x512bb.jpg";
 
-        next = findViewById(R.id.next);
-        skip = findViewById(R.id.skip);
+        bg_dots = findViewById(R.id.bg_dots);
+        next    = findViewById(R.id.next);
+        skip    = findViewById(R.id.skip);
 
         itemIntroList = new ArrayList<>();
         recyclerView = findViewById(R.id.recyclerViewPager_intro);
@@ -68,12 +72,17 @@ public class IntroActivity extends AppCompatActivity {
             }
         });
 
+        if (style==2){
+            padding = (int) getResources().getDimension(R.dimen._25sdp);
+            recyclerView.setPadding(padding,0,padding,0);
+        }else {
+            recyclerView.setPadding(0,0,0,0);
+        }
 
-        itemIntroList.add(new IntroModel(i));
-        itemIntroList.add(new IntroModel(i));
-        itemIntroList.add(new IntroModel(i));
-        itemIntroList.add(new IntroModel(i));
-        itemIntroList.add(new IntroModel(i));
+        itemIntroList.add(new IntroModel(style,"Title Testing fot Into","This Desc object in object Blow object \\n Title Testing fot Into"));
+        itemIntroList.add(new IntroModel(style,"Title Testing fot Into","This Desc object in object Blow object \\n Title Testing fot Into"));
+        itemIntroList.add(new IntroModel(style,"Title Testing fot Into","This Desc object in object Blow object \\n Title Testing fot Into"));
+        itemIntroList.add(new IntroModel(style,"Title Testing fot Into","This Desc object in object Blow object \\n Title Testing fot Into"));
         recyclerView.setLayoutManager(layout);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.addItemDecoration(new DotsIndicatorRecyclerView());
