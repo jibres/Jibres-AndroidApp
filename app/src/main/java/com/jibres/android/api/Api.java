@@ -11,6 +11,7 @@ import com.google.gson.Gson;
 import com.jibres.android.JibresApplication;
 import com.jibres.android.managers.AppManager;
 import com.jibres.android.managers.UrlManager;
+import com.jibres.android.managers.UrlManager1;
 import com.jibres.android.keys;
 
 import org.json.JSONArray;
@@ -25,9 +26,35 @@ import static com.jibres.android.managers.AppManager.versionName;
 
 public class Api {
 
-    public static void getAppDetail(Context context,ApiListener.appDetail listener){
+    public static void getFirst(Context context, ApiListener.json listener){
         StringRequest request =
-                new StringRequest(Request.Method.GET, UrlManager.get.app_detail(context),
+                new StringRequest(Request.Method.GET, UrlManager.get.endPoint(context),
+                        response -> {
+                            try {
+                                JSONObject mainObject = new JSONObject(response);
+                                if (!mainObject.isNull("ok")
+                                        && mainObject.getBoolean("ok")){
+                                    JSONObject result = mainObject.getJSONObject("result");
+                                    listener.onReceived(true,String.valueOf(result));
+                                }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                                listener.onReceived(false,null);
+                            }
+                        }, e -> listener.onReceived(false,null));
+        request.setRetryPolicy(
+                new DefaultRetryPolicy(
+                        DefaultRetryPolicy.DEFAULT_TIMEOUT_MS,
+                        DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                        DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        JibresApplication.getInstance().addToRequestQueue(request);
+    }
+
+
+
+    public static void getAppDetail(Context context, ApiListener.json listener){
+        StringRequest request =
+                new StringRequest(Request.Method.GET, UrlManager1.get.app_detail(context),
                         response -> {
                             try {
                                 JSONObject mainObject = new JSONObject(response);
@@ -71,7 +98,7 @@ public class Api {
 
     public static void getToken(Context context,final ApiListener.token listener) {
         StringRequest request =
-                new StringRequest(Request.Method.POST, UrlManager.get.token(context),
+                new StringRequest(Request.Method.POST, UrlManager1.get.token(context),
                         response -> {
                             JSONObject mainObject,result;
                             JSONArray msg;
@@ -121,7 +148,7 @@ public class Api {
                                final String token ,
                                final ApiListener.userAdd listener) {
         StringRequest request =
-                new StringRequest(Request.Method.POST, UrlManager.get.add_user(context),
+                new StringRequest(Request.Method.POST, UrlManager1.get.add_user(context),
                         response -> {
                             JSONObject mainObject,result ;
                             JSONArray msg;

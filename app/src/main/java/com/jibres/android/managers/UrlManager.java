@@ -8,72 +8,64 @@ import android.content.SharedPreferences;
 import java.util.HashMap;
 import java.util.Map;
 
-public class UrlManager1 {
+public class UrlManager {
+    public static void save_endPoint(Context context,String url){
+        save.get(context).save_endPoint(url);
+    }
+
+
+
     public static class get{
-        public static String google = "http://www.google.com";
-        public static String local = "https://jibres.com";
-        static String api = "/api/v1";
 
-        public static String local_api(Context context){
-            return local + "/" +
-                    AppManager.getAppLanguage(context)
-                    + api + "/"
-                    + AppManager.getStore(context);
-        }
-        public static String local_api_NOSTORE(Context context){
-
-            return local + "/" +
-                    AppManager.getAppLanguage(context);
+        public static String endPoint(Context context){
+            return save.get(context).getstring_appINFO().get(save.endPoint);
         }
 
-        public static String language_list = "/language";
 
-        public static String country_list = "/location/country";
-        public static String province_list = "/location/province";
-        public static String city_list = "/location/city";
 
-        public static String store = "/y885";
+
+
 
         public static String app_detail(Context context){
-            return local_api(context)+"/app";
+            return endPoint(context)+"/app";
         }
         public static String language(Context context){
-            return local_api(context)+"/language";
+            return endPoint(context)+"/language";
         }
 
         public static String token(Context context){
-            return local_api(context)+"/account/token";
+            return endPoint(context)+"/account/token";
         }
         public static String add_user(Context context){
-            return local_api(context)+"/account/android/add";
+            return endPoint(context)+"/account/android/add";
         }
         public static String enter_mobile(Context context){
-            return local_api(context)+"/account/enter";
+            return endPoint(context)+"/account/enter";
         }
         public static String verify_code(Context context){
-            return local_api(context)+"/account/enter/verify";
+            return endPoint(context)+"/account/enter/verify";
         }
         public static String session(Context context){
-            return local_api(context)+"/account/session";
+            return endPoint(context)+"/account/session";
         }
 
         public static String tiket_list(Context context,String page){
-            return local_api(context)+"/ticket/list?page="+page;
+            return endPoint(context)+"/ticket/list?page="+page;
         }
         public static String tiket_view(Context context,String tiket){
-            return local_api(context)+"/ticket/"+tiket;
+            return endPoint(context)+"/ticket/"+tiket;
         }
         public static String tiket_replay(Context context,String tiket){
-            return local_api(context)+"/ticket/"+tiket+"/replay";
+            return endPoint(context)+"/ticket/"+tiket+"/replay";
         }
         public static String tiket_set_status(Context context,String tiket){
-            return local_api(context)+"/ticket/"+tiket+"/status";
+            return endPoint(context)+"/ticket/"+tiket+"/status";
         }
         public static String tiket_set_solved(Context context,String tiket){
-            return local_api(context)+"/ticket/"+tiket+"/solved";
+            return endPoint(context)+"/ticket/"+tiket+"/solved";
         }
         public static String tiket_add(Context context){
-            return local_api(context)+"/ticket/add";
+            return endPoint(context)+"/ticket/add";
         }
 
 
@@ -117,6 +109,7 @@ public class UrlManager1 {
 
 
         /** App Info */
+        public static final String endPoint = "endPoint";
         public static final String url_site = "url_site";
         public static final String url_kingdom = "url_kingdom";
         public static final String url_domain = "url_domain";
@@ -142,9 +135,17 @@ public class UrlManager1 {
             }
             editor.apply();
         }
+        public void save_endPoint(String url ) {
+            if (url!=null){
+                editor.putString(save.endPoint, url);
+                editor.apply();
+            }
+        }
 
         public Map<String, String> getstring_appINFO() {
             HashMap<String, String> hashMap = new HashMap<>();
+            hashMap.put(endPoint, sharedPreferences.getString(endPoint, "https://core.jibres.com/r10" ));
+
             hashMap.put(url_site, sharedPreferences.getString(url_site, "https://salamquran.com" ));
             hashMap.put(url_kingdom, sharedPreferences.getString(url_kingdom, "https://salamquran.com/en" ));
             hashMap.put(url_domain, sharedPreferences.getString(url_domain, "salamquran.com" ));

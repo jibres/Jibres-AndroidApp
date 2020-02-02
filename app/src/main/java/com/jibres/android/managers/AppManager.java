@@ -31,6 +31,8 @@ public class AppManager extends ContextWrapper {
   }
 
   /** App Info */
+  public static final String appLanguage = "appLanguage";
+
   public static final String splash = "splash";
 
   public static final String look_status = "look_status";
@@ -46,6 +48,10 @@ public class AppManager extends ContextWrapper {
   public static final String version_update = "version_update";
   public static final String version_deprecated = "version_deprecated";
 
+  public void setAppLanguage(String languageLocal) {
+    editor.putString(appLanguage, languageLocal);
+    editor.apply();
+  }
 
   public void save_splash(int id) {
     editor.putInt(splash, id);
@@ -87,6 +93,7 @@ public class AppManager extends ContextWrapper {
 
   public Map<String, String> getUserInfo() {
     HashMap<String, String> hashMap = new HashMap<>();
+    hashMap.put(appLanguage, sharedPreferences.getString(appLanguage, null ));
     hashMap.put(store, sharedPreferences.getString(store, "y885"));
     hashMap.put(apikey, sharedPreferences.getString(apikey, null));
     hashMap.put(userCode, sharedPreferences.getString(userCode, null));
@@ -108,6 +115,13 @@ public class AppManager extends ContextWrapper {
     hashMap.put(version_deprecated, sharedPreferences.getBoolean(version_deprecated, false));
     hashMap.put(version_update, sharedPreferences.getBoolean(version_update, false));
     return hashMap;
+  }
+
+  public static String getAppLanguage(Context context){
+    return AppManager
+            .get(context)
+            .getUserInfo()
+            .get(AppManager.appLanguage);
   }
 
   public static Integer getSplash(Context context){

@@ -2,7 +2,6 @@ package com.jibres.android.function;
 
 import android.content.Context;
 
-import com.jibres.android.activity.language.LanguageManager;
 import com.jibres.android.api.Api;
 
 import org.json.JSONException;
@@ -33,7 +32,7 @@ public class AppDetailJson {
                     }
                     if (!result.isNull("lang_list")){
                         JSONObject lang_list = result.getJSONObject("lang_list");
-                        LanguageManager.context(context).setJsonLanguage(String.valueOf(lang_list));
+//                        LanguageManager.context(context).setJsonLanguage(String.valueOf(lang_list));
                     }
 
                     if (!result.isNull("url")){}

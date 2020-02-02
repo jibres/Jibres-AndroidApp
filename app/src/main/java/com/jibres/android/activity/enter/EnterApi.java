@@ -10,7 +10,7 @@ import com.jibres.android.api.Api;
 import com.jibres.android.api.ApiListener;
 import com.jibres.android.keys;
 import com.jibres.android.managers.AppManager;
-import com.jibres.android.managers.UrlManager;
+import com.jibres.android.managers.UrlManager1;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -28,7 +28,7 @@ public class EnterApi {
             public void onReceived(final String token) {
                 StringRequest getVerify =
                         new StringRequest(Request.Method.POST,
-                                UrlManager.get.enter_mobile(context), response -> {
+                                UrlManager1.get.enter_mobile(context), response -> {
                             JSONObject mainObject;
                             JSONArray msg;
                             boolean ok_getVerify;
@@ -106,7 +106,7 @@ public class EnterApi {
             public void onReceived(final String token) {
                 StringRequest getVerify =
                         new StringRequest(Request.Method.POST,
-                                UrlManager.get.verify_code(context), response -> {
+                                UrlManager1.get.verify_code(context), response -> {
                             JSONObject mainObject,result;
                             JSONArray msg;
                             boolean ok_getVerify;

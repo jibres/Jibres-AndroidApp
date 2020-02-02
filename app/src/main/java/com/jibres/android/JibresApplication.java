@@ -12,7 +12,7 @@ import androidx.annotation.NonNull;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
-import com.jibres.android.activity.language.LanguageManager;
+import com.jibres.android.managers.AppManager;
 import com.jibres.android.utility.TypefaceUtil;
 
 import java.util.Locale;
@@ -60,7 +60,7 @@ public class JibresApplication extends Application {
     }
 
     public void refreshLocale(@NonNull Context context) {
-        final String language = LanguageManager.getAppLanguage(this);
+        final String language = AppManager.getAppLanguage(this);
 
         final Locale locale;
         if (language != null) {
@@ -90,7 +90,8 @@ public class JibresApplication extends Application {
     }
 
     private void setFont(){
-        if (LanguageManager.getAppLanguage(getApplicationContext()).equals("fa")){
+        String appLanguage = AppManager.getAppLanguage(getApplicationContext());
+        if (appLanguage!=null && appLanguage.equals("fa")){
             TypefaceUtil.overrideFont(getApplicationContext(), "SERIF", "iranyekan_regular.ttf");
         }else {
             TypefaceUtil.overrideFont(getApplicationContext(), "SERIF", "roboto_regular.ttf");

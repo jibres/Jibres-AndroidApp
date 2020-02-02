@@ -10,7 +10,7 @@ import com.google.gson.Gson;
 import com.jibres.android.JibresApplication;
 import com.jibres.android.keys;
 import com.jibres.android.managers.AppManager;
-import com.jibres.android.managers.UrlManager;
+import com.jibres.android.managers.UrlManager1;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -25,7 +25,7 @@ public class SessionsApi {
 
     public static void list(Context context,sessionsListListener listener){
         StringRequest request =
-                new StringRequest(Request.Method.GET, UrlManager.get.session(context),
+                new StringRequest(Request.Method.GET, UrlManager1.get.session(context),
                         response -> {
                             try {
                                 JSONObject mainObject = new JSONObject(response);
@@ -89,7 +89,7 @@ public class SessionsApi {
             type = "terminate";
         }
         StringRequest request =
-                new StringRequest(Request.Method.POST, UrlManager.get.session(context),
+                new StringRequest(Request.Method.POST, UrlManager1.get.session(context),
                         response -> {
                             Log.d("amingolisss", "remove: "+response);
                             try {

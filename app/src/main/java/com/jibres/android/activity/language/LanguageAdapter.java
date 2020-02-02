@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.jibres.android.R;
+import com.jibres.android.managers.AppManager;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -55,7 +56,7 @@ public class LanguageAdapter extends RecyclerView.Adapter<LanguageAdapter.MyView
             .into(holder.imgCountry);
 
     holder.view.setOnClickListener(view -> {
-      LanguageManager.context(mContext).setAppLanguage(aItem.getTag());
+      AppManager.get(mContext).setAppLanguage(aItem.getTag());
       mlistener.onClick();
     });
 

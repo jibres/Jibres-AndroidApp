@@ -10,7 +10,7 @@ import com.google.gson.Gson;
 import com.jibres.android.JibresApplication;
 import com.jibres.android.keys;
 import com.jibres.android.managers.AppManager;
-import com.jibres.android.managers.UrlManager;
+import com.jibres.android.managers.UrlManager1;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -26,7 +26,7 @@ public class TiketApi {
             page = "1";
         }
         StringRequest request =
-                new StringRequest(Request.Method.GET, UrlManager.get.tiket_list(context,page),
+                new StringRequest(Request.Method.GET, UrlManager1.get.tiket_list(context,page),
                         response -> {
                             try {
                                 JSONObject mainObject = new JSONObject(response);
@@ -62,7 +62,7 @@ public class TiketApi {
 
     public static void viewTiket(Context context,String tiket,TiketListener.viewTiket listener){
         StringRequest request =
-                new StringRequest(Request.Method.GET, UrlManager.get.tiket_view(context,tiket),
+                new StringRequest(Request.Method.GET, UrlManager1.get.tiket_view(context,tiket),
                         response -> {
                             listener.onReceived(response);
                             try {
@@ -98,7 +98,7 @@ public class TiketApi {
     public static void replay(Context context, String TIKET, String MASSAGE, String TITLE ,
                               TiketListener.replay listener){
         StringRequest request =
-                new StringRequest(Request.Method.POST, UrlManager.get.tiket_replay(context,TIKET),
+                new StringRequest(Request.Method.POST, UrlManager1.get.tiket_replay(context,TIKET),
                         response -> {
                             try {
                                 JSONObject mainObject = new JSONObject(response);
@@ -159,7 +159,7 @@ public class TiketApi {
     public static void addTiket(Context context, String TITLE, String MASSAGE ,
                                 TiketListener.addTiket listener){
         StringRequest request =
-                new StringRequest(Request.Method.POST, UrlManager.get.tiket_add(context),
+                new StringRequest(Request.Method.POST, UrlManager1.get.tiket_add(context),
                         response -> {
                             try {
                                 JSONObject mainObject = new JSONObject(response);
@@ -222,7 +222,7 @@ public class TiketApi {
     public static void setStatus(Context context, String TIKET, String status,
                                  TiketListener.setStatus listener){
         StringRequest request =
-                new StringRequest(Request.Method.PUT, UrlManager.get.tiket_set_status(context,TIKET)
+                new StringRequest(Request.Method.PUT, UrlManager1.get.tiket_set_status(context,TIKET)
                         , response -> {
                     try {
                         JSONObject mainObject = new JSONObject(response);
@@ -280,7 +280,7 @@ public class TiketApi {
     public static void setSolved(Context context, String TIKET, boolean solved,
                                  TiketListener.setStatus listener){
         StringRequest request =
-                new StringRequest(Request.Method.PUT, UrlManager.get.tiket_set_solved(context,TIKET)
+                new StringRequest(Request.Method.PUT, UrlManager1.get.tiket_set_solved(context,TIKET)
                         , response -> {
                     try {
                         JSONObject mainObject = new JSONObject(response);

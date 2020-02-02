@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.jibres.android.JibresApplication;
 import com.jibres.android.R;
+import com.jibres.android.managers.AppManager;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -47,14 +48,14 @@ public class LanguageActivity extends AppCompatActivity {
 
     /*Get Language*/
     void GetLanguage() {
-        try {
+        /*try {
             JSONObject result = new JSONObject(LanguageManager.getJsonLanguage(this));
             Iterator<?> keys = result.keys();
             while (keys.hasNext()) {
                 String key = (String) keys.next();
                 JSONObject lang_key = result.getJSONObject(key);
                 if (result.get(key) instanceof JSONObject) {
-                    if (LanguageManager.getAppLanguage(getApplication())
+                    if (AppManager.getAppLanguage(getApplication())
                             .equals(lang_key.getString("name"))) {
                         item.add(new LanguageModel(
                                 lang_key.getString("localname"),
@@ -72,7 +73,7 @@ public class LanguageActivity extends AppCompatActivity {
             }
         } catch (JSONException e) {
             e.printStackTrace();
-        }
+        }*/
     }
 
     public void restartActivity() {

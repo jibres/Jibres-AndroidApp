@@ -21,7 +21,7 @@ import com.jibres.android.activity.tiket.adapter.TiketListAdapter;
 import com.jibres.android.activity.tiket.api.TiketApi;
 import com.jibres.android.activity.tiket.api.TiketListener;
 import com.jibres.android.activity.tiket.model.TiketListModel;
-import com.jibres.android.managers.UrlManager;
+import com.jibres.android.managers.UrlManager1;
 import com.jibres.android.weight.DividerItemDecoratorWeighet;
 
 import org.json.JSONArray;
@@ -48,7 +48,7 @@ public class TiketListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tiket_list);
 
-        Log.d("amingili", "onCreate: local_api= "+ UrlManager.get.local_api(this));
+        Log.d("amingili", "onCreate: endPoint= "+ UrlManager1.get.local_api(this));
 
         recyclerView = findViewById(R.id.recycler_view);
         item = new ArrayList<>();
