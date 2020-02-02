@@ -48,7 +48,7 @@ public class TiketListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tiket_list);
 
-        Log.d("amingili", "onCreate: endPoint= "+ UrlManager1.get.local_api(this));
+        Log.d("amingili", "onCreate: endPoint_sh= "+ UrlManager1.get.local_api(this));
 
         recyclerView = findViewById(R.id.recycler_view);
         item = new ArrayList<>();

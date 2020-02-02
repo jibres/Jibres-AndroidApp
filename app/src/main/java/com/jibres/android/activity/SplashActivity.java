@@ -17,9 +17,11 @@ import com.jibres.android.R;
 import com.jibres.android.activity.intro.IntroActivity;
 import com.jibres.android.activity.language.LanguageActivity;
 import com.jibres.android.api.Api;
+import com.jibres.android.api.ApiListener;
 import com.jibres.android.function.AddUserTemp;
 import com.jibres.android.function.AppDetailJson;
 import com.jibres.android.managers.AppManager;
+import com.jibres.android.managers.JsonManager;
 import com.jibres.android.managers.UrlManager;
 import com.jibres.android.managers.UrlManager1;
 import com.jibres.android.utility.ColorUtil;
@@ -28,10 +30,83 @@ import com.jibres.android.weight.GradientTextView;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.Iterator;
 import java.util.Locale;
 
 public class SplashActivity extends AppCompatActivity {
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        setDefaultLanguage();
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_splash);
+
+        Api.endPoint(getApplicationContext(), getEndPoint -> {
+            if (getEndPoint){
+                Api.android(getApplicationContext(), getUrl -> {
+                    Api.splash(getApplicationContext(), splashIsSet -> {
+
+                    });
+                });
+            }
+        });
+    }
+
+
+    void setValueSplash(){
+        try {
+            JSONObject object = new JSONObject(JsonManager.getJsonIntro(getApplicationContext()));
+            
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+
+
+
+
+
+    void setDefaultLanguage(){
+        if (getAppLanguage()==null){
+            String deviceLanguage = Locale.getDefault().getLanguage();
+            if (deviceLanguage.equals("fa")){
+                AppManager.get(getApplicationContext()).setAppLanguage(deviceLanguage);
+            }else {
+                AppManager.get(getApplicationContext()).setAppLanguage("en");
+            }
+        }
+    }
+
+
+
+    String getAppLanguage(){
+        return AppManager.getAppLanguage(getApplicationContext());
+    }
+    void setAppLanguage(String key){
+        AppManager.get(context).setAppLanguage(key);
+    }
+    void setEndPoint(String url){
+        UrlManager.save_endPoint(context,url);
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     Context context;
     View background;
@@ -39,11 +114,7 @@ public class SplashActivity extends AppCompatActivity {
     LottieAnimationView animation_bg;
     ImageView logo;
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        context = getApplicationContext();
-    }
+
 
     @Override
     protected void onResume() {
@@ -51,8 +122,7 @@ public class SplashActivity extends AppCompatActivity {
         helperSplash(true);
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreatess(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
         setURL();
@@ -229,45 +299,7 @@ public class SplashActivity extends AppCompatActivity {
 
 
     void setURL(){
-        Api.getFirst(getApplicationContext(), (status, value) -> {
-            String appLanguage = AppManager.getAppLanguage(context);
-            if (status && value!=null){
-                try {
-                    JSONObject result = new JSONObject(value);
-                    Iterator<?> keys = result.keys();
-                    while (keys.hasNext()) {
-                        String key = (String) keys.next();
-                        JSONObject lang_key = result.getJSONObject(key);
 
-                        if (keys.hasNext() && appLanguage!=null){
-                            if (result.get(key) instanceof JSONObject) {
-                                if (AppManager.getAppLanguage(context).equals(key)){
-                                    UrlManager.save_endPoint(context,
-                                            lang_key.getString("endpoint"));
-                                    AppManager.get(context).setAppLanguage(key);
-                                    Log.d("amingoli", AppManager.getAppLanguage(context)+" -setURL1: "+UrlManager.get.endPoint(context));
-                                    break;
-                                }
-                            }
-                        }else {
-                            if (result.get(key) instanceof JSONObject) {
-                                UrlManager.save_endPoint(context,
-                                        lang_key.getString("endpoint"));
-                                AppManager.get(context).setAppLanguage(key);
-                                Log.d("amingoli", AppManager.getAppLanguage(context)+" -setURL2: "+UrlManager.get.endPoint(context));
-                                break;
-                            }
-                        }
-
-                    }
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }else {
-                Log.d("amingoli", status+" - "+value);
-            }
-        });
     }
 }
 
@@ -275,7 +307,7 @@ public class SplashActivity extends AppCompatActivity {
 /* AppLanguage :
         1- null             -> Device = en | ar | pe -> en
                             -X Device =      fa      -> fa
-        2- if (jsonLanguage.equals(AppLanguage'fa') ) -> endPoint fa
+        2- if (jsonLanguage.equals(AppLanguage'fa') ) -> endPoint_sh fa
             en o = en
             fa o = fa
             fa x = en

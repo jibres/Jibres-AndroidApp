@@ -25,16 +25,16 @@ public class JsonManager extends ContextWrapper {
     }
 
     /** App Info */
-    public static final String json = "json";
+    public static final String json_splash = "json_splash";
 
     public void setJsonIntros(String json) {
-        editor.putString(JsonManager.json, json);
+        editor.putString(JsonManager.json_splash, json);
         editor.apply();
     }
 
     public Map<String, String> getJsonIntro_fromSaveManager() {
         HashMap<String, String> hashMap = new HashMap<>();
-        hashMap.put(json, sharedPreferences.getString(json,null));
+        hashMap.put(json_splash, sharedPreferences.getString(json_splash,null));
         return hashMap;
     }
 
@@ -42,7 +42,7 @@ public class JsonManager extends ContextWrapper {
         return JsonManager
                 .context(context)
                 .getJsonIntro_fromSaveManager()
-                .get(JsonManager.json);
+                .get(JsonManager.json_splash);
     }
 
 

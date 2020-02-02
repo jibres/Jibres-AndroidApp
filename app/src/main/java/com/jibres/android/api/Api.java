@@ -3,6 +3,7 @@ package com.jibres.android.api;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Build;
+import android.util.Log;
 
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
@@ -10,6 +11,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.google.gson.Gson;
 import com.jibres.android.JibresApplication;
 import com.jibres.android.managers.AppManager;
+import com.jibres.android.managers.JsonManager;
 import com.jibres.android.managers.UrlManager;
 import com.jibres.android.managers.UrlManager1;
 import com.jibres.android.keys;
@@ -20,28 +22,52 @@ import org.json.JSONObject;
 
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
 import static com.jibres.android.managers.AppManager.versionName;
 
 public class Api {
-
-    public static void getFirst(Context context, ApiListener.json listener){
+    public static void endPoint(Context context, ApiListener.connected listener){
         StringRequest request =
-                new StringRequest(Request.Method.GET, UrlManager.get.endPoint(context),
+                new StringRequest(Request.Method.GET, UrlManager.endPoint(context),
                         response -> {
                             try {
                                 JSONObject mainObject = new JSONObject(response);
-                                if (!mainObject.isNull("ok")
-                                        && mainObject.getBoolean("ok")){
+                                if (mainObject.getBoolean("ok")){
                                     JSONObject result = mainObject.getJSONObject("result");
-                                    listener.onReceived(true,String.valueOf(result));
+                                    Iterator<?> keys = result.keys();
+                                    while (keys.hasNext()) {
+                                        String key = (String) keys.next();
+                                        JSONObject lang_key = result.getJSONObject(key);
+                                        if (keys.hasNext() && AppManager.getAppLanguage(context) != null){
+                                            if (result.get(key) instanceof JSONObject) {
+                                                if (AppManager.getAppLanguage(context).equals(key)){
+                                                    UrlManager.save_endPoint(
+                                                            context,
+                                                            lang_key.getString("endpoint"));
+                                                    listener.onReceived(true);
+                                                    break;
+                                                }
+                                            }
+                                        }else {
+                                            if (result.get(key) instanceof JSONObject) {
+                                                UrlManager.save_endPoint(
+                                                        context,
+                                                        lang_key.getString("endpoint"));
+                                                listener.onReceived(true);
+                                                break;
+                                            }
+                                        }
+                                    }
+                                }else {
+                                    listener.onReceived(false);
                                 }
                             } catch (JSONException e) {
                                 e.printStackTrace();
-                                listener.onReceived(false,null);
+                                listener.onReceived(false);
                             }
-                        }, e -> listener.onReceived(false,null));
+                        }, e -> listener.onReceived(false));
         request.setRetryPolicy(
                 new DefaultRetryPolicy(
                         DefaultRetryPolicy.DEFAULT_TIMEOUT_MS,
@@ -49,6 +75,144 @@ public class Api {
                         DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         JibresApplication.getInstance().addToRequestQueue(request);
     }
+
+    public static void android(Context context, ApiListener.connected listener){
+        StringRequest request =
+                new StringRequest(Request.Method.GET, UrlManager.android(context),
+                        response -> {
+                            try {
+                                String  update = null, language = null, splash = null,
+                                        intro = null, homepage = null, menu = null, ad = null;
+                                JSONObject mainObject = new JSONObject(response);
+                                if (mainObject.getBoolean("ok")){
+                                    JSONObject result = mainObject.getJSONObject("result");
+                                    JSONObject url = result.getJSONObject("url");
+                                    if (!url.isNull("update")){
+                                        update = url.getString("update");
+                                    }
+                                    if (!url.isNull("language")){
+                                        language = url.getString("language");
+                                    }
+                                    if (!url.isNull("splash")){
+                                        splash = url.getString("splash");
+                                    }
+                                    if (!url.isNull("intro")){
+                                        intro = url.getString("intro");
+                                    }
+                                    if (!url.isNull("homepage")){
+                                        homepage = url.getString("homepage");
+                                    }
+                                    if (!url.isNull("menu")){
+                                        menu = url.getString("menu");
+                                    }
+                                    if (!url.isNull("ad")){
+                                        ad = url.getString("ad");
+                                    }
+                                    UrlManager.save.context(context)
+                                            .save_url(update,language,splash,intro,homepage,menu,ad);
+                                    listener.onReceived(true);
+
+                                }else {
+                                    listener.onReceived(false);
+                                }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                                listener.onReceived(false);
+                            }
+                        }, e -> listener.onReceived(false));
+        request.setRetryPolicy(
+                new DefaultRetryPolicy(
+                        DefaultRetryPolicy.DEFAULT_TIMEOUT_MS,
+                        DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                        DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        JibresApplication.getInstance().addToRequestQueue(request);
+    }
+
+    public static void splash(Context context, ApiListener.connected listener){
+        StringRequest request =
+                new StringRequest(Request.Method.GET, UrlManager.android(context),
+                        response -> {
+                            try {
+                                JSONObject mainObject = new JSONObject(response);
+                                if (mainObject.getBoolean("ok")){
+                                    JSONObject result = mainObject.getJSONObject("result");
+                                    JsonManager.context(context).setJsonIntros(String.valueOf(result));
+                                    listener.onReceived(true);
+                                }else {
+                                    listener.onReceived(false);
+                                }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                                listener.onReceived(false);
+                            }
+                        }, e -> listener.onReceived(false));
+        request.setRetryPolicy(
+                new DefaultRetryPolicy(
+                        DefaultRetryPolicy.DEFAULT_TIMEOUT_MS,
+                        DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                        DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        JibresApplication.getInstance().addToRequestQueue(request);
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -199,7 +363,7 @@ public class Api {
                     }
                     @Override
                     public String getBodyContentType() {
-                        return "application/json; charset=utf-8";
+                        return "application/json_splash; charset=utf-8";
                     }
 
                     @SuppressLint("HardwareIds")

@@ -14,4 +14,8 @@ public class ApiListener {
         void onReceived(boolean status , String value);
     }
 
+    public interface connected {
+        void onReceived(boolean status);
+    }
+
 }

@@ -71,7 +71,7 @@ public class EnterApi {
 
                             @Override
                             public String getBodyContentType() {
-                                return "application/json; charset=utf-8";
+                                return "application/json_splash; charset=utf-8";
                             }
                             @Override
                             public byte[] getBody() {
@@ -150,7 +150,7 @@ public class EnterApi {
 
                             @Override
                             public String getBodyContentType() {
-                                return "application/json; charset=utf-8";
+                                return "application/json_splash; charset=utf-8";
                             }
 
                             @Override

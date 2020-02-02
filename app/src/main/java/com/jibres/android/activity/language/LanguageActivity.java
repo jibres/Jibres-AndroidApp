@@ -54,7 +54,7 @@ public class LanguageActivity extends AppCompatActivity {
             while (keys.hasNext()) {
                 String key = (String) keys.next();
                 JSONObject lang_key = result.getJSONObject(key);
-                if (result.get(key) instanceof JSONObject) {
+                if (result.context(key) instanceof JSONObject) {
                     if (AppManager.getAppLanguage(getApplication())
                             .equals(lang_key.getString("name"))) {
                         item.add(new LanguageModel(

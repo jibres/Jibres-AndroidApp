@@ -106,7 +106,7 @@ public class FingerprintActivity extends AppCompatActivity {
         try {
             keyGenerator = KeyGenerator.getInstance(KeyProperties.KEY_ALGORITHM_AES, "AndroidKeyStore");
         } catch (NoSuchAlgorithmException | NoSuchProviderException e) {
-            throw new RuntimeException("Failed to get KeyGenerator instance", e);
+            throw new RuntimeException("Failed to context KeyGenerator instance", e);
         }
 
 
@@ -135,7 +135,7 @@ public class FingerprintActivity extends AppCompatActivity {
         try {
             cipher = Cipher.getInstance(KeyProperties.KEY_ALGORITHM_AES + "/" + KeyProperties.BLOCK_MODE_CBC + "/" + KeyProperties.ENCRYPTION_PADDING_PKCS7);
         } catch (NoSuchAlgorithmException | NoSuchPaddingException e) {
-            throw new RuntimeException("Failed to get Cipher", e);
+            throw new RuntimeException("Failed to context Cipher", e);
         }
 
 
