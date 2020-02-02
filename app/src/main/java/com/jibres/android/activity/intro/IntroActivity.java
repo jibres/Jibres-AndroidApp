@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.jibres.android.R;
 import com.jibres.android.managers.AppManager;
+import com.jibres.android.utility.ColorUtil;
 import com.lsjwzh.widget.recyclerviewpager.RecyclerViewPager;
 
 import java.util.ArrayList;
@@ -34,8 +35,6 @@ public class IntroActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_intro);
         AppManager.get(getApplication()).save_splash(3);
-
-        String i = "https://is3-ssl.mzstatic.com/image/thumb/Purple111/v4/07/2e/5d/072e5d73-6a71-2110-64f3-107eda8a1698/source/512x512bb.jpg";
 
         bg_dots = findViewById(R.id.bg_dots);
         next    = findViewById(R.id.next);
@@ -72,12 +71,17 @@ public class IntroActivity extends AppCompatActivity {
             }
         });
 
+//        Value Set By Json
         if (style==2){
             padding = (int) getResources().getDimension(R.dimen._25sdp);
             recyclerView.setPadding(padding,0,padding,0);
         }else {
             recyclerView.setPadding(0,0,0,0);
         }
+
+        /*ColorUtil.setGradient(bg_dots,"#dddddd","#ffffff");
+        next.setText("");
+        skip.setText("");*/
 
         itemIntroList.add(new IntroModel(style,"Title Testing fot Into","This Desc object in object Blow object \\n Title Testing fot Into"));
         itemIntroList.add(new IntroModel(style,"Title Testing fot Into","This Desc object in object Blow object \\n Title Testing fot Into"));
