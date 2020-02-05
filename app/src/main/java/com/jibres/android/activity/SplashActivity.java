@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.airbnb.lottie.LottieAnimationView;
 import com.bumptech.glide.Glide;
 import com.jibres.android.R;
+import com.jibres.android.activity.intro.IntroActivity;
 import com.jibres.android.api.Api;
 import com.jibres.android.managers.AppManager;
 import com.jibres.android.managers.JsonManager;
@@ -30,13 +31,8 @@ public class SplashActivity extends AppCompatActivity {
     ImageView logo;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_splash);
-        idFinder();
-        setDefaultLanguage();
-        setValueSplash();
-
+    protected void onResume() {
+        super.onResume();
         Api.endPoint(getApplicationContext(), getEndPoint -> {
             if (getEndPoint){
                 Api.android(getApplicationContext(), getUrl -> {
@@ -49,22 +45,33 @@ public class SplashActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_splash);
+        idFinder();
+        setDefaultLanguage();
+        setValueSplash();
+    }
+
     void helperActivty(){
-        Intent intent = null;
-
-        intent = new Intent(this,WebViewActivity.class);
-        intent.putExtra("url",UrlManager.language(this));
-        startActivity(intent);
-
-
+        Intent intent;
         switch (getSplash()){
             case 0:
+                intent = new Intent(this,WebViewActivity.class);
+                intent.putExtra("url",UrlManager.language(this));
+                AppManager.get(getApplication()).save_splash(1);
                 break;
             case 1:
+                intent = new Intent(this, IntroActivity.class);
+                AppManager.get(getApplication()).save_splash(2);
                 break;
             default:
+                intent = new Intent(this, MainActivity.class);
+                finish();
                 break;
         }
+        startActivity(intent);
     }
 
     void setValueSplash(){
