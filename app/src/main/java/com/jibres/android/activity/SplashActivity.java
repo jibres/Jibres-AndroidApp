@@ -1,7 +1,9 @@
 package com.jibres.android.activity;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -29,6 +31,7 @@ public class SplashActivity extends AppCompatActivity {
     TextView app_name, slug,meta;
     LottieAnimationView animation_bg;
     ImageView logo;
+    int sleep = 500;
 
     @Override
     protected void onResume() {
@@ -69,18 +72,27 @@ public class SplashActivity extends AppCompatActivity {
             default:
                 intent = new Intent(this, WebViewActivity.class);
                 intent.putExtra("url",UrlManager.dashboard(getApplication()));
-                finish();
                 break;
         }
-        startActivity(intent);
+        new Handler().postDelayed(() -> {
+            if (getSplash()>=2) finish();
+            startActivity(intent);
+        },sleep);
     }
 
     void setValueSplash(){
         try {
             String  from = "#ffffff", to   = "#ffffff";
             JSONObject object = new JSONObject(JsonManager.getJsonSplash(getApplication()));
+            if (!object.isNull("sleep")){
+                sleep = object.getInt("sleep");
+            }
             if (!object.isNull("logo")){
-                Glide.with(this).load(object.getString("logo")).into(logo);
+                try {
+                    Glide.with(this).load(object.getString("logo")).into(logo);
+                }catch (Exception e){
+
+                }
             }
             if (!object.isNull("title")){
                 app_name.setText(object.getString("title"));
@@ -97,6 +109,16 @@ public class SplashActivity extends AppCompatActivity {
                     from = bg.getString("from");
                 if (!bg.isNull("to"))
                     to = bg.getString("to");
+            }
+            if (!object.isNull("color")){
+                JSONObject color = object.getJSONObject("color");
+                if (!color.isNull("primary")){
+                    app_name.setTextColor(Color.parseColor(color.getString("primary")));
+                    slug.setTextColor(Color.parseColor(color.getString("primary")));
+                }
+                if (!color.isNull("secondary")){
+                    meta.setTextColor(Color.parseColor(color.getString("secondary")));
+                }
             }
             if (from!=null || to!=null) ColorUtil.setGradient(background,from,to);
         } catch (JSONException e) {
