@@ -25,11 +25,10 @@
         android:layout_width="@dimen/_130sdp"
         android:layout_height="@dimen/_150sdp"/>
 
-    <com.jibres.android.weight.GradientTextView
+    <TextView
         android:id="@+id/app_name"
         android:layout_below="@+id/logo"
         android:layout_centerHorizontal="true"
-        android:text="@string/app_name"
         android:maxLines="1"
         android:maxLength="20"
         android:textSize="@dimen/_11ssp"
@@ -38,11 +37,23 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
-    <com.jibres.android.weight.GradientTextView
+    <TextView
         android:id="@+id/desc"
+        android:layout_below="@+id/app_name"
+        android:layout_centerHorizontal="true"
+        android:maxLines="6"
+        android:textSize="@dimen/_9ssp"
+        android:textColor="@color/title"
+        android:textAlignment="center"
+        android:maxLength="250"
+        android:layout_marginBottom="@dimen/_10sdp"
+        android:layout_width="@dimen/_280sdp"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/meta"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:text="Desc Text Desc Text Desc Text Desc Text Desc Text Desc Text Desc Text Desc Text Desc Text Desc Text Desc Text Desc Text Desc Text Desc Text Desc Text Desc Text Desc Text "
         android:maxLines="5"
         android:textSize="@dimen/_9ssp"
         android:textColor="@color/title"

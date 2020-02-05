@@ -2,22 +2,22 @@ package com.jibres.android.activity;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.airbnb.lottie.LottieAnimationView;
+import com.bumptech.glide.Glide;
 import com.jibres.android.R;
 import com.jibres.android.activity.intro.IntroActivity;
 import com.jibres.android.activity.language.LanguageActivity;
 import com.jibres.android.api.Api;
-import com.jibres.android.api.ApiListener;
 import com.jibres.android.function.AddUserTemp;
 import com.jibres.android.function.AppDetailJson;
 import com.jibres.android.managers.AppManager;
@@ -25,7 +25,6 @@ import com.jibres.android.managers.JsonManager;
 import com.jibres.android.managers.UrlManager;
 import com.jibres.android.managers.UrlManager1;
 import com.jibres.android.utility.ColorUtil;
-import com.jibres.android.weight.GradientTextView;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -33,23 +32,29 @@ import org.json.JSONObject;
 import java.util.Locale;
 
 public class SplashActivity extends AppCompatActivity {
+    View background;
+    TextView app_name, slug,meta;
+    LottieAnimationView animation_bg;
+    ImageView logo;
 
     @Override
     protected void onStart() {
         super.onStart();
-        setDefaultLanguage();
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
+        idFinder();
+        setDefaultLanguage();
+        setValueSplash();
 
         Api.endPoint(getApplicationContext(), getEndPoint -> {
             if (getEndPoint){
                 Api.android(getApplicationContext(), getUrl -> {
                     Api.splash(getApplicationContext(), splashIsSet -> {
-
+                        setValueSplash();
                     });
                 });
             }
@@ -59,8 +64,30 @@ public class SplashActivity extends AppCompatActivity {
 
     void setValueSplash(){
         try {
-            JSONObject object = new JSONObject(JsonManager.getJsonIntro(getApplicationContext()));
-            
+            String  from = "#ffffff" ,
+                    to   = "#ffffff"
+            ;
+            JSONObject object = new JSONObject(JsonManager.getJsonSplash(getApplication()));
+            if (!object.isNull("logo")){
+                Glide.with(this).load(object.getString("logo")).into(logo);
+            }
+            if (!object.isNull("title")){
+                app_name.setText(object.getString("title"));
+            }
+            if (!object.isNull("desc")){
+                slug.setText(object.getString("desc"));
+            }
+            if (!object.isNull("meta")){
+                meta.setText(object.getString("meta"));
+            }
+            if (!object.isNull("bg")){
+                JSONObject bg = object.getJSONObject("bg");
+                if (!bg.isNull("from"))
+                    from = bg.getString("from");
+                if (!bg.isNull("to"))
+                    to = bg.getString("to");
+            }
+            if (from!=null || to!=null) ColorUtil.setGradient(background,from,to);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -109,10 +136,7 @@ public class SplashActivity extends AppCompatActivity {
 
 
     Context context;
-    View background;
-    GradientTextView app_name,desc;
-    LottieAnimationView animation_bg;
-    ImageView logo;
+
 
 
 
@@ -128,8 +152,6 @@ public class SplashActivity extends AppCompatActivity {
         setURL();
         idFinder();
         ColorUtil.setGradient(background,"#b76cd6","#6d3fc3");
-        app_name.setLinearGradient(Color.parseColor("#FFFF0000"), Color.parseColor("#ffffff"));
-        desc.setLinearGradient(Color.parseColor("#FFFF0000"), Color.parseColor("#ffffff"));
 
         new AppDetailJson(getApplicationContext(), new AppDetailJson.Listener() {
                     @Override
@@ -279,16 +301,17 @@ public class SplashActivity extends AppCompatActivity {
         animation_bg = findViewById(R.id.animate_bg);
         logo = findViewById(R.id.logo);
         app_name = findViewById(R.id.app_name);
-        desc = findViewById(R.id.desc);
+        slug = findViewById(R.id.desc);
+        meta = findViewById(R.id.meta);
     }
 
     void setStringSplash(String AppName,String Desc){
         if (AppName != null && AppName.length()>1){
             app_name.setText(AppName);
         }
-        if (desc != null && Desc.length()>1){
-            desc.setVisibility(View.VISIBLE);
-            desc.setText(Desc);
+        if (slug != null && Desc.length()>1){
+            slug.setVisibility(View.VISIBLE);
+            slug.setText(Desc);
         }
     }
 

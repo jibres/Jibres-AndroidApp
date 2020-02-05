@@ -15,7 +15,12 @@ import com.jibres.android.R;
 public class ColorUtil {
 
     public static void setGradient(View view, String START , String END){
-
+        if (!START.startsWith("#")){
+            START = "#"+START;
+        }
+        if (!END.startsWith("#")){
+            END = "#"+END;
+        }
         GradientDrawable gradient = new GradientDrawable(
                 GradientDrawable.Orientation.TOP_BOTTOM,
                 new int[] {
@@ -26,6 +31,12 @@ public class ColorUtil {
     }
 
     public static void setGradient(View view, String START , String END, Boolean setLeftToRight){
+        if (!START.startsWith("#")){
+            START = "#"+START;
+        }
+        if (!END.startsWith("#")){
+            END = "#"+END;
+        }
         if (setLeftToRight){
             GradientDrawable gradient = new GradientDrawable(
                     GradientDrawable.Orientation.LEFT_RIGHT,

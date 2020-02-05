@@ -98,7 +98,6 @@ public class UrlManager {
             if (Ad!=null){
                 editor.putString(ad, Ad);
             }
-            Log.d("amingoli", "save_url: "+Update+"\n"+Language+"\n"+Splash+"\n"+Intro+"\n"+Homepage+"\n"+Menu+"\n"+Ad);
             editor.apply();
         }
 

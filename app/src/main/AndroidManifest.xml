@@ -16,7 +16,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
-        <activity android:name=".activity.notif.NotifViewActivity"></activity>
+        <activity android:name=".activity.notif.NotifViewActivity" />
         <activity android:name=".upload_file_test.TestUploadFileActivity" />
         <activity android:name=".activity.tiket.activity.TiketViewActivity" />
         <activity android:name=".activity.tiket.activity.TiketAddActivity" />
@@ -42,6 +42,20 @@
         <activity android:name=".activity.intro.IntroActivity" />
         <activity android:name=".activity.language.LanguageActivity" />
         <activity android:name=".activity.MainActivity" />
+        <activity
+            android:name=".activity.Scheme"
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="portrait"
+            tools:ignore="InnerclassSeparator">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:scheme="https://jibres.com" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

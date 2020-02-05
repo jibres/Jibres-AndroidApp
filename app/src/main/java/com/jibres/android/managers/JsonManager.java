@@ -10,6 +10,8 @@ import java.util.Map;
 
 public class JsonManager extends ContextWrapper {
 
+    public static String json_splash_defult = "{\"logo\": \"https://jibres.com/static/logo/icon-white/png/Jibres-Logo-icon-white-1024.png\", \"theme\": \"Jibres\", \"title\": \"Jibres\", \"desc\": \"Sell and Enjoy\", \"meta\": \"Powered by Ermile\", \"bg\": {\"from\": \"#4173cc\", \"to\": \"#1da1f3\"}, \"color\": {\"primary\": \"#fff\", \"secondary\": \"#eee\"} }";
+
     SharedPreferences.Editor editor;
     SharedPreferences sharedPreferences;
     public static final String SH_PREF_NAME = "ShPerfManager_Jibres_JsonManager";
@@ -34,11 +36,11 @@ public class JsonManager extends ContextWrapper {
 
     public Map<String, String> getJsonIntro_fromSaveManager() {
         HashMap<String, String> hashMap = new HashMap<>();
-        hashMap.put(json_splash, sharedPreferences.getString(json_splash,null));
+        hashMap.put(json_splash, sharedPreferences.getString(json_splash,json_splash_defult));
         return hashMap;
     }
 
-    public static String getJsonIntro(Context context){
+    public static String getJsonSplash(Context context){
         return JsonManager
                 .context(context)
                 .getJsonIntro_fromSaveManager()

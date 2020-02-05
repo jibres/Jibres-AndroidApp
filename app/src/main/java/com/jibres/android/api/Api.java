@@ -130,13 +130,14 @@ public class Api {
 
     public static void splash(Context context, ApiListener.connected listener){
         StringRequest request =
-                new StringRequest(Request.Method.GET, UrlManager.android(context),
+                new StringRequest(Request.Method.GET, UrlManager.splash(context),
                         response -> {
                             try {
                                 JSONObject mainObject = new JSONObject(response);
                                 if (mainObject.getBoolean("ok")){
                                     JSONObject result = mainObject.getJSONObject("result");
-                                    JsonManager.context(context).setJsonIntros(String.valueOf(result));
+                                    JsonManager.context(context)
+                                            .setJsonIntros(String.valueOf(result));
                                     listener.onReceived(true);
                                 }else {
                                     listener.onReceived(false);
