@@ -27,6 +27,7 @@ import com.jibres.android.activity.security.pincode.PincodeManagerActivity;
 import com.jibres.android.activity.setting.SettingsActivity;
 import com.jibres.android.activity.tiket.activity.TiketListActivity;
 import com.jibres.android.managers.AppManager;
+import com.jibres.android.managers.UrlManager;
 import com.jibres.android.weight.BottomSheetFragment;
 
 public class MainActivity extends AppCompatActivity implements BottomSheetFragment.listenerBottomSheet {
@@ -76,7 +77,8 @@ public class MainActivity extends AppCompatActivity implements BottomSheetFragme
                 intent = new Intent(getApplication(), EnterActivity.class);
                 break;
             case "LanguageActivity":
-                intent= new Intent(getApplication(), LanguageActivity.class);
+                intent= new Intent(getApplication(), WebViewActivity.class);
+                intent.putExtra("url", UrlManager.language(getApplication()));
                 break;
             case "SettingsActivity":
                 intent= new Intent(getApplication(), SettingsActivity.class);

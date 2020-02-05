@@ -27,7 +27,10 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.jibres.android.JibresApplication;
 import com.jibres.android.R;
+import com.jibres.android.activity.intro.IntroActivity;
+import com.jibres.android.activity.language.LanguageActivity;
 import com.jibres.android.managers.AppManager;
+import com.jibres.android.managers.UrlManager;
 
 import java.io.File;
 import java.io.IOException;
@@ -53,7 +56,6 @@ public class WebViewActivity extends AppCompatActivity {
     private final static int FCR = 1;
     private final static int FILECHOOSER_RESULTCODE = 1;
 
-
     @Override
     protected void onResume() {
         errorUrl = true;
@@ -66,6 +68,9 @@ public class WebViewActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         URL = getIntent().getStringExtra("url");
+        if (URL.endsWith("language")){
+            URL = URL+"?device="+AppManager.getAppLanguage(getApplicationContext());
+        }
         try {
             setContentView(R.layout.activity_web_view);
 
@@ -75,6 +80,7 @@ public class WebViewActivity extends AppCompatActivity {
             send_headers.put("zonid",AppManager.getZonId(this));
             send_headers.put("versionCode",String.valueOf(AppManager.versionCode));
             send_headers.put("versionName",AppManager.versionName);
+            send_headers.put("device",AppManager.getAppLanguage(getApplicationContext()));
 
             swipeRefreshLayout = findViewById(R.id.swipRefresh_WebView);
             webView_object = findViewById(R.id.webView_WebView);
@@ -173,7 +179,24 @@ public class WebViewActivity extends AppCompatActivity {
                                 AppManager.get(getApplicationContext()).setAppLanguage(lang);
                                 ((JibresApplication) getApplication()).refreshLocale(getApplication());
                                 finish();
+                            }else {
+                                webView_object.loadUrl(UrlManager.dashboard(getApplication()),send_headers);
+                                if (url.startsWith("jibres://test")){
+                                    startActivity(new Intent(WebViewActivity.this,MainActivity.class));
+                                }
+                                if (url.startsWith("jibres://splash")){
+                                    startActivity(new Intent(WebViewActivity.this,SplashActivity.class));
+                                }
+                                if (url.startsWith("jibres://intro")){
+                                    startActivity(new Intent(WebViewActivity.this, IntroActivity.class));
+                                }
+                                if (url.startsWith("jibres://language")){
+                                    Intent intent = new Intent(WebViewActivity.this, WebViewActivity.class);
+                                    intent.putExtra("url", UrlManager.language(getApplication()));
+                                    startActivity(intent);
+                                }
                             }
+
                         }
                         return false;
                     }

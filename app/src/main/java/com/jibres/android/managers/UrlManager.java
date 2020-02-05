@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.ContextWrapper;
 import android.content.SharedPreferences;
-import android.util.Log;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -33,8 +32,8 @@ public class UrlManager {
     public static String intro(Context context){
         return save.context(context).getstring_appINFO().get(save.intro);
     }
-    public static String homepage(Context context){
-        return save.context(context).getstring_appINFO().get(save.homepage);
+    public static String dashboard(Context context){
+        return save.context(context).getstring_appINFO().get(save.dashboard);
     }
     public static String menu(Context context){
         return save.context(context).getstring_appINFO().get(save.menu);
@@ -66,7 +65,7 @@ public class UrlManager {
         public static final String language = "language";
         public static final String splash = "splash";
         public static final String intro = "intro";
-        public static final String homepage = "homepage";
+        public static final String dashboard = "dashboard";
         public static final String menu = "menu";
         public static final String ad = "ad";
 
@@ -90,7 +89,7 @@ public class UrlManager {
                 editor.putString(intro, Intro);
             }
             if (Homepage!=null){
-                editor.putString(homepage, Homepage);
+                editor.putString(dashboard, Homepage);
             }
             if (Menu!=null){
                 editor.putString(menu, Menu);
@@ -109,7 +108,7 @@ public class UrlManager {
             hashMap.put(language, sharedPreferences.getString(language, api+android+"/"+language ));
             hashMap.put(splash, sharedPreferences.getString(splash, api+android+"/"+splash ));
             hashMap.put(intro, sharedPreferences.getString(intro, api+android+"/"+intro ));
-            hashMap.put(homepage, sharedPreferences.getString(homepage, api+android+"/"+homepage ));
+            hashMap.put(dashboard, sharedPreferences.getString(dashboard, api+android+"/"+ dashboard));
             hashMap.put(menu, sharedPreferences.getString(menu, api+android+"/"+menu ));
             hashMap.put(ad, sharedPreferences.getString(ad, api+android+"/"+ad ));
             return hashMap;

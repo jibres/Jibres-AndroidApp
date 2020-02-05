@@ -6,12 +6,15 @@ import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Build;
 import android.text.TextUtils;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
+import com.jibres.android.api.Api;
+import com.jibres.android.api.ApiListener;
 import com.jibres.android.managers.AppManager;
 import com.jibres.android.utility.TypefaceUtil;
 
@@ -76,6 +79,12 @@ public class JibresApplication extends Application {
         if (context != appContext) {
             updateLocale(appContext, locale);
         }
+
+        Api.endPoint(getApplicationContext(), status
+                -> Api.android(getApplicationContext(), status1
+                -> {
+            Log.d(TAG, "refreshLocale");
+        }));
     }
 
     private void updateLocale(@NonNull Context context, @NonNull Locale locale) {

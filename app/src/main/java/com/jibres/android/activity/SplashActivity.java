@@ -2,7 +2,6 @@ package com.jibres.android.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -67,7 +66,8 @@ public class SplashActivity extends AppCompatActivity {
                 AppManager.get(getApplication()).save_splash(2);
                 break;
             default:
-                intent = new Intent(this, MainActivity.class);
+                intent = new Intent(this, WebViewActivity.class);
+                intent.putExtra("url",UrlManager.dashboard(getApplication()));
                 finish();
                 break;
         }
