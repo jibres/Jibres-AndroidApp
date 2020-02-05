@@ -25,6 +25,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import com.jibres.android.JibresApplication;
 import com.jibres.android.R;
 import com.jibres.android.managers.AppManager;
 
@@ -45,12 +46,6 @@ public class WebViewActivity extends AppCompatActivity {
 
     SwipeRefreshLayout swipeRefreshLayout;
     WebView webView_object;
-
-    String[] url_pay = {"https://khadije.com/pay/","https://khadije.com/ar/pay/","https://khadije.com/en/pay/","https://khadije.com/pay/"};
-    String[] url_del = {"https://khadije.com/delneveshte","https://khadije.com/ar/delneveshte","https://khadije.com/en/delneveshte","https://khadije.com/delneveshte"};
-    String[] url_news = {"https://khadije.com/blog/","https://khadije.com/ar/blog/","https://khadije.com/en/blog/","https://khadije.com/blog/"};
-    String url_site = "https://khadije.com";
-
 
     private String mCM;
     private ValueCallback<Uri> mUM;
@@ -170,6 +165,14 @@ public class WebViewActivity extends AppCompatActivity {
                                 intent.setData(Uri.parse(url));
                                 startActivity(intent);
                             } catch (android.content.ActivityNotFoundException e) {
+                            }
+                        }else {
+                            if (url.startsWith("jibres://language/")){
+                                String lang = url.replace("jibres://language/","");
+                                lang.replace(" ","");
+                                AppManager.get(getApplicationContext()).setAppLanguage(lang);
+                                ((JibresApplication) getApplication()).refreshLocale(getApplication());
+                                finish();
                             }
                         }
                         return false;
