@@ -40,6 +40,7 @@ public class SplashActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+        AppManager.get(getApplication()).setAppLanguage("fa");
     }
 
     @Override
@@ -53,6 +54,8 @@ public class SplashActivity extends AppCompatActivity {
         Api.endPoint(getApplicationContext(), getEndPoint -> {
             if (getEndPoint){
                 Api.android(getApplicationContext(), getUrl -> {
+                    Log.d("amingoli", "Url End Point: "+UrlManager.endPoint(getApplication()));
+                    Log.d("amingoli", "app Language: "+AppManager.getAppLanguage(getApplication()));
                     Api.splash(getApplicationContext(), splashIsSet -> {
                         setValueSplash();
                     });

@@ -94,7 +94,8 @@ public class JibresApplication extends Application {
         if (appLanguage!=null && appLanguage.equals("fa")){
             TypefaceUtil.overrideFont(getApplicationContext(), "SERIF", "iranyekan_regular.ttf");
         }else {
-            TypefaceUtil.overrideFont(getApplicationContext(), "SERIF", "roboto_regular.ttf");
+//            TypefaceUtil.overrideFont(getApplicationContext(), "SERIF", "roboto_regular.ttf");
+            TypefaceUtil.overrideFont(getApplicationContext(), "SERIF", "iranyekan_regular.ttf");
         }
     }
 }
