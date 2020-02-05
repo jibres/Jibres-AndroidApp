@@ -17,6 +17,7 @@ import com.jibres.android.managers.AppManager;
 import com.jibres.android.managers.JsonManager;
 import com.jibres.android.managers.UrlManager;
 import com.jibres.android.utility.ColorUtil;
+import com.jibres.android.weight.BottomSheetFragment;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -40,7 +41,7 @@ public class SplashActivity extends AppCompatActivity {
                         setValueSplash();
                     });
                 });
-            }
+            }else showBottomSheetDialogFragment();
         });
     }
 
@@ -134,5 +135,15 @@ public class SplashActivity extends AppCompatActivity {
         app_name = findViewById(R.id.app_name);
         slug = findViewById(R.id.desc);
         meta = findViewById(R.id.meta);
+    }
+
+    public void showBottomSheetDialogFragment() {
+        BottomSheetFragment bottomSheetFragment = new BottomSheetFragment();
+        bottomSheetFragment.setCancelable(false);
+        bottomSheetFragment.setListener(() -> {
+            finish();
+            startActivity(getIntent());
+        });
+        bottomSheetFragment.show(getSupportFragmentManager(), bottomSheetFragment.getTag());
     }
 }

@@ -31,6 +31,7 @@ import com.jibres.android.activity.intro.IntroActivity;
 import com.jibres.android.activity.language.LanguageActivity;
 import com.jibres.android.managers.AppManager;
 import com.jibres.android.managers.UrlManager;
+import com.jibres.android.weight.BottomSheetFragment;
 
 import java.io.File;
 import java.io.IOException;
@@ -85,6 +86,7 @@ public class WebViewActivity extends AppCompatActivity {
             swipeRefreshLayout = findViewById(R.id.swipRefresh_WebView);
             webView_object = findViewById(R.id.webView_WebView);
             WebSettings webSettings = webView_object.getSettings();
+            webView_object.setVisibility(View.VISIBLE);
             webSettings.setJavaScriptEnabled(true);
             webSettings.setAllowFileAccess(true);
             webSettings.setAllowFileAccess(true);
@@ -144,10 +146,11 @@ public class WebViewActivity extends AppCompatActivity {
                 webView_object.setWebViewClient(new WebViewClient() {
                     @Override
                     public void onReceivedError(WebView view, WebResourceRequest request, WebResourceError error){
+                        Log.d("amingoli", "onReceivedError: "+error.getDescription());
                         if (error.getDescription().equals("net::ERR_INTERNET_DISCONNECTED")){
                             if (oneStart == 0)
                             {
-                                Dialog_WebView(false);
+                                showBottomSheetDialogFragment();
                                 oneStart++;
                             }
                         }
@@ -291,32 +294,6 @@ public class WebViewActivity extends AppCompatActivity {
 
     }
 
-    boolean doubleBackToExitPressedOnce = false;
-    @Override
-    public void onBackPressed() {
-        if (doubleBackToExitPressedOnce) {
-            super.onBackPressed();
-            return;
-        }
-        else if(webView_object.canGoBack())
-        {
-            webView_object.goBack();
-        }else {
-            super.onBackPressed();
-            return;
-        }
-
-
-        doubleBackToExitPressedOnce = true;
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                doubleBackToExitPressedOnce=false;
-            }
-        }, 300);
-    }
-
-
     private void Dialog_WebView(boolean Cancelable) {
         errorNet = true;
         webView_object.setVisibility(View.INVISIBLE);
@@ -340,6 +317,20 @@ public class WebViewActivity extends AppCompatActivity {
         builderSingle.setNeutralButton("خروج", (dialogInterface, i) -> finish());
         builderSingle.setCancelable(Cancelable);
         builderSingle.show();
+    }
+
+
+    public void showBottomSheetDialogFragment() {
+        webView_object.setVisibility(View.GONE);
+        BottomSheetFragment bottomSheetFragment = new BottomSheetFragment();
+        bottomSheetFragment.setCancelable(true);
+        bottomSheetFragment.setListener(() -> {
+            Intent intent= getIntent();
+            intent.putExtra("url", URL);
+            finish();
+            startActivity(intent);
+        });
+        bottomSheetFragment.show(getSupportFragmentManager(), bottomSheetFragment.getTag());
     }
 
 }

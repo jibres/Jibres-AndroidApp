@@ -30,7 +30,7 @@ import com.jibres.android.managers.AppManager;
 import com.jibres.android.managers.UrlManager;
 import com.jibres.android.weight.BottomSheetFragment;
 
-public class MainActivity extends AppCompatActivity implements BottomSheetFragment.listenerBottomSheet {
+public class MainActivity extends AppCompatActivity {
     String[] ac = {"EnterActivity","LanguageActivity",
             "SettingsActivity","key","FingerpringActivity",
             "PinCode","ListTiket","NotifViewActivity",
@@ -121,14 +121,11 @@ public class MainActivity extends AppCompatActivity implements BottomSheetFragme
     public void showBottomSheetDialogFragment() {
         BottomSheetFragment bottomSheetFragment = new BottomSheetFragment();
         bottomSheetFragment.setCancelable(true);
-        bottomSheetFragment.setListener(this);
+        bottomSheetFragment.setListener(() -> {
+            finish();
+            startActivity(getIntent());
+        });
         bottomSheetFragment.show(getSupportFragmentManager(), bottomSheetFragment.getTag());
-    }
-
-    @Override
-    public void refreh() {
-        finish();
-        startActivity(getIntent());
     }
 
 
