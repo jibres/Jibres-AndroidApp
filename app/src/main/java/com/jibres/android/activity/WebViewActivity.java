@@ -3,8 +3,10 @@ package com.jibres.android.activity;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -20,11 +22,14 @@ import com.jibres.android.managers.AppManager;
 import com.jibres.android.managers.UrlManager;
 import com.jibres.android.weight.BottomSheetFragment;
 
+import java.net.InetAddress;
+
 import im.delight.android.webview.AdvancedWebView;
 
 public class WebViewActivity extends AppCompatActivity implements AdvancedWebView.Listener {
 
     String TAG = "amingoli";
+    boolean bottomSheetIsShow = false;
     private AdvancedWebView mWebView;
     String url = "https://jibres.com/dashboard";
 
@@ -36,6 +41,7 @@ public class WebViewActivity extends AppCompatActivity implements AdvancedWebVie
         url = getIntent().getStringExtra("url");
 
         mWebView = findViewById(R.id.webview);
+        mWebView.setVisibility(View.VISIBLE);
         mWebView.setListener(this, this);
         mWebView.loadUrl(url);
 
@@ -43,6 +49,9 @@ public class WebViewActivity extends AppCompatActivity implements AdvancedWebVie
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
                 Log.d(TAG, "shouldOverrideUrlLoading: "+url);
+                if (!isNetworkConnected()){
+                    showBottomSheetDialogFragment();
+                }
                 if (url.startsWith("jibres")){
                     Intent intent = null;
                     switch (url){
@@ -123,12 +132,15 @@ public class WebViewActivity extends AppCompatActivity implements AdvancedWebVie
         if (url.equals(UrlManager.dashboard(this))){
             mWebView.clearHistory();
         }
+        if (!isNetworkConnected()) showBottomSheetDialogFragment();
         Log.d(TAG, "onPageStarted: "+url);
     }
 
     @Override
     public void onPageFinished(String url) {
         Log.d(TAG, "onPageFinished: "+url);
+        if (isNetworkConnected())
+            if (mWebView.getVisibility() != View.VISIBLE) mWebView.setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -147,18 +159,24 @@ public class WebViewActivity extends AppCompatActivity implements AdvancedWebVie
 
 
     public void showBottomSheetDialogFragment() {
-        String htmlContent = "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>"
-                + "<head>"
-                + "<meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\" />"
-                + "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"/>"
-                + "<style type=\"text/css\">body{color: #525252;} img {max-width: 100%; height: auto}</style>"
-                + "</head>";
+        if (!bottomSheetIsShow){
+            bottomSheetIsShow = true;
+            mWebView.stopLoading();
+            mWebView.setVisibility(View.GONE);
+            BottomSheetFragment bottomSheetFragment = new BottomSheetFragment();
+            bottomSheetFragment.setCancelable(false);
+            bottomSheetFragment.setListener(()
+                    -> {
+                bottomSheetIsShow = false;
+                mWebView.reload();
+                bottomSheetFragment.dismiss();
+            });
+            bottomSheetFragment.show(getSupportFragmentManager(), bottomSheetFragment.getTag());
+        }
+    }
 
-        mWebView.loadDataWithBaseURL(null,htmlContent,"text/html", "utf-8", null);
-
-        BottomSheetFragment bottomSheetFragment = new BottomSheetFragment();
-        bottomSheetFragment.setCancelable(true);
-        bottomSheetFragment.setListener(() -> mWebView.reload());
-        bottomSheetFragment.show(getSupportFragmentManager(), bottomSheetFragment.getTag());
+    private boolean isNetworkConnected() {
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        return cm.getActiveNetworkInfo() != null && cm.getActiveNetworkInfo().isConnected();
     }
 }
