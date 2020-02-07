@@ -17,21 +17,10 @@
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
         <activity android:name=".activity.notif.NotifViewActivity" />
-        <activity android:name=".upload_file_test.TestUploadFileActivity" />
-        <activity android:name=".activity.tiket.activity.TiketViewActivity" />
-        <activity android:name=".activity.tiket.activity.TiketAddActivity" />
-        <activity android:name=".activity.tiket.activity.TiketListActivity" />
         <activity android:name=".activity.security.pincode.PincodeManagerActivity" />
         <activity android:name=".activity.security.pincode.PincodeActivity" />
         <activity android:name=".activity.security.fingerprint.FingerprintActivity" />
-        <activity android:name=".activity.security.sessions.SessionsActivity" />
         <activity android:name=".activity.WebViewActivity" />
-        <activity android:name=".activity.HtmlViewActivity" />
-        <activity android:name=".activity.about.AboutAppActivity" />
-        <activity android:name=".activity.about.AboutActivity" />
-        <activity android:name=".activity.profile.ProfileActivity" />
-        <activity android:name=".activity.setting.SettingsActivity" />
-        <activity android:name=".activity.enter.EnterActivity" />
         <activity android:name=".activity.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -40,7 +29,6 @@
             </intent-filter>
         </activity>
         <activity android:name=".activity.intro.IntroActivity" />
-        <activity android:name=".activity.language.LanguageActivity" />
         <activity android:name=".activity.MainActivity" />
         <activity
             android:name=".activity.Scheme"

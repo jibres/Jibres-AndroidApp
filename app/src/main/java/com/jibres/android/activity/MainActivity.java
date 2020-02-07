@@ -1,7 +1,6 @@
 package com.jibres.android.activity;
 
 import android.app.KeyguardManager;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -10,22 +9,16 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.jibres.android.JibresApplication;
 import com.jibres.android.R;
-import com.jibres.android.activity.enter.EnterActivity;
 import com.jibres.android.activity.intro.IntroActivity;
-import com.jibres.android.activity.language.LanguageActivity;
 import com.jibres.android.activity.notif.NotifViewActivity;
 import com.jibres.android.activity.security.fingerprint.FingerprintActivity;
-import com.jibres.android.activity.security.pincode.PincodeActivity;
 import com.jibres.android.activity.security.pincode.PincodeManagerActivity;
-import com.jibres.android.activity.setting.SettingsActivity;
-import com.jibres.android.activity.tiket.activity.TiketListActivity;
 import com.jibres.android.managers.AppManager;
 import com.jibres.android.managers.UrlManager;
 import com.jibres.android.weight.BottomSheetFragment;
@@ -73,15 +66,9 @@ public class MainActivity extends AppCompatActivity {
     private void onClicks(String activityName){
         Intent intent = null;
         switch (activityName){
-            case "EnterActivity":
-                intent = new Intent(getApplication(), EnterActivity.class);
-                break;
             case "LanguageActivity":
                 intent= new Intent(getApplication(), WebViewActivity.class);
                 intent.putExtra("url", UrlManager.language(getApplication()));
-                break;
-            case "SettingsActivity":
-                intent= new Intent(getApplication(), SettingsActivity.class);
                 break;
             case "key":
                 KeyguardManager km = (KeyguardManager)getSystemService(KEYGUARD_SERVICE);
@@ -95,9 +82,6 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case "PinCode":
                 intent= new Intent(getApplication(), PincodeManagerActivity.class);
-                break;
-            case "ListTiket":
-                intent= new Intent(getApplication(), TiketListActivity.class);
                 break;
             case "NotifViewActivity":
                 intent= new Intent(getApplication(), NotifViewActivity.class);
