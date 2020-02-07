@@ -10,7 +10,7 @@ import java.util.Map;
 
 public class JsonManager extends ContextWrapper {
 
-    public static String json_splash_defult = "{\"logo\": \"https://jibres.com/static/logo/icon-white/png/Jibres-Logo-icon-white-1024.png\", \"theme\": \"Jibres\", \"title\": \"Jibres\", \"desc\": \"Sell and Enjoy\", \"meta\": \"Powered by Ermile\", \"bg\": {\"from\": \"#4173cc\", \"to\": \"#1da1f3\"}, \"color\": {\"primary\": \"#fff\", \"secondary\": \"#eee\"} }";
+    public static String json_splash_defult = "{\"logo\": \"https://jibres.com/static/logo/icon-white/png/Jibres-Logo-icon-white-1024.png\", \"theme\": \"Jibres\", \"title\": \"Jibres\", \"desc\": \"Sell and Enjoy\", \"meta\": \"Powered by Ermile\", \"sleep\": 3000, \"bg\": {\"from\": \"#c80a5a\", \"to\": \"#c80a5a\"}, \"color\": {\"primary\": \"#ffffff\", \"secondary\": \"#eeeeee\"} }";
 
     SharedPreferences.Editor editor;
     SharedPreferences sharedPreferences;
