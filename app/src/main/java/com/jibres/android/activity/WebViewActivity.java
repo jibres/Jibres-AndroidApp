@@ -13,6 +13,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.ProgressBar;
 
 import com.jibres.android.JibresApplication;
 import com.jibres.android.R;
@@ -31,6 +32,7 @@ public class WebViewActivity extends AppCompatActivity implements AdvancedWebVie
     String TAG = "amingoli";
     boolean bottomSheetIsShow = false;
     private AdvancedWebView mWebView;
+    private ProgressBar progress;
     String url = "https://jibres.com/dashboard";
 
     @Override
@@ -40,6 +42,7 @@ public class WebViewActivity extends AppCompatActivity implements AdvancedWebVie
 
         url = getIntent().getStringExtra("url");
 
+        progress = findViewById(R.id.progress);
         mWebView = findViewById(R.id.webview);
         mWebView.setVisibility(View.VISIBLE);
         mWebView.setListener(this, this);
@@ -68,6 +71,7 @@ public class WebViewActivity extends AppCompatActivity implements AdvancedWebVie
                             if (url.startsWith("jibres://language/")){
                                 String language = url.replace("jibres://language/","");
                                 AppManager.get(getApplicationContext()).setAppLanguage(language);
+                                progress.setVisibility(View.VISIBLE);
                                 Log.d(TAG, "Change Language: "+AppManager.getAppLanguage(getApplication()));
                                 Api.endPoint(getApplicationContext(), status
                                         -> Api.android(getApplicationContext(), status1
@@ -129,6 +133,7 @@ public class WebViewActivity extends AppCompatActivity implements AdvancedWebVie
 
     @Override
     public void onPageStarted(String url, Bitmap favicon) {
+        progress.setVisibility(View.VISIBLE);
         if (url.equals(UrlManager.dashboard(this))){
             mWebView.clearHistory();
         }
@@ -139,6 +144,7 @@ public class WebViewActivity extends AppCompatActivity implements AdvancedWebVie
     @Override
     public void onPageFinished(String url) {
         Log.d(TAG, "onPageFinished: "+url);
+        progress.setVisibility(View.GONE);
         if (isNetworkConnected())
             if (mWebView.getVisibility() != View.VISIBLE) mWebView.setVisibility(View.VISIBLE);
     }
@@ -160,6 +166,7 @@ public class WebViewActivity extends AppCompatActivity implements AdvancedWebVie
 
     public void showBottomSheetDialogFragment() {
         if (!bottomSheetIsShow){
+            progress.setVisibility(View.GONE);
             bottomSheetIsShow = true;
             mWebView.stopLoading();
             mWebView.setVisibility(View.GONE);
