@@ -22,7 +22,7 @@ import java.util.Locale;
 
 public class JibresApplication extends Application {
 
-    public static final String TAG = JibresApplication.class.getSimpleName();
+    public static final String TAG = "amingoli";
     private RequestQueue mRequestQueue;
     private static JibresApplication mInstance;
 
