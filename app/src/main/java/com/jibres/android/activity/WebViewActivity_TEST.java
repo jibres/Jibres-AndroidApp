@@ -8,7 +8,6 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
-import android.os.Handler;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
@@ -28,7 +27,6 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.jibres.android.JibresApplication;
 import com.jibres.android.R;
 import com.jibres.android.activity.intro.IntroActivity;
-import com.jibres.android.activity.language.LanguageActivity;
 import com.jibres.android.managers.AppManager;
 import com.jibres.android.managers.UrlManager;
 import com.jibres.android.weight.BottomSheetFragment;
@@ -148,9 +146,11 @@ public class WebViewActivity extends AppCompatActivity {
                     public void onReceivedError(WebView view, WebResourceRequest request, WebResourceError error){
                         Log.d("amingoli", "onReceivedError: "+error.getDescription());
                         if (error.getDescription().equals("net::ERR_INTERNET_DISCONNECTED")){
+                            view.getSettings().setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
+                            view.loadUrl(view.getUrl());
                             if (oneStart == 0)
                             {
-                                showBottomSheetDialogFragment();
+//                                showBottomSheetDialogFragment();
                                 oneStart++;
                             }
                         }
@@ -206,6 +206,7 @@ public class WebViewActivity extends AppCompatActivity {
                     @Override
                     public void onPageFinished(WebView view, String url)
                     {
+                        view.getSettings().setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
 
                         swipeRefreshLayout.setRefreshing(false);
                         if
