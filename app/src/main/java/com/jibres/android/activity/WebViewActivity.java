@@ -12,9 +12,13 @@ import android.view.View;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
+import com.jibres.android.JibresApplication;
 import com.jibres.android.R;
 import com.jibres.android.activity.intro.IntroActivity;
+import com.jibres.android.api.Api;
+import com.jibres.android.managers.AppManager;
 import com.jibres.android.managers.UrlManager;
+import com.jibres.android.weight.BottomSheetFragment;
 
 import im.delight.android.webview.AdvancedWebView;
 
@@ -39,7 +43,7 @@ public class WebViewActivity extends AppCompatActivity implements AdvancedWebVie
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
                 Log.d(TAG, "shouldOverrideUrlLoading: "+url);
-                if (!url.startsWith("https://")||!url.startsWith("http://")){
+                if (url.startsWith("jibres")){
                     Intent intent = null;
                     switch (url){
                         case "jibres://intro":
@@ -47,6 +51,22 @@ public class WebViewActivity extends AppCompatActivity implements AdvancedWebVie
                             break;
                         case "jibres://test":
                             intent = new Intent(WebViewActivity.this,MainActivity.class);
+                            break;
+                        case "jibres://language":
+                            view.loadUrl(UrlManager.language(getApplication()));
+                            break;
+                        default:
+                            if (url.startsWith("jibres://language/")){
+                                String language = url.replace("jibres://language/","");
+                                AppManager.get(getApplicationContext()).setAppLanguage(language);
+                                Log.d(TAG, "Change Language: "+AppManager.getAppLanguage(getApplication()));
+                                Api.endPoint(getApplicationContext(), status
+                                        -> Api.android(getApplicationContext(), status1
+                                        -> {
+                                    view.loadUrl(UrlManager.dashboard(getApplication()));
+                                }));
+
+                            }
                             break;
                     }
                     if (intent!=null){
@@ -100,6 +120,9 @@ public class WebViewActivity extends AppCompatActivity implements AdvancedWebVie
 
     @Override
     public void onPageStarted(String url, Bitmap favicon) {
+        if (url.equals(UrlManager.dashboard(this))){
+            mWebView.clearHistory();
+        }
         Log.d(TAG, "onPageStarted: "+url);
     }
 
@@ -110,6 +133,9 @@ public class WebViewActivity extends AppCompatActivity implements AdvancedWebVie
 
     @Override
     public void onPageError(int errorCode, String description, String failingUrl) {
+        if (description.endsWith("net::ERR_INTERNET_DISCONNECTED")){
+            showBottomSheetDialogFragment();
+        }
         Log.d(TAG, "onPageError: "+errorCode+"\n"+description+"\n"+failingUrl);
     }
 
@@ -119,4 +145,20 @@ public class WebViewActivity extends AppCompatActivity implements AdvancedWebVie
     @Override
     public void onExternalPageRequest(String url) { }
 
+
+    public void showBottomSheetDialogFragment() {
+        String htmlContent = "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>"
+                + "<head>"
+                + "<meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\" />"
+                + "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"/>"
+                + "<style type=\"text/css\">body{color: #525252;} img {max-width: 100%; height: auto}</style>"
+                + "</head>";
+
+        mWebView.loadDataWithBaseURL(null,htmlContent,"text/html", "utf-8", null);
+
+        BottomSheetFragment bottomSheetFragment = new BottomSheetFragment();
+        bottomSheetFragment.setCancelable(true);
+        bottomSheetFragment.setListener(() -> mWebView.reload());
+        bottomSheetFragment.show(getSupportFragmentManager(), bottomSheetFragment.getTag());
+    }
 }
