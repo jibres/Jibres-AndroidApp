@@ -61,7 +61,7 @@ public class SplashActivity extends AppCompatActivity {
         Intent intent;
         switch (getSplash()){
             case 0:
-                intent = new Intent(this,WebViewActivity.class);
+                intent = new Intent(this, WebViewActivity_TEST.class);
                 intent.putExtra("url",UrlManager.language(this));
                 AppManager.get(getApplication()).save_splash(1);
                 break;
@@ -70,7 +70,7 @@ public class SplashActivity extends AppCompatActivity {
                 AppManager.get(getApplication()).save_splash(2);
                 break;
             default:
-                intent = new Intent(this, WebViewActivity.class);
+                intent = new Intent(this, WebViewActivity_TEST.class);
                 intent.putExtra("url",UrlManager.dashboard(getApplication()));
                 break;
         }

@@ -38,7 +38,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-public class WebViewActivity extends AppCompatActivity {
+public class WebViewActivity_TEST extends AppCompatActivity {
 
     boolean errorUrl = true;
     boolean errorNet = false;
@@ -71,7 +71,7 @@ public class WebViewActivity extends AppCompatActivity {
             URL = URL+"?device="+AppManager.getAppLanguage(getApplicationContext());
         }
         try {
-            setContentView(R.layout.activity_web_view);
+            setContentView(R.layout.activity_web_view_test);
 
             send_headers.put("x-app-request", "android");
             send_headers.put("apikey", AppManager.getApikey(this));
@@ -106,7 +106,7 @@ public class WebViewActivity extends AppCompatActivity {
                         }
                         mUMA = filePathCallback;
                         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                        if (takePictureIntent.resolveActivity(WebViewActivity.this.getPackageManager()) != null) {
+                        if (takePictureIntent.resolveActivity(WebViewActivity_TEST.this.getPackageManager()) != null) {
                             File photoFile = null;
                             try {
                                 photoFile = createImageFile();
@@ -185,16 +185,16 @@ public class WebViewActivity extends AppCompatActivity {
                             }else {
                                 webView_object.loadUrl(UrlManager.dashboard(getApplication()),send_headers);
                                 if (url.startsWith("jibres://test")){
-                                    startActivity(new Intent(WebViewActivity.this,MainActivity.class));
+                                    startActivity(new Intent(WebViewActivity_TEST.this,MainActivity.class));
                                 }
                                 if (url.startsWith("jibres://splash")){
-                                    startActivity(new Intent(WebViewActivity.this,SplashActivity.class));
+                                    startActivity(new Intent(WebViewActivity_TEST.this,SplashActivity.class));
                                 }
                                 if (url.startsWith("jibres://intro")){
-                                    startActivity(new Intent(WebViewActivity.this, IntroActivity.class));
+                                    startActivity(new Intent(WebViewActivity_TEST.this, IntroActivity.class));
                                 }
                                 if (url.startsWith("jibres://language")){
-                                    Intent intent = new Intent(WebViewActivity.this, WebViewActivity.class);
+                                    Intent intent = new Intent(WebViewActivity_TEST.this, WebViewActivity_TEST.class);
                                     intent.putExtra("url", UrlManager.language(getApplication()));
                                     startActivity(intent);
                                 }
@@ -245,7 +245,7 @@ public class WebViewActivity extends AppCompatActivity {
         Intent i = new Intent(Intent.ACTION_GET_CONTENT);
         i.addCategory(Intent.CATEGORY_OPENABLE);
         i.setType("*/*");
-        WebViewActivity.this.startActivityForResult(Intent.createChooser(i, "File Browser"), FILECHOOSER_RESULTCODE);
+        WebViewActivity_TEST.this.startActivityForResult(Intent.createChooser(i, "File Browser"), FILECHOOSER_RESULTCODE);
     }
 
 

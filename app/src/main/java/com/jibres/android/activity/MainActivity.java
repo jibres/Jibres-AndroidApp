@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = null;
         switch (activityName){
             case "LanguageActivity":
-                intent= new Intent(getApplication(), WebViewActivity.class);
+                intent= new Intent(getApplication(), WebViewActivity_TEST.class);
                 intent.putExtra("url", UrlManager.language(getApplication()));
                 break;
             case "key":
@@ -125,7 +125,7 @@ public class MainActivity extends AppCompatActivity {
                     if (!editTextInput.startsWith("https://")){
                         editTextInput = "https://"+editTextInput;
                     }
-                    Intent intent = new Intent(this,WebViewActivity.class);
+                    Intent intent = new Intent(this, WebViewActivity_TEST.class);
                     intent.putExtra("url",editTextInput);
                     startActivity(intent);
                 })
