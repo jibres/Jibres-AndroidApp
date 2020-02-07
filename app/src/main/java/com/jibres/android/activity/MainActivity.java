@@ -16,7 +16,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.jibres.android.JibresApplication;
 import com.jibres.android.R;
 import com.jibres.android.activity.intro.IntroActivity;
-import com.jibres.android.activity.notif.NotifViewActivity;
 import com.jibres.android.activity.security.fingerprint.FingerprintActivity;
 import com.jibres.android.activity.security.pincode.PincodeManagerActivity;
 import com.jibres.android.managers.AppManager;
@@ -82,9 +81,6 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case "PinCode":
                 intent= new Intent(getApplication(), PincodeManagerActivity.class);
-                break;
-            case "NotifViewActivity":
-                intent= new Intent(getApplication(), NotifViewActivity.class);
                 break;
             case "BottomSheet":
                 showBottomSheetDialogFragment();
