@@ -16,11 +16,12 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
+        <activity android:name=".activity.WebViewActivity"></activity>
         <activity android:name=".activity.notif.NotifViewActivity" />
         <activity android:name=".activity.security.pincode.PincodeManagerActivity" />
         <activity android:name=".activity.security.pincode.PincodeActivity" />
         <activity android:name=".activity.security.fingerprint.FingerprintActivity" />
-        <activity android:name=".activity.WebViewActivity" />
+        <activity android:name=".activity.WebViewActivity_TEST" />
         <activity android:name=".activity.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
