@@ -1,7 +1,5 @@
 <resources>
-    <string name="app_name">Jibres</string>
     <string name="flag">بفروش و لذت ببر!</string>
-
 
     <string name="update">Update</string>
     <string name="update_warn">This Version is Deprecated!</string>

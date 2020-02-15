@@ -12,9 +12,9 @@
     <application
         android:name=".JibresApplication"
         android:allowBackup="true"
-        android:icon="@drawable/logo_xml"
+        android:icon="@drawable/logo"
         android:label="@string/app_name"
-        android:roundIcon="@drawable/logo_xml"
+        android:roundIcon="@drawable/logo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
