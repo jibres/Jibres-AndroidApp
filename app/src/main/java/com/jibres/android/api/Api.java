@@ -125,7 +125,34 @@ public class Api {
                                 if (mainObject.getBoolean("ok")){
                                     JSONObject result = mainObject.getJSONObject("result");
                                     JsonManager.context(context)
-                                            .setJsonIntros(String.valueOf(result));
+                                            .setJsonSplash(String.valueOf(result));
+                                    listener.onReceived(true);
+                                }else {
+                                    listener.onReceived(false);
+                                }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                                listener.onReceived(false);
+                            }
+                        }, e -> listener.onReceived(false));
+        request.setRetryPolicy(
+                new DefaultRetryPolicy(
+                        DefaultRetryPolicy.DEFAULT_TIMEOUT_MS,
+                        DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                        DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        JibresApplication.getInstance().addToRequestQueue(request);
+    }
+
+    public static void intro(Context context, ApiListener.connected listener){
+        StringRequest request =
+                new StringRequest(Request.Method.GET, UrlManager.intro(context),
+                        response -> {
+                            try {
+                                JSONObject mainObject = new JSONObject(response);
+                                if (mainObject.getBoolean("ok")){
+                                    JSONObject result = mainObject.getJSONObject("result");
+                                    JsonManager.context(context)
+                                            .setJsonIntro(String.valueOf(result));
                                     listener.onReceived(true);
                                 }else {
                                     listener.onReceived(false);

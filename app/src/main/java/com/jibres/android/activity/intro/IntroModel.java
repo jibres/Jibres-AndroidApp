@@ -32,6 +32,20 @@ public class IntroModel {
       new IntroModel(title,desc);
     }
   }
+  public IntroModel(String image,String title, String desc,String bg_color_start, String bg_color_end, String colot_title, String colot_desc ) {
+    if (image !=null){
+      this.style = 2;
+      this.image = image;
+      this.title = title;
+      this.desc = desc;
+      this.bg_color_start = bg_color_start;
+      this.bg_color_end = bg_color_end;
+      this.colot_title = colot_title;
+      this.colot_desc = colot_desc;
+    }else {
+      new IntroModel(title,desc);
+    }
+  }
   public IntroModel(int style,String image,String title, String desc ) {
     if (image !=null){
       this.style = style;

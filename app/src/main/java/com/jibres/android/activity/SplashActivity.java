@@ -17,6 +17,7 @@ import com.bumptech.glide.Glide;
 import com.jibres.android.R;
 import com.jibres.android.activity.intro.IntroActivity;
 import com.jibres.android.api.Api;
+import com.jibres.android.api.ApiListener;
 import com.jibres.android.managers.AppManager;
 import com.jibres.android.managers.JsonManager;
 import com.jibres.android.managers.UrlManager;
@@ -43,6 +44,7 @@ public class SplashActivity extends AppCompatActivity {
             if (getEndPoint){
                 Api.android(getApplicationContext(), getUrl -> {
                     helperActivty();
+                    Api.intro(getApplicationContext(), introIsGet -> {});
                     Api.splash(getApplicationContext(), splashIsSet -> {
                         setValueSplash();
                     });
@@ -63,20 +65,20 @@ public class SplashActivity extends AppCompatActivity {
         Log.d("amingoli78", "onCreate: endpoint_test-"+ SecretReadFile.endpoint_test(this));
         Log.d("amingoli78", "onCreate: endpoint-"+ SecretReadFile.endpoint(this));
         Log.d("amingoli78", "onCreate: store-"+ SecretReadFile.store(this));
-
     }
 
     void helperActivty(){
+
         Intent intent;
         switch (getSplash()){
-            case 0:
+            /*case 0:
                 intent = new Intent(this, WebViewActivity.class);
                 intent.putExtra("url",UrlManager.language(this));
                 AppManager.get(getApplication()).save_splash(1);
-                break;
-            case 1:
+                break;*/
+            case 0:
                 intent = new Intent(this, IntroActivity.class);
-                AppManager.get(getApplication()).save_splash(2);
+//                AppManager.get(getApplication()).save_splash(2);
                 break;
             default:
                 intent = new Intent(this, WebViewActivity.class);
@@ -84,7 +86,8 @@ public class SplashActivity extends AppCompatActivity {
                 break;
         }
         new Handler().postDelayed(() -> {
-            if (getSplash()>=2) finish();
+            /*if (getSplash()>=2) */
+            finish();
             startActivity(intent);
         },sleep);
     }
