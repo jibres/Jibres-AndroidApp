@@ -18,7 +18,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
-        <activity android:name=".activity.WebViewActivity"></activity>
+
+        <activity android:name=".activity.WebViewActivity"/>
         <activity android:name=".activity.security.pincode.PincodeManagerActivity" />
         <activity android:name=".activity.security.pincode.PincodeActivity" />
         <activity android:name=".activity.security.fingerprint.FingerprintActivity" />
@@ -26,7 +27,6 @@
         <activity android:name=".activity.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -39,13 +39,12 @@
             tools:ignore="InnerclassSeparator">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
-
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
-
-                <data android:scheme="https://jibres.com" />
+                <data android:scheme="jibres://" />
             </intent-filter>
         </activity>
-    </application>
 
+    </application>
+    
 </manifest>
