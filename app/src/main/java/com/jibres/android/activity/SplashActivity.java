@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
@@ -20,6 +21,7 @@ import com.jibres.android.managers.AppManager;
 import com.jibres.android.managers.JsonManager;
 import com.jibres.android.managers.UrlManager;
 import com.jibres.android.utility.ColorUtil;
+import com.jibres.android.utility.SecretReadFile;
 import com.jibres.android.weight.BottomSheetFragment;
 
 import org.json.JSONException;
@@ -57,6 +59,11 @@ public class SplashActivity extends AppCompatActivity {
         idFinder();
         setDefaultLanguage();
         setValueSplash();
+
+        Log.d("amingoli78", "onCreate: endpoint_test-"+ SecretReadFile.endpoint_test(this));
+        Log.d("amingoli78", "onCreate: endpoint-"+ SecretReadFile.endpoint(this));
+        Log.d("amingoli78", "onCreate: store-"+ SecretReadFile.store(this));
+
     }
 
     void helperActivty(){

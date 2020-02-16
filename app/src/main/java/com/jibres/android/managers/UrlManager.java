@@ -5,11 +5,12 @@ import android.content.Context;
 import android.content.ContextWrapper;
 import android.content.SharedPreferences;
 
+import com.jibres.android.utility.SecretReadFile;
+
 import java.util.HashMap;
 import java.util.Map;
 
 public class UrlManager {
-    private static String api = "https://core.jibres.com/r10";
     private static String android = "/android";
 
     public static String endPoint(Context context){
@@ -58,6 +59,8 @@ public class UrlManager {
         public static save context(Context context) {
             return new save(context);
         }
+
+        private String api = SecretReadFile.endpoint(this);
 
         public static final String endPoint_sh = "endPoint_sh";
 

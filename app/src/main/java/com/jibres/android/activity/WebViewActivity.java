@@ -21,9 +21,12 @@ import com.jibres.android.activity.intro.IntroActivity;
 import com.jibres.android.api.Api;
 import com.jibres.android.managers.AppManager;
 import com.jibres.android.managers.UrlManager;
+import com.jibres.android.utility.SecretReadFile;
 import com.jibres.android.weight.BottomSheetFragment;
 
 import java.net.InetAddress;
+import java.util.HashMap;
+import java.util.Map;
 
 import im.delight.android.webview.AdvancedWebView;
 
@@ -40,13 +43,15 @@ public class WebViewActivity extends AppCompatActivity implements AdvancedWebVie
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_web_view);
 
+        Log.d(TAG, "onCreate: "+send_headers());
+
         url = getIntent().getStringExtra("url");
 
         progress = findViewById(R.id.progress);
         mWebView = findViewById(R.id.webview);
         mWebView.setVisibility(View.VISIBLE);
         mWebView.setListener(this, this);
-        mWebView.loadUrl(url);
+        mWebView.loadUrl(url,send_headers());
 
         mWebView.setWebViewClient(new WebViewClient(){
             @Override
@@ -185,5 +190,16 @@ public class WebViewActivity extends AppCompatActivity implements AdvancedWebVie
     private boolean isNetworkConnected() {
         ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         return cm.getActiveNetworkInfo() != null && cm.getActiveNetworkInfo().isConnected();
+    }
+
+
+    private Map<String,String> send_headers(){
+        Map<String,String> send_headers = new HashMap<>();
+        send_headers.put("x-app-request", "android");
+        send_headers.put("store", SecretReadFile.store(this));
+        send_headers.put("versionCode",String.valueOf(AppManager.versionCode));
+        send_headers.put("versionName",AppManager.versionName);
+        send_headers.put("device",AppManager.getAppLanguage(getApplicationContext()));
+        return send_headers;
     }
 }
