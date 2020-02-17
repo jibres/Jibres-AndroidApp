@@ -1,7 +1,5 @@
 package com.jibres.android.activity;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
@@ -9,13 +7,13 @@ import android.graphics.Bitmap;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
 
-import com.jibres.android.JibresApplication;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.jibres.android.R;
 import com.jibres.android.activity.intro.IntroActivity;
 import com.jibres.android.api.Api;
@@ -24,8 +22,8 @@ import com.jibres.android.managers.UrlManager;
 import com.jibres.android.utility.SecretReadFile;
 import com.jibres.android.weight.BottomSheetFragment;
 
-import java.net.InetAddress;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 import im.delight.android.webview.AdvancedWebView;
@@ -200,7 +198,9 @@ public class WebViewActivity extends AppCompatActivity implements AdvancedWebVie
         send_headers.put("store", SecretReadFile.store(this));
         send_headers.put("versionCode",String.valueOf(AppManager.versionCode));
         send_headers.put("versionName",AppManager.versionName);
-        send_headers.put("device",AppManager.getAppLanguage(getApplicationContext()));
+        send_headers.put("display-language-device", Locale.getDefault().getDisplayLanguage());
+        send_headers.put("language-default", Locale.getDefault().getLanguage());
+        send_headers.put("language-device",AppManager.getAppLanguage(getApplicationContext()));
         return send_headers;
     }
 }
