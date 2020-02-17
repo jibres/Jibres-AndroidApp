@@ -20,7 +20,7 @@ public class DotsIndicatorRecyclerView extends RecyclerView.ItemDecoration {
     /**
      * Height of the space the indicator takes up at the bottom of the view.
      */
-    private final int mIndicatorHeight = (int) (DP * 56);
+    private final int mIndicatorHeight = (int) (DP * 50);
 
     /**
      * Indicator stroke width.
@@ -34,7 +34,7 @@ public class DotsIndicatorRecyclerView extends RecyclerView.ItemDecoration {
     /**
      * Padding between indicators.
      */
-    private final float mIndicatorItemPadding = DP * 10;
+    private final float mIndicatorItemPadding = DP * 20;
 
     /**
      * Some more natural animation interpolation
@@ -127,6 +127,7 @@ public class DotsIndicatorRecyclerView extends RecyclerView.ItemDecoration {
     @Override
     public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
         super.getItemOffsets(outRect, view, parent, state);
-        outRect.bottom = mIndicatorHeight;
+//        outRect.bottom = mIndicatorHeight;
+        outRect.bottom = 0;
     }
 }
