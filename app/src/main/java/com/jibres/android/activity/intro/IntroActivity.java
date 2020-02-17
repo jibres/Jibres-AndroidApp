@@ -1,6 +1,7 @@
 package com.jibres.android.activity.intro;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -92,17 +93,6 @@ public class IntroActivity extends AppCompatActivity {
         });
 
         getJson();
-
-//        Value Set By Json
-/*
-        if (style==2){
-            padding = (int) getResources().getDimension(R.dimen._25sdp);
-            recyclerView.setPadding(padding,0,padding,0);
-        }else {
-            recyclerView.setPadding(0,0,0,0);
-        }
-*/
-
     }
     int getPage(){
         return recyclerView.getCurrentPosition();
@@ -132,6 +122,23 @@ public class IntroActivity extends AppCompatActivity {
         try {
             JSONObject jsonObject = new JSONObject(JsonManager.getJsonIntro(this));
 
+            if (!jsonObject.isNull("theme")){
+                switch (jsonObject.getString("theme")){
+                    case "Jibres":
+                        style = 1;
+                        break;
+                    default:
+                        style = 2;
+                        break;
+                }
+            }
+            if (style==2){
+                padding = (int) getResources().getDimension(R.dimen._25sdp);
+                recyclerView.setPadding(padding,0,padding,0);
+            }else {
+                recyclerView.setPadding(0,0,0,0);
+            }
+
             if (!jsonObject.isNull("translation")){
                 JSONObject translation = jsonObject.getJSONObject("translation");
                 if (!translation.isNull("next"))
@@ -151,6 +158,8 @@ public class IntroActivity extends AppCompatActivity {
                 if (!bg.isNull("to"))
                     bg_to = bg.getString("to");
             }
+            ColorUtil.setGradient(recyclerView,bg_from,bg_to);
+
             if (!jsonObject.isNull("color")){
                 JSONObject color = jsonObject.getJSONObject("color");
                 if (!color.isNull("primary"))
@@ -158,6 +167,8 @@ public class IntroActivity extends AppCompatActivity {
                 if (!color.isNull("secondary"))
                     color_secondary = color.getString("secondary");
             }
+            next.setTextColor(Color.parseColor(color_secondary));
+            skip.setTextColor(Color.parseColor(color_secondary));
 
             if (!jsonObject.isNull("page")){
                 JSONArray page = jsonObject.getJSONArray("page");
@@ -176,7 +187,7 @@ public class IntroActivity extends AppCompatActivity {
                         desc = object.getString("desc");
 
                     try {
-                        itemIntroList.add(new IntroModel(image, title, desc,bg_from,bg_to,color_primary,color_secondary));
+                        itemIntroList.add(new IntroModel(style,image, title, desc,bg_from,bg_to,color_primary,color_primary));
                         recyclerView.setLayoutManager(layout);
                         recyclerView.setItemAnimator(new DefaultItemAnimator());
                         recyclerView.addItemDecoration(new DotsIndicatorRecyclerView());

@@ -7,12 +7,11 @@
 
 
     <LinearLayout
-        android:layout_marginTop="@dimen/_160sdp"
         android:layout_alignParentTop="true"
         android:orientation="vertical"
         android:gravity="center"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
         <TextView
             android:id="@+id/title"
             android:padding="@dimen/_5sdp"

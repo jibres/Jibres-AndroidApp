@@ -6,14 +6,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.jibres.android.R;
-import com.jibres.android.utility.ColorUtil;
 
 import java.util.List;
 
@@ -43,18 +41,26 @@ public class IntroAdapter extends RecyclerView.Adapter<IntroAdapter.ViewHolder>{
     IntroModel item = itemIntroList.get(position);
 
     int style = item.getStyle();
-
-    if (style == 2 && urlIsTrue(item.getImage())){
+    if (style == 2){
       holder.view_1.setVisibility(View.GONE);
       holder.view_2.setVisibility(View.VISIBLE);
-      Glide.with(context).load(item.getImage()).into(holder.v2_image);
+      if (item.getImage()==null){
+        holder.v2_image.setVisibility(View.GONE);
+      }else {
+        holder.v2_image.setVisibility(View.VISIBLE);
+        Glide.with(context).load(item.getImage()).into(holder.v2_image);
+      }
       holder.v2_title.setText(item.getTitle());
+      holder.v2_title.setTextColor(Color.parseColor(item.getColot_title()));
       holder.v2_desc.setText(item.getDesc());
+      holder.v2_desc.setTextColor(Color.parseColor(item.getColot_desc()));
     }else {
       holder.view_1.setVisibility(View.VISIBLE);
       holder.view_2.setVisibility(View.GONE);
       holder.v1_title.setText(item.getTitle());
+      holder.v1_title.setTextColor(Color.parseColor(item.getColot_title()));
       holder.v1_desc.setText(item.getDesc());
+      holder.v1_desc.setTextColor(Color.parseColor(item.getColot_desc()));
     }
   }
 

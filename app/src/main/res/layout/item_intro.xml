@@ -6,10 +6,14 @@
 
     <include
         android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:id="@+id/style_1"
         layout="@layout/item_intro_1"/>
     <include
         android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:id="@+id/style_2"
         layout="@layout/item_intro_2"/>
 

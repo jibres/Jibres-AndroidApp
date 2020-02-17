@@ -34,7 +34,7 @@ public class DotsIndicatorRecyclerView extends RecyclerView.ItemDecoration {
     /**
      * Padding between indicators.
      */
-    private final float mIndicatorItemPadding = DP * 20;
+    private final float mIndicatorItemPadding = DP * 10;
 
     /**
      * Some more natural animation interpolation

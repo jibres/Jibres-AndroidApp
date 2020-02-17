@@ -6,24 +6,20 @@
 
 
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/card_view"
-        app:cardCornerRadius="30dp"
+    <ImageView
+        android:visibility="visible"
+        android:id="@+id/intro_img"
         android:layout_marginStart="@dimen/_12sdp"
         android:layout_marginEnd="@dimen/_12sdp"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_300sdp">
-        <ImageView
-            android:id="@+id/intro_img"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scaleType="centerInside" />
-    </androidx.cardview.widget.CardView>
+        android:layout_height="@dimen/_300sdp"
+        android:scaleType="centerInside" />
 
 
     <TextView
         android:id="@+id/title"
-        android:layout_below="@+id/card_view"
+        android:layout_centerVertical="true"
+        android:layout_below="@+id/intro_img"
         android:layout_centerHorizontal="true"
         android:padding="@dimen/_5sdp"
         android:textAlignment="center"
