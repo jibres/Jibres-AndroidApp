@@ -55,6 +55,7 @@ public class WebViewActivity extends AppCompatActivity implements AdvancedWebVie
         mWebView.setWebViewClient(new WebViewClient(){
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                view.loadUrl(url, send_headers());
                 Log.d(TAG, "shouldOverrideUrlLoading: "+url);
                 if (!isNetworkConnected()){
                     showBottomSheetDialogFragment();
@@ -80,7 +81,7 @@ public class WebViewActivity extends AppCompatActivity implements AdvancedWebVie
                                 Api.endPoint(getApplicationContext(), status
                                         -> Api.android(getApplicationContext(), status1
                                         -> {
-                                    view.loadUrl(UrlManager.dashboard(getApplication()));
+                                    view.loadUrl(UrlManager.dashboard(getApplication()),send_headers());
                                 }));
 
                             }
