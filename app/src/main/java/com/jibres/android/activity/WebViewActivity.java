@@ -49,6 +49,7 @@ public class WebViewActivity extends AppCompatActivity implements AdvancedWebVie
 
         progress = findViewById(R.id.progress);
         mWebView = findViewById(R.id.webview);
+        progress.setVisibility(View.VISIBLE);
         mWebView.setVisibility(View.VISIBLE);
         mWebView.setListener(this, this);
         mWebView.loadUrl(url,send_headers());
