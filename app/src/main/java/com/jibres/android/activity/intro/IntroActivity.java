@@ -30,6 +30,8 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
+import me.relex.circleindicator.CircleIndicator2;
+
 public class IntroActivity extends AppCompatActivity {
     int style = 1;
     int padding = 0;
@@ -69,8 +71,16 @@ public class IntroActivity extends AppCompatActivity {
         recyclerView.setAdapter(adaptorIntro);
         recyclerView.setNestedScrollingEnabled(false);
         recyclerView.setHasFixedSize(true);
-        new PagerSnapHelper().attachToRecyclerView(recyclerView);
+        PagerSnapHelper pagerSnapHelper = new PagerSnapHelper();
+        pagerSnapHelper.attachToRecyclerView(recyclerView);
         layout= new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false);
+        recyclerView.setLayoutManager(layout);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+//      Dots
+        CircleIndicator2 indicator = findViewById(R.id.indicator);
+        indicator.attachToRecyclerView(recyclerView, pagerSnapHelper);
+//      optional
+        adaptorIntro.registerAdapterDataObserver(indicator.getAdapterDataObserver());
 
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
@@ -79,9 +89,11 @@ public class IntroActivity extends AppCompatActivity {
                 if (getPage() == itemIntroList.size()-1){
 //                    next.setText(lang_start);
                     next.setTag("start");
+                    indicator.animate().alpha(0).setDuration(300);
                 }else {
 //                    next.setText(lang_next);
                     next.setTag("next");
+                    indicator.animate().alpha(1).setDuration(300);
                 }
 
                 if (getPage() ==0){
@@ -206,9 +218,8 @@ public class IntroActivity extends AppCompatActivity {
                         }else {
                             itemIntroList.add(new IntroModel(image, title,null, desc,bg_from,bg_to,color_primary,color_secondary));
                         }
-                        recyclerView.setLayoutManager(layout);
-                        recyclerView.setItemAnimator(new DefaultItemAnimator());
-                        recyclerView.addItemDecoration(new DotsIndicatorRecyclerView());
+                        adaptorIntro.notifyDataSetChanged();
+                        recyclerView.getAdapter();
                     }catch (Exception e){
                         e.printStackTrace();
                     }

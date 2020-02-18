@@ -62,6 +62,18 @@
             android:layout_width="@dimen/_30sdp"
             android:layout_height="@dimen/_30sdp"/>
 
+        <me.relex.circleindicator.CircleIndicator2
+            android:id="@+id/indicator"
+            app:ci_width ="5dp"
+            app:ci_height ="5dp"
+            app:ci_margin ="5dp"
+
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@+id/skip"
+            android:layout_toStartOf="@+id/next" />
+
         <TextView
             android:visibility="invisible"
             android:enabled="false"
