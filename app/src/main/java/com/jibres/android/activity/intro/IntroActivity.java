@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -39,7 +40,8 @@ public class IntroActivity extends AppCompatActivity {
     LinearLayoutManager layout;
 
     View bg_dots;
-    TextView next, skip;
+    TextView skip;
+    ImageView next;
 
     String bg_from = "#ffffff";
     String bg_to = "#ffffff";
@@ -75,10 +77,10 @@ public class IntroActivity extends AppCompatActivity {
             public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
                 if (getPage() == itemIntroList.size()-1){
-                    next.setText(lang_start);
+//                    next.setText(lang_start);
                     next.setTag("start");
                 }else {
-                    next.setText(lang_next);
+//                    next.setText(lang_next);
                     next.setTag("next");
                 }
 
@@ -171,7 +173,7 @@ public class IntroActivity extends AppCompatActivity {
                 if (!color.isNull("doSelected"))
                     DotsIndicatorRecyclerView.colorActive = color.getString("doSelected");
             }
-            next.setTextColor(Color.parseColor(color_secondary));
+//            next.setTextColor(Color.parseColor(color_secondary));
             skip.setTextColor(Color.parseColor(color_secondary));
 
             if (!jsonObject.isNull("page")){

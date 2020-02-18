@@ -9,15 +9,6 @@
     tools:context=".activity.intro.IntroActivity"
     tools:ignore="UnusedAttribute">
 
-    <View
-        android:id="@+id/bg_dots"
-        android:background="#000000"
-        android:alpha="0.3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/box"
-        android:layout_alignParentBottom="true" />
-
     <com.lsjwzh.widget.recyclerviewpager.RecyclerViewPager
         android:id="@+id/recyclerViewPager_intro"
         android:layout_width="match_parent"
@@ -25,6 +16,15 @@
         app:rvp_triggerOffset="0.1"
         app:rvp_singlePageFling="true"
         android:clipToPadding="false"/>
+
+    <View
+        android:id="@+id/bg_dots"
+        android:background="#000000"
+        android:alpha="0.1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/box"
+        android:layout_alignParentBottom="true" />
 
     <RelativeLayout
         android:id="@+id/box"
@@ -36,7 +36,8 @@
         android:layout_height="wrap_content">
 
         <TextView
-            android:id="@+id/next"
+            android:visibility="gone"
+            android:id="@+id/nexts"
             android:tag="next"
             android:onClick="btn_intro"
             android:layout_alignParentEnd="true"
@@ -49,7 +50,21 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 
+        <ImageView
+            android:id="@+id/next"
+            android:tag="next"
+            android:src="@drawable/icon_felesh"
+            android:onClick="btn_intro"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/row_background"
+            android:tint="#fff"
+            android:layout_width="@dimen/_30sdp"
+            android:layout_height="@dimen/_30sdp"/>
+
         <TextView
+            android:visibility="invisible"
+            android:enabled="false"
             android:id="@+id/skip"
             android:tag="skip"
             android:onClick="btn_intro"
