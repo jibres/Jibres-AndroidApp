@@ -35,6 +35,7 @@ public class WebViewActivity extends AppCompatActivity implements AdvancedWebVie
     private AdvancedWebView mWebView;
     private ProgressBar progress;
     String url = "https://jibres.com/dashboard";
+    boolean goToIntro = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,10 +45,12 @@ public class WebViewActivity extends AppCompatActivity implements AdvancedWebVie
         Log.d(TAG, "onCreate: "+send_headers());
         
         url = getIntent().getStringExtra("url");
+        goToIntro = getIntent().getBooleanExtra("intro",false);
 
         progress = findViewById(R.id.progress);
         mWebView = findViewById(R.id.webview);
         progress.setVisibility(View.VISIBLE);
+        mWebView.setScrollbarFadingEnabled(true);
         mWebView.setVisibility(View.VISIBLE);
         mWebView.setListener(this, this);
         mWebView.loadUrl(url,send_headers());
@@ -81,7 +84,12 @@ public class WebViewActivity extends AppCompatActivity implements AdvancedWebVie
                                 Api.endPoint(getApplicationContext(), status
                                         -> Api.android(getApplicationContext(), status1
                                         -> {
-                                    view.loadUrl(UrlManager.dashboard(getApplication()),send_headers());
+                                            if (goToIntro){
+                                                finish();
+                                                startActivity(new Intent(WebViewActivity.this,IntroActivity.class));
+                                            }else{
+                                                view.loadUrl(UrlManager.dashboard(getApplication()),send_headers());
+                                            }
                                 }));
 
                             }
@@ -156,8 +164,11 @@ public class WebViewActivity extends AppCompatActivity implements AdvancedWebVie
 
     @Override
     public void onPageError(int errorCode, String description, String failingUrl) {
-        if (description.endsWith("net::ERR_INTERNET_DISCONNECTED")){
+        if (description.equals("net::ERR_INTERNET_DISCONNECTED")){
             showBottomSheetDialogFragment();
+        }
+        if (errorCode == -10 || description.equals("net::ERR_UNKNOWN_URL_SCHEME")){
+            mWebView.setVisibility(View.GONE);
         }
         Log.d(TAG, "onPageError: "+errorCode+"\n"+description+"\n"+failingUrl);
     }
