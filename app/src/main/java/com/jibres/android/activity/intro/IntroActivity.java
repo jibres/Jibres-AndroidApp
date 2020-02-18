@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.jibres.android.R;
 import com.jibres.android.activity.WebViewActivity;
+import com.jibres.android.managers.AppManager;
 import com.jibres.android.managers.JsonManager;
 import com.jibres.android.managers.UrlManager;
 import com.jibres.android.utility.ColorUtil;
@@ -57,8 +58,9 @@ public class IntroActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        onWindowFocusChanged(true);
         setContentView(R.layout.activity_intro);
-//        AppManager.get(getApplication()).save_splash(2);
+        AppManager.get(getApplication()).save_splash(2);
 
         bg_dots   = findViewById(R.id.bg_dots);
         indicator = findViewById(R.id.indicator);
@@ -236,6 +238,16 @@ public class IntroActivity extends AppCompatActivity {
 
         } catch (JSONException e) {
             e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void onWindowFocusChanged(boolean hasFocus) {
+        super.onWindowFocusChanged(hasFocus);
+        if (hasFocus) {
+            View decorView = getWindow().getDecorView();
+            decorView.setSystemUiVisibility(
+                    View.SYSTEM_UI_FLAG_IMMERSIVE | View.SYSTEM_UI_FLAG_FULLSCREEN);
         }
     }
 }
