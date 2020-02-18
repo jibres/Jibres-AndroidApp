@@ -57,10 +57,20 @@ public class IntroAdapter extends RecyclerView.Adapter<IntroAdapter.ViewHolder>{
     }else {
       holder.view_1.setVisibility(View.VISIBLE);
       holder.view_2.setVisibility(View.GONE);
-      holder.v1_title.setText(item.getTitle());
-      holder.v1_title.setTextColor(Color.parseColor(item.getColot_title()));
-      holder.v1_desc.setText(item.getDesc());
-      holder.v1_desc.setTextColor(Color.parseColor(item.getColot_desc()));
+      if (item.getTitle()!=null){
+        holder.v1_title.setVisibility(View.VISIBLE);
+        holder.v1_title.setText(item.getTitle());
+        holder.v1_title.setTextColor(Color.parseColor(item.getColot_title()));
+      }else if (item.getSubTitle()!=null){
+        holder.v1_subTitle.setVisibility(View.VISIBLE);
+        holder.v1_subTitle.setText(item.getSubTitle());
+        holder.v1_subTitle.setTextColor(Color.parseColor(item.getColot_title()));
+      }
+      if (item.getDesc()!=null){
+        holder.v1_desc.setVisibility(View.VISIBLE);
+        holder.v1_desc.setText(item.getDesc());
+        holder.v1_desc.setTextColor(Color.parseColor(item.getColot_desc()));
+      }
     }
   }
 
@@ -75,13 +85,14 @@ public class IntroAdapter extends RecyclerView.Adapter<IntroAdapter.ViewHolder>{
   public class ViewHolder extends RecyclerView.ViewHolder{
     View view_1,view_2;
     ImageView v2_image;
-    TextView v1_title,v1_desc,v2_title,v2_desc;
+    TextView v1_title,v1_subTitle,v1_desc,v2_title,v2_desc;
 
     ViewHolder(View itemView) {
       super(itemView);
 //      item_intro_1
       view_1 = itemView.findViewById(R.id.style_1);
       v1_title = view_1.findViewById(R.id.title);
+      v1_subTitle = view_1.findViewById(R.id.sub_title);
       v1_desc = view_1.findViewById(R.id.desc);
 //      item_intro_2
       view_2 = itemView.findViewById(R.id.style_2);

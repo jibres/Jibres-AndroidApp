@@ -177,17 +177,29 @@ public class IntroActivity extends AppCompatActivity {
 
                     String image = null;
                     String title = null;
+                    String subTitle = null;
                     String desc  = null;
 
                     if (!object.isNull("image"))
                         image = object.getString("image");
-                    if (!object.isNull("title"))
+                    if (!object.isNull("title")) {
                         title = object.getString("title");
+                    }else if (!object.isNull("subtitle")) {
+                        subTitle = object.getString("subtitle");
+                    }
                     if (!object.isNull("desc"))
                         desc = object.getString("desc");
 
                     try {
-                        itemIntroList.add(new IntroModel(style,image, title, desc,bg_from,bg_to,color_primary,color_primary));
+                        if (style==1){
+                            if (title != null){
+                                itemIntroList.add(new IntroModel(title,null, desc,bg_from,bg_to,color_primary,color_secondary));
+                            }else if (subTitle != null){
+                                itemIntroList.add(new IntroModel(null,subTitle, desc,bg_from,bg_to,color_primary,color_secondary));
+                            }
+                        }else {
+                            itemIntroList.add(new IntroModel(image, title,null, desc,bg_from,bg_to,color_primary,color_secondary));
+                        }
                         recyclerView.setLayoutManager(layout);
                         recyclerView.setItemAnimator(new DefaultItemAnimator());
                         recyclerView.addItemDecoration(new DotsIndicatorRecyclerView());

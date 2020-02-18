@@ -13,17 +13,26 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <TextView
+            android:visibility="gone"
             android:id="@+id/title"
+            android:textAlignment="center"
+            android:textColor="@color/title"
+            android:textSize="@dimen/_35ssp"
+            android:textStyle="bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:visibility="gone"
+            android:id="@+id/sub_title"
             android:padding="@dimen/_5sdp"
             android:textAlignment="center"
             android:textColor="@color/title"
-            android:textSize="@dimen/_20ssp"
+            android:textSize="@dimen/_25ssp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
-
         <TextView
+            android:visibility="gone"
             android:id="@+id/desc"
-            android:paddingTop="@dimen/_5sdp"
             android:paddingStart="@dimen/_7sdp"
             android:paddingEnd="@dimen/_7sdp"
             android:textAlignment="center"

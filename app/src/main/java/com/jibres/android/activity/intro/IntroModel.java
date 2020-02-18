@@ -1,70 +1,40 @@
 package com.jibres.android.activity.intro;
 
 public class IntroModel {
-  private String image,title,desc,bg_color_start,bg_color_end,colot_title,colot_desc =null;
+  private String image,title,subTitle,desc,bg_color_start,bg_color_end,colot_title,colot_desc =null;
   private int style = 1;
 
-  public IntroModel(int style, String image, String title, String desc, String bg_color_start, String bg_color_end, String colot_title, String colot_desc) {
-    this.style = style;
+  public IntroModel(String image, String title, String subTitle, String desc, String bg_color_start, String bg_color_end, String colot_title, String colot_desc, int style) {
     this.image = image;
     this.title = title;
+    this.subTitle = subTitle;
+    this.desc = desc;
+    this.bg_color_start = bg_color_start;
+    this.bg_color_end = bg_color_end;
+    this.colot_title = colot_title;
+    this.colot_desc = colot_desc;
+    this.style = style;
+  }
+  public IntroModel(String title, String subTitle, String desc, String bg_color_start, String bg_color_end, String colot_title, String colot_desc) {
+    this.style = 1;
+    this.title = title;
+    this.subTitle = subTitle;
     this.desc = desc;
     this.bg_color_start = bg_color_start;
     this.bg_color_end = bg_color_end;
     this.colot_title = colot_title;
     this.colot_desc = colot_desc;
   }
-  public IntroModel(int style, String image, String title, String desc, String bg_color_start, String bg_color_end) {
-    this.style = style;
+  public IntroModel(String image, String title, String subTitle, String desc, String bg_color_start, String bg_color_end, String colot_title, String colot_desc) {
+    this.style = 2;
     this.image = image;
     this.title = title;
+    this.subTitle = subTitle;
     this.desc = desc;
     this.bg_color_start = bg_color_start;
     this.bg_color_end = bg_color_end;
-  }
-  public IntroModel(String image,String title, String desc ) {
-    if (image !=null){
-      this.style = 2;
-      this.image = image;
-      this.title = title;
-      this.desc = desc;
-    }else {
-      new IntroModel(title,desc);
-    }
-  }
-  public IntroModel(String image,String title, String desc,String bg_color_start, String bg_color_end, String colot_title, String colot_desc ) {
-    if (image !=null){
-      this.style = 2;
-      this.image = image;
-      this.title = title;
-      this.desc = desc;
-      this.bg_color_start = bg_color_start;
-      this.bg_color_end = bg_color_end;
-      this.colot_title = colot_title;
-      this.colot_desc = colot_desc;
-    }else {
-      new IntroModel(title,desc);
-    }
-  }
-  public IntroModel(int style,String image,String title, String desc ) {
-    if (image !=null){
-      this.style = style;
-      this.image = image;
-      this.title = title;
-      this.desc = desc;
-    }else {
-      new IntroModel(title,desc);
-    }
-  }
-  public IntroModel(String title, String desc ) {
-    this.style = 1;
-    this.title = title;
-    this.desc = desc;
-  }
-  public IntroModel(int style ,String title, String desc ) {
-    this.style = style;
-    this.title = title;
-    this.desc = desc;
+    this.colot_title = colot_title;
+    this.colot_desc = colot_desc;
   }
 
   public String getImage() {
@@ -81,6 +51,14 @@ public class IntroModel {
 
   public void setTitle(String title) {
     this.title = title;
+  }
+
+  public String getSubTitle() {
+    return subTitle;
+  }
+
+  public void setSubTitle(String subTitle) {
+    this.subTitle = subTitle;
   }
 
   public String getDesc() {

@@ -42,7 +42,7 @@ public class WebViewActivity extends AppCompatActivity implements AdvancedWebVie
         setContentView(R.layout.activity_web_view);
 
         Log.d(TAG, "onCreate: "+send_headers());
-
+        
         url = getIntent().getStringExtra("url");
 
         progress = findViewById(R.id.progress);
