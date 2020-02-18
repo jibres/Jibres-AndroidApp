@@ -15,9 +15,7 @@ import androidx.recyclerview.widget.PagerSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.jibres.android.R;
-import com.jibres.android.activity.SplashActivity;
 import com.jibres.android.activity.WebViewActivity;
-import com.jibres.android.managers.AppManager;
 import com.jibres.android.managers.JsonManager;
 import com.jibres.android.managers.UrlManager;
 import com.jibres.android.utility.ColorUtil;
@@ -42,8 +40,9 @@ public class IntroActivity extends AppCompatActivity {
     LinearLayoutManager layout;
 
     View bg_dots;
-    TextView skip;
-    ImageView next;
+    TextView next,skip,start;
+    ImageView img_next;
+    CircleIndicator2 indicator;
 
     String bg_from = "#ffffff";
     String bg_to = "#ffffff";
@@ -61,9 +60,12 @@ public class IntroActivity extends AppCompatActivity {
         setContentView(R.layout.activity_intro);
 //        AppManager.get(getApplication()).save_splash(2);
 
-        bg_dots = findViewById(R.id.bg_dots);
-        next    = findViewById(R.id.next);
-        skip    = findViewById(R.id.skip);
+        bg_dots   = findViewById(R.id.bg_dots);
+        indicator = findViewById(R.id.indicator);
+        next      = findViewById(R.id.next);
+        skip      = findViewById(R.id.skip);
+        start     = findViewById(R.id.start);
+        img_next  = findViewById(R.id.image_next);
 
         itemIntroList = new ArrayList<>();
         recyclerView = findViewById(R.id.recyclerViewPager_intro);
@@ -77,7 +79,6 @@ public class IntroActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(layout);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 //      Dots
-        CircleIndicator2 indicator = findViewById(R.id.indicator);
         indicator.attachToRecyclerView(recyclerView, pagerSnapHelper);
 //      optional
         adaptorIntro.registerAdapterDataObserver(indicator.getAdapterDataObserver());
@@ -87,13 +88,19 @@ public class IntroActivity extends AppCompatActivity {
             public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
                 if (getPage() == itemIntroList.size()-1){
-//                    next.setText(lang_start);
-                    next.setTag("start");
-                    indicator.animate().alpha(0).setDuration(300);
+                    next.setText(lang_start);
+                    img_next.setTag("start");
+                    img_next.animate().alpha(0).setDuration(150);
+                    indicator.animate().alpha(0).setDuration(150);
+                    start.animate().alpha(1).setDuration(100);
+                    start.setEnabled(true);
                 }else {
-//                    next.setText(lang_next);
-                    next.setTag("next");
-                    indicator.animate().alpha(1).setDuration(300);
+                    next.setText(lang_next);
+                    img_next.setTag("next");
+                    img_next.animate().alpha(1).setDuration(150);
+                    indicator.animate().alpha(1).setDuration(150);
+                    start.animate().alpha(0).setDuration(100);
+                    start.setEnabled(false);
                 }
 
                 if (getPage() ==0){
@@ -155,8 +162,8 @@ public class IntroActivity extends AppCompatActivity {
 
             if (!jsonObject.isNull("translation")){
                 JSONObject translation = jsonObject.getJSONObject("translation");
-                if (!translation.isNull("next"))
-                    lang_next = translation.getString("next");
+                if (!translation.isNull("img_next"))
+                    lang_next = translation.getString("img_next");
                 if (!translation.isNull("prev"))
                     lang_back = translation.getString("prev");
                 if (!translation.isNull("skip"))
@@ -185,7 +192,8 @@ public class IntroActivity extends AppCompatActivity {
                 if (!color.isNull("doSelected"))
                     DotsIndicatorRecyclerView.colorActive = color.getString("doSelected");
             }
-//            next.setTextColor(Color.parseColor(color_secondary));
+            next.setTextColor(Color.parseColor(color_secondary));
+            start.setTextColor(Color.parseColor(color_secondary));
             skip.setTextColor(Color.parseColor(color_secondary));
 
             if (!jsonObject.isNull("page")){

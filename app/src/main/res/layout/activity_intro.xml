@@ -36,8 +36,9 @@
         android:layout_height="wrap_content">
 
         <TextView
-            android:visibility="gone"
-            android:id="@+id/nexts"
+            android:visibility="invisible"
+            android:enabled="false"
+            android:id="@+id/next"
             android:tag="next"
             android:onClick="btn_intro"
             android:layout_alignParentEnd="true"
@@ -51,7 +52,7 @@
             android:layout_height="wrap_content"/>
 
         <ImageView
-            android:id="@+id/next"
+            android:id="@+id/image_next"
             android:tag="next"
             android:src="@drawable/icon_felesh"
             android:onClick="btn_intro"
@@ -68,11 +69,30 @@
             app:ci_height ="5dp"
             app:ci_margin ="5dp"
 
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="48dp"
             android:layout_centerVertical="true"
-            android:layout_toEndOf="@+id/skip"
-            android:layout_toStartOf="@+id/next" />
+            android:layout_centerHorizontal="true" />
+
+        <TextView
+            android:id="@+id/start"
+            android:textAlignment="center"
+
+            android:enabled="false"
+            android:alpha="0"
+
+            android:tag="skip"
+            android:onClick="btn_intro"
+            android:background="@drawable/row_background"
+            android:padding="@dimen/_10sdp"
+            android:textColor="@android:color/holo_blue_dark"
+            android:textSize="@dimen/_12ssp"
+            android:text="Get Started"
+
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
 
         <TextView
             android:visibility="invisible"
