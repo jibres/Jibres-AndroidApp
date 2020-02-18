@@ -2,6 +2,7 @@ package com.jibres.android.activity.intro;
 
 import android.content.res.Resources;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.view.View;
@@ -12,8 +13,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class DotsIndicatorRecyclerView extends RecyclerView.ItemDecoration {
-    private int colorActive = 0xDE000000;
-    private int colorInactive = 0x33000000;
+    public static String colorActive = "#ffffff";
+    public static String colorInactive = "#eeeeee";
 
     private static final float DP = Resources.getSystem().getDisplayMetrics().density;
 
@@ -88,7 +89,7 @@ public class DotsIndicatorRecyclerView extends RecyclerView.ItemDecoration {
     }
 
     private void drawInactiveIndicators(Canvas c, float indicatorStartX, float indicatorPosY, int itemCount) {
-        mPaint.setColor(colorInactive);
+        mPaint.setColor(Color.parseColor(colorInactive));
 
         // width of item indicator including padding
         final float itemWidth = mIndicatorItemLength + mIndicatorItemPadding;
@@ -104,7 +105,7 @@ public class DotsIndicatorRecyclerView extends RecyclerView.ItemDecoration {
 
     private void drawHighlights(Canvas c, float indicatorStartX, float indicatorPosY,
                                 int highlightPosition, float progress) {
-        mPaint.setColor(colorActive);
+        mPaint.setColor(Color.parseColor(colorActive));
 
         // width of item indicator including padding
         final float itemWidth = mIndicatorItemLength + mIndicatorItemPadding;

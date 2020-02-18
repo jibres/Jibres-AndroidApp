@@ -166,6 +166,10 @@ public class IntroActivity extends AppCompatActivity {
                     color_primary = color.getString("primary");
                 if (!color.isNull("secondary"))
                     color_secondary = color.getString("secondary");
+                if (!color.isNull("dot"))
+                    DotsIndicatorRecyclerView.colorInactive = color.getString("dot");
+                if (!color.isNull("doSelected"))
+                    DotsIndicatorRecyclerView.colorActive = color.getString("doSelected");
             }
             next.setTextColor(Color.parseColor(color_secondary));
             skip.setTextColor(Color.parseColor(color_secondary));

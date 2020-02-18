@@ -7,6 +7,7 @@
 
 
     <LinearLayout
+        android:layout_marginBottom="@dimen/_100sdp"
         android:layout_alignParentTop="true"
         android:orientation="vertical"
         android:gravity="center"
@@ -17,17 +18,17 @@
             android:id="@+id/title"
             android:textAlignment="center"
             android:textColor="@color/title"
-            android:textSize="@dimen/_35ssp"
-            android:textStyle="bold"
+            android:textSize="@dimen/_50ssp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
         <TextView
-            android:visibility="gone"
             android:id="@+id/sub_title"
+            android:visibility="gone"
             android:padding="@dimen/_5sdp"
+            android:textStyle="bold"
             android:textAlignment="center"
             android:textColor="@color/title"
-            android:textSize="@dimen/_25ssp"
+            android:textSize="@dimen/_30ssp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
         <TextView
@@ -37,7 +38,7 @@
             android:paddingEnd="@dimen/_7sdp"
             android:textAlignment="center"
             android:textColor="@color/desc"
-            android:textSize="@dimen/_12ssp"
+            android:textSize="@dimen/_14ssp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
     </LinearLayout>
