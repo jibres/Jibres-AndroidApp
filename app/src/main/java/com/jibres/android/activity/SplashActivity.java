@@ -37,6 +37,21 @@ public class SplashActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        onWindowFocusChanged(true);
+        setContentView(R.layout.activity_splash);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+        idFinder();
+        setDefaultLanguage();
+        setValueSplash();
+        API();
+    }
+
+    void API(){
         Api.endPoint(getApplicationContext(), getEndPoint -> {
             if (getEndPoint){
                 Api.android(getApplicationContext(), getUrl -> {
@@ -50,27 +65,18 @@ public class SplashActivity extends AppCompatActivity {
         });
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_splash);
-        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-        idFinder();
-        setDefaultLanguage();
-        setValueSplash();
-    }
-
     void helperActivty(){
         Intent intent;
         switch (getSplash()){
-            /*case 0:
+            case 0:
                 intent = new Intent(this, WebViewActivity.class);
                 intent.putExtra("url",UrlManager.language(this));
+                intent.putExtra("intro",true);
                 AppManager.get(getApplication()).save_splash(1);
-                break;*/
-            case 0:
+                break;
+            case 1:
                 intent = new Intent(this, IntroActivity.class);
-//                AppManager.get(getApplication()).save_splash(2);
+                AppManager.get(getApplication()).save_splash(2);
                 break;
             default:
                 intent = new Intent(this, WebViewActivity.class);
@@ -78,7 +84,6 @@ public class SplashActivity extends AppCompatActivity {
                 break;
         }
         new Handler().postDelayed(() -> {
-            /*if (getSplash()>=2) */
             finish();
             startActivity(intent);
         },sleep);
@@ -171,5 +176,15 @@ public class SplashActivity extends AppCompatActivity {
             startActivity(getIntent());
         });
         bottomSheetFragment.show(getSupportFragmentManager(), bottomSheetFragment.getTag());
+    }
+
+    @Override
+    public void onWindowFocusChanged(boolean hasFocus) {
+        super.onWindowFocusChanged(hasFocus);
+        if (hasFocus) {
+            View decorView = getWindow().getDecorView();
+            decorView.setSystemUiVisibility(
+                    View.SYSTEM_UI_FLAG_IMMERSIVE | View.SYSTEM_UI_FLAG_FULLSCREEN);
+        }
     }
 }
