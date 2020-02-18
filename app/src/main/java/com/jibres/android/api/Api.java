@@ -9,11 +9,14 @@ import com.jibres.android.JibresApplication;
 import com.jibres.android.managers.AppManager;
 import com.jibres.android.managers.JsonManager;
 import com.jibres.android.managers.UrlManager;
+import com.jibres.android.utility.SecretReadFile;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
 
 public class Api {
     public static void endPoint(Context context, ApiListener.connected listener){
@@ -55,7 +58,15 @@ public class Api {
                                 e.printStackTrace();
                                 listener.onReceived(false);
                             }
-                        }, e -> listener.onReceived(false));
+                        }, e -> listener.onReceived(false))
+                {
+                    @Override
+                    public Map<String, String> getHeaders()  {
+                        HashMap<String, String> headers = new HashMap<>();
+                        headers.put("store", SecretReadFile.store(context));
+                        return headers;
+                    }
+                };
         request.setRetryPolicy(
                 new DefaultRetryPolicy(
                         DefaultRetryPolicy.DEFAULT_TIMEOUT_MS,
@@ -107,7 +118,15 @@ public class Api {
                                 e.printStackTrace();
                                 listener.onReceived(false);
                             }
-                        }, e -> listener.onReceived(false));
+                        }, e -> listener.onReceived(false))
+                {
+                    @Override
+                    public Map<String, String> getHeaders()  {
+                        HashMap<String, String> headers = new HashMap<>();
+                        headers.put("store", SecretReadFile.store(context));
+                        return headers;
+                    }
+                };
         request.setRetryPolicy(
                 new DefaultRetryPolicy(
                         DefaultRetryPolicy.DEFAULT_TIMEOUT_MS,
@@ -161,7 +180,15 @@ public class Api {
                                 e.printStackTrace();
                                 listener.onReceived(false);
                             }
-                        }, e -> listener.onReceived(false));
+                        }, e -> listener.onReceived(false))
+                {
+                    @Override
+                    public Map<String, String> getHeaders()  {
+                        HashMap<String, String> headers = new HashMap<>();
+                        headers.put("store", SecretReadFile.store(context));
+                        return headers;
+                    }
+                };
         request.setRetryPolicy(
                 new DefaultRetryPolicy(
                         DefaultRetryPolicy.DEFAULT_TIMEOUT_MS,
