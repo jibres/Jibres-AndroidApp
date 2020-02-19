@@ -8,6 +8,7 @@ import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
@@ -37,6 +38,7 @@ public class WebViewActivity extends AppCompatActivity implements AdvancedWebVie
     String url = "https://jibres.com/dashboard";
     boolean goToIntro = false;
 
+    @SuppressLint({"JavascriptInterface", "SetJavaScriptEnabled"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,6 +53,24 @@ public class WebViewActivity extends AppCompatActivity implements AdvancedWebVie
         mWebView = findViewById(R.id.webview);
         progress.setVisibility(View.VISIBLE);
         mWebView.setScrollbarFadingEnabled(true);
+        mWebView.setOverScrollMode(View.OVER_SCROLL_NEVER);
+
+        mWebView.getSettings().setDomStorageEnabled(true);
+        mWebView.getSettings().setPluginState(WebSettings.PluginState.ON);
+        mWebView.getSettings().setJavaScriptEnabled(true);
+        mWebView.getSettings().setLoadsImagesAutomatically(true);
+        mWebView.getSettings().setRenderPriority(WebSettings.RenderPriority.HIGH);
+        mWebView.getSettings().setSupportZoom(false);
+        mWebView.getSettings().setSavePassword(false);
+        mWebView.getSettings().setBlockNetworkImage(false);
+        mWebView.getSettings().setSupportMultipleWindows(false);
+        mWebView.getSettings().setAppCacheEnabled(true);
+        mWebView.addJavascriptInterface(this, "jsinterface");
+
+
+
+
+
         mWebView.setVisibility(View.VISIBLE);
         mWebView.setListener(this, this);
         mWebView.loadUrl(url,send_headers());
