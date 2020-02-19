@@ -1,6 +1,7 @@
 package com.jibres.android.api;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
@@ -19,6 +20,7 @@ import java.util.Iterator;
 import java.util.Map;
 
 public class Api {
+    private static String TAG = "amingoli-api";
     public static void endPoint(Context context, ApiListener.connected listener){
         StringRequest request =
                 new StringRequest(Request.Method.GET, UrlManager.endPoint(context),
@@ -153,7 +155,15 @@ public class Api {
                                 e.printStackTrace();
                                 listener.onReceived(false);
                             }
-                        }, e -> listener.onReceived(false));
+                        }, e -> listener.onReceived(false))
+                {
+                    @Override
+                    public Map<String, String> getHeaders()  {
+                        HashMap<String, String> headers = new HashMap<>();
+                        headers.put("store", SecretReadFile.store(context));
+                        return headers;
+                    }
+                };
         request.setRetryPolicy(
                 new DefaultRetryPolicy(
                         DefaultRetryPolicy.DEFAULT_TIMEOUT_MS,
@@ -166,6 +176,7 @@ public class Api {
         StringRequest request =
                 new StringRequest(Request.Method.GET, UrlManager.intro(context),
                         response -> {
+                            Log.d(TAG, "intro: "+response);
                             try {
                                 JSONObject mainObject = new JSONObject(response);
                                 if (mainObject.getBoolean("ok")){
@@ -177,10 +188,15 @@ public class Api {
                                     listener.onReceived(false);
                                 }
                             } catch (JSONException e) {
-                                e.printStackTrace();
                                 listener.onReceived(false);
+                                e.printStackTrace();
+                                Log.e(TAG, "intro > result: ",e );
                             }
-                        }, e -> listener.onReceived(false))
+                        }, e -> {
+                    listener.onReceived(false);
+                    e.printStackTrace();
+                    Log.e(TAG, "intro > request: ",e );
+                })
                 {
                     @Override
                     public Map<String, String> getHeaders()  {
