@@ -18,6 +18,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.jibres.android.R;
 import com.jibres.android.activity.intro.IntroActivity;
 import com.jibres.android.api.Api;
+import com.jibres.android.api.ApiListener;
 import com.jibres.android.managers.AppManager;
 import com.jibres.android.managers.UrlManager;
 import com.jibres.android.utility.SecretReadFile;
@@ -43,18 +44,16 @@ public class WebViewActivity extends AppCompatActivity implements AdvancedWebVie
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_web_view);
+        progress = findViewById(R.id.progress);
+        progress.setVisibility(View.VISIBLE);
 
-        Log.d(TAG, "onCreate: "+send_headers());
-        
         url = getIntent().getStringExtra("url");
         goToIntro = getIntent().getBooleanExtra("intro",false);
 
-        progress = findViewById(R.id.progress);
         mWebView = findViewById(R.id.webview);
-        progress.setVisibility(View.VISIBLE);
+        mWebView.setVisibility(View.VISIBLE);
         mWebView.setScrollbarFadingEnabled(true);
         mWebView.setOverScrollMode(View.OVER_SCROLL_NEVER);
-
         mWebView.getSettings().setDomStorageEnabled(true);
         mWebView.getSettings().setPluginState(WebSettings.PluginState.ON);
         mWebView.getSettings().setJavaScriptEnabled(true);
@@ -67,11 +66,6 @@ public class WebViewActivity extends AppCompatActivity implements AdvancedWebVie
         mWebView.getSettings().setAppCacheEnabled(true);
         mWebView.addJavascriptInterface(this, "jsinterface");
 
-
-
-
-
-        mWebView.setVisibility(View.VISIBLE);
         mWebView.setListener(this, this);
         mWebView.loadUrl(url,send_headers());
 
@@ -102,14 +96,15 @@ public class WebViewActivity extends AppCompatActivity implements AdvancedWebVie
                                 progress.setVisibility(View.VISIBLE);
                                 Log.d(TAG, "Change Language: "+AppManager.getAppLanguage(getApplication()));
                                 Api.endPoint(getApplicationContext(), status
-                                        -> Api.android(getApplicationContext(), status1
-                                        -> {
-                                            if (goToIntro){
-                                                finish();
-                                                startActivity(new Intent(WebViewActivity.this,IntroActivity.class));
-                                            }else{
-                                                view.loadUrl(UrlManager.dashboard(getApplication()),send_headers());
-                                            }
+                                        -> Api.android(getApplicationContext(), status1 -> {
+                                    if (goToIntro){
+                                        Api.intro(getApplicationContext(), status2 -> {
+                                            finish();
+                                            startActivity(new Intent(WebViewActivity.this,IntroActivity.class));
+                                        });
+                                    }else{
+                                        view.loadUrl(UrlManager.dashboard(getApplication()),send_headers());
+                                    }
                                 }));
 
                             }
@@ -179,7 +174,8 @@ public class WebViewActivity extends AppCompatActivity implements AdvancedWebVie
         Log.d(TAG, "onPageFinished: "+url);
         progress.setVisibility(View.GONE);
         if (isNetworkConnected())
-            if (mWebView.getVisibility() != View.VISIBLE) mWebView.setVisibility(View.VISIBLE);
+            if (mWebView.getVisibility() != View.VISIBLE)
+                mWebView.setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -189,6 +185,7 @@ public class WebViewActivity extends AppCompatActivity implements AdvancedWebVie
         }
         if (errorCode == -10 || description.equals("net::ERR_UNKNOWN_URL_SCHEME")){
             mWebView.setVisibility(View.GONE);
+            progress.setVisibility(View.VISIBLE);
         }
         Log.d(TAG, "onPageError: "+errorCode+"\n"+description+"\n"+failingUrl);
     }
@@ -208,8 +205,7 @@ public class WebViewActivity extends AppCompatActivity implements AdvancedWebVie
             mWebView.setVisibility(View.GONE);
             BottomSheetFragment bottomSheetFragment = new BottomSheetFragment();
             bottomSheetFragment.setCancelable(false);
-            bottomSheetFragment.setListener(()
-                    -> {
+            bottomSheetFragment.setListener(() -> {
                 bottomSheetIsShow = false;
                 mWebView.reload();
                 bottomSheetFragment.dismiss();
@@ -220,7 +216,10 @@ public class WebViewActivity extends AppCompatActivity implements AdvancedWebVie
 
     private boolean isNetworkConnected() {
         ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-        return cm.getActiveNetworkInfo() != null && cm.getActiveNetworkInfo().isConnected();
+        if (cm != null) {
+            return cm.getActiveNetworkInfo() != null && cm.getActiveNetworkInfo().isConnected();
+        }
+        return false;
     }
 
 
