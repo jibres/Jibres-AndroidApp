@@ -3,6 +3,7 @@ package com.jibres.android.activity.intro;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -32,6 +33,7 @@ import java.util.List;
 import me.relex.circleindicator.CircleIndicator2;
 
 public class IntroActivity extends AppCompatActivity {
+    private static String TAG = "amingoli-intro";
     int style = 1;
     int padding = 0;
 
@@ -91,6 +93,7 @@ public class IntroActivity extends AppCompatActivity {
                 super.onScrollStateChanged(recyclerView, newState);
                 if (getPage() == itemIntroList.size()-1){
                     next.setText(lang_start);
+                    start.setText(lang_start);
                     img_next.setTag("start");
                     img_next.animate().alpha(0).setDuration(150);
                     indicator.animate().alpha(0).setDuration(150);
@@ -142,11 +145,12 @@ public class IntroActivity extends AppCompatActivity {
 
 
     private void getJson(){
+        Log.d(TAG, "getJson: "+JsonManager.getJsonIntro(this));
         try {
-            JSONObject jsonObject = new JSONObject(JsonManager.getJsonIntro(this));
+            JSONObject result = new JSONObject(JsonManager.getJsonIntro(this));
 
-            if (!jsonObject.isNull("theme")){
-                switch (jsonObject.getString("theme")){
+            if (!result.isNull("theme")){
+                switch (result.getString("theme")){
                     case "Jibres":
                         style = 1;
                         break;
@@ -162,8 +166,8 @@ public class IntroActivity extends AppCompatActivity {
                 recyclerView.setPadding(0,0,0,0);
             }
 
-            if (!jsonObject.isNull("translation")){
-                JSONObject translation = jsonObject.getJSONObject("translation");
+            if (!result.isNull("translation")){
+                JSONObject translation = result.getJSONObject("translation");
                 if (!translation.isNull("img_next"))
                     lang_next = translation.getString("img_next");
                 if (!translation.isNull("prev"))
@@ -174,8 +178,8 @@ public class IntroActivity extends AppCompatActivity {
                     lang_start = translation.getString("start");
             }
 
-            if (!jsonObject.isNull("bg")){
-                JSONObject bg = jsonObject.getJSONObject("bg");
+            if (!result.isNull("bg")){
+                JSONObject bg = result.getJSONObject("bg");
                 if (!bg.isNull("from"))
                     bg_from = bg.getString("from");
                 if (!bg.isNull("to"))
@@ -183,8 +187,8 @@ public class IntroActivity extends AppCompatActivity {
             }
             ColorUtil.setGradient(recyclerView,bg_from,bg_to);
 
-            if (!jsonObject.isNull("color")){
-                JSONObject color = jsonObject.getJSONObject("color");
+            if (!result.isNull("color")){
+                JSONObject color = result.getJSONObject("color");
                 if (!color.isNull("primary"))
                     color_primary = color.getString("primary");
                 if (!color.isNull("secondary"))
@@ -198,27 +202,26 @@ public class IntroActivity extends AppCompatActivity {
             start.setTextColor(Color.parseColor(color_secondary));
             skip.setTextColor(Color.parseColor(color_secondary));
 
-            if (!jsonObject.isNull("page")){
-                JSONArray page = jsonObject.getJSONArray("page");
+            if (!result.isNull("page")){
+                JSONArray page = result.getJSONArray("page");
                 for (int i = 0; i < page.length(); i++) {
-                    JSONObject object = page.getJSONObject(i);
-
-                    String image = null;
-                    String title = null;
-                    String subTitle = null;
-                    String desc  = null;
-
-                    if (!object.isNull("image"))
-                        image = object.getString("image");
-                    if (!object.isNull("title")) {
-                        title = object.getString("title");
-                    }else if (!object.isNull("subtitle")) {
-                        subTitle = object.getString("subtitle");
-                    }
-                    if (!object.isNull("desc"))
-                        desc = object.getString("desc");
-
                     try {
+                        JSONObject object = page.getJSONObject(i);
+
+                        String image = null;
+                        String title = null;
+                        String subTitle = null;
+                        String desc  = null;
+
+                        if (!object.isNull("image"))
+                            image = object.getString("image");
+                        if (!object.isNull("title")) {
+                            title = object.getString("title");
+                        }else if (!object.isNull("subtitle")) {
+                            subTitle = object.getString("subtitle");
+                        }
+                        if (!object.isNull("desc"))
+                            desc = object.getString("desc");
                         if (style==1){
                             if (title != null){
                                 itemIntroList.add(new IntroModel(title,null, desc,bg_from,bg_to,color_primary,color_secondary));
@@ -237,6 +240,7 @@ public class IntroActivity extends AppCompatActivity {
             }
 
         } catch (JSONException e) {
+            Log.e(TAG, "getJson > result: ",e);
             e.printStackTrace();
         }
     }
