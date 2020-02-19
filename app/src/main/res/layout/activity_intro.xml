@@ -43,7 +43,6 @@
             android:onClick="btn_intro"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
-            android:background="@drawable/row_background"
             android:padding="@dimen/_10sdp"
             android:textColor="@android:color/holo_blue_dark"
             android:textSize="@dimen/_12ssp"
@@ -51,23 +50,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 
-        <ImageView
-            android:id="@+id/image_next"
-            android:tag="next"
-            android:src="@drawable/icon_felesh"
-            android:onClick="btn_intro"
-            android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
-            android:background="@drawable/row_background"
-            android:tint="#fff"
-            android:layout_width="@dimen/_30sdp"
-            android:layout_height="@dimen/_30sdp"/>
-
         <me.relex.circleindicator.CircleIndicator2
             android:id="@+id/indicator"
-            app:ci_width ="5dp"
-            app:ci_height ="5dp"
-            app:ci_margin ="5dp"
+            app:ci_width ="@dimen/_5sdp"
+            app:ci_height ="@dimen/_5sdp"
+            app:ci_margin ="@dimen/_5sdp"
 
             android:layout_width="wrap_content"
             android:layout_height="48dp"
@@ -77,22 +64,29 @@
         <TextView
             android:id="@+id/start"
             android:textAlignment="center"
-
             android:enabled="false"
             android:alpha="0"
-
             android:tag="skip"
             android:onClick="btn_intro"
-            android:background="@drawable/row_background"
             android:padding="@dimen/_10sdp"
             android:textColor="@android:color/holo_blue_dark"
             android:textSize="@dimen/_12ssp"
-            android:text="Get Started"
-
             android:layout_centerVertical="true"
             android:layout_centerHorizontal="true"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
+
+        <ImageView
+            android:id="@+id/image_next"
+            android:tag="next"
+            android:src="@drawable/icon_felesh"
+            android:onClick="btn_intro"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:tint="#fff"
+            android:padding="@dimen/_5sdp"
+            android:layout_width="@dimen/_35sdp"
+            android:layout_height="@dimen/_35sdp"/>
 
         <TextView
             android:visibility="invisible"
@@ -102,7 +96,6 @@
             android:onClick="btn_intro"
             android:layout_alignParentStart="true"
             android:layout_centerVertical="true"
-            android:background="@drawable/row_background"
             android:padding="@dimen/_10sdp"
             android:textColor="@android:color/holo_blue_dark"
             android:textSize="@dimen/_12ssp"
