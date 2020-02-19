@@ -55,8 +55,9 @@ public class SplashActivity extends AppCompatActivity {
         Api.endPoint(getApplicationContext(), getEndPoint -> {
             if (getEndPoint){
                 Api.android(getApplicationContext(), getUrl -> {
-                    helperActivty();
-                    Api.intro(getApplicationContext(), introIsGet -> {});
+                    Api.intro(getApplicationContext(), introIsGet -> {
+                        helperActivty();
+                    });
                     Api.splash(getApplicationContext(), splashIsSet -> {
                         setValueSplash();
                     });
