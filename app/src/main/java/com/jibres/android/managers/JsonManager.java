@@ -32,11 +32,11 @@ public class JsonManager extends ContextWrapper {
     public static final String json_intro = "json_intro";
 
     public void setJsonSplash(String json) {
-        editor.putString(JsonManager.json_splash, json);
+        editor.putString(json_splash, json);
         editor.apply();
     }
     public void setJsonIntro(String json) {
-        editor.putString(JsonManager.json_intro, json);
+        editor.putString(json_intro, json);
         editor.apply();
     }
 
