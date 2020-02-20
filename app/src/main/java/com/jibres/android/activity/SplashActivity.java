@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.jibres.android.R;
 import com.jibres.android.activity.intro.IntroActivity;
 import com.jibres.android.api.Api;
@@ -55,12 +56,14 @@ public class SplashActivity extends AppCompatActivity {
         Api.endPoint(getApplicationContext(), getEndPoint -> {
             if (getEndPoint){
                 Api.android(getApplicationContext(), getUrl -> {
-                    Api.intro(getApplicationContext(), introIsGet -> {
+                    if (getApiIntro()){
+                        Api.intro(getApplicationContext(), introIsGet -> {
+                            helperActivty();
+                        });
+                    }else {
                         helperActivty();
-                    });
-                    Api.splash(getApplicationContext(), splashIsSet -> {
-                        setValueSplash();
-                    });
+                    }
+                    Api.splash(getApplicationContext(), splashIsSet -> {});
                 });
             }else showBottomSheetDialogFragment();
         });
@@ -86,20 +89,26 @@ public class SplashActivity extends AppCompatActivity {
         }
         new Handler().postDelayed(() -> {
             finish();
+            setValueSplash();
             startActivity(intent);
         },sleep);
     }
 
     void setValueSplash(){
         try {
-            String  from = "#ffffff", to   = "#ffffff";
+            String from="#ffffff", to= "#ffffff";
             JSONObject object = new JSONObject(JsonManager.getJsonSplash(getApplication()));
             if (!object.isNull("sleep")){
                 sleep = object.getInt("sleep");
             }
             if (!object.isNull("logo")){
                 try {
-                    Glide.with(this).load(object.getString("logo")).into(logo);
+                    Glide.with(this)
+                            .applyDefaultRequestOptions(new RequestOptions()
+                                    .placeholder(R.drawable.logo)
+                                    .error(R.drawable.logo))
+                            .load(object.getString("logo"))
+                            .into(logo);
                 }catch (Exception e){
 
                 }
@@ -159,6 +168,9 @@ public class SplashActivity extends AppCompatActivity {
     int getSplash(){
         return AppManager.get(getApplication()).getUserInfo_int().get(AppManager.splash);
     }
+    boolean getApiIntro(){
+        return getSplash()==0;
+    }
 
     void idFinder(){
         background = findViewById(R.id.splash_relative_layout);
@@ -173,8 +185,8 @@ public class SplashActivity extends AppCompatActivity {
         BottomSheetFragment bottomSheetFragment = new BottomSheetFragment();
         bottomSheetFragment.setCancelable(false);
         bottomSheetFragment.setListener(() -> {
-            finish();
-            startActivity(getIntent());
+            bottomSheetFragment.dismiss();
+            API();
         });
         bottomSheetFragment.show(getSupportFragmentManager(), bottomSheetFragment.getTag());
     }
