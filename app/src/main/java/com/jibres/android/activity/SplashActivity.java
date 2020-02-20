@@ -186,7 +186,8 @@ public class SplashActivity extends AppCompatActivity {
         bottomSheetFragment.setCancelable(false);
         bottomSheetFragment.setListener(() -> {
             bottomSheetFragment.dismiss();
-            API();
+            finish();
+            startActivity(getIntent());
         });
         bottomSheetFragment.show(getSupportFragmentManager(), bottomSheetFragment.getTag());
     }
