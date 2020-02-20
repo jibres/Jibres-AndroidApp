@@ -52,8 +52,11 @@ public class WebViewActivity extends AppCompatActivity implements AdvancedWebVie
 
         mWebView = findViewById(R.id.webview);
         mWebView.setVisibility(View.VISIBLE);
-        mWebView.setScrollbarFadingEnabled(true);
-        mWebView.setOverScrollMode(View.OVER_SCROLL_NEVER);
+        mWebView.setScrollbarFadingEnabled(false);
+        mWebView.setHorizontalScrollBarEnabled(false);
+        mWebView.setVerticalScrollBarEnabled(false);
+        mWebView.setScrollContainer(false);
+
         mWebView.getSettings().setDomStorageEnabled(true);
         mWebView.getSettings().setPluginState(WebSettings.PluginState.ON);
         mWebView.getSettings().setJavaScriptEnabled(true);
@@ -65,6 +68,9 @@ public class WebViewActivity extends AppCompatActivity implements AdvancedWebVie
         mWebView.getSettings().setSupportMultipleWindows(false);
         mWebView.getSettings().setAppCacheEnabled(true);
         mWebView.addJavascriptInterface(this, "jsinterface");
+
+        mWebView.setOverScrollMode(View.OVER_SCROLL_NEVER);
+
 
         mWebView.setListener(this, this);
         mWebView.loadUrl(url,send_headers());
