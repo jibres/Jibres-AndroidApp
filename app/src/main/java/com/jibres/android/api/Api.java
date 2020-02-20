@@ -10,7 +10,7 @@ import com.jibres.android.JibresApplication;
 import com.jibres.android.managers.AppManager;
 import com.jibres.android.managers.JsonManager;
 import com.jibres.android.managers.UrlManager;
-import com.jibres.android.utility.SecretReadFile;
+import com.jibres.android.utility.file.SecretReadFile;
 
 import org.json.JSONException;
 import org.json.JSONObject;

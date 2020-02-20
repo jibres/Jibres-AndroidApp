@@ -18,10 +18,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.jibres.android.R;
 import com.jibres.android.activity.intro.IntroActivity;
 import com.jibres.android.api.Api;
-import com.jibres.android.api.ApiListener;
 import com.jibres.android.managers.AppManager;
 import com.jibres.android.managers.UrlManager;
-import com.jibres.android.utility.SecretReadFile;
+import com.jibres.android.utility.file.SecretReadFile;
 import com.jibres.android.weight.BottomSheetFragment;
 
 import java.util.HashMap;

@@ -5,7 +5,7 @@ import android.content.Context;
 import android.content.ContextWrapper;
 import android.content.SharedPreferences;
 
-import com.jibres.android.utility.SecretReadFile;
+import com.jibres.android.utility.file.SecretReadFile;
 
 import java.util.HashMap;
 import java.util.Map;
