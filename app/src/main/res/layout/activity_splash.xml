@@ -23,7 +23,7 @@
     <ImageView
         android:id="@+id/logo"
         android:layout_centerInParent="true"
-        android:src="@drawable/logo_xml"
+        android:src="@drawable/logo"
         android:layout_width="@dimen/_130sdp"
         android:layout_height="@dimen/_150sdp"/>
 
