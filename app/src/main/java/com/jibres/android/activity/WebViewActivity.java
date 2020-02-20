@@ -103,6 +103,7 @@ public class WebViewActivity extends AppCompatActivity implements AdvancedWebVie
                                 Log.d(TAG, "Change Language: "+AppManager.getAppLanguage(getApplication()));
                                 Api.endPoint(getApplicationContext(), status
                                         -> Api.android(getApplicationContext(), status1 -> {
+                                    Api.splash(getApplicationContext(), splashIsSet -> {});
                                     if (goToIntro){
                                         Api.intro(getApplicationContext(), status2 -> {
                                             finish();
