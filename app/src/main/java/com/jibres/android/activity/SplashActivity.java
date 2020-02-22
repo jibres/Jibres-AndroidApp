@@ -97,7 +97,23 @@ public class SplashActivity extends AppCompatActivity {
     void setValueSplash(){
         try {
             String from="#ffffff", to= "#ffffff";
+            int style = 1;
             JSONObject object = new JSONObject(JsonManager.getJsonSplash(getApplication()));
+            if (!object.isNull("theme")){
+                switch (object.getString("theme")){
+                    case "Jibres":
+                        style = 1;
+                        break;
+                    default:
+                        style = 2;
+                        break;
+                }
+            }
+            if (style==2){
+                animation_bg.setVisibility(View.INVISIBLE);
+            }else {
+                animation_bg.setVisibility(View.VISIBLE);
+            }
             if (!object.isNull("sleep")){
                 sleep = object.getInt("sleep");
             }
