@@ -181,8 +181,7 @@ public class Api {
                                 JSONObject mainObject = new JSONObject(response);
                                 if (mainObject.getBoolean("ok")){
                                     JSONObject result = mainObject.getJSONObject("result");
-                                    JsonManager.context(context)
-                                            .setJsonIntro(String.valueOf(result));
+                                    JsonManager.context(context).setJsonIntro(String.valueOf(result));
                                     listener.onReceived(true);
                                 }else {
                                     listener.onReceived(false);
