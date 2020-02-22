@@ -229,6 +229,8 @@ public class IntroActivity extends AppCompatActivity {
                                 itemIntroList.add(new IntroModel(null,subTitle, desc,bg_from,bg_to,color_primary,color_secondary));
                             }
                         }else {
+                            int padding = (int) getResources().getDimension(R.dimen._50sdp);
+                            recyclerView.setPadding(padding,0,padding,0);
                             itemIntroList.add(new IntroModel(image, title,null, desc,bg_from,bg_to,color_primary,color_secondary));
                         }
                         adaptorIntro.notifyDataSetChanged();
