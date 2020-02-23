@@ -4,30 +4,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <View
-        android:layout_alignParentStart="true"
-        android:backgroundTint="#000"
-        android:layout_marginTop="@dimen/_5sdp"
-        android:background="@drawable/bg_radus_r"
-        android:layout_width="@dimen/_30sdp"
-        android:layout_height="@dimen/_300sdp"/>
-
-    <View
-        android:layout_alignParentEnd="true"
-        android:backgroundTint="#000"
-        android:layout_marginTop="@dimen/_5sdp"
-        android:background="@drawable/bg_radus_l"
-        android:layout_width="@dimen/_30sdp"
-        android:layout_height="@dimen/_300sdp"/>
-
     <androidx.cardview.widget.CardView
         android:id="@+id/box_image"
-        app:cardBackgroundColor="#000"
+        app:cardBackgroundColor="#fff"
         app:cardCornerRadius="@dimen/_10sdp"
 
-        android:layout_marginStart="@dimen/_40sdp"
-        android:layout_marginEnd="@dimen/_40sdp"
-        android:layout_marginTop="@dimen/_5sdp"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_marginEnd="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_10sdp"
 
         android:layout_width="match_parent"
         android:layout_height="@dimen/_300sdp">
