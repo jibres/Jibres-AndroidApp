@@ -11,6 +11,7 @@
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/animate_bg"
         android:alpha="0.1"
+        app:lottie_speed="2"
         android:tint="#000"
         android:layout_centerInParent="true"
         android:layout_width="match_parent"
