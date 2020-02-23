@@ -185,6 +185,7 @@ public class IntroActivity extends AppCompatActivity {
                 if (!bg.isNull("to"))
                     bg_to = bg.getString("to");
             }
+
             ColorUtil.setGradient(recyclerView,bg_from,bg_to);
 
             if (!result.isNull("color")){
