@@ -33,3 +33,9 @@ app/gradle.properties
 .cxx
 *-key-store
 /app/src/main/java/com/jibres/android/keys.java
+/app/src/main/assets/json/intro_default.json
+/app/src/main/assets/json/splash_default.json
+/app/src/main/assets/secret/endpoint.txt
+/app/src/main/assets/secret/store.txt
+/app/src/main/res/drawable/logo.png
+/app/src/main/res/values/app_name.xml
