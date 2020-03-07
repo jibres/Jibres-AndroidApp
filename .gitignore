@@ -32,6 +32,7 @@ captures
 app/gradle.properties
 .cxx
 *-key-store
+*.jks
 /app/src/main/java/com/jibres/android/keys.java
 /app/src/main/assets/json/intro_default.json
 /app/src/main/assets/json/splash_default.json
