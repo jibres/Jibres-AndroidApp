@@ -33,6 +33,9 @@ allprojects {
     }
 }
 
+tasks.withType(JavaExec) {
+    jvmArgs = ['-Xms512m', '-Xmx512m']
+}
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
