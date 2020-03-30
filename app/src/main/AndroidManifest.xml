@@ -6,7 +6,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.WAKE_LOCK"/>
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.USE_FINGERPRINT" />
 
     <application
@@ -19,7 +19,7 @@
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
 
-        <activity android:name=".activity.WebViewActivity"/>
+        <activity android:name=".activity.WebViewActivity" />
         <activity android:name=".activity.security.pincode.PincodeManagerActivity" />
         <activity android:name=".activity.security.pincode.PincodeActivity" />
         <activity android:name=".activity.security.fingerprint.FingerprintActivity" />
@@ -39,12 +39,14 @@
             tools:ignore="InnerclassSeparator">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
+
                 <data android:scheme="jibres://" />
             </intent-filter>
         </activity>
 
     </application>
-    
+
 </manifest>
