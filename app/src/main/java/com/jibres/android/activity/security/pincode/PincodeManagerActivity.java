@@ -12,10 +12,10 @@ import com.jibres.android.R;
 import com.jibres.android.managers.AppManager;
 
 public class PincodeManagerActivity extends AppCompatActivity {
-    int lookStatus =0;
+    int lookStatus = 0;
     String pinCode = null;
     EditText editText;
-    TextView desc ,textError;
+    TextView desc, textError;
 
     View boxError;
 
@@ -48,62 +48,58 @@ public class PincodeManagerActivity extends AppCompatActivity {
         findViewById(R.id.button).setOnClickListener(view1 -> onClickOk());
 
 
-
-
     }
 
-    private void onClickOk(){
-        if (editText.getText().length() ==4){
+    private void onClickOk() {
+        if (editText.getText().length() == 4) {
             error(null);
-            if (hasPin){
-                if (getTextEdt().equals(AppManager.getPinCode(this))){
+            if (hasPin) {
+                if (getTextEdt().equals(AppManager.getPinCode(this))) {
                     hasPin = false;
                     desc.setText("کد جدید را وارد کنید");
                     editText.getText().clear();
-                }else {
+                } else {
                     error("کد اشتباه است");
                 }
-            } else if (one || one_pin == null){
+            } else if (one || one_pin == null) {
                 one = false;
                 one_pin = getTextEdt();
                 editText.getText().clear();
                 editText.requestFocus();
                 desc.setText("دوباره کد جدید را وارد کنید");
-            }else {
-                if (one_pin.equals(getTextEdt())){
+            } else {
+                if (one_pin.equals(getTextEdt())) {
                     AppManager.get(this).save_lookStatus(2);
                     AppManager.get(this).save_pinCode(getTextEdt());
                     finish();
-                }else {
+                } else {
                     error("کد مطابقت ندارد");
                 }
             }
-        }else {
+        } else {
             error("باید ۴ رقم وارد کنید");
         }
     }
 
 
-    private String getTextEdt(){
+    private String getTextEdt() {
         return editText.getText().toString();
     }
 
 
-
-
-    private void hasPinCode(){
-        if (AppManager.getLookStatus(this)!=0 ||
-                AppManager.getPinCode(this)!=null){
+    private void hasPinCode() {
+        if (AppManager.getLookStatus(this) != 0 ||
+                AppManager.getPinCode(this) != null) {
             desc.setText("کد قبلی خود را وارد کنید");
             hasPin = true;
         }
     }
 
-    private void error(String txt){
-        if (txt!=null){
+    private void error(String txt) {
+        if (txt != null) {
             boxError.setVisibility(View.VISIBLE);
             textError.setText(txt);
-        }else {
+        } else {
             boxError.setVisibility(View.GONE);
         }
     }

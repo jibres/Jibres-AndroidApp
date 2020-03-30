@@ -43,7 +43,7 @@ public class IntroActivity extends AppCompatActivity {
     LinearLayoutManager layout;
 
     View bg_dots;
-    TextView next,skip,start;
+    TextView next, skip, start;
     ImageView img_next;
     CircleIndicator2 indicator;
 
@@ -64,22 +64,22 @@ public class IntroActivity extends AppCompatActivity {
         setContentView(R.layout.activity_intro);
         AppManager.get(getApplication()).save_splash(2);
 
-        bg_dots   = findViewById(R.id.bg_dots);
+        bg_dots = findViewById(R.id.bg_dots);
         indicator = findViewById(R.id.indicator);
-        next      = findViewById(R.id.next);
-        skip      = findViewById(R.id.skip);
-        start     = findViewById(R.id.start);
-        img_next  = findViewById(R.id.image_next);
+        next = findViewById(R.id.next);
+        skip = findViewById(R.id.skip);
+        start = findViewById(R.id.start);
+        img_next = findViewById(R.id.image_next);
 
         itemIntroList = new ArrayList<>();
         recyclerView = findViewById(R.id.recyclerViewPager_intro);
-        adaptorIntro  = new IntroAdapter(this,itemIntroList);
+        adaptorIntro = new IntroAdapter(this, itemIntroList);
         recyclerView.setAdapter(adaptorIntro);
         recyclerView.setNestedScrollingEnabled(false);
         recyclerView.setHasFixedSize(true);
         PagerSnapHelper pagerSnapHelper = new PagerSnapHelper();
         pagerSnapHelper.attachToRecyclerView(recyclerView);
-        layout= new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false);
+        layout = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         recyclerView.setLayoutManager(layout);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 //      Dots
@@ -91,7 +91,7 @@ public class IntroActivity extends AppCompatActivity {
             @Override
             public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
-                if (getPage() == itemIntroList.size()-1){
+                if (getPage() == itemIntroList.size() - 1) {
                     next.setText(lang_start);
                     start.setText(lang_start);
                     img_next.setTag("start");
@@ -99,7 +99,7 @@ public class IntroActivity extends AppCompatActivity {
                     indicator.animate().alpha(0).setDuration(150);
                     start.animate().alpha(1).setDuration(100);
                     start.setEnabled(true);
-                }else {
+                } else {
                     next.setText(lang_next);
                     img_next.setTag("next");
                     img_next.animate().alpha(1).setDuration(150);
@@ -108,10 +108,10 @@ public class IntroActivity extends AppCompatActivity {
                     start.setEnabled(false);
                 }
 
-                if (getPage() ==0){
+                if (getPage() == 0) {
                     skip.setText(lang_skip);
                     skip.setTag("skip");
-                }else {
+                } else {
                     skip.setText(lang_back);
                     skip.setTag("back");
                 }
@@ -120,19 +120,20 @@ public class IntroActivity extends AppCompatActivity {
 
         getJson();
     }
-    int getPage(){
+
+    int getPage() {
         return recyclerView.getCurrentPosition();
     }
 
     public void btn_intro(View view) {
         int page = getPage();
         String tag = view.getTag().toString();
-        switch (tag){
+        switch (tag) {
             case "next":
-                recyclerView.smoothScrollToPosition(page+1);
+                recyclerView.smoothScrollToPosition(page + 1);
                 break;
             case "back":
-                recyclerView.smoothScrollToPosition(page-1);
+                recyclerView.smoothScrollToPosition(page - 1);
                 break;
             default:
                 finish();
@@ -144,13 +145,13 @@ public class IntroActivity extends AppCompatActivity {
     }
 
 
-    private void getJson(){
-        Log.d(TAG, "getJson: "+JsonManager.getJsonIntro(this));
+    private void getJson() {
+        Log.d(TAG, "getJson: " + JsonManager.getJsonIntro(this));
         try {
             JSONObject result = new JSONObject(JsonManager.getJsonIntro(this));
 
-            if (!result.isNull("theme")){
-                switch (result.getString("theme")){
+            if (!result.isNull("theme")) {
+                switch (result.getString("theme")) {
                     case "Jibres":
                         style = 1;
                         break;
@@ -159,14 +160,14 @@ public class IntroActivity extends AppCompatActivity {
                         break;
                 }
             }
-            if (style==2){
+            if (style == 2) {
                 padding = (int) getResources().getDimension(R.dimen._25sdp);
-                recyclerView.setPadding(padding,0,padding,0);
-            }else {
-                recyclerView.setPadding(0,0,0,0);
+                recyclerView.setPadding(padding, 0, padding, 0);
+            } else {
+                recyclerView.setPadding(0, 0, 0, 0);
             }
 
-            if (!result.isNull("translation")){
+            if (!result.isNull("translation")) {
                 JSONObject translation = result.getJSONObject("translation");
                 if (!translation.isNull("img_next"))
                     lang_next = translation.getString("img_next");
@@ -178,7 +179,7 @@ public class IntroActivity extends AppCompatActivity {
                     lang_start = translation.getString("start");
             }
 
-            if (!result.isNull("bg")){
+            if (!result.isNull("bg")) {
                 JSONObject bg = result.getJSONObject("bg");
                 if (!bg.isNull("from"))
                     bg_from = bg.getString("from");
@@ -186,9 +187,9 @@ public class IntroActivity extends AppCompatActivity {
                     bg_to = bg.getString("to");
             }
 
-            ColorUtil.setGradient(recyclerView,bg_from,bg_to);
+            ColorUtil.setGradient(recyclerView, bg_from, bg_to);
 
-            if (!result.isNull("color")){
+            if (!result.isNull("color")) {
                 JSONObject color = result.getJSONObject("color");
                 if (!color.isNull("primary"))
                     color_primary = color.getString("primary");
@@ -203,7 +204,7 @@ public class IntroActivity extends AppCompatActivity {
             start.setTextColor(Color.parseColor(color_secondary));
             skip.setTextColor(Color.parseColor(color_secondary));
 
-            if (!result.isNull("page")){
+            if (!result.isNull("page")) {
                 JSONArray page = result.getJSONArray("page");
                 for (int i = 0; i < page.length(); i++) {
                     try {
@@ -212,40 +213,40 @@ public class IntroActivity extends AppCompatActivity {
                         String image = null;
                         String title = null;
                         String subTitle = null;
-                        String desc  = null;
+                        String desc = null;
 
                         if (!object.isNull("image"))
                             image = object.getString("image");
                         if (!object.isNull("title")) {
                             title = object.getString("title");
-                        }else if (!object.isNull("subtitle")) {
+                        } else if (!object.isNull("subtitle")) {
                             subTitle = object.getString("subtitle");
                         }
                         if (!object.isNull("desc"))
                             desc = object.getString("desc");
-                        if (style==1){
-                            if (title != null){
-                                itemIntroList.add(new IntroModel(title,null, desc,bg_from,bg_to,color_primary,color_secondary));
-                            }else if (subTitle != null){
-                                itemIntroList.add(new IntroModel(null,subTitle, desc,bg_from,bg_to,color_primary,color_secondary));
+                        if (style == 1) {
+                            if (title != null) {
+                                itemIntroList.add(new IntroModel(title, null, desc, bg_from, bg_to, color_primary, color_secondary));
+                            } else if (subTitle != null) {
+                                itemIntroList.add(new IntroModel(null, subTitle, desc, bg_from, bg_to, color_primary, color_secondary));
                             }
-                        }else {
-                            if (image!=null){
+                        } else {
+                            if (image != null) {
                                 int padding = (int) getResources().getDimension(R.dimen._30sdp);
-                                recyclerView.setPadding(padding,0,padding,0);
-                                itemIntroList.add(new IntroModel(image, title,null, desc,bg_from,bg_to,color_primary,color_secondary));
+                                recyclerView.setPadding(padding, 0, padding, 0);
+                                itemIntroList.add(new IntroModel(image, title, null, desc, bg_from, bg_to, color_primary, color_secondary));
                             }
                         }
                         adaptorIntro.notifyDataSetChanged();
                         recyclerView.getAdapter();
-                    }catch (Exception e){
+                    } catch (Exception e) {
                         e.printStackTrace();
                     }
                 }
             }
 
         } catch (JSONException e) {
-            Log.e(TAG, "getJson > result: ",e);
+            Log.e(TAG, "getJson > result: ", e);
             e.printStackTrace();
         }
     }

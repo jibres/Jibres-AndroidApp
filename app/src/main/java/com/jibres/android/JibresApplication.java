@@ -37,7 +37,7 @@ public class JibresApplication extends Application {
         return mInstance;
     }
 
-    public  RequestQueue getRequestQueue() {
+    public RequestQueue getRequestQueue() {
         if (mRequestQueue == null) {
             mRequestQueue = Volley.newRequestQueue(getApplicationContext());
         }
@@ -98,11 +98,11 @@ public class JibresApplication extends Application {
         setFont();
     }
 
-    private void setFont(){
+    private void setFont() {
         String appLanguage = AppManager.getAppLanguage(getApplicationContext());
-        if (appLanguage!=null && appLanguage.equals("fa")){
+        if (appLanguage != null && appLanguage.equals("fa")) {
             TypefaceUtil.overrideFont(getApplicationContext(), "SERIF", "iranyekan_regular.ttf");
-        }else {
+        } else {
 //            TypefaceUtil.overrideFont(getApplicationContext(), "SERIF", "roboto_regular.ttf");
             TypefaceUtil.overrideFont(getApplicationContext(), "SERIF", "iranyekan_regular.ttf");
         }

@@ -65,11 +65,11 @@ public class FingerprintHandler extends FingerprintManager.AuthenticationCallbac
     }
 
 
-    public void update(String e, Boolean success){
-        TextView textView = (TextView) ((Activity)context).findViewById(R.id.errorText);
+    public void update(String e, Boolean success) {
+        TextView textView = (TextView) ((Activity) context).findViewById(R.id.errorText);
         textView.setText(e);
-        if(success){
-            textView.setTextColor(ContextCompat.getColor(context,R.color.colorPrimaryDark));
+        if (success) {
+            textView.setTextColor(ContextCompat.getColor(context, R.color.colorPrimaryDark));
         }
     }
 }

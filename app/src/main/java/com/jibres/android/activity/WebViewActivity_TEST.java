@@ -67,19 +67,19 @@ public class WebViewActivity_TEST extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         URL = getIntent().getStringExtra("url");
-        if (URL.endsWith("language")){
-            URL = URL+"?device="+AppManager.getAppLanguage(getApplicationContext());
+        if (URL.endsWith("language")) {
+            URL = URL + "?device=" + AppManager.getAppLanguage(getApplicationContext());
         }
         try {
             setContentView(R.layout.activity_web_view_test);
 
             send_headers.put("x-app-request", "android");
             send_headers.put("apikey", AppManager.getApikey(this));
-            send_headers.put("usercode",AppManager.getUserCode(this));
-            send_headers.put("zonid",AppManager.getZonId(this));
-            send_headers.put("versionCode",String.valueOf(AppManager.versionCode));
-            send_headers.put("versionName",AppManager.versionName);
-            send_headers.put("device",AppManager.getAppLanguage(getApplicationContext()));
+            send_headers.put("usercode", AppManager.getUserCode(this));
+            send_headers.put("zonid", AppManager.getZonId(this));
+            send_headers.put("versionCode", String.valueOf(AppManager.versionCode));
+            send_headers.put("versionName", AppManager.versionName);
+            send_headers.put("device", AppManager.getAppLanguage(getApplicationContext()));
 
             swipeRefreshLayout = findViewById(R.id.swipRefresh_WebView);
             webView_object = findViewById(R.id.webView_WebView);
@@ -91,14 +91,12 @@ public class WebViewActivity_TEST extends AppCompatActivity {
             webSettings.setAllowContentAccess(true);
 
 
-
-
-            if (URL != null){
+            if (URL != null) {
                 swipeRefreshLayout.setRefreshing(true);
                 swipeRefreshLayout.setOnRefreshListener(()
                         -> webView_object.loadUrl(webView_object.getUrl(), send_headers));
                 webView_object.loadUrl(URL, send_headers);
-                webView_object.setWebChromeClient(new WebChromeClient(){
+                webView_object.setWebChromeClient(new WebChromeClient() {
 
                     public boolean onShowFileChooser(WebView webView, ValueCallback<Uri[]> filePathCallback, WebChromeClient.FileChooserParams fileChooserParams) {
                         if (mUMA != null) {
@@ -143,19 +141,19 @@ public class WebViewActivity_TEST extends AppCompatActivity {
                 });
                 webView_object.setWebViewClient(new WebViewClient() {
                     @Override
-                    public void onReceivedError(WebView view, WebResourceRequest request, WebResourceError error){
-                        Log.d("amingoli", "onReceivedError: "+error.getDescription());
-                        if (error.getDescription().equals("net::ERR_INTERNET_DISCONNECTED")){
+                    public void onReceivedError(WebView view, WebResourceRequest request, WebResourceError error) {
+                        Log.d("amingoli", "onReceivedError: " + error.getDescription());
+                        if (error.getDescription().equals("net::ERR_INTERNET_DISCONNECTED")) {
                             view.getSettings().setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
                             view.loadUrl(view.getUrl());
-                            if (oneStart == 0)
-                            {
+                            if (oneStart == 0) {
 //                                showBottomSheetDialogFragment();
                                 oneStart++;
                             }
                         }
-                        Log.d("WebView_onReceivedError", "ErrorCode= "+error.getErrorCode() +" | ErrorDescription= "+error.getDescription());
+                        Log.d("WebView_onReceivedError", "ErrorCode= " + error.getErrorCode() + " | ErrorDescription= " + error.getDescription());
                     }
+
                     // in refresh send header
                     @Override
                     public boolean shouldOverrideUrlLoading(WebView view, String url) {
@@ -175,25 +173,25 @@ public class WebViewActivity_TEST extends AppCompatActivity {
                                 startActivity(intent);
                             } catch (android.content.ActivityNotFoundException e) {
                             }
-                        }else {
-                            if (url.startsWith("jibres://language/")){
-                                String lang = url.replace("jibres://language/","");
-                                lang.replace(" ","");
+                        } else {
+                            if (url.startsWith("jibres://language/")) {
+                                String lang = url.replace("jibres://language/", "");
+                                lang.replace(" ", "");
                                 AppManager.get(getApplicationContext()).setAppLanguage(lang);
                                 ((JibresApplication) getApplication()).refreshLocale(getApplication());
                                 finish();
-                            }else {
-                                webView_object.loadUrl(UrlManager.dashboard(getApplication()),send_headers);
-                                if (url.startsWith("jibres://test")){
-                                    startActivity(new Intent(WebViewActivity_TEST.this,MainActivity.class));
+                            } else {
+                                webView_object.loadUrl(UrlManager.dashboard(getApplication()), send_headers);
+                                if (url.startsWith("jibres://test")) {
+                                    startActivity(new Intent(WebViewActivity_TEST.this, MainActivity.class));
                                 }
-                                if (url.startsWith("jibres://splash")){
-                                    startActivity(new Intent(WebViewActivity_TEST.this,SplashActivity.class));
+                                if (url.startsWith("jibres://splash")) {
+                                    startActivity(new Intent(WebViewActivity_TEST.this, SplashActivity.class));
                                 }
-                                if (url.startsWith("jibres://intro")){
+                                if (url.startsWith("jibres://intro")) {
                                     startActivity(new Intent(WebViewActivity_TEST.this, IntroActivity.class));
                                 }
-                                if (url.startsWith("jibres://language")){
+                                if (url.startsWith("jibres://language")) {
                                     Intent intent = new Intent(WebViewActivity_TEST.this, WebViewActivity_TEST.class);
                                     intent.putExtra("url", UrlManager.language(getApplication()));
                                     startActivity(intent);
@@ -203,9 +201,9 @@ public class WebViewActivity_TEST extends AppCompatActivity {
                         }
                         return false;
                     }
+
                     @Override
-                    public void onPageFinished(WebView view, String url)
-                    {
+                    public void onPageFinished(WebView view, String url) {
                         view.getSettings().setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
 
                         swipeRefreshLayout.setRefreshing(false);
@@ -213,18 +211,15 @@ public class WebViewActivity_TEST extends AppCompatActivity {
                         (
                                 webView_object.getVisibility() == View.INVISIBLE
                                         && !errorNet
-                        )
-                        {
+                        ) {
                             webView_object.setVisibility(View.VISIBLE);
                         }
                     }
                 });
-            }
-            else {
+            } else {
                 Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_SHORT).show();
             }
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             Intent brower = new Intent(Intent.ACTION_VIEW);
             brower.setData(Uri.parse(URL));
             startActivity(brower);
@@ -326,7 +321,7 @@ public class WebViewActivity_TEST extends AppCompatActivity {
         BottomSheetFragment bottomSheetFragment = new BottomSheetFragment();
         bottomSheetFragment.setCancelable(true);
         bottomSheetFragment.setListener(() -> {
-            Intent intent= getIntent();
+            Intent intent = getIntent();
             intent.putExtra("url", URL);
             finish();
             startActivity(intent);

@@ -23,17 +23,17 @@ import com.jibres.android.managers.UrlManager;
 import com.jibres.android.weight.BottomSheetFragment;
 
 public class MainActivity extends AppCompatActivity {
-    String[] ac = {"EnterActivity","LanguageActivity",
-            "SettingsActivity","key","FingerpringActivity",
-            "PinCode","ListTiket","NotifViewActivity",
-            "BottomSheet","WebView","intro"
+    String[] ac = {"EnterActivity", "LanguageActivity",
+            "SettingsActivity", "key", "FingerpringActivity",
+            "PinCode", "ListTiket", "NotifViewActivity",
+            "BottomSheet", "WebView", "intro"
             /*"TestUplloadFile"*/
     };
 
     @Override
     protected void onStart() {
         super.onStart();
-        Log.d("AppManager", "apikey: "+ AppManager.getApikey(this));
+        Log.d("AppManager", "apikey: " + AppManager.getApikey(this));
     }
 
     @Override
@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
                 new LinearLayout.LayoutParams(
                         LinearLayout.LayoutParams.WRAP_CONTENT,
                         ViewGroup.LayoutParams.WRAP_CONTENT);
-        layoutParams.setMargins(10,10,10,10);
+        layoutParams.setMargins(10, 10, 10, 10);
 
         for (int i = 0; i < ac.length; i++) {
             textView = new TextView(this);
@@ -57,30 +57,30 @@ public class MainActivity extends AppCompatActivity {
             textView.setOnClickListener(view -> onClicks(ac[finalI]));
             textView.setLayoutParams(layoutParams);
             textView.setBackgroundResource(R.drawable.row_background);
-            textView.setPadding(10,10,10,10);
+            textView.setPadding(10, 10, 10, 10);
             layout.addView(textView);
         }
     }
 
-    private void onClicks(String activityName){
+    private void onClicks(String activityName) {
         Intent intent = null;
-        switch (activityName){
+        switch (activityName) {
             case "LanguageActivity":
-                intent= new Intent(getApplication(), WebViewActivity_TEST.class);
+                intent = new Intent(getApplication(), WebViewActivity_TEST.class);
                 intent.putExtra("url", UrlManager.language(getApplication()));
                 break;
             case "key":
-                KeyguardManager km = (KeyguardManager)getSystemService(KEYGUARD_SERVICE);
+                KeyguardManager km = (KeyguardManager) getSystemService(KEYGUARD_SERVICE);
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    Intent intents = km.createConfirmDeviceCredentialIntent("TITLE","DESC");
-                    startActivityForResult(intents,RESULT_FIRST_USER);
+                    Intent intents = km.createConfirmDeviceCredentialIntent("TITLE", "DESC");
+                    startActivityForResult(intents, RESULT_FIRST_USER);
                 }
                 break;
             case "FingerpringActivity":
-                intent= new Intent(getApplication(), FingerprintActivity.class);
+                intent = new Intent(getApplication(), FingerprintActivity.class);
                 break;
             case "PinCode":
-                intent= new Intent(getApplication(), PincodeManagerActivity.class);
+                intent = new Intent(getApplication(), PincodeManagerActivity.class);
                 break;
             case "BottomSheet":
                 showBottomSheetDialogFragment();
@@ -92,7 +92,7 @@ public class MainActivity extends AppCompatActivity {
                 intent = new Intent(getApplication(), IntroActivity.class);
                 break;
         }
-        if (intent!=null){
+        if (intent != null) {
             intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
             startActivity(intent);
         }
@@ -109,7 +109,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    void dialog(){
+    void dialog() {
         EditText inputEditTextField = new EditText(this);
         inputEditTextField.setText("jibres.ir");
         AlertDialog dialog = new AlertDialog.Builder(this)
@@ -118,11 +118,11 @@ public class MainActivity extends AppCompatActivity {
                 .setView(inputEditTextField)
                 .setPositiveButton("OK", (dialogInterface, i) -> {
                     String editTextInput = inputEditTextField.getText().toString();
-                    if (!editTextInput.startsWith("https://")){
-                        editTextInput = "https://"+editTextInput;
+                    if (!editTextInput.startsWith("https://")) {
+                        editTextInput = "https://" + editTextInput;
                     }
                     Intent intent = new Intent(this, WebViewActivity_TEST.class);
-                    intent.putExtra("url",editTextInput);
+                    intent.putExtra("url", editTextInput);
                     startActivity(intent);
                 })
                 .setNegativeButton("Cancel", null)

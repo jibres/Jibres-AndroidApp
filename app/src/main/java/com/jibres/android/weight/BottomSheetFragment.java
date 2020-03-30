@@ -33,7 +33,7 @@ public class BottomSheetFragment extends BottomSheetDialogFragment {
         return view;
     }
 
-    public interface listenerBottomSheet{
+    public interface listenerBottomSheet {
         void refreh();
     }
 }

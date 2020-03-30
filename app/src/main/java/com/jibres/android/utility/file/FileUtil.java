@@ -1,11 +1,12 @@
 package com.jibres.android.utility.file;
 
 import android.content.Context;
+
 import java.io.IOException;
 import java.io.InputStream;
 
 public class FileUtil {
-    public static String ReadFileAssets(Context context, String FileName){
+    public static String ReadFileAssets(Context context, String FileName) {
         try {
             InputStream is = context.getAssets().open(FileName);
             // We guarantee that the available method returns the total
@@ -20,9 +21,9 @@ public class FileUtil {
             String text = new String(buffer);
             // Finally stick the string into the text view.
             // Replace with whatever you need to have the text into.
-            if (text.length()==0){
+            if (text.length() == 0) {
                 return null;
-            }else {
+            } else {
                 return text;
             }
         } catch (IOException e) {

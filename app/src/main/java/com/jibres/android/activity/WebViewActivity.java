@@ -47,7 +47,7 @@ public class WebViewActivity extends AppCompatActivity implements AdvancedWebVie
         progress.setVisibility(View.VISIBLE);
 
         url = getIntent().getStringExtra("url");
-        goToIntro = getIntent().getBooleanExtra("intro",false);
+        goToIntro = getIntent().getBooleanExtra("intro", false);
 
         mWebView = findViewById(R.id.webview);
         mWebView.setVisibility(View.VISIBLE);
@@ -72,51 +72,52 @@ public class WebViewActivity extends AppCompatActivity implements AdvancedWebVie
 
 
         mWebView.setListener(this, this);
-        mWebView.loadUrl(url,send_headers());
+        mWebView.loadUrl(url, send_headers());
 
-        mWebView.setWebViewClient(new WebViewClient(){
+        mWebView.setWebViewClient(new WebViewClient() {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
                 view.loadUrl(url, send_headers());
-                Log.d(TAG, "shouldOverrideUrlLoading: "+url);
-                if (!isNetworkConnected()){
+                Log.d(TAG, "shouldOverrideUrlLoading: " + url);
+                if (!isNetworkConnected()) {
                     showBottomSheetDialogFragment();
                 }
-                if (url.startsWith("jibres")){
+                if (url.startsWith("jibres")) {
                     Intent intent = null;
-                    switch (url){
+                    switch (url) {
                         case "jibres://intro":
-                            intent = new Intent(WebViewActivity.this,IntroActivity.class);
+                            intent = new Intent(WebViewActivity.this, IntroActivity.class);
                             break;
                         case "jibres://test":
-                            intent = new Intent(WebViewActivity.this,MainActivity.class);
+                            intent = new Intent(WebViewActivity.this, MainActivity.class);
                             break;
                         case "jibres://language":
                             view.loadUrl(UrlManager.language(getApplication()));
                             break;
                         default:
-                            if (url.startsWith("jibres://language/")){
-                                String language = url.replace("jibres://language/","");
+                            if (url.startsWith("jibres://language/")) {
+                                String language = url.replace("jibres://language/", "");
                                 AppManager.get(getApplicationContext()).setAppLanguage(language);
                                 progress.setVisibility(View.VISIBLE);
-                                Log.d(TAG, "Change Language: "+AppManager.getAppLanguage(getApplication()));
+                                Log.d(TAG, "Change Language: " + AppManager.getAppLanguage(getApplication()));
                                 Api.endPoint(getApplicationContext(), status
                                         -> Api.android(getApplicationContext(), status1 -> {
-                                    Api.splash(getApplicationContext(), splashIsSet -> {});
-                                    if (goToIntro){
+                                    Api.splash(getApplicationContext(), splashIsSet -> {
+                                    });
+                                    if (goToIntro) {
                                         Api.intro(getApplicationContext(), status2 -> {
                                             finish();
-                                            startActivity(new Intent(WebViewActivity.this,IntroActivity.class));
+                                            startActivity(new Intent(WebViewActivity.this, IntroActivity.class));
                                         });
-                                    }else{
-                                        view.loadUrl(UrlManager.dashboard(getApplication()),send_headers());
+                                    } else {
+                                        view.loadUrl(UrlManager.dashboard(getApplication()), send_headers());
                                     }
                                 }));
 
                             }
                             break;
                     }
-                    if (intent!=null){
+                    if (intent != null) {
                         startActivity(intent);
                     }
                     return true;
@@ -154,13 +155,15 @@ public class WebViewActivity extends AppCompatActivity implements AdvancedWebVie
     protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
         super.onActivityResult(requestCode, resultCode, intent);
         mWebView.onActivityResult(requestCode, resultCode, intent);
-        Log.d(TAG, "onActivityResult: "+requestCode+"\n"+resultCode+"\n"+intent);
+        Log.d(TAG, "onActivityResult: " + requestCode + "\n" + resultCode + "\n" + intent);
         // ...
     }
 
     @Override
     public void onBackPressed() {
-        if (!mWebView.onBackPressed()) { return; }
+        if (!mWebView.onBackPressed()) {
+            return;
+        }
         // ...
         super.onBackPressed();
     }
@@ -168,16 +171,16 @@ public class WebViewActivity extends AppCompatActivity implements AdvancedWebVie
     @Override
     public void onPageStarted(String url, Bitmap favicon) {
         progress.setVisibility(View.VISIBLE);
-        if (url.equals(UrlManager.dashboard(this))){
+        if (url.equals(UrlManager.dashboard(this))) {
             mWebView.clearHistory();
         }
         if (!isNetworkConnected()) showBottomSheetDialogFragment();
-        Log.d(TAG, "onPageStarted: "+url);
+        Log.d(TAG, "onPageStarted: " + url);
     }
 
     @Override
     public void onPageFinished(String url) {
-        Log.d(TAG, "onPageFinished: "+url);
+        Log.d(TAG, "onPageFinished: " + url);
         progress.setVisibility(View.GONE);
         if (isNetworkConnected())
             if (mWebView.getVisibility() != View.VISIBLE)
@@ -186,25 +189,27 @@ public class WebViewActivity extends AppCompatActivity implements AdvancedWebVie
 
     @Override
     public void onPageError(int errorCode, String description, String failingUrl) {
-        if (description.equals("net::ERR_INTERNET_DISCONNECTED")){
+        if (description.equals("net::ERR_INTERNET_DISCONNECTED")) {
             showBottomSheetDialogFragment();
         }
-        if (errorCode == -10 || description.equals("net::ERR_UNKNOWN_URL_SCHEME")){
+        if (errorCode == -10 || description.equals("net::ERR_UNKNOWN_URL_SCHEME")) {
             mWebView.setVisibility(View.GONE);
             progress.setVisibility(View.VISIBLE);
         }
-        Log.d(TAG, "onPageError: "+errorCode+"\n"+description+"\n"+failingUrl);
+        Log.d(TAG, "onPageError: " + errorCode + "\n" + description + "\n" + failingUrl);
     }
 
     @Override
-    public void onDownloadRequested(String url, String suggestedFilename, String mimeType, long contentLength, String contentDisposition, String userAgent) { }
+    public void onDownloadRequested(String url, String suggestedFilename, String mimeType, long contentLength, String contentDisposition, String userAgent) {
+    }
 
     @Override
-    public void onExternalPageRequest(String url) { }
+    public void onExternalPageRequest(String url) {
+    }
 
 
     public void showBottomSheetDialogFragment() {
-        if (!bottomSheetIsShow){
+        if (!bottomSheetIsShow) {
             progress.setVisibility(View.GONE);
             bottomSheetIsShow = true;
             mWebView.stopLoading();
@@ -229,15 +234,15 @@ public class WebViewActivity extends AppCompatActivity implements AdvancedWebVie
     }
 
 
-    private Map<String,String> send_headers(){
-        Map<String,String> send_headers = new HashMap<>();
+    private Map<String, String> send_headers() {
+        Map<String, String> send_headers = new HashMap<>();
         send_headers.put("x-app-request", "android");
         send_headers.put("store", SecretReadFile.store(this));
-        send_headers.put("versionCode",String.valueOf(AppManager.versionCode));
-        send_headers.put("versionName",AppManager.versionName);
+        send_headers.put("versionCode", String.valueOf(AppManager.versionCode));
+        send_headers.put("versionName", AppManager.versionName);
         send_headers.put("display-language-device", Locale.getDefault().getDisplayLanguage());
         send_headers.put("language-default", Locale.getDefault().getLanguage());
-        send_headers.put("language-device",AppManager.getAppLanguage(getApplicationContext()));
+        send_headers.put("language-device", AppManager.getAppLanguage(getApplicationContext()));
         return send_headers;
     }
 }

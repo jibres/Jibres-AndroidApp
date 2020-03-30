@@ -40,6 +40,7 @@ public class FingerprintActivity extends AppCompatActivity {
     private static final String KEY_NAME = "androidHive";
     private Cipher cipher;
     private TextView textView;
+
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +57,7 @@ public class FingerprintActivity extends AppCompatActivity {
 
 
         // Check whether the device has FingerprintHandler Fingerprint sensor.
-        if(!fingerprintManager.isHardwareDetected()){
+        if (!fingerprintManager.isHardwareDetected()) {
             /**
              * An error message will be displayed if the device does not contain the fingerprint hardware.
              * However if you plan to implement FingerprintHandler default authentication method,
@@ -66,19 +67,19 @@ public class FingerprintActivity extends AppCompatActivity {
              * startActivity(intent);
              */
             textView.setText("Your Device does not have FingerprintHandler Fingerprint Sensor");
-        }else {
+        } else {
             // Checks whether fingerprint permission is set on manifest
             if (ActivityCompat.checkSelfPermission(this, Manifest.permission.USE_FINGERPRINT) != PackageManager.PERMISSION_GRANTED) {
                 textView.setText("Fingerprint authentication permission not enabled");
-            }else{
+            } else {
                 // Check whether at least one fingerprint is registered
                 if (!fingerprintManager.hasEnrolledFingerprints()) {
                     textView.setText("Register at least one fingerprint in Settings");
-                }else{
+                } else {
                     // Checks whether lock screen security is enabled or not
                     if (!keyguardManager.isKeyguardSecure()) {
                         textView.setText("Lock screen security not enabled in Settings");
-                    }else{
+                    } else {
                         generateKey();
 
 
