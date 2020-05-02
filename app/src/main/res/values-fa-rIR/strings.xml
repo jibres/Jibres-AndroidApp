@@ -1,28 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">جیبرس</string>
-    <string name="flag">بفروش و لذت ببر!</string>
-
-
     <string name="update">Update</string>
     <string name="update_warn">This Version is Deprecated!</string>
-    <string name="link_flag_contry" translatable="false">https://jibres.com/static/img/flags/png100px/%1$s.png</string>
-    <string name="prefs_change_language">Choose Language</string>
-
-    <string name="your_phone">Your Phone</string>
-    <string name="phone_number">Phone Number</string>
-    <string name="enter_number">Enter Number</string>
-    <string name="desc_enter">A 4 digit OTP will be sent via SMS to verify yor mobile number!</string>
-    <string name="enter_the_otp">Enter the OTP you received to</string>
-    <string name="edit">EDIT</string>
-    <string name="resend">Resend</string>
-    <string name="phone_verification">Phone Verification</string>
-
-    <string name="title_activity_main">MainActivity</string>
-    <string name="title_fingerprint">One-touch Sign In</string>
-    <string name="desc_fingerprint">Please place your fingertip on the scanner to verify your identity</string>
-    <string name="note">(Fingerprint sign in makes your app login much faster. Your device should have at least one fingerprint registered in device settings)</string>
-    <string name="title_activity_home">Fingerprint</string>
-    <string name="activity_home_desc">You have successfully logged in with fingerprint authentication</string>
-    <string name="activity_home_note">Close and re-open the app to see the fingerprint auth screen again</string>
+    <string name="no_internet_connections">به اینترنت متصل شوید</string>
+    <string name="please_try_again_later">اتصال برقرار نیست!</string>
+    <string name="refresh">تلاش دوباره</string>
 </resources>

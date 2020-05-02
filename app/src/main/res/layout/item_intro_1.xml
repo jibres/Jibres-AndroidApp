@@ -1,49 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout android:id="@+id/background"
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/background"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-
-    <LinearLayout
-        android:layout_marginBottom="@dimen/_100sdp"
-        android:layout_alignParentTop="true"
-        android:orientation="vertical"
-        android:gravity="center"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <TextView
-            android:visibility="gone"
-            android:id="@+id/title"
-            android:textAlignment="center"
-            android:textColor="@color/title"
-            android:textSize="@dimen/_50ssp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <TextView
-            android:id="@+id/sub_title"
-            android:visibility="gone"
-            android:padding="@dimen/_5sdp"
-            android:textStyle="bold"
-            android:textAlignment="center"
-            android:textColor="@color/title"
-            android:textSize="@dimen/_30ssp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <TextView
-            android:visibility="gone"
-            android:id="@+id/desc"
-            android:paddingStart="@dimen/_7sdp"
-            android:paddingEnd="@dimen/_7sdp"
-            android:textAlignment="center"
-            android:textColor="@color/desc"
-            android:textSize="@dimen/_14ssp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-    </LinearLayout>
-
-
-</RelativeLayout>
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:layout_alignParentTop="true"
+    android:layout_marginBottom="@dimen/_100sdp">
+    <TextView
+        android:visibility="gone"
+        android:id="@+id/title_intro1"
+        android:textAlignment="center"
+        android:textColor="@color/title"
+        android:textSize="@dimen/_50ssp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    <TextView
+        android:id="@+id/sub_title_intro1"
+        android:visibility="gone"
+        android:padding="@dimen/_5sdp"
+        android:textStyle="bold"
+        android:textAlignment="center"
+        android:textColor="@color/title"
+        android:textSize="@dimen/_30ssp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    <TextView
+        android:visibility="gone"
+        android:id="@+id/desc_intro1"
+        android:paddingStart="@dimen/_7sdp"
+        android:paddingEnd="@dimen/_7sdp"
+        android:textAlignment="center"
+        android:textColor="@color/desc"
+        android:textSize="@dimen/_14ssp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+</LinearLayout>

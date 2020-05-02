@@ -9,7 +9,8 @@ import android.util.AttributeSet;
 import android.widget.TextView;
 
 @SuppressLint("AppCompatCustomView")
-public class GradientTextView extends TextView {
+public class GradientTextView extends TextView
+{
     // ===========================================================
     // Constants
     // ===========================================================
@@ -50,7 +51,7 @@ public class GradientTextView extends TextView {
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
 
-        if (mApplyLinearGradient)
+        if(mApplyLinearGradient)
             applyLinearGradient();
     }
 
@@ -58,23 +59,29 @@ public class GradientTextView extends TextView {
     // Methods
     // ===========================================================
 
-    private void applyLinearGradient() {
+    private void applyLinearGradient()
+    {
         Shader shader = null;
 
-        if (mGradientOrientation == LG_HORIZONTAL) {
-            shader = new LinearGradient(0, getHeight(), getWidth(), 0, mStartColor, mEndColor, Shader.TileMode.CLAMP);
-        } else {
-            shader = new LinearGradient(0, 0, 0, getHeight(), mStartColor, mEndColor, Shader.TileMode.CLAMP);
+        if(mGradientOrientation == LG_HORIZONTAL)
+        {
+            shader = new LinearGradient(0,getHeight(),getWidth(),0,mStartColor,mEndColor,Shader.TileMode.CLAMP);
+        }
+        else
+        {
+            shader = new LinearGradient(0,0,0,getHeight(),mStartColor,mEndColor,Shader.TileMode.CLAMP);
         }
 
         getPaint().setShader(shader);
     }
 
 
+
     /**
      * Simple method to set linear gradient to textview with orientation as Horizontal or Vertical
      */
-    public void setLinearGradient(int mStartColor, int mEndColor, int mGradientOrientation) {
+    public void setLinearGradient(int mStartColor,int mEndColor,int mGradientOrientation)
+    {
         this.mApplyLinearGradient = true;
         this.mStartColor = mStartColor;
         this.mEndColor = mEndColor;
@@ -84,7 +91,8 @@ public class GradientTextView extends TextView {
         requestLayout();
     }
 
-    public void setLinearGradient(int mStartColor, int mEndColor) {
+    public void setLinearGradient(int mStartColor,int mEndColor)
+    {
         this.mApplyLinearGradient = true;
         this.mStartColor = mStartColor;
         this.mEndColor = mEndColor;

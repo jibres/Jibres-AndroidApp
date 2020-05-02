@@ -5,12 +5,10 @@
     android:layout_height="match_parent"
     android:keepScreenOn="true"
     tools:context=".activity.WebViewActivity">
-
     <im.delight.android.webview.AdvancedWebView
         android:id="@+id/webview"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
-
     <ProgressBar
         android:id="@+id/progress"
         android:visibility="visible"
@@ -18,5 +16,5 @@
         android:layout_centerInParent="true"
         android:padding="@dimen/_5sdp"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"/>
 </RelativeLayout>

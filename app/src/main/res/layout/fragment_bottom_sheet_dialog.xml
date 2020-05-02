@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:padding="@dimen/_8sdp">
 
@@ -12,7 +13,7 @@
         android:background="@drawable/bg_radus"
         android:alpha="0.5"
         android:layout_width="@dimen/_80sdp"
-        android:layout_height="@dimen/_5sdp" />
+        android:layout_height="@dimen/_5sdp"/>
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/animate_bg"
@@ -35,17 +36,18 @@
             android:id="@+id/title"
             android:textSize="@dimen/_18ssp"
             android:textColor="@color/title"
-            android:text="No internet connections!"
+            android:text="@string/no_internet_connections"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
+            android:layout_height="wrap_content"
+            tools:ignore="HardcodedText"/>
         <TextView
             android:id="@+id/desc"
             android:textColor="@color/desc"
             android:textSize="@dimen/_12ssp"
-            android:text="Please try again later."
+            android:text="@string/please_try_again_later"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            tools:ignore="HardcodedText"/>
     </LinearLayout>
 
     <RelativeLayout
@@ -70,9 +72,10 @@
             android:textColor="@color/title"
             android:textStyle="bold"
             android:textSize="@dimen/_12ssp"
-            android:text="REFRESH"
+            android:text="@string/refresh"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            tools:ignore="HardcodedText"/>
 
     </RelativeLayout>
 

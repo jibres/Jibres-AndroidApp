@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layoutDirection="ltr"
     android:layout_height="match_parent"
-    android:background="#fff"
+    android:background="@android:color/white"
     tools:context=".activity.intro.IntroActivity"
     tools:ignore="UnusedAttribute">
 
@@ -15,7 +15,7 @@
         android:layout_height="match_parent"
         app:rvp_triggerOffset="0.1"
         app:rvp_singlePageFling="true"
-        android:clipToPadding="false" />
+        android:clipToPadding="false"/>
 
     <View
         android:id="@+id/bg_dots"
@@ -48,13 +48,14 @@
             android:textSize="@dimen/_12ssp"
             android:text="Next"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            tools:ignore="HardcodedText" />
 
         <me.relex.circleindicator.CircleIndicator2
             android:id="@+id/indicator"
-            app:ci_width="@dimen/_5sdp"
-            app:ci_height="@dimen/_5sdp"
-            app:ci_margin="@dimen/_5sdp"
+            app:ci_width ="@dimen/_5sdp"
+            app:ci_height ="@dimen/_5sdp"
+            app:ci_margin ="@dimen/_5sdp"
 
             android:layout_width="wrap_content"
             android:layout_height="48dp"
@@ -74,7 +75,7 @@
             android:layout_centerVertical="true"
             android:layout_centerHorizontal="true"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"/>
 
         <ImageView
             android:id="@+id/image_next"
@@ -86,7 +87,7 @@
             android:tint="#fff"
             android:padding="@dimen/_5sdp"
             android:layout_width="@dimen/_35sdp"
-            android:layout_height="@dimen/_35sdp" />
+            android:layout_height="@dimen/_35sdp"/>
 
         <TextView
             android:visibility="invisible"
@@ -101,7 +102,8 @@
             android:textSize="@dimen/_12ssp"
             android:text="Skip"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            tools:ignore="HardcodedText" />
 
     </RelativeLayout>
 

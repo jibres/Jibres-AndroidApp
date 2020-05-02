@@ -30,7 +30,7 @@ import java.util.Locale;
 
 public class SplashActivity extends AppCompatActivity {
     View background;
-    TextView app_name, slug, meta;
+    TextView app_name, slug,meta;
     LottieAnimationView animation_bg;
     ImageView logo;
     int sleep = 500;
@@ -52,31 +52,30 @@ public class SplashActivity extends AppCompatActivity {
         API();
     }
 
-    void API() {
+    void API(){
         Api.endPoint(getApplicationContext(), getEndPoint -> {
-            if (getEndPoint) {
+            if (getEndPoint){
                 Api.android(getApplicationContext(), getUrl -> {
-                    if (getApiIntro()) {
+                    if (getApiIntro()){
                         Api.intro(getApplicationContext(), introIsGet -> {
                             helperActivty();
                         });
-                    } else {
+                    }else {
                         helperActivty();
                     }
-                    Api.splash(getApplicationContext(), splashIsSet -> {
-                    });
+                    Api.splash(getApplicationContext(), splashIsSet -> {});
                 });
-            } else showBottomSheetDialogFragment();
+            }else showBottomSheetDialogFragment();
         });
     }
 
-    void helperActivty() {
+    void helperActivty(){
         Intent intent;
-        switch (getSplash()) {
+        switch (getSplash()){
             case 0:
                 intent = new Intent(this, WebViewActivity.class);
-                intent.putExtra("url", UrlManager.language(this));
-                intent.putExtra("intro", true);
+                intent.putExtra("url",UrlManager.language(this));
+                intent.putExtra("intro",true);
                 AppManager.get(getApplication()).save_splash(1);
                 break;
             case 1:
@@ -85,23 +84,23 @@ public class SplashActivity extends AppCompatActivity {
                 break;
             default:
                 intent = new Intent(this, WebViewActivity.class);
-                intent.putExtra("url", UrlManager.dashboard(getApplication()));
+                intent.putExtra("url",UrlManager.dashboard(getApplication()));
                 break;
         }
         new Handler().postDelayed(() -> {
             finish();
             setValueSplash();
             startActivity(intent);
-        }, sleep);
+        },sleep);
     }
 
-    void setValueSplash() {
+    void setValueSplash(){
         try {
-            String from = "#ffffff", to = "#ffffff";
+            String from="#ffffff", to= "#ffffff";
             int style = 1;
             JSONObject object = new JSONObject(JsonManager.getJsonSplash(getApplication()));
-            if (!object.isNull("theme")) {
-                switch (object.getString("theme")) {
+            if (!object.isNull("theme")){
+                switch (object.getString("theme")){
                     case "Jibres":
                         style = 1;
                         break;
@@ -110,15 +109,15 @@ public class SplashActivity extends AppCompatActivity {
                         break;
                 }
             }
-            if (style == 2) {
+            if (style==2){
                 animation_bg.setVisibility(View.INVISIBLE);
-            } else {
+            }else {
                 animation_bg.setVisibility(View.VISIBLE);
             }
-            if (!object.isNull("sleep")) {
+            if (!object.isNull("sleep")){
                 sleep = object.getInt("sleep");
             }
-            if (!object.isNull("logo")) {
+            if (!object.isNull("logo")){
                 try {
                     Glide.with(this)
                             .applyDefaultRequestOptions(new RequestOptions()
@@ -126,74 +125,70 @@ public class SplashActivity extends AppCompatActivity {
                                     .error(R.drawable.logo))
                             .load(object.getString("logo"))
                             .into(logo);
-                } catch (Exception e) {
+                }catch (Exception e){
 
                 }
             }
-            if (!object.isNull("title")) {
+            if (!object.isNull("title")){
                 app_name.setText(object.getString("title"));
             }
-            if (!object.isNull("desc")) {
+            if (!object.isNull("desc")){
                 slug.setText(object.getString("desc"));
             }
-            if (!object.isNull("meta")) {
+            if (!object.isNull("meta")){
                 meta.setText(object.getString("meta"));
             }
-            if (!object.isNull("bg")) {
+            if (!object.isNull("bg")){
                 JSONObject bg = object.getJSONObject("bg");
                 if (!bg.isNull("from"))
                     from = bg.getString("from");
                 if (!bg.isNull("to"))
                     to = bg.getString("to");
             }
-            if (!object.isNull("color")) {
+            if (!object.isNull("color")){
                 JSONObject color = object.getJSONObject("color");
-                if (!color.isNull("primary")) {
+                if (!color.isNull("primary")){
                     app_name.setTextColor(Color.parseColor(color.getString("primary")));
                     slug.setTextColor(Color.parseColor(color.getString("primary")));
                 }
-                if (!color.isNull("secondary")) {
+                if (!color.isNull("secondary")){
                     meta.setTextColor(Color.parseColor(color.getString("secondary")));
                 }
             }
-            if (from != null || to != null) ColorUtil.setGradient(background, from, to);
+            if (from!=null || to!=null) ColorUtil.setGradient(background,from,to);
         } catch (JSONException e) {
             e.printStackTrace();
         }
     }
 
-    void setDefaultLanguage() {
-        if (getAppLanguage() == null) {
+    void setDefaultLanguage(){
+        if (getAppLanguage()==null){
             String deviceLanguage = Locale.getDefault().getLanguage();
-            if (deviceLanguage.equals("fa")) {
+            if (deviceLanguage.equals("fa")){
                 AppManager.get(getApplicationContext()).setAppLanguage(deviceLanguage);
-            } else {
+            }else {
                 AppManager.get(getApplicationContext()).setAppLanguage("en");
             }
         }
     }
 
-    String getAppLanguage() {
+    String getAppLanguage(){
         return AppManager.getAppLanguage(getApplication());
     }
-
-    void setAppLanguage(String key) {
+    void setAppLanguage(String key){
         AppManager.get(getApplication()).setAppLanguage(key);
     }
-
-    void setEndPoint(String url) {
-        UrlManager.save_endPoint(getApplication(), url);
+    void setEndPoint(String url){
+        UrlManager.save_endPoint(getApplication(),url);
     }
-
-    int getSplash() {
+    int getSplash(){
         return AppManager.get(getApplication()).getUserInfo_int().get(AppManager.splash);
     }
-
-    boolean getApiIntro() {
-        return getSplash() == 0;
+    boolean getApiIntro(){
+        return getSplash()==0;
     }
 
-    void idFinder() {
+    void idFinder(){
         background = findViewById(R.id.splash_relative_layout);
         animation_bg = findViewById(R.id.animate_bg);
         logo = findViewById(R.id.logo);
