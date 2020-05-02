@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">جیبرس</string>
     <string name="update">Update</string>
     <string name="update_warn">This Version is Deprecated!</string>
     <string name="no_internet_connections">به اینترنت متصل شوید</string>
