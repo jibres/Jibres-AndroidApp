@@ -89,8 +89,8 @@ public class SplashActivity extends AppCompatActivity {
         }
         new Handler().postDelayed(() -> {
             finish();
-            setValueSplash();
             startActivity(intent);
+            setValueSplash();
         },sleep);
     }
 
