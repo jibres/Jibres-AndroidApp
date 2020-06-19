@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layoutDirection="ltr"
     android:layout_height="match_parent"
-    android:background="@android:color/white"
+    android:background="@color/white"
     tools:context=".activity.intro.IntroActivity"
     tools:ignore="UnusedAttribute">
 
@@ -44,7 +44,7 @@
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
             android:padding="@dimen/_10sdp"
-            android:textColor="@android:color/holo_blue_dark"
+            android:textColor="@color/holo_blue_dark"
             android:textSize="@dimen/_12ssp"
             android:text="Next"
             android:layout_width="wrap_content"
@@ -70,7 +70,7 @@
             android:tag="skip"
             android:onClick="btn_intro"
             android:padding="@dimen/_10sdp"
-            android:textColor="@android:color/holo_blue_dark"
+            android:textColor="@color/holo_blue_dark"
             android:textSize="@dimen/_12ssp"
             android:layout_centerVertical="true"
             android:layout_centerHorizontal="true"
@@ -79,6 +79,7 @@
 
         <ImageView
             android:id="@+id/image_next"
+            android:contentDescription="@string/loading"
             android:tag="next"
             android:src="@drawable/icon_felesh"
             android:onClick="btn_intro"
@@ -98,7 +99,7 @@
             android:layout_alignParentStart="true"
             android:layout_centerVertical="true"
             android:padding="@dimen/_10sdp"
-            android:textColor="@android:color/holo_blue_dark"
+            android:textColor="@color/holo_blue_dark"
             android:textSize="@dimen/_12ssp"
             android:text="Skip"
             android:layout_width="wrap_content"

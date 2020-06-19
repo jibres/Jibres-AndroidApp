@@ -1,18 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#333333</color>
-    <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
     <!--TextColor-->
-    <color name="textPrimary">#f5f5f5</color>
-    <color name="textPrimaryDark">#95aab4</color>
-    <color name="errorText">#ff7878</color>
     <color name="title">#333333</color>
     <color name="desc">#858282</color>
     <!--On click-->
     <color name="onClick_activated">#B1B1B1</color>
-    <color name="onClick_pressed">#FFFFFF</color>
+    <color name="white">#FFFFFF</color>
     <color name="onClick_ripple">#C7CACA</color>
-    <!--Fade Color-->
-    <color name="text_fade">#999999</color>
+    <!--Other-->
+    <color name="holo_blue_dark">#ff0099cc</color>
 </resources>
