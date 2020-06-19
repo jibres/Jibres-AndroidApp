@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="update">Update</string>
-    <string name="update_warn">This Version is Deprecated!</string>
+    <string name="app_name">
+        جیبرس
+    </string>
+    <string name="update">بروزرسانی</string>
+    <string name="update_warn">این نسخه منقضی شده!</string>
     <string name="no_internet_connections">به اینترنت متصل شوید</string>
     <string name="please_try_again_later">اتصال برقرار نیست!</string>
     <string name="refresh">تلاش دوباره</string>
+    <string name="loading">درحال بارگذاری</string>
 </resources>
