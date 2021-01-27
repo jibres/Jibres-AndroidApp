@@ -40,4 +40,5 @@ app/gradle.properties
 /app/src/main/assets/secret/endpoint.txt
 /app/src/main/assets/secret/store.txt
 /app/src/main/res/drawable/logo.png
+/app/src/main/res/drawable-v24/logo.png
 /app/src/main/res/values/app_name.xml
